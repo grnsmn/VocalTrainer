@@ -1,13 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screen/HomeScreen';
+import AddominaleDiaframmaticaList from './src/Respirazione/Famiglia/AddominaleDiaframmaticaList';
+import FamiglieList from './src/Respirazione/FamiglieList';
+import TrainingScreen from './src/screen/TrainingScreen'
+//import Metronome from './src/MetronomeHook'
 
-export default function App() {
+
+const Stack = createNativeStackNavigator();
+
+export default function App () {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Lista Famiglie" component={FamiglieList} />
+      <Stack.Screen name="Addominale Diaframmatica" component={AddominaleDiaframmaticaList} />
+       <Stack.Screen name="Training" component={TrainingScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -15,6 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
