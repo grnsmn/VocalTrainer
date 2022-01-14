@@ -1,10 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, View, Button, StyleSheet } from 'react-native'
 //import Slider from '@react-native-community/slider';
 import { Audio } from 'expo-av'
 
 const Metronome = props => {
-  const [click1, setClick1] = useState(null)
+  const [click1, setClick1] = useState({})
+
+  async function playSound() {
+    console.log('Loading Sound');
+    const { click } = await Audio.Sound.createAsync(
+       require('../screen/sounds/click1.mp3')
+    );
+    setClick1(click);
+
+    console.log('Playing Sound');
+    await click1.playAsync(); }
+
+    // useEffect(() => {
+    //   return click1
+    //     ? () => {
+    //         console.log('Unloading Sound');
+    //         click1.unloadAsync(); }
+    //     : undefined;
+    // }, [click1]);
 
   return (
     <View style={styles.container}>
@@ -19,7 +37,7 @@ const Metronome = props => {
         /> */}
       <Button
         style={styles.button}
-        //onPress={this.startStop}
+        onPress={playSound}
         title={'Play'}
         accessibilityLabel='Start and Stop The Metronome'
       />

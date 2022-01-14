@@ -24,7 +24,13 @@ export default class Esercizio extends Component {
     currentCicle: 0
   }
 
-  durataEsercizioCompleta () {
+  async durataEsercizioCompleta () {
+    this.click1 = await Audio.Sound.createAsync(
+      require('../screen/sounds/click1.mp3')
+    )
+    this.click2 = await Audio.Sound.createAsync(
+      require('../screen/sounds/click2.mp3')
+    )
     var x = 0
     var index = 0
     var c = new Array()
@@ -45,7 +51,7 @@ export default class Esercizio extends Component {
         x += parseInt(item)
       })
     })
-    console.log(x)
+    //console.log(x)
     this.setState({
       durataEsercizio: x,
       cicli: c
@@ -58,17 +64,12 @@ export default class Esercizio extends Component {
     })
 
     this.setState({
-      durataCiclo: durCicl,
+      durataCiclo: durCicl
       //beatPerMeasure: this.state.cicli[0][0]
     })
   }
-  componentDidMount(){
+  componentDidMount () {
     this.durataEsercizioCompleta()
-
-  }
-  async UNSAFE_componentWillMount () {
-    this.click1 = await Audio.Sound.createAsync(require('../screen/sounds/click1.mp3'))
-    this.click2 = await Audio.Sound.createAsync(require('../screen/sounds/click2.mp3'))
   }
 
   // https://docs.expo.io/versions/v28.0.0/sdk/audio#__next
@@ -81,21 +82,21 @@ export default class Esercizio extends Component {
       clearInterval(this.timer)
       this.setState({
         playing: false,
-        count: 1,
-        counterTot: 1,
-        key: 1,
-        currentCicle:0,
-        counterDurataCiclo:0
+        count: 0,
+        counterTot: 0,
+        key: 0,
+        currentCicle: 0,
+        counterDurataCiclo: 0
       })
     } else {
       // Start a timer with the current BPM
       this.timer = setInterval(this.playClick, (60 / this.state.bpm) * 1000)
-      console.log('inziio ciclo')
+      // console.log('inziio ciclo')
       this.setState(
         {
           count: 1,
           playing: true,
-          key:1
+          key: 0
           // Play a click "immediately" (after setState finishes)
         },
         this.playClick
@@ -115,39 +116,42 @@ export default class Esercizio extends Component {
       currentCicle,
       cicli
     } = this.state
-    
+
     // The first beat will have a different sound than the others
     if (counterTot == durataEsercizio) {
       this.startStop()
     }
-    if(counterDurataCiclo == durataCiclo[currentCicle]){
+    if (counterDurataCiclo == durataCiclo[currentCicle]) {
       //console.log(durataCiclo[0], counterDurataCiclo)
-      console.log('cambio ciclo')
+      //console.log('cambio ciclo')
       this.setState(state => ({
-        currentCicle: state.currentCicle+1,
+        currentCicle: state.currentCicle + 1,
         counterDurataCiclo: 0,
-        key: 0,
+        key: 0
       }))
     }
     if (count % beatPerMeasure == 1) {
       //console.log('resto ' + count % beatPerMeasure)
       this.click2.sound.replayAsync()
       this.setState(state => ({
-        beatPerMeasure: cicli[currentCicle][key-1],
+        beatPerMeasure: cicli[currentCicle][key - 1],
         count: 1,
-        key: (count == 1 || count == cicli[currentCicle][key-1])?1:state.key +1
+        key:
+          count == 1 || count == cicli[currentCicle][key - 1]
+            ? 1
+            : state.key + 1
       }))
-        } else {
-          this.click1.sound.replayAsync()
-          //console.log(currentCicle, key)
-          console.log(currentCicle, cicli[currentCicle][key-1], key)
-        }
-        // Keep track of which beat we're on
-        this.setState(state => ({
-      beatPerMeasure: cicli[currentCicle][key-1],
+    } else {
+      this.click1.sound.replayAsync()
+      //console.log(currentCicle, key)
+      //console.log(currentCicle, cicli[currentCicle][key-1], key)
+    }
+    // Keep track of which beat we're on
+    this.setState(state => ({
+      beatPerMeasure: cicli[currentCicle][key - 1],
       count: state.count + 1,
       counterTot: state.counterTot + 1,
-      counterDurataCiclo: state.counterDurataCiclo +1
+      counterDurataCiclo: state.counterDurataCiclo + 1
     }))
   }
 
@@ -181,15 +185,18 @@ export default class Esercizio extends Component {
               <Text
                 style={item.key == key ? styles.PallinoPlay : styles.Pallino}
               >
-                o-{item.definizione} |{item.durata}|
+                o-{item.definizione}
+                <Text style={styles.durataPallino}>{item.durata}</Text>
               </Text>
             </View>
           )}
         ></FlatList>
 
-        <Text style={styles.countTitle}>Count: {count - 1} </Text>
-        <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text>
-        <Text style={styles.bpmTitle}>{bpm} BPM</Text>
+        <View style={styles.infoTrainer}>
+          <Text style={styles.countTitle}>Count: {count - 1} </Text>
+          {/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
+          <Text style={styles.bpmTitle}>{bpm} BPM</Text>
+        </View>
         <Slider
           style={styles.slider}
           maximumValue={180}
@@ -211,12 +218,12 @@ export default class Esercizio extends Component {
 
 const styles = {
   bpmTitle: {
-    fontSize: 30,
-    marginBottom: 20
+    fontSize: 20
+    //marginBottom: 20
   },
   countTitle: {
-    fontSize: 30,
-    marginBottom: 20,
+    fontSize: 20,
+    //marginBottom: 20,
     color: 'blue',
     fontWeight: 'bold'
   },
@@ -226,14 +233,14 @@ const styles = {
     alignItems: 'center'
   },
   slider: {
-    height: 50,
+    height: '10%',
     justifyContent: 'space-around',
     width: 300
   },
   button: {
     fontSize: 90,
     height: 100,
-    marginBottom:20
+    marginBottom: 20
   },
   Pallino: {
     flexDirection: 'row',
@@ -243,10 +250,15 @@ const styles = {
     color: 'black'
   },
   PallinoPlay: {
-    fontSize: 40,
+    fontSize: 35,
     textAlign: 'center',
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'orange'
-  }
+  },
+  durataPallino: {},
+  infoTrainer:{
+    flexDirection:'row',
+    alignItems: 'center',
+  },
 }
