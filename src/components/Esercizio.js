@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { Text, View, Button, FlatList } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { Audio } from 'expo-av'
+import AppLoading from 'expo-app-loading';
 
 export default class Esercizio extends Component {
   constructor (props) {
     super(props)
-    this.click1 = null
-    this.click2 = null
+    this.click1 = this.fetchClick1()
+    this.click2 = this.fetchClick2()
   }
 
   state = {
@@ -24,13 +25,19 @@ export default class Esercizio extends Component {
     currentCicle: 0
   }
 
-  async durataEsercizioCompleta () {
-    this.click1 = await Audio.Sound.createAsync(
+  async fetchClick1(){
+    console.log('carico click 1')
+    return this.click1 = await Audio.Sound.createAsync(
       require('../screen/sounds/click1.mp3')
     )
-    this.click2 = await Audio.Sound.createAsync(
+  } 
+  async fetchClick2(){
+    return this.click2 = await Audio.Sound.createAsync(
       require('../screen/sounds/click2.mp3')
     )
+  } 
+
+  durataEsercizioCompleta () {
     var x = 0
     var index = 0
     var c = new Array()
@@ -71,11 +78,7 @@ export default class Esercizio extends Component {
   componentDidMount () {
     this.durataEsercizioCompleta()
   }
-
-  // https://docs.expo.io/versions/v28.0.0/sdk/audio#__next
-  // https://github.com/expo/playlist-example/blob/master/App.js
-  // https://daveceddia.com/react-practice-projects/
-
+  
   startStop = () => {
     if (this.state.playing) {
       // Stop the timer
@@ -186,7 +189,7 @@ export default class Esercizio extends Component {
                 style={item.key == key ? styles.PallinoPlay : styles.Pallino}
               >
                 o-{item.definizione}
-                <Text style={styles.durataPallino}>{item.durata}</Text>
+                <Text style={styles.durataPallino}>  {item.durata}</Text>
               </Text>
             </View>
           )}
@@ -257,8 +260,8 @@ const styles = {
     color: 'orange'
   },
   durataPallino: {},
-  infoTrainer:{
-    flexDirection:'row',
-    alignItems: 'center',
-  },
+  infoTrainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 }

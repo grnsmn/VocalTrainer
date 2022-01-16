@@ -6,7 +6,7 @@ import Metronome from '../components/MetronomeHook'
 const TrainingScreen = ({route}) => {
 
   const {esercizio} = route.params
-  console.log(Object.keys(esercizio.lista_pallini))
+  //onsole.log(Object.keys(esercizio.lista_pallini))
   
   return (
     <View style={styles.container}>

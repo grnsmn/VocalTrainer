@@ -1,22 +1,41 @@
-import { StyleSheet, View } from 'react-native'
+import { useState } from 'react';
+import { StyleSheet} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screen/HomeScreen';
-import AddominaleDiaframmaticaList from './src/Respirazione/Famiglia/AddominaleDiaframmaticaList';
+import EserciziList from './src/Respirazione/Famiglia/EserciziList';
 import FamiglieList from './src/Respirazione/FamiglieList';
 import TrainingScreen from './src/screen/TrainingScreen'
 //import Metronome from './src/MetronomeHook'
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font'
 
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+  })
+}
 
 const Stack = createNativeStackNavigator();
 
 export default function App () {
+  const [fontLoad, setFontLoad] = useState(false)
+  if (!fontLoad) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setFontLoad(true)}
+        onError={err => console.log(err)}
+      />
+    )
+  }
+
   return (
     <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Lista Famiglie" component={FamiglieList} />
-      <Stack.Screen name="Addominale Diaframmatica" component={AddominaleDiaframmaticaList} />
+      <Stack.Screen name="Lista esercizi" component={EserciziList} />
        <Stack.Screen name="Training" component={TrainingScreen} />
     </Stack.Navigator>
   </NavigationContainer>

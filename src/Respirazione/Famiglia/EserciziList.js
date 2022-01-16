@@ -3,13 +3,12 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import ListItem from '../../components/ListElement'
 import { useState, useEffect } from 'react'
 
-const AddominaleDiaframmaticaList = ({ route, navigation }) => {
+const EserciziList = ({ route, navigation }) => {
   const { Titoli } = route.params
   const [listaTitoli, setListaTitoli] = useState(Object.values(Titoli))
   const [scelta, setScelta] = useState('')
 
   const loadEsercizio = (item) => {
-    
     setScelta(item)
   }
   
@@ -37,12 +36,6 @@ const AddominaleDiaframmaticaList = ({ route, navigation }) => {
         )}
       >
       </FlatList>
-      {/* <Es_Respirazione
-          title={data[0].titolo}
-          descript={data[0].descrizione}
-          pallini={data[0].lista_pallini}
-          cicli={data[0].cicli}
-        ></Es_Respirazione> */}
     </View>
   )
 }
@@ -56,4 +49,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddominaleDiaframmaticaList
+export default EserciziList

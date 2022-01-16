@@ -73,7 +73,7 @@ const FamiglieList = ({ route, navigation }) => {
   useEffect(() => {
     if (scelta.length != 0) {
       //console.log(contenutoFamiglia)
-      navigation.navigate(scelta, {
+      navigation.navigate('Lista esercizi', {
         Titoli: listaEsercizi
       })
     }

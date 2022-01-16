@@ -7,22 +7,16 @@ const Metronome = props => {
   const [click1, setClick1] = useState({})
 
   async function playSound() {
-    console.log('Loading Sound');
     const { click } = await Audio.Sound.createAsync(
-       require('../screen/sounds/click1.mp3')
-    );
+      require('../screen/sounds/click1.mp3')
+      );
     setClick1(click);
 
     console.log('Playing Sound');
-    await click1.playAsync(); }
+    await click1.playAsync(); 
+  }
 
-    // useEffect(() => {
-    //   return click1
-    //     ? () => {
-    //         console.log('Unloading Sound');
-    //         click1.unloadAsync(); }
-    //     : undefined;
-    // }, [click1]);
+ 
 
   return (
     <View style={styles.container}>

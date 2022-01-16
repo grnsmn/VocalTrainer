@@ -3,7 +3,6 @@ import { StyleSheet, View, Button } from 'react-native'
 import { useEffect, useState, useRef } from 'react'
 import firebase from 'firebase/compat/app'
 import { getDatabase, ref, onValue } from 'firebase/database'
-import FamiglieList from '../Respirazione/FamiglieList'
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -29,19 +28,20 @@ const refRespirazione = ref(db, '/Respirazione/')
 
 export default function HomeScreen ({ navigation }) {
   const [famiglieRespirazione, setFamiglieRespirazione] = useState([])
-  
+
+
   useEffect(() => {
     let tmp = []
     let famiglia = {}
     setFamiglieRespirazione([])
     onValue(refRespirazione, snapshot => {
       snapshot.forEach(childSnap => {
-        famiglia = {id: childSnap.key, contenuto: childSnap.val()}
+        famiglia = { id: childSnap.key, contenuto: childSnap.val() }
         tmp.push(famiglia)
       })
       setFamiglieRespirazione(tmp)
     })
-  },[])
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -49,7 +49,9 @@ export default function HomeScreen ({ navigation }) {
       <Button
         style={styles.button}
         title={'Respirazione'}
-        onPress={() => navigation.navigate('Lista Famiglie', {lista: famiglieRespirazione})}
+        onPress={() =>
+          navigation.navigate('Lista Famiglie', { lista: famiglieRespirazione })
+        }
       ></Button>
       <Button style={styles.button} title={'Ritmico'}></Button>
       <Button style={styles.button} title={'Vocalizzi'}></Button>
