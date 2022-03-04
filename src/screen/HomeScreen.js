@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View, Button } from 'react-native'
-import { useEffect, useState, useRef } from 'react'
+import { StyleSheet, View, RefreshControl, Button } from 'react-native'
+import { useEffect, useState} from 'react'
 import firebase from 'firebase/compat/app'
 import { getDatabase, ref, onValue } from 'firebase/database'
 
@@ -28,13 +28,14 @@ const refRespirazione = ref(db, '/Respirazione/')
 
 export default function HomeScreen ({ navigation }) {
   const [famiglieRespirazione, setFamiglieRespirazione] = useState([])
-
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     let tmp = []
     let famiglia = {}
     setFamiglieRespirazione([])
     onValue(refRespirazione, snapshot => {
+      setLoading(!loading)
       snapshot.forEach(childSnap => {
         famiglia = { id: childSnap.key, contenuto: childSnap.val() }
         tmp.push(famiglia)
@@ -43,20 +44,35 @@ export default function HomeScreen ({ navigation }) {
     })
   }, [])
 
-  return (
-    <View style={styles.container}>
-      <StatusBar style='auto' />
-      <Button
-        style={styles.button}
-        title={'Respirazione'}
-        onPress={() =>
-          navigation.navigate('Lista Famiglie', { lista: famiglieRespirazione })
-        }
-      ></Button>
-      <Button style={styles.button} title={'Ritmico'}></Button>
-      <Button style={styles.button} title={'Vocalizzi'}></Button>
-    </View>
-  )
+  useEffect(() => {
+    setLoading(!loading)
+  }, [famiglieRespirazione])
+
+  if (loading === true) {
+    return (
+      <RefreshControl
+        refreshing={loading}
+        onRefresh={()=>console.log('refres')}
+        >
+      </RefreshControl>
+    )
+  } else
+    return (
+      <View style={styles.container}>
+        <StatusBar style='auto' />
+        <Button
+          style={styles.button}
+          title={'Respirazione'}
+          onPress={() =>
+            navigation.navigate('Lista Famiglie', {
+              lista: famiglieRespirazione
+            })
+          }
+        ></Button>
+        <Button style={styles.button} title={'Ritmico'}></Button>
+        <Button style={styles.button} title={'Vocalizzi'}></Button>
+      </View>
+    )
 }
 
 const styles = StyleSheet.create({

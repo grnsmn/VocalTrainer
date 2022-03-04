@@ -40,12 +40,10 @@ const FamiglieList = ({ route, navigation }) => {
     var tmp = []
     var esercizio = {}
     setListaEsercizi([])
-    
     onValue(refEsResp, snapshot => {
       snapshot.forEach(childSnap => {
         esercizio = {id: childSnap.key, contenuto: childSnap.val()}
         tmp.push(esercizio)
-        // childData will be the actual contents of the child
       })
       setListaEsercizi(tmp)
       setScelta(item)
@@ -67,7 +65,7 @@ const FamiglieList = ({ route, navigation }) => {
       })
     })
     setListaEsercizi(tmp)
-    setRefreshing(false)
+    setRefreshing(false) 
   }, [refreshing])
 
   useEffect(() => {
@@ -80,6 +78,11 @@ const FamiglieList = ({ route, navigation }) => {
     setScelta('')
   }, [scelta])
 
+  if(refresh===true){
+    return <View>
+      <Text>STO CARICANDO</Text>
+    </View>
+  } else
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />

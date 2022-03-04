@@ -1,20 +1,21 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, Button } from 'react-native'
 import Esercizio from '../components/Esercizio'
 import Metronome from '../components/MetronomeHook'
+
 
 const TrainingScreen = ({route}) => {
 
   const {esercizio} = route.params
-  //onsole.log(Object.keys(esercizio.lista_pallini))
+  //console.log((esercizio.cicli))
   
   return (
     <View style={styles.container}>
       <View style={styles.Esercizio}>
         <Text style={styles.Title}>{esercizio.titolo}</Text>
         <Text style={styles.Descript}>{esercizio.descrizione}</Text>
-        <Esercizio pallini={esercizio.lista_pallini}  cicli= {esercizio.cicli}></Esercizio>
-        {/* <Metronome/> */}
+        <Esercizio pallini={esercizio.lista_pallini}  cicli= {[esercizio.cicli]}></Esercizio>
+        {/* <Metronome pallini={esercizio.lista_pallini}  cicli= {[esercizio.cicli]}/> */}
       </View>
     </View>
   )

@@ -16,7 +16,7 @@ const EserciziList = ({ route, navigation }) => {
     if (scelta.length != 0) {
       listaTitoli.forEach(element => {
         if (element.id===scelta){
-          console.log(element.contenuto)
+          //console.log(element.contenuto)
           navigation.navigate('Training', {esercizio: element.contenuto})
         }
       }

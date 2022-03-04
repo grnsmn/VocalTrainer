@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Button, FlatList } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { Audio } from 'expo-av'
-import AppLoading from 'expo-app-loading';
+import CountDown from 'react-native-countdown-component'
 
 export default class Esercizio extends Component {
   constructor (props) {
@@ -25,19 +25,25 @@ export default class Esercizio extends Component {
     currentCicle: 0
   }
 
-  async fetchClick1(){
-    console.log('carico click 1')
-    return this.click1 = await Audio.Sound.createAsync(
-      require('../screen/sounds/click1.mp3')
-    )
-  } 
-  async fetchClick2(){
-    return this.click2 = await Audio.Sound.createAsync(
-      require('../screen/sounds/click2.mp3')
-    )
-  } 
+  async fetchClick1 () {
+    return (this.click1 = await Audio.Sound.createAsync(
+      require('../screen/sounds/click1.wav')
+    ))
+  }
+  async fetchClick2 () {
+    return (this.click2 = await Audio.Sound.createAsync(
+      require('../screen/sounds/click2.wav')
+    ))
+  }
+
+  // async componentWillMount() {
+  //   this.click1 = await Audio.Sound.createAsync(require('../screen/sounds/click1.wav'));
+  //   this.click2 = await Audio.Sound.createAsync(require('../screen/sounds/click2.wav'));
+  //   }
 
   durataEsercizioCompleta () {
+     this.click1 = this.fetchClick1()
+     this.click2 = this.fetchClick2()
     var x = 0
     var index = 0
     var c = new Array()
@@ -66,30 +72,31 @@ export default class Esercizio extends Component {
     var durCicl = []
     const reducer = (previousValue, currentValue) =>
       previousValue + currentValue
-    this.state.cicli.forEach(el => {
+      
+    c.forEach(el => {
       durCicl.push(el.reduce(reducer))
     })
-
+    
     this.setState({
       durataCiclo: durCicl
-      //beatPerMeasure: this.state.cicli[0][0]
     })
   }
+
   componentDidMount () {
     this.durataEsercizioCompleta()
   }
-  
+    
   startStop = () => {
     if (this.state.playing) {
       // Stop the timer
       clearInterval(this.timer)
       this.setState({
         playing: false,
-        count: 0,
+        count: 1,
         counterTot: 0,
         key: 0,
         currentCicle: 0,
-        counterDurataCiclo: 0
+        counterDurataCiclo: 0,
       })
     } else {
       // Start a timer with the current BPM
@@ -97,9 +104,12 @@ export default class Esercizio extends Component {
       // console.log('inziio ciclo')
       this.setState(
         {
-          count: 1,
           playing: true,
-          key: 0
+          counterTot: 0,
+          count: 1,
+          currentCicle: 0,
+          counterDurataCiclo: 0,
+          key: 0,
           // Play a click "immediately" (after setState finishes)
         },
         this.playClick
@@ -117,15 +127,15 @@ export default class Esercizio extends Component {
       durataCiclo,
       counterDurataCiclo,
       currentCicle,
-      cicli
+      cicli, 
     } = this.state
-
+    
     // The first beat will have a different sound than the others
     if (counterTot == durataEsercizio) {
       this.startStop()
     }
     if (counterDurataCiclo == durataCiclo[currentCicle]) {
-      //console.log(durataCiclo[0], counterDurataCiclo)
+      // console.log(durataCiclo[currentCicle], counterDurataCiclo)
       //console.log('cambio ciclo')
       this.setState(state => ({
         currentCicle: state.currentCicle + 1,
@@ -140,7 +150,7 @@ export default class Esercizio extends Component {
         beatPerMeasure: cicli[currentCicle][key - 1],
         count: 1,
         key:
-          count == 1 || count == cicli[currentCicle][key - 1]
+          count == 1 || count == cicli[currentCicle][key-1] || key === this.props.pallini.length
             ? 1
             : state.key + 1
       }))
@@ -167,7 +177,10 @@ export default class Esercizio extends Component {
       // Set the new BPM, and reset the beat counter
       this.setState({
         count: 1,
-        counterTot: 1,
+        counterTot: 0,
+        currentCicle: 0,
+        counterDurataCiclo: 0,
+        key: 0,
         bpm
       })
     } else {
@@ -177,7 +190,7 @@ export default class Esercizio extends Component {
   }
 
   render () {
-    const { bpm, playing, count, counterTot, key } = this.state
+    const { bpm, playing, count, key } = this.state
 
     return (
       <View style={styles.container}>
@@ -186,20 +199,36 @@ export default class Esercizio extends Component {
           renderItem={({ item }) => (
             <View>
               <Text
-                style={item.key == key ? styles.PallinoPlay : styles.Pallino}
+                style={item.key == key && playing==true  ? styles.PallinoPlay : styles.Pallino}
               >
                 o-{item.definizione}
-                <Text style={styles.durataPallino}>  {item.durata}</Text>
+                <Text style={styles.durataPallino}> {item.durata+', '}</Text>
               </Text>
             </View>
           )}
         ></FlatList>
-
         <View style={styles.infoTrainer}>
           <Text style={styles.countTitle}>Count: {count - 1} </Text>
           {/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
           <Text style={styles.bpmTitle}>{bpm} BPM</Text>
         </View>
+        <CountDown
+          size={45}
+          until={8}
+          onFinish={this.startStop}
+          digitStyle={{
+            backgroundColor: '#FFF',
+            borderWidth: 2,
+            borderColor: '#1CC625'
+          }}
+          digitTxtStyle={{ color: '#1CC625' }}
+          timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+          separatorStyle={{ color: '#1CC625' }}
+          timeToShow={['S']}
+          running={true}
+          timeLabels={{ s: null }}
+          showSeparator
+        ></CountDown>
         <Slider
           style={styles.slider}
           maximumValue={180}
