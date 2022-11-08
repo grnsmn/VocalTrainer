@@ -4,18 +4,21 @@ import Esercizio from '../components/Esercizio'
 import Metronome from '../components/MetronomeHook'
 
 
-const TrainingScreen = ({route}) => {
+const TrainingScreen = ({ route, navigation }) => {
 
-  const {esercizio} = route.params
+  const { esercizio, next } = route.params
   //console.log((esercizio.cicli))
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.Esercizio}>
         <Text style={styles.Title}>{esercizio.titolo}</Text>
         <Text style={styles.Descript}>{esercizio.descrizione}</Text>
-        <Esercizio pallini={esercizio.lista_pallini}  cicli= {[esercizio.cicli]}></Esercizio>
+        <Esercizio pallini={esercizio.lista_pallini} cicli={[esercizio.cicli]} />
         {/* <Metronome pallini={esercizio.lista_pallini}  cicli= {[esercizio.cicli]}/> */}
+
+        {/* <Button title='Next' onPress={navigation.navigate('Training', {esercizio: next.contenuto})}></Button> */}
+
       </View>
     </View>
   )
@@ -26,23 +29,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     // alignItems: 'center',
-    
+
   },
   Esercizio: {
     flex: 1
   },
   Title: {
-    fontSize: 35,
+    fontSize: 30,
     textAlign: 'center',
     color: 'red',
-    fontWeight:'bold',
-    height:'10%'
+    fontWeight: 'bold',
   },
   Descript: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginBottom: 10,
-    fontStyle: 'italic'
+    fontSize: 25,
+    textAlign: 'left',
+    fontStyle: 'italic',
+    marginBottom: 16,
   }
 })
 export default TrainingScreen
