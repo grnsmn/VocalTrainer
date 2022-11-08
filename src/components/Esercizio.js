@@ -5,7 +5,7 @@ import { Audio } from 'expo-av'
 import CountDown from 'react-native-countdown-component'
 
 export default class Esercizio extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.click1 = this.fetchClick1()
     this.click2 = this.fetchClick2()
@@ -22,28 +22,22 @@ export default class Esercizio extends Component {
     durataEsercizio: 0,
     cicli: [],
     durataCiclo: [],
-    currentCicle: 0
+    currentCicle: 0,
+    startCountDown: true
   }
 
-  async fetchClick1 () {
+  async fetchClick1() {
     return (this.click1 = await Audio.Sound.createAsync(
-      require('../screen/sounds/click1.wav')
+      require('../screen/sounds/click1.mp3')
     ))
   }
-  async fetchClick2 () {
+  async fetchClick2() {
     return (this.click2 = await Audio.Sound.createAsync(
-      require('../screen/sounds/click2.wav')
+      require('../screen/sounds/click2.mp3')
     ))
   }
 
-  // async componentWillMount() {
-  //   this.click1 = await Audio.Sound.createAsync(require('../screen/sounds/click1.wav'));
-  //   this.click2 = await Audio.Sound.createAsync(require('../screen/sounds/click2.wav'));
-  //   }
-
-  durataEsercizioCompleta () {
-     this.click1 = this.fetchClick1()
-     this.click2 = this.fetchClick2()
+  durataEsercizioCompleta() {
     var x = 0
     var index = 0
     var c = new Array()
@@ -72,20 +66,23 @@ export default class Esercizio extends Component {
     var durCicl = []
     const reducer = (previousValue, currentValue) =>
       previousValue + currentValue
-      
+
     c.forEach(el => {
       durCicl.push(el.reduce(reducer))
     })
-    
+
     this.setState({
       durataCiclo: durCicl
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.durataEsercizioCompleta()
   }
-    
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
   startStop = () => {
     if (this.state.playing) {
       // Stop the timer
@@ -110,6 +107,7 @@ export default class Esercizio extends Component {
           currentCicle: 0,
           counterDurataCiclo: 0,
           key: 0,
+          startCountDown: false
           // Play a click "immediately" (after setState finishes)
         },
         this.playClick
@@ -127,14 +125,14 @@ export default class Esercizio extends Component {
       durataCiclo,
       counterDurataCiclo,
       currentCicle,
-      cicli, 
+      cicli,
     } = this.state
-    
+
     // The first beat will have a different sound than the others
     if (counterTot == durataEsercizio) {
       this.startStop()
     }
-    if (counterDurataCiclo == durataCiclo[currentCicle]) {
+    else if (counterDurataCiclo == durataCiclo[currentCicle]) {
       // console.log(durataCiclo[currentCicle], counterDurataCiclo)
       //console.log('cambio ciclo')
       this.setState(state => ({
@@ -143,14 +141,14 @@ export default class Esercizio extends Component {
         key: 0
       }))
     }
-    if (count % beatPerMeasure == 1) {
+    else if (count % beatPerMeasure == 1) {
       //console.log('resto ' + count % beatPerMeasure)
       this.click2.sound.replayAsync()
       this.setState(state => ({
         beatPerMeasure: cicli[currentCicle][key - 1],
         count: 1,
         key:
-          count == 1 || count == cicli[currentCicle][key-1] || key === this.props.pallini.length
+          count == 1 || count == cicli[currentCicle][key - 1]
             ? 1
             : state.key + 1
       }))
@@ -168,6 +166,10 @@ export default class Esercizio extends Component {
     }))
   }
 
+  handleCountDown() {
+    var x = this.startCountDown
+    this.setState({ startCountDown: !x })
+  }
   handleBpmChange = bpm => {
     if (this.state.playing) {
       // Stop the old timer and start a new one
@@ -189,8 +191,8 @@ export default class Esercizio extends Component {
     }
   }
 
-  render () {
-    const { bpm, playing, count, key } = this.state
+  render() {
+    const { bpm, playing, count, key, startCountDown } = this.state
 
     return (
       <View style={styles.container}>
@@ -199,10 +201,10 @@ export default class Esercizio extends Component {
           renderItem={({ item }) => (
             <View>
               <Text
-                style={item.key == key && playing==true  ? styles.PallinoPlay : styles.Pallino}
+                style={item.key == key && playing == true ? styles.PallinoPlay : styles.Pallino}
               >
                 o-{item.definizione}
-                <Text style={styles.durataPallino}> {item.durata+', '}</Text>
+                <Text style={styles.durataPallino}> {item.durata + '; '}</Text>
               </Text>
             </View>
           )}
@@ -210,39 +212,42 @@ export default class Esercizio extends Component {
         <View style={styles.infoTrainer}>
           <Text style={styles.countTitle}>Count: {count - 1} </Text>
           {/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
-          <Text style={styles.bpmTitle}>{bpm} BPM</Text>
         </View>
-        <CountDown
-          size={45}
-          until={8}
-          onFinish={this.startStop}
-          digitStyle={{
-            backgroundColor: '#FFF',
-            borderWidth: 2,
-            borderColor: '#1CC625'
-          }}
-          digitTxtStyle={{ color: '#1CC625' }}
-          timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-          separatorStyle={{ color: '#1CC625' }}
-          timeToShow={['S']}
-          running={true}
-          timeLabels={{ s: null }}
-          showSeparator
-        ></CountDown>
-        <Slider
-          style={styles.slider}
-          maximumValue={180}
-          minimumValue={60}
-          onValueChange={this.handleBpmChange}
-          step={1}
-          value={bpm}
-        />
-        <Button
-          style={styles.button}
-          onPress={this.startStop}
-          title={playing ? 'Stop' : 'Play'}
-          accessibilityLabel='Start and Stop The Metronome'
-        />
+        <View style={styles.controlContainer}>
+          <CountDown
+            size={30}
+            until={8}
+            onFinish={(playing === true) ? null : this.startStop}
+            digitStyle={{
+              backgroundColor: '#FFF',
+              borderWidth: 2,
+              borderColor: '#1CC625',
+            }}
+            digitTxtStyle={{ color: '#1CC625',  }}
+            timeLabelStyle={{ color: 'red', fontWeight: 'bold', }}
+            separatorStyle={{ color: '#1CC625' }}
+            timeToShow={['S']}
+            running={startCountDown}
+            timeLabels={{ s: null }}
+            showSeparator
+          />
+          <Text style={styles.bpmTitle}>{bpm} BPM</Text>
+          <Slider
+            style={styles.slider}
+            maximumValue={180}
+            minimumValue={60}
+            onValueChange={this.handleBpmChange}
+            step={1}
+            value={bpm}
+          />
+          <Button
+            style={styles.button}
+            color={'#1CC625'}
+            onPress={this.startStop}
+            title={playing ? 'Stop' : 'Play'}
+            accessibilityLabel='Start and Stop The Metronome'
+          />
+        </View>
       </View>
     )
   }
@@ -250,14 +255,15 @@ export default class Esercizio extends Component {
 
 const styles = {
   bpmTitle: {
-    fontSize: 20
-    //marginBottom: 20
+    fontSize: 16,
+    textAlign:'center',
   },
   countTitle: {
-    fontSize: 20,
+    fontSize: 24,
     //marginBottom: 20,
     color: 'blue',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom:8
   },
   container: {
     flex: 1,
@@ -265,14 +271,15 @@ const styles = {
     alignItems: 'center'
   },
   slider: {
-    height: '10%',
+    height: '20%',
     justifyContent: 'space-around',
-    width: 300
+    width: 300,
+    paddingVertical: 16,
   },
   button: {
-    fontSize: 90,
+    fontSize: 45,
     height: 100,
-    marginBottom: 20
+    paddingVertical: 16,
   },
   Pallino: {
     flexDirection: 'row',
@@ -291,6 +298,12 @@ const styles = {
   durataPallino: {},
   infoTrainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  pallinoContainer: {
+    height: '50%'
+  },
+  controlContainer: {
+    height: '30%',
   }
 }
