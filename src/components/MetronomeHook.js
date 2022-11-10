@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, Button, StyleSheet, FlatList, SafeAreaView } from 'react-native'
+import { View, Button, StyleSheet} from 'react-native'
 //import Slider from '@react-native-community/slider';
 import { Audio } from 'expo-av'
 
