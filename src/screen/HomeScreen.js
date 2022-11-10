@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View, RefreshControl, Button } from 'react-native'
-import { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import firebase from 'firebase/compat/app'
 import { getDatabase, ref, onValue } from 'firebase/database'
-
+// Get a reference to the storage service, which is used to create references in your storage bucket
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyAY9RAEFc8VYup5Y8SQZziZS-GPDAodBE0',
@@ -11,7 +11,7 @@ const firebaseConfig = {
   databaseURL:
     'https://vocaltrainer-bfc85-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'vocaltrainer-bfc85',
-  storageBucket: 'vocaltrainer-bfc85.appspot.com',
+  storageBucket: 'gs://vocaltrainer-bfc85.appspot.com',
   messagingSenderId: '976841336358',
   appId: '1:976841336358:web:c3fd687505c9314e0368e7',
   measurementId: 'G-4BV0XVCFBG'
@@ -25,8 +25,11 @@ if (!firebase.apps.length) {
 
 const db = getDatabase()
 const refRespirazione = ref(db, '/Respirazione/')
-
-export default function HomeScreen ({ navigation }) {
+//const refVocalizzi = ref(db, '/Vocalizzi/')
+// const storage = getStorage();
+// const storageRef = ref(storage);
+// console.log(storageRef);
+export default function HomeScreen({ navigation }) {
   const [famiglieRespirazione, setFamiglieRespirazione] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -52,9 +55,8 @@ export default function HomeScreen ({ navigation }) {
     return (
       <RefreshControl
         refreshing={loading}
-        onRefresh={()=>console.log('refres')}
-        >
-      </RefreshControl>
+        onRefresh={() => console.log('refres')}
+      ></RefreshControl>
     )
   } else
     return (
@@ -70,7 +72,13 @@ export default function HomeScreen ({ navigation }) {
           }
         ></Button>
         <Button style={styles.button} title={'Ritmico'}></Button>
-        <Button style={styles.button} title={'Vocalizzi'}></Button>
+        <Button
+          style={styles.button}
+          title={'Vocalizzi'}
+          onPress={() =>
+            navigation.navigate('Vocalizzi')
+          }
+        ></Button>
       </View>
     )
 }

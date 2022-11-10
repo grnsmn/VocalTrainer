@@ -7,20 +7,32 @@ const EserciziList = ({ route, navigation }) => {
   const { Titoli } = route.params
   const [listaTitoli, setListaTitoli] = useState(Object.values(Titoli))
   const [scelta, setScelta] = useState('')
+  //console.log(Object.values(Titoli));
+
 
   const loadEsercizio = (item) => {
     setScelta(item)
+
   }
   
   useEffect(() => {
     if (scelta.length != 0) {
-      listaTitoli.forEach(element => {
-        if (element.id===scelta){
-          //console.log(element.contenuto)
-          navigation.navigate('Training', {esercizio: element.contenuto})
-        }
+      let esercizioScelto = {}
+      let esercizioNext = {}
+      esercizioScelto = listaTitoli.find(element => element.id==scelta)
+      let nextIndex = listaTitoli.indexOf(esercizioScelto)+1
+      if(listaTitoli[nextIndex]!=null){
+        esercizioNext= listaTitoli[nextIndex]
       }
-      )
+      
+      navigation.navigate('Training', {esercizio: esercizioScelto.contenuto, next: esercizioNext})
+      
+      // listaTitoli.forEach(element => {
+      //   if (element.id===scelta){
+      //     navigation.navigate('Training', {esercizio: element.contenuto})
+      //   }
+      // }
+      // )
     }
     setScelta('')
   }, [scelta])

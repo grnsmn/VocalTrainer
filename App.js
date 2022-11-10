@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { StyleSheet} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screen/HomeScreen';
-import EserciziList from './src/Respirazione/Famiglia/EserciziList';
-import FamiglieList from './src/Respirazione/FamiglieList';
+import { useState } from 'react'
+import { StyleSheet } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import HomeScreen from './src/screen/HomeScreen'
+import EserciziList from './src/Respirazione/Famiglia/EserciziList'
+import FamiglieList from './src/Respirazione/FamiglieList'
 import TrainingScreen from './src/screen/TrainingScreen'
+import VocalizziScreen from './src/screen/VocalizziScreen'
 //import Metronome from './src/MetronomeHook'
-import AppLoading from 'expo-app-loading';
+import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 
 const fetchFonts = () => {
@@ -16,7 +17,7 @@ const fetchFonts = () => {
   })
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App () {
   const [fontLoad, setFontLoad] = useState(false)
@@ -32,13 +33,14 @@ export default function App () {
 
   return (
     <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Lista Famiglie" component={FamiglieList} />
-      <Stack.Screen name="Lista esercizi" component={EserciziList} />
-       <Stack.Screen name="Training" component={TrainingScreen} />
-    </Stack.Navigator>
-  </NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={HomeScreen} />
+        <Stack.Screen name='Lista Famiglie' component={FamiglieList} />
+        <Stack.Screen name='Lista esercizi' component={EserciziList} />
+        <Stack.Screen name='Training' component={TrainingScreen} />
+        <Stack.Screen name='Vocalizzi' component={VocalizziScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
