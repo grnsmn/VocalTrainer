@@ -11,6 +11,7 @@ import VocalizziScreen from './src/screen/VocalizziScreen'
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 
+
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
