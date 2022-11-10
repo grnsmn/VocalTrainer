@@ -23,7 +23,7 @@ export default class Esercizio extends Component {
     cicli: [],
     durataCiclo: [],
     currentCicle: 0,
-    startCountDown: true
+    startCountDown: false
   }
 
   async fetchClick1() {
@@ -210,43 +210,45 @@ export default class Esercizio extends Component {
           )}
         ></FlatList>
         <View style={styles.infoTrainer}>
-          <Text style={styles.countTitle}>Count: {count - 1} </Text>
           {/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
-        </View>
-        <View style={styles.controlContainer}>
-          <CountDown
-            size={30}
-            until={8}
-            onFinish={(playing === true) ? null : this.startStop}
-            digitStyle={{
-              backgroundColor: '#FFF',
-              borderWidth: 2,
-              borderColor: '#1CC625',
-            }}
-            digitTxtStyle={{ color: '#1CC625',  }}
-            timeLabelStyle={{ color: 'red', fontWeight: 'bold', }}
-            separatorStyle={{ color: '#1CC625' }}
-            timeToShow={['S']}
-            running={startCountDown}
-            timeLabels={{ s: null }}
-            showSeparator
-          />
-          <Text style={styles.bpmTitle}>{bpm} BPM</Text>
-          <Slider
-            style={styles.slider}
-            maximumValue={180}
-            minimumValue={60}
-            onValueChange={this.handleBpmChange}
-            step={1}
-            value={bpm}
-          />
-          <Button
-            style={styles.button}
-            color={'#1CC625'}
-            onPress={this.startStop}
-            title={playing ? 'Stop' : 'Play'}
-            accessibilityLabel='Start and Stop The Metronome'
-          />
+          <View style={styles.controlContainer}>
+            <Text style={styles.countTitle}>Count: {count - 1} </Text>
+            <CountDown
+              size={30}
+              until={8}
+              onFinish={(playing === true) ? null : this.startStop}
+              digitStyle={{
+                backgroundColor: '#FFF',
+                borderWidth: 2,
+                borderColor: '#1CC625',
+              }}
+              digitTxtStyle={{ color: '#1CC625', }}
+              timeLabelStyle={{ color: 'red', fontWeight: 'bold', }}
+              separatorStyle={{ color: '#1CC625' }}
+              timeToShow={['S']}
+              running={startCountDown}
+              timeLabels={{ s: null }}
+              showSeparator
+            />
+           <View style={{marginVertical:4}}>
+           <Button
+              style={styles.button}
+              color={'#1CC625'}
+              onPress={this.startStop}
+              title={playing ? 'Stop' : 'Play'}
+              accessibilityLabel='Start and Stop The Metronome'
+            />
+           </View>
+            <Text style={styles.bpmTitle}>{bpm} BPM</Text>
+            <Slider
+              style={styles.slider}
+              maximumValue={180}
+              minimumValue={60}
+              onValueChange={this.handleBpmChange}
+              step={1}
+              value={bpm}
+            />
+          </View>
         </View>
       </View>
     )
@@ -256,14 +258,16 @@ export default class Esercizio extends Component {
 const styles = {
   bpmTitle: {
     fontSize: 16,
-    textAlign:'center',
+    textAlign: 'center',
+    paddingVertical: 4
   },
   countTitle: {
     fontSize: 24,
     //marginBottom: 20,
     color: 'blue',
     fontWeight: 'bold',
-    marginBottom:8
+    marginBottom: 4,
+    alignSelf: 'center',
   },
   container: {
     flex: 1,
@@ -271,15 +275,14 @@ const styles = {
     alignItems: 'center'
   },
   slider: {
-    height: '20%',
-    justifyContent: 'space-around',
-    width: 300,
-    paddingVertical: 16,
+    height: '5%',
+    width: '90%',
+    paddingBottom: 16,
+    alignSelf: 'center'
   },
   button: {
     fontSize: 45,
-    height: 100,
-    paddingVertical: 16,
+    height: '100%',
   },
   Pallino: {
     flexDirection: 'row',
@@ -297,13 +300,16 @@ const styles = {
   },
   durataPallino: {},
   infoTrainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: '100%',
+    borderWidth: 2,
+    borderRadius: 16,
+    borderColor: '#1CC625'
+
   },
   pallinoContainer: {
-    height: '50%'
+    height: '60%'
   },
   controlContainer: {
-    height: '30%',
+    height: '35%',
   }
 }
