@@ -129,10 +129,10 @@ export default class Esercizio extends Component {
     } = this.state
 
     // The first beat will have a different sound than the others
-    if (counterTot == durataEsercizio) {
+    if (counterTot === durataEsercizio) {
       this.startStop()
     }
-    else if (counterDurataCiclo == durataCiclo[currentCicle]) {
+    if (counterDurataCiclo === durataCiclo[currentCicle]) {
       // console.log(durataCiclo[currentCicle], counterDurataCiclo)
       //console.log('cambio ciclo')
       this.setState(state => ({
@@ -141,14 +141,14 @@ export default class Esercizio extends Component {
         key: 0
       }))
     }
-    else if (count % beatPerMeasure == 1) {
+    if (count % beatPerMeasure === 1) {
       //console.log('resto ' + count % beatPerMeasure)
       this.click2.sound.replayAsync()
       this.setState(state => ({
         beatPerMeasure: cicli[currentCicle][key - 1],
         count: 1,
         key:
-          count == 1 || count == cicli[currentCicle][key - 1]
+          count == 1 || count == cicli[currentCicle][key - 1] || key === this.props.pallini.length
             ? 1
             : state.key + 1
       }))
