@@ -12,7 +12,6 @@ const EserciziList = ({ route, navigation }) => {
 
   const loadEsercizio = (item) => {
     setScelta(item)
-
   }
   
   useEffect(() => {
