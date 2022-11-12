@@ -38,7 +38,7 @@ export default function App () {
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Lista Famiglie' component={FamiglieList} />
         <Stack.Screen name='Lista esercizi' component={EserciziList} />
-        <Stack.Screen name='Training' component={TrainingScreen} />
+        <Stack.Screen name='Training' component={TrainingScreen} options={({ route }) => ({ title: route.params.name })} />
         <Stack.Screen name='Vocalizzi' component={VocalizziScreen} />
       </Stack.Navigator>
     </NavigationContainer>
