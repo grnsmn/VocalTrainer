@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -8,7 +8,6 @@ import FamiglieList from './src/Respirazione/FamiglieList'
 import TrainingScreen from './src/screen/TrainingScreen'
 import VocalizziScreen from './src/screen/VocalizziScreen'
 //import Metronome from './src/MetronomeHook'
-import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 
 
@@ -21,16 +20,10 @@ const fetchFonts = () => {
 const Stack = createNativeStackNavigator()
 
 export default function App () {
-  const [fontLoad, setFontLoad] = useState(false)
-  if (!fontLoad) {
-    return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => setFontLoad(true)}
-        onError={err => console.log(err)}
-      />
-    )
-  }
+  useEffect(() => {
+    fetchFonts()
+  }, [])
+  
 
   return (
     <NavigationContainer>
