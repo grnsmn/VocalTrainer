@@ -20,6 +20,7 @@ const fetchFonts = () => {
 const Stack = createNativeStackNavigator()
 
 export default function App() {
+
   useEffect(() => {
     fetchFonts()
   }, [])
@@ -27,9 +28,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='Home' component={HomeScreen} />
-        <Stack.Screen name='Lista Famiglie' component={FamiglieList} />
+      <Stack.Navigator screenOptions={navScreensOptions}>
+        <Stack.Screen name='Home' component={HomeScreen} options={{title:'Vocal Trainer'}} />
+        <Stack.Screen name='Lista Famiglie' component={FamiglieList} options={{title:'Famiglie'}} />
         <Stack.Screen name='Lista esercizi' component={EserciziList} options={({ route }) => ({ title: route.params.name })} />
         <Stack.Screen name='Training' component={TrainingScreen} options={({ route }) => ({ title: route.params.name })} />
         {/* <Stack.Screen name='Vocalizzi' component={VocalizziScreen} /> */}
@@ -38,11 +39,14 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+const navScreensOptions = {
+  headerTitleAlign: 'center',
+  headerStyle: {
+    backgroundColor: '#1CC625',
+  },
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    textAlign: 'center'
+  },
+}
