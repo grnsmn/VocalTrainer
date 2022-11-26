@@ -31,7 +31,7 @@ const FamiglieList = ({ route, navigation }) => {
 
   const [listaFamiglie, setListaFamiglie] = useState(Object.values(lista))
   const [listaEsercizi, setListaEsercizi] = useState([])
- 
+
   const [refreshing, setRefreshing] = useState(false)
   const [scelta, setScelta] = useState('')
 
@@ -42,7 +42,7 @@ const FamiglieList = ({ route, navigation }) => {
     setListaEsercizi([])
     onValue(refEsResp, snapshot => {
       snapshot.forEach(childSnap => {
-        esercizio = {id: childSnap.key, contenuto: childSnap.val()}
+        esercizio = { id: childSnap.key, contenuto: childSnap.val() }
         tmp.push(esercizio)
       })
       setListaEsercizi(tmp)
@@ -52,7 +52,7 @@ const FamiglieList = ({ route, navigation }) => {
   const refresh = () => {
     setRefreshing(true)
   }
-  
+
   useEffect(() => {
     var tmp = []
     var esercizio = {}
@@ -60,43 +60,44 @@ const FamiglieList = ({ route, navigation }) => {
     const refEsResp = ref(db, '/Respirazione/')
     onValue(refEsResp, snapshot => {
       snapshot.forEach(childSnap => {
-        esercizio = {id: childSnap.key, contenuto: childSnap.val()}
+        esercizio = { id: childSnap.key, contenuto: childSnap.val() }
         tmp.push(esercizio)
       })
     })
     setListaEsercizi(tmp)
-    setRefreshing(false) 
+    setRefreshing(false)
   }, [refreshing])
 
   useEffect(() => {
     if (scelta.length != 0) {
-      //console.log(contenutoFamiglia)
+      //cosole.log(contenutoFamiglia)
       navigation.navigate('Lista esercizi', {
-        Titoli: listaEsercizi
+        Titoli: listaEsercizi,
+        famiglia: scelta
       })
     }
     setScelta('')
   }, [scelta])
 
-  if(refresh===true){
+  if (refresh === true) {
     return <View>
       <Text>STO CARICANDO</Text>
     </View>
   } else
-  return (
-    <View style={styles.container}>
-      <StatusBar style='auto' />
-      <FlatList
-        data={listaFamiglie}
-        refreshing={refreshing}
-        onRefresh={refresh}
-        keyExtractor={item => item.id}
-        renderItem={item => (
-          <ListItem nome={item.item.id} onPressItem={onPressHandler} />
-        )}
-      ></FlatList>
-    </View>
-  )
+    return (
+      <View style={styles.container}>
+        <StatusBar style='auto' />
+        <FlatList
+          data={listaFamiglie}
+          refreshing={refreshing}
+          onRefresh={refresh}
+          keyExtractor={item => item.id}
+          renderItem={item => (
+            <ListItem nome={item.item.id} onPressItem={onPressHandler} />
+          )}
+        ></FlatList>
+      </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     // alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    paddingTop: 10,
   }
 })
 

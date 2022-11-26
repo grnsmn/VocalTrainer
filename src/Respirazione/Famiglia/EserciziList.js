@@ -4,28 +4,36 @@ import ListItem from '../../components/ListElement'
 import { useState, useEffect } from 'react'
 
 const EserciziList = ({ route, navigation }) => {
-  const { Titoli } = route.params
+  const { Titoli, famiglia } = route.params
   const [listaTitoli, setListaTitoli] = useState(Object.values(Titoli))
   const [scelta, setScelta] = useState('')
   //console.log(Object.values(Titoli));
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: famiglia,
+      headerTitleStyle: {
+        fontSize: 24,
+      },
+    })
+  }, [])
 
   const loadEsercizio = (item) => {
     setScelta(item)
   }
-  
+
   useEffect(() => {
     if (scelta.length != 0) {
       let esercizioScelto = {}
       let esercizioNext = {}
-      esercizioScelto = listaTitoli.find(element => element.id==scelta)
-      let nextIndex = listaTitoli.indexOf(esercizioScelto)+1
-      if(listaTitoli[nextIndex]!=null){
-        esercizioNext= listaTitoli[nextIndex]
+      esercizioScelto = listaTitoli.find(element => element.id == scelta)
+      let nextIndex = listaTitoli.indexOf(esercizioScelto) + 1
+      if (listaTitoli[nextIndex] != null) {
+        esercizioNext = listaTitoli[nextIndex]
       }
-      
-      navigation.navigate('Training', {esercizio: esercizioScelto.contenuto, next: esercizioNext})
-      
+
+      navigation.navigate('Training', { esercizio: esercizioScelto.contenuto, next: esercizioNext })
+
       // listaTitoli.forEach(element => {
       //   if (element.id===scelta){
       //     navigation.navigate('Training', {esercizio: element.contenuto})
