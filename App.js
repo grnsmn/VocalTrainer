@@ -6,7 +6,7 @@ import HomeScreen from './src/screen/HomeScreen'
 import EserciziList from './src/Respirazione/Famiglia/EserciziList'
 import FamiglieList from './src/Respirazione/FamiglieList'
 import TrainingScreen from './src/screen/TrainingScreen'
-//import VocalizziScreen from './src/screen/VocalizziScreen'
+import VocalizziScreen from './src/screen/VocalizziScreen'
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font'
 
@@ -33,7 +33,7 @@ export default function App() {
         <Stack.Screen name='Lista Famiglie' component={FamiglieList} options={{title:'Famiglie'}} />
         <Stack.Screen name='Lista esercizi' component={EserciziList} options={({ route }) => ({ title: route.params.name })} />
         <Stack.Screen name='Training' component={TrainingScreen} options={({ route }) => ({ title: route.params.name })} />
-        {/* <Stack.Screen name='Vocalizzi' component={VocalizziScreen} /> */}
+        <Stack.Screen name='Vocalizzi' component={VocalizziScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
