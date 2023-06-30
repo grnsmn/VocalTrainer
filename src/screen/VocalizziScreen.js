@@ -31,21 +31,27 @@ const storageRef = ref(
   "gs://vocaltrainer-bfc85.appspot.com/81 Traccia 81.mp3"
 );
 const VocalizziScreen = ({ route, navigation }) => {
-  const [sound, setSound] = useState();
-  const [audio, setAudio] = useState("");
-
-  async function playSound() {
-    if (!sound.isPlayng) {
-      console.log("🚀 ~ Audio:", Audio);
-      console.log("Loading Sound");
+  const [sound, setSound] = useState('');
+  
+  useEffect(() => {
+    const setAudio = async () => {
       const url = await getDownloadURL(storageRef);
-      console.log("🚀 ~ url:", url);
-      const { sound } = await Audio.Sound.createAsync(
+      console.log("Loading Sound");
+      const { sound: soundFirebase } = await Audio.Sound.createAsync(
         { uri: url },
-        { shouldPlay: true }
+        // { shouldPlay: true }
       );
-      setSound(sound);
-
+      console.log('🚀 ~ soundFirebase:', soundFirebase.A);
+      setSound(soundFirebase);
+    }
+    setAudio()
+  }, [])
+  
+  
+  async function playSound() {
+    const getSound = await sound.getStatusAsync()
+    console.log('🚀 ~ sound:', getSound.isPlaying );
+    if (!getSound.isPlaying) {
       console.log("Playing Sound");
       await sound.playAsync();
     } else {
