@@ -6,6 +6,7 @@ import firebase from "firebase/compat/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { Audio } from "expo-av";
 
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAY9RAEFc8VYup5Y8SQZziZS-GPDAodBE0",
@@ -41,7 +42,6 @@ const VocalizziScreen = ({ route, navigation }) => {
         { uri: url },
         // { shouldPlay: true }
       );
-      console.log('🚀 ~ soundFirebase:', soundFirebase.A);
       setSound(soundFirebase);
     }
     setAudio()
@@ -49,8 +49,7 @@ const VocalizziScreen = ({ route, navigation }) => {
   
   
   async function playSound() {
-    const getSound = await sound.getStatusAsync()
-    console.log('🚀 ~ sound:', getSound.isPlaying );
+    const getSound = await sound.getStatusAsync();
     if (!getSound.isPlaying) {
       console.log("Playing Sound");
       await sound.playAsync();
