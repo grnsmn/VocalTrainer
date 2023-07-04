@@ -27,7 +27,7 @@ export default class Esercizio extends Component {
     cicli: [],
     durataCiclo: [],
     currentCicle: 0,
-    startCountDown: false
+    startCountDown: true
   }
 
   async fetchClick1() {
@@ -111,7 +111,7 @@ export default class Esercizio extends Component {
           currentCicle: 0,
           counterDurataCiclo: 0,
           key: 0,
-          startCountDown: false
+          startCountDown: true
           // Play a click "immediately" (after setState finishes)
         },
         this.playClick
