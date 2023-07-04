@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Button, FlatList } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { Audio } from 'expo-av'
-
-// temporany mantained to hide warning removelistener used in rn-counrtdown-component 
-import CountDown from 'react-native-countdown-component' ////TODO: remove with another component couse removeListener now is deprecated with SDK47
-import { LogBox } from "react-native";
-LogBox.ignoreLogs(["EventEmitter.removeListener"]);
+import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js 
 
 export default class Esercizio extends Component {
   constructor(props) {
@@ -27,7 +23,7 @@ export default class Esercizio extends Component {
     cicli: [],
     durataCiclo: [],
     currentCicle: 0,
-    startCountDown: false
+    startCountDown: true
   }
 
   async fetchClick1() {
@@ -217,7 +213,7 @@ export default class Esercizio extends Component {
           {/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
           <View style={styles.controlContainer}>
             <Text style={styles.countTitle}>Count: {count - 1} </Text>
-            {/* <CountDown
+            <CountDown
               size={30}
               until={8}
               onFinish={(playing === true) ? null : this.startStop}
@@ -233,7 +229,7 @@ export default class Esercizio extends Component {
               running={startCountDown}
               timeLabels={{ s: null }}
               showSeparator
-            /> */}
+            />
            <View style={{marginVertical:4}}>
            <Button
               style={styles.button}
