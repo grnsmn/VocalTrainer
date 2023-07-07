@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Button, FlatList, Text } from "react-native";
 import ListItem from "../components/ListElement";
 import firebase from "firebase/compat/app";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, listAll, list } from "firebase/storage";
 import { Audio } from "expo-av";
 
 
@@ -27,15 +27,20 @@ if (!firebase.apps.length) {
 }
 
 const storage = getStorage();
+
 const storageRef = ref(
   storage,
-  "gs://vocaltrainer-bfc85.appspot.com/81 Traccia 81.mp3"
+  "gs://vocaltrainer-bfc85.appspot.com"
 );
+
 const VocalizziScreen = ({ route, navigation }) => {
   const [sound, setSound] = useState('');
+  const [listVocalizzi, setListVocalizzi] = useState();
   
   useEffect(() => {
     const setAudio = async () => {
+      const listStorage = await list(storageRef)
+      setListVocalizzi(listStorage.items);
       const url = await getDownloadURL(storageRef);
       console.log("Loading Sound");
       const { sound: soundFirebase } = await Audio.Sound.createAsync(
@@ -70,6 +75,10 @@ const VocalizziScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      {listVocalizzi?.map(item => {
+        console.log('🚀 ~ item:', item._location.path);
+        return (<View style={{width:10, height:10, backgroundColor:'red', padding: 8}}>{ item._location.path}</View>)
+      	})}
       <Button title="Play Sound" onPress={playSound} />
     </View>
   );
