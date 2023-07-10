@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Button, FlatList } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { Audio } from 'expo-av'
-
-// temporany mantained to hide warning removelistener used in rn-counrtdown-component 
-import CountDown from 'react-native-countdown-component'
-import { LogBox } from "react-native";
-LogBox.ignoreLogs(["EventEmitter.removeListener"]);
+import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js 
 
 export default class Esercizio extends Component {
   constructor(props) {
@@ -27,7 +23,7 @@ export default class Esercizio extends Component {
     cicli: [],
     durataCiclo: [],
     currentCicle: 0,
-    startCountDown: false
+    startCountDown: true
   }
 
   async fetchClick1() {
