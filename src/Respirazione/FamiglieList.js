@@ -2,27 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View, FlatList, Text } from 'react-native'
 import ListItem from '../components/ListElement'
-import firebase from 'firebase/compat/app'
 import { getDatabase, ref, onValue } from 'firebase/database'
-
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: 'AIzaSyAY9RAEFc8VYup5Y8SQZziZS-GPDAodBE0',
-  authDomain: 'vocaltrainer-bfc85.firebaseapp.com',
-  databaseURL:
-    'https://vocaltrainer-bfc85-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'vocaltrainer-bfc85',
-  storageBucket: 'vocaltrainer-bfc85.appspot.com',
-  messagingSenderId: '976841336358',
-  appId: '1:976841336358:web:c3fd687505c9314e0368e7',
-  measurementId: 'G-4BV0XVCFBG'
-}
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-} else {
-  firebase.app() // if already initialized, use that one
-}
 
 const db = getDatabase()
 
