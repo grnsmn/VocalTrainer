@@ -28,7 +28,7 @@ const storage = getStorage();
 
 const storageRef = ref(
   storage,
-  "gs://vocaltrainer-bfc85.appspot.com"
+  "gs://vocaltrainer-bfc85.appspot.com/81 Traccia 81.mp3"
 );
 
 const VocalizziScreen = ({ route, navigation }) => {
