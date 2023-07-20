@@ -1,10 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, RefreshControl, Button, Image } from "react-native";
+import { StyleSheet, View, RefreshControl, Button } from "react-native";
 import { useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { getStorage, ref as refStore, getDownloadURL } from "firebase/storage";
-// Get a reference to the storage service, which is used to create references in your storage bucket
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAY9RAEFc8VYup5Y8SQZziZS-GPDAodBE0",
