@@ -77,7 +77,7 @@ const VocalizziScreen = ({ route, navigation }) => {
 					</View>
 				);
 			})}
-			<Button title="bbhb" onPress={playSound} />
+			<Button title="Pausa esercizio in esecuzione" onPress={playSound} />
 		</View>
 	);
 };
