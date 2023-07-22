@@ -10,7 +10,6 @@ import TrainingScreen from './src/screen/TrainingScreen'
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font'
 
-
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
