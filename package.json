@@ -24,6 +24,9 @@
     "react-dom": "18.1.0",
     "react-native": "0.70.8",
     "react-native-countdown-component": "^2.7.1",
+    "@gluestack-style/react": "latest",
+    "@gluestack-ui/provider": "latest",
+    "@gluestack-style/animation-plugin": "latest",
     "react-native-dotenv": "^3.4.9",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
@@ -34,7 +37,10 @@
     "eslint": "^8.44.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "react-native-web": "^0.18.12",
+    "react-native": "^0.70.7",
+    "@types/react-native": "^0.71.6"
   },
   "private": true
 }

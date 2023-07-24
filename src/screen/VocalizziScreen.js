@@ -3,6 +3,8 @@ import { StyleSheet, View, Button, FlatList, Text } from "react-native";
 import { getStorage, ref, getDownloadURL, list } from "firebase/storage";
 import { Audio } from "expo-av";
 
+const storage = getStorage();
+
 const storageRef = ref(
   storage,
   "gs://vocaltrainer-bfc85.appspot.com/81 Traccia 81.mp3"
