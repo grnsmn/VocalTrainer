@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button, Text, FlatList } from 'react-native';
 import { getStorage, ref, getDownloadURL, list } from 'firebase/storage';
 import { Audio } from 'expo-av';
+import {
+  STORAGE_PATH
+} from '@env';
 
 const storage = getStorage();
 
-const storageRef = ref(storage, 'gs://vocaltrainer-bfc85.appspot.com');
+const storageRef = ref(storage, STORAGE_PATH);
 
 const VocalizziScreen = ({ route, navigation }) => {
 	const [sound, setSound] = useState('');
@@ -21,7 +24,7 @@ const VocalizziScreen = ({ route, navigation }) => {
 			if (soundChoose !== '') {
 				const soundRef = ref(
 					storage,
-					`gs://vocaltrainer-bfc85.appspot.com/${soundChoose}`,
+					`${STORAGE_PATH}/${soundChoose}`,
 				);
 				const uri = await getDownloadURL(soundRef);
 				console.log('Loading Sound');
@@ -67,7 +70,6 @@ const VocalizziScreen = ({ route, navigation }) => {
 				return (
 					<View key={index} style={styles.playerButtons}>
 						<Button
-							width="auto"
 							title={item?._location?.path}
 							onPress={() =>
 								setSoundChoose(item?._location?.path)
@@ -87,8 +89,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'space-around',
+    height: '100%',
 	},
 	playerButton: {
+    flex:1,
 		paddingVertical: '10',
 		backgroundColor: 'lightgreen',
 	},
