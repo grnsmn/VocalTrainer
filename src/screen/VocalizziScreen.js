@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, Text } from 'react-native';
+import { StyleSheet, View, Button, Text, FlatList } from 'react-native';
 import { getStorage, ref, getDownloadURL, list } from 'firebase/storage';
 import { Audio } from 'expo-av';
 
@@ -34,20 +34,19 @@ const VocalizziScreen = ({ route, navigation }) => {
 		setAudio();
 	}, [soundChoose]);
 
-	
 	useEffect(() => {
 		const play = async () => {
 			playSound();
 		};
 		play();
 		return sound
-		? () => {
-			console.log('Unloading Sound');
-			sound.unloadAsync();
-		}
-		: undefined;
+			? () => {
+					console.log('Unloading Sound');
+					sound.unloadAsync();
+			  }
+			: undefined;
 	}, [sound]);
-	
+
 	async function playSound() {
 		if (sound) {
 			const getSound = await sound?.getStatusAsync();
@@ -64,16 +63,17 @@ const VocalizziScreen = ({ route, navigation }) => {
 	}
 	return (
 		<View style={styles.container}>
-			{listVocalizzi?.map(item => {
+			{listVocalizzi?.map((item, index) => {
 				return (
-					<View
-						style={{
-							width: '100%',
-							height: 100,
-							backgroundColor: 'lightgreen',
-						}}
-					>
-						<Button title={item?._location?.path}  onPress={() => setSoundChoose(item?._location?.path)} style={{color: 'black'}} />
+					<View key={index} style={styles.playerButtons}>
+						<Button
+							width="auto"
+							title={item?._location?.path}
+							onPress={() =>
+								setSoundChoose(item?._location?.path)
+							}
+							style={{ color: 'black' }}
+						/>
 					</View>
 				);
 			})}
@@ -84,10 +84,13 @@ const VocalizziScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		backgroundColor: '#fff',
-		// alignItems: 'center',
+		alignItems: 'center',
 		justifyContent: 'space-around',
+	},
+	playerButton: {
+		paddingVertical: '10',
+		backgroundColor: 'lightgreen',
 	},
 });
 
