@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, RefreshControl, Button, Image } from 'react-native';
+import { StyleSheet, View, RefreshControl, Button } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import firebase from 'firebase/compat/app';
