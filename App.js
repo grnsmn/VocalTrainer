@@ -1,24 +1,23 @@
-import { useEffect } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from './src/screen/HomeScreen'
-import EserciziList from './src/Respirazione/Famiglia/EserciziList'
-import FamiglieList from './src/Respirazione/FamiglieList'
-import TrainingScreen from './src/screen/TrainingScreen'
+import { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screen/HomeScreen';
+import EserciziList from './src/Respirazione/Famiglia/EserciziList';
+import FamiglieList from './src/Respirazione/FamiglieList';
+import TrainingScreen from './src/screen/TrainingScreen';
 // import VocalizziScreen from './src/screen/VocalizziScreen'
 //import Metronome from './src/MetronomeHook'
-import firebase from 'firebase/compat/app'
+import firebase from 'firebase/compat/app';
 import * as Font from 'expo-font';
-import {
-  FIREBASE_CONFIG
-} from '@env';
+import { FIREBASE_CONFIG } from '@env';
 
 // Initialize Firebase
 const firebaseConfig = FIREBASE_CONFIG;
+
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
+	firebase.initializeApp(firebaseConfig);
 } else {
-  firebase.app() // if already initialized, use that one
+	firebase.app(); // if already initialized, use that one
 }
 
 const fetchFonts = () => {
