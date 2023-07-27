@@ -5,7 +5,7 @@ import HomeScreen from './src/screen/HomeScreen';
 import EserciziList from './src/Respirazione/Famiglia/EserciziList';
 import FamiglieList from './src/Respirazione/FamiglieList';
 import TrainingScreen from './src/screen/TrainingScreen';
-// import VocalizziScreen from './src/screen/VocalizziScreen'
+import VocalizziScreen from './src/screen/VocalizziScreen'
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font';
 
