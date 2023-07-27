@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button, Text, FlatList } from 'react-native';
 import { getStorage, ref, getDownloadURL, list } from 'firebase/storage';
 import { Audio } from 'expo-av';
-import {
-  STORAGE_PATH
-} from '@env';
+import { STORAGE_PATH } from '@env';
 
 const storage = getStorage();
 
@@ -22,16 +20,16 @@ const VocalizziScreen = ({ route, navigation }) => {
 			setListVocalizzi(listStorage?.items);
 
 			if (soundChoose !== '') {
-				const soundRef = ref(
-					storage,
-					`${STORAGE_PATH}/${soundChoose}`,
-				);
-				const uri = await getDownloadURL(soundRef);
-				console.log('Loading Sound');
-				const { sound: soundFirebase } = await Audio.Sound.createAsync({
-					uri,
-				});
-				setSound(soundFirebase);
+				const soundRef = ref(storage, `${STORAGE_PATH}/${soundChoose}`);
+				if (soundRef) {
+					const uri = await getDownloadURL(soundRef);
+					console.log('Loading Sound');
+					const { sound: soundFirebase } =
+						await Audio.Sound.createAsync({
+							uri,
+						});
+					setSound(soundFirebase);
+				}
 			}
 		};
 		setAudio();
@@ -89,10 +87,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-    height: '100%',
+		height: '100%',
 	},
 	playerButton: {
-    flex:1,
+		flex: 1,
 		paddingVertical: '10',
 		backgroundColor: 'lightgreen',
 	},
