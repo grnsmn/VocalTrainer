@@ -7,18 +7,38 @@ import FamiglieList from './src/Respirazione/FamiglieList';
 import TrainingScreen from './src/screen/TrainingScreen';
 // import VocalizziScreen from './src/screen/VocalizziScreen'
 //import Metronome from './src/MetronomeHook'
-import firebase from 'firebase/compat/app';
 import * as Font from 'expo-font';
-import { FIREBASE_CONFIG } from '@env';
+import firebase from 'firebase/compat/app';
+import {
+	API_KEY,
+	AUTH_DOMAIN,
+	DATABASE_URL,
+	PROJECT_ID,
+	STORAGE_BUCKET,
+	MESSAGING_SENDER_ID,
+	APP_ID,
+	MEASUREMENT_ID,
+} from '@env';
+console.log('🚀 ~ PROJECT_ID:', PROJECT_ID);
 
-// Initialize Firebase
-const firebaseConfig = FIREBASE_CONFIG;
+// // Get a reference to the storage service, which is used to create references in your storage bucket
+// // Initialize Firebase
+// const firebaseConfig = {
+// 	apiKey: API_KEY,
+// 	authDomain: AUTH_DOMAIN,
+// 	databaseURL:DATABASE_URL,
+// 	projectId: PROJECT_ID,
+// 	storageBucket: STORAGE_BUCKET,
+// 	messagingSenderId: MESSAGING_SENDER_ID,
+// 	appId: APP_ID,
+// 	measurementId: MEASUREMENT_ID,
+// };
 
-if (!firebase.apps.length) {
-	firebase.initializeApp(firebaseConfig);
-} else {
-	firebase.app(); // if already initialized, use that one
-}
+// if (!firebase.apps.length) {
+// 	firebase.initializeApp(firebaseConfig);
+// } else {
+// 	firebase.app(); // if already initialized, use that one
+// }
 
 const fetchFonts = () => {
 	return Font.loadAsync({
@@ -35,7 +55,7 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<Stack.Navigator screenOptions={navScreensOptions}>
+			<Stack.Navigator initialRouteName='Home' screenOptions={navScreensOptions}>
 				<Stack.Screen
 					name="Home"
 					component={HomeScreen}
