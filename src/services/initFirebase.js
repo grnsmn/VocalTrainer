@@ -22,14 +22,12 @@ const useFirebaseInit = () => {
 		measurementId: MEASUREMENT_ID,
 	};
 
-
-		// Inizializza Firebase solo se non è già stato inizializzato
-		if (!firebase.apps.length) {
-			firebase.initializeApp(firebaseConfig);
-		} else {
-			firebase.app(); // if already initialized, use that one
-		}
-
+	// Inizializza Firebase solo se non è già stato inizializzato
+	if (!firebase.apps.length) {
+		firebase.initializeApp(firebaseConfig);
+	} else {
+		firebase.app(); // if already initialized, use that one
+	}
 };
 
 export default useFirebaseInit;
