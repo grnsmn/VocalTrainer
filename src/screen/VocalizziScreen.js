@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Button, FlatList } from 'react-native';
 import { getStorage, ref, getDownloadURL, list } from 'firebase/storage';
 import { Audio } from 'expo-av';
 import { STORAGE_PATH } from '@env';
