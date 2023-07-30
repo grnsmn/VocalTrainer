@@ -62,23 +62,30 @@ const VocalizziScreen = ({ route, navigation }) => {
 			}
 		}
 	}
+
+	const renderItem = ({ item }) => {
+		return (
+			<View style={styles.playerButtons}>
+				<Button
+					title={item?._location?.path}
+					onPress={() => setSoundChoose(item?._location?.path)}
+					style={{ color: 'black' }}
+				/>
+			</View>
+		);
+	};
 	return (
-		<View style={styles.container}>
-			{listVocalizzi?.map((item, index) => {
-				return (
-					<View key={index} style={styles.playerButtons}>
-						<Button
-							title={item?._location?.path}
-							onPress={() =>
-								setSoundChoose(item?._location?.path)
-							}
-							style={{ color: 'black' }}
-						/>
-					</View>
-				);
-			})}
-			<Button title="Pausa esercizio in esecuzione" onPress={playSound} />
-		</View>
+		<FlatList
+			data={listVocalizzi}
+			renderItem={renderItem}
+			contentContainerStyle={styles.container}
+			ListFooterComponent={
+				<Button
+					title="Pausa esercizio in esecuzione"
+					onPress={playSound}
+				/>
+			}
+		/>
 	);
 };
 
