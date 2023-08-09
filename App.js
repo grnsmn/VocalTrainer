@@ -9,9 +9,6 @@ import VocalizziScreen from './src/screen/VocalizziScreen';
 import VocalsChoose from './src/screen/VocalsChoose';
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font';
-import Trillo from './src/screen/Trillo';
-import Humming from './src/screen/Humming';
-import Gne from './src/screen/Gne';
 import VocalizziList from './src/components/VocalizziList';
 
 const fetchFonts = () => {
