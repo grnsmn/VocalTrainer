@@ -22,10 +22,10 @@ const VocalizziTypeList = ({ route, navigation }) => {
 				title="Apertura Vocali"
 				onPress={() => navigation.navigate('VocalizziList',{vocals, name: 'AperturaVocali'})}
 			/>
-			<Button
+			{/* <Button
 				title="Solo"
 				onPress={() => navigation.navigate('VocalizziList',{vocals, name: 'Solo'})}
-			/>
+			/> */}
 		</View>
 	);
 };
