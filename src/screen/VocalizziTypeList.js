@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 
-const VocalizziScreen = ({ route, navigation }) => {
+const VocalizziTypeList = ({ route, navigation }) => {
 	const { vocals } = route.params;
 	
 	return (
@@ -17,6 +17,14 @@ const VocalizziScreen = ({ route, navigation }) => {
 			<Button
 				title="Gne"
 				onPress={() => navigation.navigate('VocalizziList',{vocals, name: 'Gne'})}
+			/>
+			<Button
+				title="Apertura Vocali"
+				onPress={() => navigation.navigate('VocalizziList',{vocals, name: 'AperturaVocali'})}
+			/>
+			<Button
+				title="Solo"
+				onPress={() => navigation.navigate('VocalizziList',{vocals, name: 'Solo'})}
 			/>
 		</View>
 	);
@@ -36,4 +44,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default VocalizziScreen;
+export default VocalizziTypeList;
