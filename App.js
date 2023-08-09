@@ -11,6 +11,7 @@ import VocalsChoose from './src/screen/VocalsChoose';
 import * as Font from 'expo-font';
 import Trillo from './src/screen/Trillo';
 import Humming from './src/screen/Humming';
+import Gne from './src/screen/Gne';
 
 const fetchFonts = () => {
 	return Font.loadAsync({
@@ -55,6 +56,7 @@ export default function App() {
 				<Stack.Screen name="Vocalizzi" component={VocalizziScreen} />
 				<Stack.Screen name="Trillo" component={Trillo} />
 				<Stack.Screen name="Humming" component={Humming} />
+				<Stack.Screen name="Gne" component={Gne} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

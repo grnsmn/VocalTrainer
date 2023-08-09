@@ -9,6 +9,7 @@ const storage = getStorage();
 const storageRef = ref(storage, STORAGE_PATH);
 
 const VocalizziScreen = ({ route, navigation }) => {
+	const { vocals } = route.params;
 	// const [sound, setSound] = useState('');
 	// const [soundChoose, setSoundChoose] = useState('');
 	// const [listVocalizzi, setListVocalizzi] = useState();
@@ -76,10 +77,17 @@ const VocalizziScreen = ({ route, navigation }) => {
 	// };
 	return (
 		<View style={styles.container}>
-			<Button title='Trillo' onPress={() => navigation.navigate('Trillo')}/>
-			<Button title='Humming' onPress={() => navigation.navigate('Humming')}/>
+			<Button
+				title="Trillo"
+				onPress={() => navigation.navigate('Trillo',{vocals})}
+			/>
+			<Button
+				title="Humming"
+				onPress={() => navigation.navigate('Humming',{vocals})}
+			/>
+			<Button title="Gne" onPress={() => navigation.navigate('Gne',{vocals})} />
 		</View>
-	)
+	);
 	return (
 		<FlatList
 			data={listVocalizzi}
