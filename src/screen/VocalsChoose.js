@@ -1,13 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
-import { getStorage, ref } from 'firebase/storage';
-import { STORAGE_PATH } from '@env';
 
-const storage = getStorage();
-
-const storageRef = ref(storage, STORAGE_PATH);
-
-const VocalizziScreen = ({ navigation }) => {
+const VocalsChoose = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<Button
@@ -33,4 +27,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default VocalizziScreen;
+export default VocalsChoose;
