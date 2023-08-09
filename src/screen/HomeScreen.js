@@ -55,7 +55,7 @@ export default function HomeScreen({ navigation }) {
 				<Button
 					style={styles.button}
 					title={'Vocalizzi'}
-					onPress={() => navigation.navigate('Vocalizzi')}
+					onPress={() => navigation.navigate('VocalsChoose')}
 				></Button>
 			</View>
 		);

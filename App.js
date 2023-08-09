@@ -6,6 +6,7 @@ import EserciziList from './src/Respirazione/Famiglia/EserciziList';
 import FamiglieList from './src/Respirazione/FamiglieList';
 import TrainingScreen from './src/screen/TrainingScreen';
 import VocalizziScreen from './src/screen/VocalizziScreen';
+import VocalsChoose from './src/screen/VocalsChoose';
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font';
 import Trillo from './src/screen/Trillo';
@@ -50,7 +51,9 @@ export default function App() {
 					component={TrainingScreen}
 					options={({ route }) => ({ title: route.params.name })}
 				/>
+				<Stack.Screen name="VocalsChoose" component={VocalsChoose} />
 				<Stack.Screen name="Vocalizzi" component={VocalizziScreen} />
+				<Stack.Screen name="Trillo" component={Trillo} />
 				<Stack.Screen name="Humming" component={Humming} />
 			</Stack.Navigator>
 		</NavigationContainer>
