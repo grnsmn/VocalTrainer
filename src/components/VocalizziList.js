@@ -13,7 +13,7 @@ const VocalizziList = ({ route }) => {
 	const [soundChoose, setSoundChoose] = useState('');
 	const [listVocalizzi, setListVocalizzi] = useState();
 	const endpoint = `${STORAGE_PATH}/${vocals}/${name}`;
-    const storageRef = ref(storage, endpoint);
+	const storageRef = ref(storage, endpoint);
 
 	useEffect(() => {
 		const setList = async () => {
@@ -23,10 +23,9 @@ const VocalizziList = ({ route }) => {
 		};
 		setList();
 	}, []);
-	
+
 	useEffect(() => {
 		const setAudio = async () => {
-
 			if (soundChoose !== '') {
 				const soundRef = ref(storage, `${STORAGE_PATH}/${soundChoose}`);
 				if (soundRef) {
@@ -74,7 +73,7 @@ const VocalizziList = ({ route }) => {
 	const renderItem = ({ item }) => {
 		const regex = /\btraccia\s(?:[1-9]|[1-9][0-9]|100)\b/;
 		const match = item?._location?.path.match(regex);
-		
+
 		if (match) {
 			const title = match[0]; // Estrae la sottostringa corrispondente al pattern
 			return (
