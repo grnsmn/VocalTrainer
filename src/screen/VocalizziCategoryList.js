@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 
-const category = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali'];
+const category = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
 
 const VocalizziCategoryList = ({ route, navigation }) => {
 	const { vocals } = route.params;
