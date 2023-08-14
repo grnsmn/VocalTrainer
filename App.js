@@ -5,7 +5,7 @@ import HomeScreen from './src/screen/HomeScreen';
 import EserciziList from './src/Respirazione/Famiglia/EserciziList';
 import FamiglieList from './src/Respirazione/FamiglieList';
 import TrainingScreen from './src/screen/TrainingScreen';
-import VocalizziTypeList from './src/screen/VocalizziTypeList';
+import VocalizziCategoryList from './src/screen/VocalizziCategoryList';
 import VocalsChoose from './src/screen/VocalsChoose';
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font';
@@ -51,7 +51,7 @@ export default function App() {
 					options={({ route }) => ({ title: route.params.name })}
 				/>
 				<Stack.Screen name="VocalsChoose" component={VocalsChoose} />
-				<Stack.Screen name="Vocalizzi" component={VocalizziTypeList} />
+				<Stack.Screen name="Vocalizzi" component={VocalizziCategoryList} />
 				<Stack.Screen
 					name="VocalizziList"
 					component={VocalizziList}

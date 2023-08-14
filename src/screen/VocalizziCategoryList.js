@@ -3,7 +3,7 @@ import { StyleSheet, View, Button } from 'react-native';
 
 const category = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali'];
 
-const VocalizziTypeList = ({ route, navigation }) => {
+const VocalizziCategoryList = ({ route, navigation }) => {
 	const { vocals } = route.params;
 
 	const getNameRoute = route => {
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default VocalizziTypeList;
+export default VocalizziCategoryList;
