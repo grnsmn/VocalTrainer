@@ -9,11 +9,12 @@ const storage = getStorage();
 const VocalizziList = ({ route }) => {
 	const { vocals, name } = route.params;
 
+	const endpoint = `${STORAGE_PATH}/${vocals}/${name}`;
+	const storageRef = ref(storage, endpoint);
+
 	const [sound, setSound] = useState('');
 	const [soundChoose, setSoundChoose] = useState('');
 	const [listVocalizzi, setListVocalizzi] = useState();
-	const endpoint = `${STORAGE_PATH}/${vocals}/${name}`;
-	const storageRef = ref(storage, endpoint);
 
 	useEffect(() => {
 		const setList = async () => {
@@ -71,7 +72,7 @@ const VocalizziList = ({ route }) => {
 	}
 
 	const renderItem = ({ item }) => {
-		const regex = /\btraccia\s(?:[1-9]|[1-9][0-9]|100)\b/;
+		const regex = /\btraccia\s(?:[1-9]|[1-9]\d|100)\b/i;
 		const match = item?._location?.path.match(regex);
 
 		if (match) {
