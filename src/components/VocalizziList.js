@@ -6,6 +6,8 @@ import { STORAGE_PATH } from '@env';
 
 const storage = getStorage();
 
+const Separator = () => <View style={styles.separator} />;
+
 const VocalizziList = ({ route }) => {
 	const { vocals, name } = route.params;
 
@@ -84,6 +86,7 @@ const VocalizziList = ({ route }) => {
 						onPress={() => setSoundChoose(item?._location?.path)}
 						style={{ color: 'black' }}
 					/>
+					<Separator />
 				</View>
 			);
 		} else {
@@ -113,12 +116,17 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-		height: '100%',
+		flexGrow: 1,
 	},
 	playerButton: {
 		flex: 1,
 		paddingVertical: '10',
 		backgroundColor: 'lightgreen',
+	},
+	separator: {
+		marginVertical: 8,
+		borderBottomColor: '#737373',
+		borderBottomWidth: StyleSheet.hairlineWidth,
 	},
 });
 
