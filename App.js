@@ -5,9 +5,11 @@ import HomeScreen from './src/screen/HomeScreen';
 import EserciziList from './src/Respirazione/Famiglia/EserciziList';
 import FamiglieList from './src/Respirazione/FamiglieList';
 import TrainingScreen from './src/screen/TrainingScreen';
-// import VocalizziScreen from './src/screen/VocalizziScreen'
+import VocalizziCategoryList from './src/screen/VocalizziCategoryList';
+import VocalsChoose from './src/screen/VocalsChoose';
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font';
+import VocalizziList from './src/components/VocalizziList';
 
 const fetchFonts = () => {
 	return Font.loadAsync({
@@ -24,7 +26,10 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName='Home' screenOptions={navScreensOptions}>
+			<Stack.Navigator
+				initialRouteName="Home"
+				screenOptions={navScreensOptions}
+			>
 				<Stack.Screen
 					name="Home"
 					component={HomeScreen}
@@ -45,7 +50,13 @@ export default function App() {
 					component={TrainingScreen}
 					options={({ route }) => ({ title: route.params.name })}
 				/>
-				{/* <Stack.Screen name='Vocalizzi' component={VocalizziScreen} /> */}
+				<Stack.Screen name="VocalsChoose" component={VocalsChoose} />
+				<Stack.Screen name="Vocalizzi" component={VocalizziCategoryList} />
+				<Stack.Screen
+					name="VocalizziList"
+					component={VocalizziList}
+					options={({ route }) => ({ title: route.params.name })}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
