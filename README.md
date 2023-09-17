@@ -1,6 +1,6 @@
 # Vocal Trainer App
 
-![Logo](link_al_tuo_logo.png)
+<!-- ![Logo](link_al_tuo_logo.png) -->
 
 Benvenuti nell'app Vocal Trainer, un'app cross-platform per esercitazioni vocali sviluppata utilizzando React Native con Expo.
 
@@ -18,9 +18,9 @@ Ogni sezione fornisce una serie di esercizi appositamente creati per sviluppare 
 
 - Esercizi di Respiro: Questa sezione offre una serie di esercizi progettati per migliorare il controllo del respiro e la capacità polmonare dei cantanti.
 
-- Esercizi Ritmici: Qui troverai esercizi per affinare il senso del ritmo e la precisione nell'interpretazione delle note musicali.
+- Esercizi Ritmici: Qui troverai esercizi per affinare il senso del ritmo e la precisione nell'interpretazione delle note musicali. (Ancora in fase progettuale)
 
-- Esercizi di Vocalizzi: La sezione dei vocalizzi ti permetterà di eseguire una varietà di vocalizzi per potenziare la flessibilità e la gamma della tua voce.
+- Esercizi audio con Vocalizzi: La sezione dei vocalizzi ti permetterà di eseguire una varietà di vocalizzi per potenziare la flessibilità e la gamma della tua voce.
 
 ## Installazione
 
@@ -51,4 +51,4 @@ Questo progetto è concesso in licenza con la licenza [Nome della Licenza]. Per 
 
 ---
 
-Sviluppato da [Tuo Nome] - Contattami all'indirizzo [tua email] - [Link al tuo portfolio/website]
+Sviluppato da @grnsmn - Contattami all'indirizzo simoneguarnuccio@gmail.com - [Link al tuo portfolio/website]
