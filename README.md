@@ -45,10 +45,6 @@ Le contribuzioni sono benvenute! Se desideri contribuire a questo progetto, segu
 4. Pusha il tuo branch: `git push origin feature/nuova-funzionalita`.
 5. Apri una Pull Request nella repository originale.
 
-## Licenza
-
-Questo progetto è concesso in licenza con la licenza [Nome della Licenza]. Per ulteriori dettagli, consulta il file `LICENSE`.
-
 ---
 
-Sviluppato da @grnsmn - Contattami all'indirizzo simoneguarnuccio@gmail.com - [Link al tuo portfolio/website]
+Sviluppato da @grnsmn
