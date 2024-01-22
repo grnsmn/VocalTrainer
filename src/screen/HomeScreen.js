@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, RefreshControl } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import useFirebaseInit from '../services/initFirebase';
-import { Box, Button, ButtonText } from '@gluestack-ui/themed';
+import { Box, Button, ButtonText, RefreshControl } from '@gluestack-ui/themed';
 
 useFirebaseInit();
 
@@ -41,7 +41,12 @@ export default function HomeScreen({ navigation }) {
 		);
 	} else
 		return (
-			<Box style={styles.container}>
+			<Box
+				flex={1}
+				bg="darkgray"
+				justifyContent="space-around"
+				alignItems="center"
+			>
 				<StatusBar style="light" />
 				<Button
 					onPress={() =>
