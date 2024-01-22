@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, RefreshControl, Button } from 'react-native';
+import { StyleSheet, View, RefreshControl } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import useFirebaseInit from '../services/initFirebase';
+import { Box, Button, ButtonText } from '@gluestack-ui/themed';
 
-useFirebaseInit()
+useFirebaseInit();
 
 const db = getDatabase();
 const refRespirazione = ref(db, '/Respirazione/');
@@ -40,24 +41,24 @@ export default function HomeScreen({ navigation }) {
 		);
 	} else
 		return (
-			<View style={styles.container}>
-				<StatusBar style="auto" />
+			<Box style={styles.container}>
+				<StatusBar style="light" />
 				<Button
-					style={styles.button}
-					title={'Respirazione'}
 					onPress={() =>
 						navigation.navigate('Lista Famiglie', {
 							lista: famiglieRespirazione,
 						})
 					}
-				></Button>
-				<Button style={styles.button} title={'Ritmico'}></Button>
-				<Button
-					style={styles.button}
-					title={'Vocalizzi'}
-					onPress={() => navigation.navigate('VocalsChoose')}
-				></Button>
-			</View>
+				>
+					<ButtonText>Respirazione</ButtonText>
+				</Button>
+				<Button onPress={() => navigation.navigate('VocalsChoose')}>
+					<ButtonText>Ritmico</ButtonText>
+				</Button>
+				<Button onPress={() => navigation.navigate('VocalsChoose')}>
+					<ButtonText>Vocalizzi</ButtonText>
+				</Button>
+			</Box>
 		);
 }
 
