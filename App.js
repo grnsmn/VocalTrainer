@@ -10,6 +10,8 @@ import VocalsChoose from './src/screen/VocalsChoose';
 //import Metronome from './src/MetronomeHook'
 import * as Font from 'expo-font';
 import VocalizziList from './src/components/VocalizziList';
+import { GluestackUIProvider, Text, Box } from '@gluestack-ui/themed';
+import { config } from '@gluestack-ui/config';
 
 const fetchFonts = () => {
 	return Font.loadAsync({
@@ -25,40 +27,48 @@ export default function App() {
 	}, []);
 
 	return (
-		<NavigationContainer>
-			<Stack.Navigator
-				initialRouteName="Home"
-				screenOptions={navScreensOptions}
-			>
-				<Stack.Screen
-					name="Home"
-					component={HomeScreen}
-					options={{ title: 'Vocal Trainer' }}
-				/>
-				<Stack.Screen
-					name="Lista Famiglie"
-					component={FamiglieList}
-					options={{ title: 'Famiglie' }}
-				/>
-				<Stack.Screen
-					name="Lista esercizi"
-					component={EserciziList}
-					options={({ route }) => ({ title: route.params.name })}
-				/>
-				<Stack.Screen
-					name="Training"
-					component={TrainingScreen}
-					options={({ route }) => ({ title: route.params.name })}
-				/>
-				<Stack.Screen name="VocalsChoose" component={VocalsChoose} />
-				<Stack.Screen name="Vocalizzi" component={VocalizziCategoryList} />
-				<Stack.Screen
-					name="VocalizziList"
-					component={VocalizziList}
-					options={({ route }) => ({ title: route.params.name })}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
+		<GluestackUIProvider config={config}>
+			<NavigationContainer>
+				<Stack.Navigator
+					initialRouteName="Home"
+					screenOptions={navScreensOptions}
+				>
+					<Stack.Screen
+						name="Home"
+						component={HomeScreen}
+						options={{ title: 'Vocal Trainer' }}
+					/>
+					<Stack.Screen
+						name="Lista Famiglie"
+						component={FamiglieList}
+						options={{ title: 'Famiglie' }}
+					/>
+					<Stack.Screen
+						name="Lista esercizi"
+						component={EserciziList}
+						options={({ route }) => ({ title: route.params.name })}
+					/>
+					<Stack.Screen
+						name="Training"
+						component={TrainingScreen}
+						options={({ route }) => ({ title: route.params.name })}
+					/>
+					<Stack.Screen
+						name="VocalsChoose"
+						component={VocalsChoose}
+					/>
+					<Stack.Screen
+						name="Vocalizzi"
+						component={VocalizziCategoryList}
+					/>
+					<Stack.Screen
+						name="VocalizziList"
+						component={VocalizziList}
+						options={({ route }) => ({ title: route.params.name })}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
+		</GluestackUIProvider>
 	);
 }
 
