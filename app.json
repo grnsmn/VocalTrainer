@@ -1,17 +1,15 @@
 {
   "expo": {
-    "name": "VocalTrainer",
-    "slug": "VocalTrainer",
-    "version": "1.2.0",
+    "name": "Vocal",
+    "slug": "Vocal",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
@@ -22,17 +20,11 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.gscripts.VocalTrainer"
+        "backgroundColor": "#ffffff"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "25baeacb-0df5-4607-b105-0e6242835ec3"
-      }
     }
   }
 }
