@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Vocal",
-    "slug": "Vocal",
+    "name": "VocalTrainer",
+    "slug": "VocalTrainer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
