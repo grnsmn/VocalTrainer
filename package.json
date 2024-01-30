@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
     "react-native-dotenv": "^3.4.9"
   },
   "private": true
