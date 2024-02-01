@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.1.1",
+    "@expo/webpack-config": "^19.0.0",
+    "@gluestack-style/react": "^1.0.45",
+    "@gluestack-ui/themed": "^1.1.2",
     "expo": "^49.0.7",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.2",
-    "react-native-web": "~0.19.6",
-    "@expo/webpack-config": "^19.0.0"
+    "react-native-svg": "^13.4.0",
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
