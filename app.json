@@ -16,7 +16,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
+"ios": {
       "supportsTablet": true
     },
     "android": {
@@ -27,7 +27,9 @@
       "package": "com.VocalTrainer.app"
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/icon.png",
+      "output": "server",
+      "bundler": "metro"
     },
     "extra": {
       "eas": {
