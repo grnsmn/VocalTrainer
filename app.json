@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "VocalTrainer",
-    "slug": "VocalTrainer",
+    "name": "Vocal Trainer",
+    "slug": "Vocal Trainer",
     "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/piano.jpg",
+      "resizeMode": "cover",
+      "backgroundColor": "#080808"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,7 +27,7 @@
       "package": "com.gscripts.VocalTrainer"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
     },
     "extra": {
       "eas": {
