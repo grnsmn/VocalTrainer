@@ -7,20 +7,29 @@ import {
 } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home } from './src/screens/Home';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
 	return (
 		<NavigationContainer>
-			<GluestackUIProvider config={config}>
-				<SafeAreaView flex={1}>
+			<SafeAreaProvider>
+				<GluestackUIProvider config={config}>
 					<StatusBar />
-					<Box flex={1} justifyContent="center" alignItems="center">
-						<Text textAlign="center">
-							Open up App.js to start working on your app!
-						</Text>
-					</Box>
-				</SafeAreaView>
-			</GluestackUIProvider>
+					<Tab.Navigator
+						screenOptions={{ headerTitleAlign: 'center' }}
+					>
+						<Tab.Screen
+							name="Vocalizzi"
+							component={Home}
+							screenOptions={{ headerShown: false }}
+						/>
+					</Tab.Navigator>
+				</GluestackUIProvider>
+			</SafeAreaProvider>
 		</NavigationContainer>
 	);
 }
