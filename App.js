@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import {
 	GluestackUIProvider,
 	SafeAreaView,
 	Text,
 	Box,
+	StatusBar,
 } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 
