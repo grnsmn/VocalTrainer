@@ -14,6 +14,7 @@
     "@gluestack-style/react": "^1.0.45",
     "@gluestack-ui/config": "^1.1.2",
     "@gluestack-ui/themed": "^1.1.2",
+    "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.10",
     "expo": "^49.0.7",
     "expo-status-bar": "~1.6.0",
