@@ -20,13 +20,11 @@ export default function App() {
 				<GluestackUIProvider config={config}>
 					<StatusBar />
 					<Tab.Navigator
-						screenOptions={{ headerTitleAlign: 'center' }}
+						screenOptions={{
+							headerTitleAlign: 'center',
+						}}
 					>
-						<Tab.Screen
-							name="Vocalizzi"
-							component={Home}
-							screenOptions={{ headerShown: false }}
-						/>
+						<Tab.Screen name="Vocalizzi" component={Home} />
 					</Tab.Navigator>
 				</GluestackUIProvider>
 			</SafeAreaProvider>
