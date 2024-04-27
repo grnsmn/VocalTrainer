@@ -34,6 +34,7 @@ Ogni sezione fornisce una serie di esercizi appositamente creati per sviluppare 
 - Node.js
 - npm
 - Expo CLI
+- Firebase Storage
 
 ## Contributi
 
