@@ -16,11 +16,9 @@ const CardSelect = ({ onPress, title }) => {
 			p="$2"
 			$pressed-opacity={0.6}
 		>
-			<Card size="lg" variant="elevated" m="$3">
+			<Card size="lg" variant="elevated">
 				<HStack justifyContent="space-between" alignItems="center">
-					<Heading mb="$1" size="md">
-						{title}
-					</Heading>
+					<Heading size="md">{title}</Heading>
 
 					<Icon as={ChevronsRightIcon} size="lg" />
 				</HStack>
