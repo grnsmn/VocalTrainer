@@ -24,6 +24,11 @@ function VocalizationsStackScreen() {
 			<VocalizationsStack.Screen
 				name="Lista"
 				component={VocalizationsList}
+				options={({ route }) => ({
+					title:
+						`Esercizi ${route.params?.selectedListName}` ||
+						'Lista Esercizi',
+				})}
 			/>
 		</VocalizationsStack.Navigator>
 	);
