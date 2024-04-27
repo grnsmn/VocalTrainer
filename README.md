@@ -1,6 +1,6 @@
 # Vocal Trainer App
 
-<!-- ![Logo](link_al_tuo_logo.png) -->
+<!-- ![Logo](./assets/icon.png) -->
 
 Benvenuti nell'app Vocal Trainer, un'app cross-platform per esercitazioni vocali sviluppata utilizzando React Native con Expo.
 
