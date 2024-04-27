@@ -5,29 +5,16 @@ import { STORAGE_PATH } from '@env';
 import { getStorage, ref, getDownloadURL, list } from 'firebase/storage';
 import CardPlay from '../../components/CardPlay';
 import { CirclePlay } from 'lucide-react-native';
+import useVocalizationsList from '../../hooks/useVocalizationsList';
 // import { Audio } from 'expo-av';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
-	const [listVocalizzi, setListVocalizzi] = useState();
-	const [loading, setLoading] = useState();
 
-	/* ----------------------------- STORAGE REQUIRE ---------------------------- */
-	const storage = getStorage();
-	const endpoint = `${STORAGE_PATH}/${typeVocal}/${selectedListName}`;
-	const storageRef = ref(storage, endpoint);
-
-	useEffect(() => {
-		const fetchAudio = async () => {
-			setLoading(true);
-			const listStorage = await list(storageRef);
-
-			setListVocalizzi(listStorage?.items);
-			setLoading(false);
-		};
-
-		fetchAudio();
-	}, []);
+	const { data, loading } = useVocalizationsList({
+		typeVocal,
+		listName: selectedListName,
+	});
 
 	const renderItem = ({ item }) => {
 		const regex = /\btraccia\s(?:[1-9]|[1-9]\d|100)\b/i;
@@ -63,7 +50,7 @@ const VocalizationsList = ({ route }) => {
 
 	return (
 		<FlatList
-			data={listVocalizzi}
+			data={data}
 			renderItem={renderItem}
 			// ListFooterComponent={
 
