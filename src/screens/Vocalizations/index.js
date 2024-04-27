@@ -1,12 +1,15 @@
 import React from 'react';
 import { FlatList } from '@gluestack-ui/themed';
 import CardSelect from '../../components/CardSelect';
+import { useNavigation } from '@react-navigation/native';
 
 const CATEGORY_LIST = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
 
-export const Home = () => {
+export const Vocalizations = () => {
+	const navigation = useNavigation();
 	const handlePress = () => {
 		console.log('🚀 ~ testing');
+		navigation.navigate('Lista');
 	};
 
 	const renderItem = ({ item }) => {
