@@ -1,4 +1,4 @@
-# Vocal Trainer App
+# Vocal Trainer
 
 ![Logo](./assets/icon.png)
 
