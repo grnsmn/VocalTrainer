@@ -1,16 +1,8 @@
 import React from 'react';
-import {
-	Card,
-	ChevronsRightIcon,
-	FlatList,
-	HStack,
-	Heading,
-	Icon,
-	Pressable,
-} from '@gluestack-ui/themed';
+import { FlatList } from '@gluestack-ui/themed';
 import CardSelect from '../../components/CardSelect';
 
-const TYPES_OF_VOCALS = [{ label: 'Trilli' }, { label: 'Humming' }];
+const CATEGORY_LIST = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
 
 export const Home = () => {
 	const handlePress = async () => {
@@ -18,9 +10,8 @@ export const Home = () => {
 	};
 
 	const renderItem = ({ item }) => {
-		const { label } = item;
-		return <CardSelect title={label} onPress={handlePress} />;
+		return <CardSelect title={item} onPress={handlePress} />;
 	};
 
-	return <FlatList data={TYPES_OF_VOCALS} renderItem={renderItem} />;
+	return <FlatList data={CATEGORY_LIST} renderItem={renderItem} />;
 };
