@@ -7,6 +7,7 @@ import { AudioLines } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import VocalizationsList from './src/screens/Vocalizations/VocalizationsList';
+import useFirebaseInit from './src/hooks/useFirebaseInit';
 
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ function VocalizationsStackScreen() {
 }
 
 export default function App() {
+	useFirebaseInit();
 	return (
 		<NavigationContainer>
 			<SafeAreaProvider>
