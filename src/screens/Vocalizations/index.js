@@ -7,9 +7,12 @@ const CATEGORY_LIST = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
 
 export const Vocalizations = () => {
 	const navigation = useNavigation();
-	const handlePress = () => {
-		console.log('🚀 ~ testing');
-		navigation.navigate('Lista');
+
+	const handlePress = listName => {
+		navigation.navigate('Lista', {
+			typeVocal: 'Uomo',
+			selectedListName: listName,
+		});
 	};
 
 	const renderItem = ({ item }) => {
