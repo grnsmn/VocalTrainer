@@ -10,12 +10,7 @@ import {
 
 const CardSelect = ({ onPress, title }) => {
 	return (
-		<Pressable
-			onPress={onPress}
-			bg="primary.400"
-			p="$2"
-			$pressed-opacity={0.6}
-		>
+		<Pressable onPress={onPress} bg="primary.400" m="$2">
 			<Card size="lg" variant="elevated">
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
