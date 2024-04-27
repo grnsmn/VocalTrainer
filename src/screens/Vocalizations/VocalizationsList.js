@@ -1,8 +1,5 @@
+import React from 'react';
 import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
-
-import React, { useEffect, useState } from 'react';
-import { STORAGE_PATH } from '@env';
-import { getStorage, ref, getDownloadURL, list } from 'firebase/storage';
 import CardPlay from '../../components/CardPlay';
 import { CirclePlay } from 'lucide-react-native';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
