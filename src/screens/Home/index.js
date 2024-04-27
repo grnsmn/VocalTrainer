@@ -5,7 +5,7 @@ import CardSelect from '../../components/CardSelect';
 const CATEGORY_LIST = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
 
 export const Home = () => {
-	const handlePress = async () => {
+	const handlePress = () => {
 		console.log('🚀 ~ testing');
 	};
 
