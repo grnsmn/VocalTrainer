@@ -1,17 +1,70 @@
-import React from 'react';
-import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
-import CardPlay from '../../components/CardPlay';
-import { CirclePlay } from 'lucide-react-native';
+import React, { useEffect, useState } from 'react';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { STORAGE_PATH } from '@env';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
-// import { Audio } from 'expo-av';
+import useStorage from '../../hooks/useStorage';
+import CardPlay from '../../components/CardPlay';
+import { Audio } from 'expo-av';
+import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
+import { CirclePlay } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
-
-	const { data, loading } = useVocalizationsList({
-		typeVocal,
-		listName: selectedListName,
+	const { storage, storageRef } = useStorage({
+		customPath: `${typeVocal}/${selectedListName}`,
 	});
+	const { data, loading } = useVocalizationsList({
+		storageRef,
+	});
+
+	const [sound, setSound] = useState('');
+	const [soundChoose, setSoundChoose] = useState('');
+
+	useEffect(() => {
+		const setAudio = async () => {
+			if (soundChoose !== '') {
+				const soundRef = ref(storage, `${STORAGE_PATH}/${soundChoose}`);
+				if (soundRef) {
+					const uri = await getDownloadURL(soundRef);
+					console.log('Loading Sound');
+					const { sound: soundFirebase } =
+						await Audio.Sound.createAsync({
+							uri,
+						});
+					setSound(soundFirebase);
+				}
+			}
+		};
+		setAudio();
+	}, [soundChoose]);
+
+	useEffect(() => {
+		const play = async () => {
+			playSound();
+		};
+		play();
+		return sound
+			? () => {
+					console.log('Unloading Sound');
+					sound.unloadAsync();
+			  }
+			: undefined;
+	}, [sound]);
+
+	async function playSound() {
+		if (sound) {
+			const getSound = await sound?.getStatusAsync();
+			if (!getSound.isPlaying) {
+				// console.log('Playing Sound');
+				await sound.playAsync();
+			} else {
+				// console.log('Pause Sound');
+				await sound.stopAsync();
+				setSoundChoose('');
+				setSound('');
+			}
+		}
+	}
 
 	const renderItem = ({ item }) => {
 		const regex = /\btraccia\s(?:[1-9]|[1-9]\d|100)\b/i;
@@ -22,7 +75,7 @@ const VocalizationsList = ({ route }) => {
 			return (
 				<CardPlay
 					title={title}
-					onPress={() => console.log('🚀 ~ testing')}
+					onPress={() => setSoundChoose(item?._location?.path)}
 					RightIcon={CirclePlay}
 				/>
 			);
