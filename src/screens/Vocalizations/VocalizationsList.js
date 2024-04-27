@@ -1,4 +1,4 @@
-import { Center, FlatList, Spinner } from '@gluestack-ui/themed';
+import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
 
 import React, { useEffect, useState } from 'react';
 import { STORAGE_PATH } from '@env';
@@ -49,9 +49,15 @@ const VocalizationsList = ({ route }) => {
 
 	if (loading) {
 		return (
-			<Center flex={1}>
+			<VStack
+				flex={1}
+				space="sm"
+				justifyContent="center"
+				alignItems="center"
+			>
 				<Spinner size="small" />
-			</Center>
+				<Text size="md">Please Wait</Text>
+			</VStack>
 		);
 	}
 
