@@ -8,10 +8,18 @@ const CATEGORY_LIST = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
 export const Vocalizations = () => {
 	const navigation = useNavigation();
 
+	const formatListName = route => {
+		if (route === 'Apertura Vocali') {
+			return 'AperturaVocali';
+		} else {
+			return route;
+		}
+	};
+
 	const handlePress = listName => {
 		navigation.navigate('Lista', {
 			typeVocal: 'Uomo',
-			selectedListName: listName,
+			selectedListName: formatListName(listName),
 		});
 	};
 
