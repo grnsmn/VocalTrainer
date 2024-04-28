@@ -13,6 +13,18 @@ const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 
 function VocalizationsStackScreen() {
+	const getDynamicHeader = ({ route }) => {
+		//Replace usato per il caso di route name lunghi passati in
+		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
+		const dynamicHeaderPart = route.params?.selectedListName
+			.replace(/([A-Z])/g, ' $1')
+			.trim();
+
+		return {
+			title: `Esercizi ${dynamicHeaderPart}` || 'Lista Esercizi',
+		};
+	};
+
 	return (
 		<VocalizationsStack.Navigator
 			screenOptions={{
@@ -24,11 +36,7 @@ function VocalizationsStackScreen() {
 			<VocalizationsStack.Screen
 				name="Lista"
 				component={VocalizationsList}
-				options={({ route }) => ({
-					title:
-						`Esercizi ${route.params?.selectedListName}` ||
-						'Lista Esercizi',
-				})}
+				options={getDynamicHeader}
 			/>
 		</VocalizationsStack.Navigator>
 	);
