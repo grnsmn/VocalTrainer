@@ -9,7 +9,7 @@ import {
 	Pressable,
 	Progress,
 } from '@gluestack-ui/themed';
-const CardSelect = ({ onPress, title, RightIcon, progressValue }) => {
+const CardPLay = ({ onPress, title, RightIcon, progressValue }) => {
 	const handleOnPress = () => {
 		onPress(title);
 	};
@@ -18,11 +18,7 @@ const CardSelect = ({ onPress, title, RightIcon, progressValue }) => {
 			<Card size="lg" variant="elevated">
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
-					{RightIcon && (
-						<Pressable onPress={handleOnPress}>
-							<Icon as={RightIcon} size="xl" />
-						</Pressable>
-					)}
+					{RightIcon && <Icon as={RightIcon} size="xl" />}
 				</HStack>
 				<Center mt={'$4'}>
 					<Progress value={progressValue} size={'sm'}>
@@ -33,4 +29,4 @@ const CardSelect = ({ onPress, title, RightIcon, progressValue }) => {
 		</Pressable>
 	);
 };
-export default memo(CardSelect);
+export default memo(CardPLay);
