@@ -5,8 +5,15 @@ import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
 import { Audio } from 'expo-av';
-import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
-import { CirclePlay } from 'lucide-react-native';
+import {
+	Center,
+	FlatList,
+	Icon,
+	Spinner,
+	Text,
+	VStack,
+} from '@gluestack-ui/themed';
+import { CirclePlay, Pause } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
@@ -16,7 +23,7 @@ const VocalizationsList = ({ route }) => {
 	const { data, loading } = useVocalizationsList({
 		storageRef,
 	});
-
+	//TODO: pulire le logiche nella richiesta e uso della traccia
 	const [sound, setSound] = useState('');
 	const [soundChoose, setSoundChoose] = useState('');
 
@@ -103,7 +110,9 @@ const VocalizationsList = ({ route }) => {
 			data={data}
 			renderItem={renderItem}
 			// ListFooterComponent={
-
+			// 	<Center flex={1}>
+			// 		<Icon as={Pause} size="lg" />
+			// 	</Center>
 			// }
 		/>
 	);
