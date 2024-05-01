@@ -9,12 +9,13 @@ import {
 	Pressable,
 	Progress,
 } from '@gluestack-ui/themed';
+
 const CardPLay = ({ onPress, title, RightIcon, progressValue }) => {
 	const handleOnPress = () => {
 		onPress(title);
 	};
 	return (
-		<Pressable onPress={handleOnPress} bg="primary.400" m="$2">
+		<Pressable onPress={handleOnPress} m="$2">
 			<Card size="lg" variant="elevated">
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
