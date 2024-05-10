@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "VocalTrainer",
-    "slug": "VocalTrainer",
+    "name": "Vocal Trainer",
+    "slug": "Vocal Trainer",
     "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#c6e9ff"
     },
@@ -27,7 +27,7 @@
       "package": "com.VocalTrainer.app"
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/favicon.png",
     },
     "extra": {
       "eas": {
