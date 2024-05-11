@@ -1,4 +1,4 @@
-import { Fab, FabIcon, FabLabel, HStack } from '@gluestack-ui/themed';
+import { Fab, FabLabel } from '@gluestack-ui/themed';
 
 import React, { useEffect, useState } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
@@ -8,7 +8,7 @@ import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
 import { Audio } from 'expo-av';
 import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
-import { AudioWaveform, Pause, Play } from 'lucide-react-native';
+import { AudioWaveform, Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
@@ -21,7 +21,6 @@ const VocalizationsList = ({ route }) => {
 	//TODO: pulire le logiche nella richiesta e uso della traccia
 	const [sound, setSound] = useState('');
 	const [soundChoose, setSoundChoose] = useState('');
-	const [isLoadingSound, setIsLoadingSound] = useState(false);
 
 	useEffect(() => {
 		const setAudio = async () => {
@@ -56,9 +55,7 @@ const VocalizationsList = ({ route }) => {
 
 	async function playSound() {
 		if (sound) {
-			setIsLoadingSound(true);
 			const statusSound = await sound?.getStatusAsync();
-			setIsLoadingSound(false);
 			if (!statusSound.isPlaying) {
 				// console.log('Playing Sound');
 				await sound.playAsync();
@@ -116,14 +113,11 @@ const VocalizationsList = ({ route }) => {
 					showLabel={true}
 					onPress={playSound}
 					alignItems="center"
+					bgColor={'$warning600'}
 				>
-					<VStack alignItems="center" space={3}>
-						<FabLabel>In riproduzione</FabLabel>
-						<HStack alignItems="center">
-							{/* <FabIcon as={StopCircle} m={'$1'} /> */}
-							<FabLabel>{getTitleExercise(soundChoose)}</FabLabel>
-						</HStack>
-					</VStack>
+					<FabLabel color="$black">
+						{`STOP ${getTitleExercise(soundChoose)}`}
+					</FabLabel>
 				</Fab>
 			)}
 		</>
