@@ -5,7 +5,6 @@
   },
   "build": {
     "development": {
-      "image": "latest",
       "distribution": "internal",
       "autoIncrement": true,
       "android": {
