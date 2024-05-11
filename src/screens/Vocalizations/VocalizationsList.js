@@ -1,6 +1,6 @@
 import { Fab, FabLabel } from '@gluestack-ui/themed';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
@@ -67,12 +67,10 @@ const VocalizationsList = ({ route }) => {
 		}
 	};
 
-	const getTitleExercise = urlPath => {
-		if (urlPath) {
-			const regex = /\btraccia\s(?:[1-9]|[1-9]\d|100)\b/i;
-			return urlPath?.match(regex)[0];
-		}
-	};
+	const getTitleExercise = useCallback(
+		urlPath => urlPath?.match(/\btraccia\s(?:\d{1,3})\b/i)?.[0],
+		[],
+	);
 
 	const renderItem = ({ item }) => {
 		const title = getTitleExercise(item?._location?.path);
@@ -110,7 +108,7 @@ const VocalizationsList = ({ route }) => {
 			<FlatList data={data} renderItem={renderItem} />
 			{!!sound && (
 				<Fab
-					placement={'bottom center'}
+					placement={'bottom right'}
 					showLabel={true}
 					onPress={playSound}
 					alignItems="center"
