@@ -1,5 +1,3 @@
-import { ProgressFilledTrack, Center } from '@gluestack-ui/themed';
-
 import React, { memo } from 'react';
 import {
 	Card,
@@ -10,20 +8,30 @@ import {
 	Progress,
 } from '@gluestack-ui/themed';
 
-const CardPLay = ({ onPress, title, RightIcon, progressValue, isPlaying }) => {
+const CardPLay = ({
+	onPress,
+	title,
+	RightIcon,
+	progressValue,
+	isPlaying = false,
+}) => {
 	const handleOnPress = () => {
 		onPress(title);
 	};
 	return (
 		<Pressable onPress={handleOnPress} m="$2">
-			<Card size="lg" variant="elevated">
+			<Card
+				size="lg"
+				variant="elevated"
+				backgroundColor={isPlaying ? '$green200' : '$white'}
+			>
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
 					{RightIcon && (
 						<Icon
 							as={RightIcon}
 							size="xl"
-							color={isPlaying ? '$green500' : undefined}
+							color={isPlaying ? '$green700' : undefined}
 						/>
 					)}
 				</HStack>
