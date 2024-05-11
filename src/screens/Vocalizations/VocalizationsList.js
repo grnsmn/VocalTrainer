@@ -1,6 +1,5 @@
-import { Fab, FabLabel } from '@gluestack-ui/themed';
-
 import React, { useCallback, useEffect, useState } from 'react';
+import { Fab, FabLabel } from '@gluestack-ui/themed';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
