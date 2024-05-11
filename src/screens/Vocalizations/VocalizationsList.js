@@ -73,14 +73,15 @@ const VocalizationsList = ({ route }) => {
 	);
 
 	const renderItem = ({ item }) => {
-		const title = getTitleExercise(item?._location?.path);
+		const pathVocalization = item?._location?.path;
+		const title = getTitleExercise(pathVocalization);
 		const playing = getTitleExercise(soundChoose) === title;
 
 		if (title) {
 			return (
 				<CardPlay
 					title={title}
-					onPress={() => setSoundChoose(item?._location?.path)}
+					onPress={() => setSoundChoose(pathVocalization)}
 					RightIcon={playing ? AudioWaveform : Play}
 					isPlaying={playing}
 				/>
