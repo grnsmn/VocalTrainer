@@ -12,15 +12,14 @@ import { AudioWaveform, Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
+	const [sound, setSound] = useState('');
+	const [soundChoose, setSoundChoose] = useState('');
 	const { storage, storageRef } = useStorage({
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
 	const { data, loading } = useVocalizationsList({
 		storageRef,
 	});
-	//TODO: pulire le logiche nella richiesta e uso della traccia
-	const [sound, setSound] = useState('');
-	const [soundChoose, setSoundChoose] = useState('');
 
 	useEffect(() => {
 		const setAudio = async () => {
