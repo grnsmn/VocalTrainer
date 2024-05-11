@@ -21,8 +21,9 @@
     "production": {
       "android": {
         "image": "latest",
-        "autoIncrement": true,
-        "buildType": "apk"
+      },
+      "ios": {
+        "image": "latest"
       }
     }
   },
