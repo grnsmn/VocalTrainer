@@ -14,6 +14,7 @@ const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
 	const [sound, setSound] = useState('');
 	const [soundChoose, setSoundChoose] = useState('');
+	const [isLoadingSound, setIsLoadingSound] = useState(false);
 	const { storage, storageRef } = useStorage({
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
@@ -21,9 +22,11 @@ const VocalizationsList = ({ route }) => {
 		storageRef,
 	});
 
+	/* ---------------------- handle play vocalize sound --------------------- */
 	useEffect(() => {
 		const setAudio = async () => {
 			if (soundChoose !== '') {
+				setIsLoadingSound(true);
 				const soundRef = ref(storage, `${STORAGE_PATH}/${soundChoose}`);
 				if (soundRef) {
 					const uri = await getDownloadURL(soundRef);
@@ -55,6 +58,8 @@ const VocalizationsList = ({ route }) => {
 	const playSound = async () => {
 		if (sound) {
 			const statusSound = await sound?.getStatusAsync();
+			setIsLoadingSound(false);
+
 			if (!statusSound.isPlaying) {
 				// console.log('Playing Sound');
 				await sound.playAsync();
@@ -67,6 +72,8 @@ const VocalizationsList = ({ route }) => {
 		}
 	};
 
+	/* -------------------------------------------------------------------------- */
+
 	const getTitleExercise = useCallback(
 		urlPath => urlPath?.match(/\btraccia\s(?:\d{1,3})\b/i)?.[0],
 		[],
@@ -75,15 +82,16 @@ const VocalizationsList = ({ route }) => {
 	const renderItem = ({ item }) => {
 		const pathVocalization = item?._location?.path;
 		const title = getTitleExercise(pathVocalization);
-		const playing = getTitleExercise(soundChoose) === title;
+		const chosen = getTitleExercise(soundChoose) === title;
 
 		if (title) {
 			return (
 				<CardPlay
 					title={title}
 					onPress={() => setSoundChoose(pathVocalization)}
-					RightIcon={playing ? AudioWaveform : Play}
-					isPlaying={playing}
+					RightIcon={chosen ? AudioWaveform : Play}
+					isPlaying={chosen}
+					isLoading={isLoadingSound && chosen}
 				/>
 			);
 		}
