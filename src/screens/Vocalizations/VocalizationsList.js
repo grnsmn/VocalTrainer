@@ -90,6 +90,8 @@ const VocalizationsList = ({ route }) => {
 		}
 	};
 
+	/* --------------------------------- render --------------------------------- */
+
 	if (loading) {
 		return (
 			<VStack
