@@ -19,7 +19,7 @@ const CardSelect = ({ onPress, title }) => {
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
 
-					<Icon as={ChevronsRightIcon} size="lg" />
+					<Icon as={ChevronsRightIcon} size="xl" />
 				</HStack>
 			</Card>
 		</Pressable>
