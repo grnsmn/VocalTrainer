@@ -52,7 +52,7 @@ const VocalizationsList = ({ route }) => {
 			: undefined;
 	}, [sound]);
 
-	async function playSound() {
+	const playSound = async () => {
 		if (sound) {
 			const statusSound = await sound?.getStatusAsync();
 			if (!statusSound.isPlaying) {
@@ -65,7 +65,7 @@ const VocalizationsList = ({ route }) => {
 				setSound('');
 			}
 		}
-	}
+	};
 
 	const getTitleExercise = urlPath => {
 		if (urlPath) {
