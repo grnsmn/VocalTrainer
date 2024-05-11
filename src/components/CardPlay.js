@@ -5,15 +5,15 @@ import {
 	Heading,
 	Icon,
 	Pressable,
-	Progress,
+	Spinner,
 } from '@gluestack-ui/themed';
 
 const CardPLay = ({
 	onPress,
 	title,
 	RightIcon,
-	progressValue,
 	isPlaying = false,
+	isLoading = false,
 }) => {
 	const handleOnPress = () => {
 		onPress(title);
@@ -27,6 +27,7 @@ const CardPLay = ({
 			>
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
+					{isLoading && <Spinner size="small" color={'$green700'} />}
 					{RightIcon && (
 						<Icon
 							as={RightIcon}
@@ -35,11 +36,6 @@ const CardPLay = ({
 						/>
 					)}
 				</HStack>
-				{/* <Center mt={'$4'}>
-					<Progress value={progressValue} size={'sm'}>
-						<ProgressFilledTrack />
-					</Progress>
-				</Center> */}
 			</Card>
 		</Pressable>
 	);
