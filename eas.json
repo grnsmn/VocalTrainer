@@ -9,6 +9,7 @@
         "distribution": "internal"
       },
       "preview": {
+        "image": "latest",
         "distribution": "internal",
         "autoIncrement": true,
         "android": {
