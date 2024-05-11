@@ -1,3 +1,5 @@
+import { Fab, FabIcon, FabLabel, HStack } from '@gluestack-ui/themed';
+
 import React, { useEffect, useState } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
@@ -5,15 +7,8 @@ import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
 import { Audio } from 'expo-av';
-import {
-	Center,
-	FlatList,
-	Icon,
-	Spinner,
-	Text,
-	VStack,
-} from '@gluestack-ui/themed';
-import { CirclePlay, Pause } from 'lucide-react-native';
+import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
+import { AudioWaveform, Pause, Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
@@ -26,6 +21,7 @@ const VocalizationsList = ({ route }) => {
 	//TODO: pulire le logiche nella richiesta e uso della traccia
 	const [sound, setSound] = useState('');
 	const [soundChoose, setSoundChoose] = useState('');
+	const [isLoadingSound, setIsLoadingSound] = useState(false);
 
 	useEffect(() => {
 		const setAudio = async () => {
@@ -60,8 +56,10 @@ const VocalizationsList = ({ route }) => {
 
 	async function playSound() {
 		if (sound) {
-			const getSound = await sound?.getStatusAsync();
-			if (!getSound.isPlaying) {
+			setIsLoadingSound(true);
+			const statusSound = await sound?.getStatusAsync();
+			setIsLoadingSound(false);
+			if (!statusSound.isPlaying) {
 				// console.log('Playing Sound');
 				await sound.playAsync();
 			} else {
@@ -73,21 +71,26 @@ const VocalizationsList = ({ route }) => {
 		}
 	}
 
-	const renderItem = ({ item }) => {
-		const regex = /\btraccia\s(?:[1-9]|[1-9]\d|100)\b/i;
-		const match = item?._location?.path.match(regex);
+	const getTitleExercise = urlPath => {
+		if (urlPath) {
+			const regex = /\btraccia\s(?:[1-9]|[1-9]\d|100)\b/i;
+			return urlPath?.match(regex)[0];
+		}
+	};
 
-		if (match) {
-			const title = match[0]; // Estrae la sottostringa corrispondente al pattern
+	const renderItem = ({ item }) => {
+		const title = getTitleExercise(item?._location?.path);
+		const playing = getTitleExercise(soundChoose) === title;
+
+		if (title) {
 			return (
 				<CardPlay
 					title={title}
 					onPress={() => setSoundChoose(item?._location?.path)}
-					RightIcon={CirclePlay}
+					RightIcon={playing ? AudioWaveform : Play}
+					isPlaying={playing}
 				/>
 			);
-		} else {
-			return null;
 		}
 	};
 
@@ -104,17 +107,26 @@ const VocalizationsList = ({ route }) => {
 			</VStack>
 		);
 	}
-
 	return (
-		<FlatList
-			data={data}
-			renderItem={renderItem}
-			// ListFooterComponent={
-			// 	<Center flex={1}>
-			// 		<Icon as={Pause} size="lg" />
-			// 	</Center>
-			// }
-		/>
+		<>
+			<FlatList data={data} renderItem={renderItem} />
+			{!!sound && (
+				<Fab
+					placement={'bottom center'}
+					showLabel={true}
+					onPress={playSound}
+					alignItems="center"
+				>
+					<VStack alignItems="center" space={3}>
+						<FabLabel>In riproduzione</FabLabel>
+						<HStack alignItems="center">
+							{/* <FabIcon as={StopCircle} m={'$1'} /> */}
+							<FabLabel>{getTitleExercise(soundChoose)}</FabLabel>
+						</HStack>
+					</VStack>
+				</Fab>
+			)}
+		</>
 	);
 };
 export default VocalizationsList;

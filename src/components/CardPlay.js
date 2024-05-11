@@ -10,7 +10,7 @@ import {
 	Progress,
 } from '@gluestack-ui/themed';
 
-const CardPLay = ({ onPress, title, RightIcon, progressValue }) => {
+const CardPLay = ({ onPress, title, RightIcon, progressValue, isPlaying }) => {
 	const handleOnPress = () => {
 		onPress(title);
 	};
@@ -19,13 +19,19 @@ const CardPLay = ({ onPress, title, RightIcon, progressValue }) => {
 			<Card size="lg" variant="elevated">
 				<HStack justifyContent="space-between" alignItems="center">
 					<Heading size="md">{title}</Heading>
-					{RightIcon && <Icon as={RightIcon} size="xl" />}
+					{RightIcon && (
+						<Icon
+							as={RightIcon}
+							size="xl"
+							color={isPlaying ? '$green500' : undefined}
+						/>
+					)}
 				</HStack>
-				<Center mt={'$4'}>
+				{/* <Center mt={'$4'}>
 					<Progress value={progressValue} size={'sm'}>
 						<ProgressFilledTrack />
 					</Progress>
-				</Center>
+				</Center> */}
 			</Card>
 		</Pressable>
 	);
