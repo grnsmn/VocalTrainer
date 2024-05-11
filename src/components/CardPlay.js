@@ -31,7 +31,6 @@ const CardPLay = ({
 					{RightIcon && (
 						<Icon
 							as={RightIcon}
-							size="xl"
 							color={isPlaying ? '$green700' : undefined}
 						/>
 					)}
