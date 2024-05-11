@@ -17,7 +17,7 @@ const VocalizationsList = ({ route }) => {
 	const { storage, storageRef } = useStorage({
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
-	const { data, loading } = useVocalizationsList({
+	const { data, loading: isLoadingVocalizations } = useVocalizationsList({
 		storageRef,
 	});
 
@@ -90,7 +90,7 @@ const VocalizationsList = ({ route }) => {
 
 	/* --------------------------------- render --------------------------------- */
 
-	if (loading) {
+	if (isLoadingVocalizations) {
 		return (
 			<VStack
 				flex={1}
@@ -103,6 +103,7 @@ const VocalizationsList = ({ route }) => {
 			</VStack>
 		);
 	}
+
 	return (
 		<>
 			<FlatList data={data} renderItem={renderItem} />
