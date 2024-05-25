@@ -1,4 +1,4 @@
-import { GluestackUIProvider, StatusBar } from '@gluestack-ui/themed';
+import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
@@ -53,7 +53,12 @@ export default function App() {
 						screenOptions={({ route }) => ({
 							tabBarIcon: ({ focused }) => {
 								if (route.name === 'Vocalizzi') {
-									return <AudioLines />;
+									return (
+										<Icon
+											as={AudioLines}
+											color={'$primary500'}
+										/>
+									);
 								}
 							},
 							tabBarInactiveTintColor: 'gray',
