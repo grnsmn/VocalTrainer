@@ -20,6 +20,7 @@
     "expo-av": "~14.0.5",
     "expo-status-bar": "~1.12.1",
     "firebase": "^10.11.1",
+    "lottie-react-native": "6.7.0",
     "lucide-react-native": "^0.376.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -28,7 +29,7 @@
     "react-native-screens": "3.31.1",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10",
-    "lottie-react-native": "6.7.0"
+    "react-native-web-lottie": "^1.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
