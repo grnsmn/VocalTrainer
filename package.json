@@ -9,10 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@dotlottie/react-player": "^1.6.19",
     "@expo/metro-runtime": "~3.2.1",
     "@gluestack-style/react": "^1.0.45",
     "@gluestack-ui/config": "^1.1.2",
     "@gluestack-ui/themed": "^1.1.2",
+    "@lottiefiles/react-lottie-player": "^3.5.4",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.26",
