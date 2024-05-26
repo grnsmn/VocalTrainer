@@ -10,7 +10,9 @@ import {
 
 const CardSelect = ({ onPress, title }) => {
 	const handleOnPress = () => {
-		onPress(title);
+		if (!!onPress) {
+			onPress(title);
+		}
 	};
 
 	return (
