@@ -23,7 +23,6 @@ const useBreathingFamilies = () => {
 			});
 			setFamilies(tmp);
 		});
-		console.log('🚀 ~ tmp:', tmp);
 	}, []);
 
 	return families;
