@@ -88,7 +88,7 @@ const VocalizationsList = ({ route }) => {
 				<CardPlay
 					title={title}
 					onPress={() => setSoundChoose(pathVocalization)}
-					RightIcon={chosen ? AudioWaveform : Play}
+					RightIcon={Play}
 					isPlaying={chosen}
 					isLoading={isLoadingSound && chosen}
 				/>
