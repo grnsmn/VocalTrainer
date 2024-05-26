@@ -7,7 +7,7 @@ import {
 	Pressable,
 	Spinner,
 } from '@gluestack-ui/themed';
-import LottieView from 'lottie-react-native';
+//FIXME: Lottie on web
 import AnimatedPlayIcon from '../../assets/lotties/sing.json';
 
 const CardPLay = ({
@@ -37,13 +37,13 @@ const CardPLay = ({
 							// color={isPlaying ? '$green700' : undefined}
 						/>
 					)}
-					{!showRightIcon && (
+					{/* {!showRightIcon && (
 						<LottieView
 							source={AnimatedPlayIcon}
 							autoPlay
 							style={{ width: 28, height: 28 }}
 						/>
-					)}
+					)} */}
 				</HStack>
 			</Card>
 		</Pressable>
