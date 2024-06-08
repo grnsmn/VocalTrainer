@@ -23,7 +23,6 @@ const EserciziList = ({ route, navigation }) => {
 
 	useEffect(() => {
 		if (scelta.length != 0) {
-			console.log('🚀 ~ scelta', scelta);
 			let esercizioScelto = {};
 			let esercizioNext = {};
 			esercizioScelto = listaTitoli?.find(element => {
@@ -50,10 +49,9 @@ const EserciziList = ({ route, navigation }) => {
 		setScelta('');
 	}, [scelta]);
 
-	const renderItem = item => {
-		console.log('🚀 ~ item:', item);
-		return <CardSelect title={item.item.titolo} onPress={loadEsercizio} />;
-	};
+	const renderItem = item => (
+		<CardSelect title={item.item.titolo} onPress={loadEsercizio} />
+	);
 
 	return (
 		<FlatList
