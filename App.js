@@ -9,6 +9,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
 import VocalizationsList from './src/screens/Vocalizations/VocalizationsList';
 import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
+import EserciziList from './src/screens/Breathing/EserciziList';
+import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
@@ -70,6 +72,11 @@ function BreathingStackScreen() {
 				name="BreathingFamilies"
 				component={CategoriesBreath}
 			/>
+			<BreathingStack.Screen
+				name="BreathingList"
+				component={EserciziList}
+			/>
+			<BreathingStack.Screen name="Training" component={TrainingScreen} />
 		</BreathingStack.Navigator>
 	);
 }

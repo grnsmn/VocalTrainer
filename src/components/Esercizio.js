@@ -1,8 +1,25 @@
+import {
+	Text,
+	Slider,
+	ScrollView,
+	VStack,
+	FlatList,
+	Box,
+} from '@gluestack-ui/themed';
+import { Volume, Volume2Icon, ArrowRightFromLine } from 'lucide-react-native';
+
 import React, { Component } from 'react';
-import { Text, View, Button, FlatList } from 'react-native';
-import Slider from '@react-native-community/slider';
+import { View } from 'react-native';
+// import Slider from '@react-native-community/slider';
 import { Audio } from 'expo-av';
 import CardPlay from './CardPlay';
+import {
+	Center,
+	SliderFilledTrack,
+	SliderTrack,
+	SliderThumb,
+} from '@gluestack-ui/themed';
+import { Icon } from '@gluestack-ui/config/build/theme';
 // import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js
 
 export default class Esercizio extends Component {
@@ -11,7 +28,6 @@ export default class Esercizio extends Component {
 		this.click1 = this.fetchClick1();
 		this.click2 = this.fetchClick2();
 	}
-
 	state = {
 		bpm: 100,
 		playing: false,
@@ -26,7 +42,6 @@ export default class Esercizio extends Component {
 		currentCicle: 0,
 		startCountDown: true,
 	};
-
 	async fetchClick1() {
 		return (this.click1 = await Audio.Sound.createAsync(
 			require('../../assets/sounds/click1.mp3'),
@@ -37,7 +52,6 @@ export default class Esercizio extends Component {
 			require('../../assets/sounds/click2.mp3'),
 		));
 	}
-
 	durataEsercizioCompleta() {
 		var x = 0;
 		var index = 0;
@@ -53,7 +67,6 @@ export default class Esercizio extends Component {
 			});
 			c.push(tmp);
 		}
-
 		this.props?.pallini?.forEach(element => {
 			element.durata.forEach(item => {
 				x += parseInt(item);
@@ -67,23 +80,19 @@ export default class Esercizio extends Component {
 		var durCicl = [];
 		const reducer = (previousValue, currentValue) =>
 			previousValue + currentValue;
-
 		c.forEach(el => {
 			durCicl.push(el.reduce(reducer));
 		});
-
 		this.setState({
 			durataCiclo: durCicl,
 		});
 	}
-
 	componentDidMount() {
 		this.durataEsercizioCompleta();
 	}
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
-
 	startStop = () => {
 		if (this.state.playing) {
 			// Stop the timer
@@ -118,7 +127,6 @@ export default class Esercizio extends Component {
 			);
 		}
 	};
-
 	playClick = () => {
 		const {
 			count,
@@ -171,10 +179,11 @@ export default class Esercizio extends Component {
 			counterDurataCiclo: state.counterDurataCiclo + 1,
 		}));
 	};
-
 	handleCountDown() {
 		var x = this.startCountDown;
-		this.setState({ startCountDown: !x });
+		this.setState({
+			startCountDown: !x,
+		});
 	}
 	handleBpmChange = bpm => {
 		if (this.state.playing) {
@@ -193,41 +202,52 @@ export default class Esercizio extends Component {
 			});
 		} else {
 			// Otherwise just update the BPM
-			this.setState({ bpm });
+			this.setState({
+				bpm,
+			});
 		}
 	};
-
 	render() {
 		const { bpm, playing, count, key, startCountDown } = this.state;
-
 		return (
-			<View style={styles.container}>
+			<>
 				<FlatList
 					data={this.props.pallini}
-					renderItem={({ item }) => (
-						<View>
-							<Text
-								style={
-									item.key == key && playing == true
-										? styles.PallinoPlay
-										: styles.Pallino
-								}
-							>
-								o-{item.definizione}
-								<Text style={styles.durataPallino}>
-									{' '}
-									{item.durata + '; '}
-								</Text>
-							</Text>
-						</View>
+					scrollEnabled={false}
+					contentContainerStyle={{ padding: 16 }}
+					ListFooterComponent={() => (
+						<CardPlay
+							flex={1}
+							onPress={this.startStop}
+							title={playing ? 'Stop  ' : 'Play '}
+							RightIcon={playing ? Volume : Volume2Icon}
+						/>
 					)}
-				></FlatList>
+					renderItem={({ item, index }) => (
+						<Text
+							py={'$0.5'}
+							style={
+								item.key == key && playing
+									? styles.PallinoPlay
+									: styles.Pallino
+							}
+						>
+							{item.key == key && playing ? '' : `o  `}
+							{`${item.definizione}`}
+							<Text
+								textAlign={'right'}
+								style={styles.durataPallino}
+								color={'$primary600'}
+							>
+								{`    [${item.durata} BPM]; `}
+							</Text>
+						</Text>
+					)}
+				/>
 				<View style={styles.infoTrainer}>
 					{/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
+
 					<View style={styles.controlContainer}>
-						<Text style={styles.countTitle}>
-							Count: {count - 1}{' '}
-						</Text>
 						{/* <CountDown
               size={30}
               until={8}
@@ -245,28 +265,38 @@ export default class Esercizio extends Component {
               timeLabels={{ s: null }}
               showSeparator
             /> */}
-						<View style={{ marginVertical: 4 }}>
-							<CardPlay
-								onPress={this.startStop}
-								title={playing ? 'Stop' : 'Play'}
-							/>
-						</View>
-						<Text style={styles.bpmTitle}>{bpm} BPM</Text>
-						<Slider
-							style={styles.slider}
-							maximumValue={180}
-							minimumValue={60}
-							onValueChange={this.handleBpmChange}
-							step={1}
-							value={bpm}
-						/>
+
+						<Text color={'$primary600'}>{bpm} BPM</Text>
+						<Text
+							style={styles.countTitle}
+							color={playing ? '$orange400' : '$primary600'}
+						>
+							Count: {count - 1}{' '}
+						</Text>
+
+						<Center flex={1} w={'$80%'} h={40}>
+							<Slider
+								defaultValue={80}
+								size="sm"
+								minValue={40}
+								maxValue={180}
+								orientation="horizontal"
+								isDisabled={false}
+								isReversed={false}
+								onChange={this.handleBpmChange}
+							>
+								<SliderTrack>
+									<SliderFilledTrack />
+								</SliderTrack>
+								<SliderThumb />
+							</Slider>
+						</Center>
 					</View>
 				</View>
-			</View>
+			</>
 		);
 	}
 }
-
 const styles = {
 	bpmTitle: {
 		fontSize: 16,
@@ -275,52 +305,42 @@ const styles = {
 	},
 	countTitle: {
 		fontSize: 24,
-		//marginBottom: 20,
-		color: 'blue',
 		fontWeight: 'bold',
-		marginBottom: 4,
 		alignSelf: 'center',
 	},
 	container: {
 		flex: 1,
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-	},
-	slider: {
-		height: '5%',
-		width: '90%',
-		paddingBottom: 16,
-		alignSelf: 'center',
-	},
-	button: {
-		fontSize: 45,
-		height: '100%',
+		justifyContent: 'space-between',
 	},
 	Pallino: {
-		flexDirection: 'row',
 		textAlign: 'left',
-		fontSize: 25,
+		fontSize: 24,
 		fontWeight: 'bold',
 		color: 'black',
 	},
 	PallinoPlay: {
-		fontSize: 35,
+		fontSize: 34,
 		textAlign: 'center',
 		fontWeight: 'bold',
-		marginBottom: 20,
+		paddingVertical: 20,
 		color: 'orange',
 	},
-	durataPallino: {},
+	durataPallino: {
+		fontSize: 26,
+	},
 	infoTrainer: {
+		justifyContent: 'flex-end',
 		width: '100%',
 		borderWidth: 2,
 		borderRadius: 16,
 		borderColor: '#c6e9ff',
+		padding: 16,
 	},
 	pallinoContainer: {
 		height: '60%',
 	},
 	controlContainer: {
-		height: '35%',
+		alignItems: 'center',
+		gap: 12,
 	},
 };
