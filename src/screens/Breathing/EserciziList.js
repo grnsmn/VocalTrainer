@@ -29,7 +29,6 @@ const EserciziList = ({ route, navigation }) => {
 			esercizioScelto = listaTitoli?.find(element => {
 				return element.titolo == scelta;
 			});
-			console.log('🚀 ~ esercizioScelto:', esercizioScelto);
 
 			let nextIndex = listaTitoli.indexOf(esercizioScelto) + 1;
 			if (listaTitoli[nextIndex] != null) {
