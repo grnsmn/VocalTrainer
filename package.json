@@ -15,7 +15,6 @@
     "@gluestack-ui/config": "^1.1.2",
     "@gluestack-ui/themed": "^1.1.2",
     "@lottiefiles/react-lottie-player": "^3.5.4",
-    "@react-native-community/slider": "^4.5.2",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.26",
