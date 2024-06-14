@@ -1,9 +1,11 @@
+// App.js
+import React from 'react';
 import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind } from 'lucide-react-native';
+import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -11,10 +13,12 @@ import VocalizationsList from './src/screens/Vocalizations/VocalizationsList';
 import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import EserciziList from './src/screens/Breathing/EserciziList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
+import AuthScreen from './src/screens/Auth';
 
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator(); // Create a stack for authentication
 
 function VocalizationsStackScreen() {
 	const getDynamicHeader = ({ route }) => {
@@ -81,6 +85,20 @@ function BreathingStackScreen() {
 	);
 }
 
+function AuthStackScreen() {
+	return (
+		<AuthStack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerStyle: { backgroundColor: '#c6e9ff' },
+				title: 'Authentication',
+			}}
+		>
+			<AuthStack.Screen name="Auth" component={AuthScreen} />
+		</AuthStack.Navigator>
+	);
+}
+
 export default function App() {
 	useFirebaseInit();
 	return (
@@ -89,6 +107,7 @@ export default function App() {
 				<GluestackUIProvider config={config}>
 					<StatusBar />
 					<Tab.Navigator
+					
 						screenOptions={({ route }) => ({
 							tabBarIcon: ({ focused }) => {
 								if (route.name === 'Vocalizzi') {
@@ -104,6 +123,14 @@ export default function App() {
 										<Icon as={Wind} color={'$primary500'} />
 									);
 								}
+								if (route.name === 'Auth') {
+									return (
+										<Icon
+											as={KeyRoundIcon}
+											color={'$primary500'}
+										/>
+									);
+								}
 							},
 							tabBarInactiveTintColor: 'gray',
 							headerShown: false,
@@ -116,6 +143,10 @@ export default function App() {
 						<Tab.Screen
 							name="Respirazione"
 							component={BreathingStackScreen}
+						/>
+						<Tab.Screen
+							name="Auth"
+							component={AuthStackScreen}
 						/>
 					</Tab.Navigator>
 				</GluestackUIProvider>
