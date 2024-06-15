@@ -2,9 +2,11 @@ import React from 'react';
 import { FlatList } from '@gluestack-ui/themed';
 import useBreathingFamilies from '../../hooks/useBreathingFamilies';
 import CardSelect from '../../components/CardSelect';
+import Loader from '../../components/Loader';
 
 const CategoriesBreath = ({ navigation }) => {
-	const families = useBreathingFamilies();
+	const { families, loading: isLoadingBreathCategories } =
+		useBreathingFamilies();
 
 	const onPressHandler = ({ item }) => {
 		navigation.navigate('BreathingList', {
@@ -21,6 +23,10 @@ const CategoriesBreath = ({ navigation }) => {
 			/>
 		);
 	};
+
+	if (isLoadingBreathCategories) {
+		return <Loader />;
+	}
 
 	return (
 		<FlatList
