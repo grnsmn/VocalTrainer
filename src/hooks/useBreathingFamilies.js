@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useBreathingFamilies = () => {
 	const [families, setFamilies] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const db = getDatabase();
 	const refBreathingDB = ref(db, '/Respirazione/');
@@ -23,9 +24,10 @@ const useBreathingFamilies = () => {
 			});
 			setFamilies(tmp);
 		});
+		setLoading(false);
 	}, []);
 
-	return families;
+	return { families, loading };
 };
 
 export default useBreathingFamilies;
