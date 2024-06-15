@@ -1,26 +1,19 @@
+import React, { Component } from 'react';
 import {
 	Text,
 	Slider,
-	ScrollView,
-	VStack,
 	FlatList,
-	Box,
-} from '@gluestack-ui/themed';
-import { Volume, Volume2Icon, ArrowRightFromLine } from 'lucide-react-native';
-
-import React, { Component } from 'react';
-import { View } from 'react-native';
-// import Slider from '@react-native-community/slider';
-import { Audio } from 'expo-av';
-import CardPlay from './CardPlay';
-import {
 	Center,
 	SliderFilledTrack,
 	SliderTrack,
 	SliderThumb,
 } from '@gluestack-ui/themed';
-import { Icon } from '@gluestack-ui/config/build/theme';
-// import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js
+import { Volume, Volume2Icon, ArrowRightFromLine } from 'lucide-react-native';
+
+import { View } from 'react-native';
+import { Audio } from 'expo-av';
+import CardPlay from './CardPlay';
+import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js
 
 export default class Esercizio extends Component {
 	constructor(props) {
@@ -42,6 +35,7 @@ export default class Esercizio extends Component {
 		currentCicle: 0,
 		startCountDown: true,
 	};
+
 	async fetchClick1() {
 		return (this.click1 = await Audio.Sound.createAsync(
 			require('../../assets/sounds/click1.mp3'),
@@ -245,26 +239,27 @@ export default class Esercizio extends Component {
 					)}
 				/>
 				<View style={styles.infoTrainer}>
-					{/* <Text style={styles.countTitle}>CONTATORE: {counterTot - 1} </Text> */}
-
 					<View style={styles.controlContainer}>
-						{/* <CountDown
-              size={30}
-              until={8}
-              onFinish={(playing === true) ? null : this.startStop}
-              digitStyle={{
-                backgroundColor: '#FFF',
-                borderWidth: 2,
-                borderColor: '#1CC625',
-              }}
-              digitTxtStyle={{ color: '#1CC625', }}
-              timeLabelStyle={{ color: 'red', fontWeight: 'bold', }}
-              separatorStyle={{ color: '#1CC625' }}
-              timeToShow={['S']}
-              running={startCountDown}
-              timeLabels={{ s: null }}
-              showSeparator
-            /> */}
+						<CountDown
+							size={30}
+							until={10}
+							onFinish={playing === true ? null : this.startStop}
+							digitStyle={{
+								backgroundColor: '#FFF',
+								borderWidth: 2,
+								borderColor: '#c6e9ff',
+							}}
+							digitTxtStyle={{ color: '#005DB4' }}
+							timeLabelStyle={{
+								color: 'red',
+								fontWeight: 'bold',
+							}}
+							separatorStyle={{ color: '#c6e9ff' }}
+							timeToShow={['S']}
+							running={startCountDown}
+							timeLabels={{ s: null }}
+							showSeparator
+						/>
 
 						<Text color={'$primary600'}>{bpm} BPM</Text>
 						<Text
@@ -330,7 +325,6 @@ const styles = {
 	},
 	infoTrainer: {
 		justifyContent: 'flex-end',
-		width: '100%',
 		borderWidth: 2,
 		borderRadius: 16,
 		borderColor: '#c6e9ff',

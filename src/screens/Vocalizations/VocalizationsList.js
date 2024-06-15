@@ -5,9 +5,10 @@ import { STORAGE_PATH } from '@env';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
+import Loader from '../../components/Loader';
 import { Audio } from 'expo-av';
-import { FlatList, Spinner, Text, VStack } from '@gluestack-ui/themed';
-import { AudioWaveform, Play } from 'lucide-react-native';
+import { FlatList } from '@gluestack-ui/themed';
+import { Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
@@ -99,17 +100,7 @@ const VocalizationsList = ({ route }) => {
 	/* --------------------------------- render --------------------------------- */
 
 	if (isLoadingVocalizations) {
-		return (
-			<VStack
-				flex={1}
-				space="sm"
-				justifyContent="center"
-				alignItems="center"
-			>
-				<Spinner size="small" />
-				<Text size="md">Please Wait</Text>
-			</VStack>
-		);
+		return <Loader />;
 	}
 
 	return (
