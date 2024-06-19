@@ -1,7 +1,17 @@
-const { getDefaultConfig } = require("@expo/metro-config");
+const { getDefaultConfig } = require('expo/metro-config');
+const path = require('path');
 
-const defaultConfig = getDefaultConfig(__dirname);
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
 
-defaultConfig.resolver.assetExts.push("cjs");
+config.resolver = {
+	...config.resolver,
+	extraNodeModules: {
+		'lottie-react-native': path.resolve(
+			__dirname,
+			'node_modules/react-native-web-lottie',
+		),
+	},
+};
 
-module.exports = defaultConfig;
+module.exports = config;

@@ -1,14 +1,14 @@
 {
   "expo": {
     "name": "Vocal Trainer",
-    "slug": "Vocal Trainer",
-    "version": "1.2.0",
+    "slug": "VocalTrainer",
+    "version": "2.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/splash.png",
     "splash": {
-      "image": "./assets/piano.jpg",
-      "resizeMode": "cover",
-      "backgroundColor": "#080808"
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#c6e9ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,18 +21,20 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/splash.png",
+        "backgroundColor": "#ffffff"
       },
-      "package": "com.gscripts.VocalTrainer"
+      "package": "com.VocalTrainer.app"
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "favicon": "./assets/splash.png"
     },
     "extra": {
       "eas": {
         "projectId": "25baeacb-0df5-4607-b105-0e6242835ec3"
       }
-    }
+    },
+    "owner": "gscripts"
   }
 }
