@@ -7,10 +7,11 @@
 ### Benvenuti nell'app Vocal Trainer, un'app cross-platform per esercitazioni vocali sviluppata utilizzando React Native con Expo.
 
 ## Demo
-Se sei incuriosito di provare di cosa si tratta puoi provare la [Demo web](https://vocaltrainer.netlify.app/)
+### Se sei incuriosito di provare di cosa si tratta puoi provare la [Demo web](https://vocaltrainer.netlify.app/)
 
 <p align="center">
-  <img src="./assets/demo.png" alt="Home" height="450" />
+  <img src="./assets/Demo_web.jpeg" alt="web_demo" height="450" />
+  <img src="./assets/Demo_ios.png" alt="ios_demo" height="450" />
 </p>
 
 ## Descrizione
