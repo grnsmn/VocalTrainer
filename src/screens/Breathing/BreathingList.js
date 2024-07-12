@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FlatList } from '@gluestack-ui/themed';
 import CardSelect from '../../components/CardSelect';
 
-const EserciziList = ({ route, navigation }) => {
+const BreathingList = ({ route, navigation }) => {
 	const { Titoli, famiglia } = route.params;
 	const [listaTitoli, setListaTitoli] = useState(Object.values(Titoli));
 	const [scelta, setScelta] = useState('');
@@ -62,4 +62,4 @@ const EserciziList = ({ route, navigation }) => {
 	);
 };
 
-export default EserciziList;
+export default BreathingList;
