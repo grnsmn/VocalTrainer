@@ -16,29 +16,9 @@ export default function AuthScreen() {
 	const auth = getAuth();
 	const provider = new GoogleAuthProvider();
 
-	// const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-	//   clientId: 'YOUR_GOOGLE_CLIENT_ID',
-	// });
-
 	const onPressGoogle = () => {
 		signInWithRedirect(auth, provider);
 	};
-
-	console.log('🚀 ~ auth:', auth);
-
-	// useEffect(() => {
-	//   if (response?.type === 'success') {
-	//     const { id_token } = response.params;
-	//     const credential = GoogleAuthProvider.credential(id_token);
-	//     signInWithCredential(auth, credential)
-	//       .then((userCredential) => {
-	//         Alert.alert('Logged in with Google!', `Welcome ${userCredential.user.email}`);
-	//       })
-	//       .catch((error) => {
-	//         Alert.alert('Google login error', error.message);
-	//       });
-	//   }
-	// }, [response]);
 
 	const handleLogin = () => {
 		signInWithEmailAndPassword(auth, email, password)
