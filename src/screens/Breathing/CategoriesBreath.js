@@ -31,6 +31,7 @@ const CategoriesBreath = ({ navigation }) => {
 
 	return (
 		<FlatList
+			bg="$primary0"
 			data={families}
 			keyExtractor={item => item.id}
 			renderItem={renderItem}

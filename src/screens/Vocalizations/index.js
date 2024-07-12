@@ -30,6 +30,7 @@ export const Vocalizations = () => {
 
 	return (
 		<FlatList
+			bg={'$primary0'}
 			data={CATEGORY_LIST}
 			renderItem={renderItem}
 			ListHeaderComponent={<Hero />}

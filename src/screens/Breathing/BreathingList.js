@@ -55,8 +55,9 @@ const BreathingList = ({ route, navigation }) => {
 
 	return (
 		<FlatList
+			bg="$primary0"
 			data={listaTitoli}
-			keyExtractor={item => item.id}
+			keyExtractor={item => item.titolo}
 			renderItem={renderItem}
 		/>
 	);
