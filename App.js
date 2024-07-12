@@ -85,7 +85,7 @@ export default function App() {
 	useFirebaseInit();
 	return (
 		<NavigationContainer>
-			<SafeAreaProvider backgroundColor={'#c6e9ff'}>
+			<SafeAreaProvider>
 				<GluestackUIProvider config={config}>
 					<StatusBar />
 					<Tab.Navigator
