@@ -1,5 +1,5 @@
 import React from 'react';
-import icon from '../../assets/icon.png';
+import icon from '../../assets/splash.png';
 import { Image } from '@gluestack-ui/themed';
 
 const Hero = () => {
