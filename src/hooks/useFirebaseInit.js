@@ -9,6 +9,7 @@ import {
 	APP_ID,
 	MEASUREMENT_ID,
 } from '@env';
+import { useEffect } from 'react';
 
 const useFirebaseInit = () => {
 	const firebaseConfig = {
@@ -22,12 +23,14 @@ const useFirebaseInit = () => {
 		measurementId: MEASUREMENT_ID,
 	};
 
-	// Inizializza Firebase solo se non è già stato inizializzato
-	if (!firebase.apps.length) {
-		firebase.initializeApp(firebaseConfig);
-	} else {
-		firebase.app(); // if already initialized, use that one
-	}
+	useEffect(() => {
+		// Inizializza Firebase solo se non è già stato inizializzato
+		if (!firebase.apps.length) {
+			firebase.initializeApp(firebaseConfig);
+		} else {
+			firebase.app(); // if already initialized, use that one
+		}
+	}, [firebase]);
 };
 
 export default useFirebaseInit;
