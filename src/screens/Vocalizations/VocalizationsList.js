@@ -105,7 +105,7 @@ const VocalizationsList = ({ route }) => {
 
 	return (
 		<>
-			<FlatList data={data} renderItem={renderItem} />
+			<FlatList data={data} renderItem={renderItem} bg="$primary0" />
 			{!!sound && (
 				<Fab
 					placement={'bottom right'}

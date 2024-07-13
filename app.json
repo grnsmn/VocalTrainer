@@ -27,7 +27,8 @@
       "package": "com.VocalTrainer.app"
     },
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "favicon": "./assets/splash.png"
     },
     "extra": {
       "eas": {

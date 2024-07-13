@@ -14,6 +14,7 @@ const useBreathingFamilies = () => {
 		setFamilies([]);
 
 		onValue(refBreathingDB, snapshot => {
+			setLoading(true);
 			snapshot.forEach(childSnap => {
 				famiglia = {
 					id: childSnap.key,
@@ -23,8 +24,8 @@ const useBreathingFamilies = () => {
 				tmp.push(famiglia);
 			});
 			setFamilies(tmp);
+			setLoading(false);
 		});
-		setLoading(false);
 	}, []);
 
 	return { families, loading };
