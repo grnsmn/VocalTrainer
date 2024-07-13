@@ -1,75 +1,125 @@
-import { useEffect } from 'react';
+import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
+import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
+import { Vocalizations } from './src/screens/Vocalizations';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AudioLines, Wind } from 'lucide-react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screen/HomeScreen';
-import EserciziList from './src/Respirazione/Famiglia/EserciziList';
-import FamiglieList from './src/Respirazione/FamiglieList';
-import TrainingScreen from './src/screen/TrainingScreen';
-import VocalizziCategoryList from './src/screen/VocalizziCategoryList';
-import VocalsChoose from './src/screen/VocalsChoose';
-//import Metronome from './src/MetronomeHook'
-import * as Font from 'expo-font';
-import VocalizziList from './src/components/VocalizziList';
+import useFirebaseInit from './src/hooks/useFirebaseInit';
+import VocalizationsList from './src/screens/Vocalizations/VocalizationsList';
+import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
+import BreathingList from './src/screens/Breathing/BreathingList';
+import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 
-const fetchFonts = () => {
-	return Font.loadAsync({
-		'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
-	});
-};
+const Tab = createBottomTabNavigator();
+const VocalizationsStack = createNativeStackNavigator();
+const BreathingStack = createNativeStackNavigator();
 
-const Stack = createNativeStackNavigator();
+function VocalizationsStackScreen() {
+	const getDynamicHeader = ({ route }) => {
+		//Replace usato per il caso di route name lunghi passati in
+		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
+		const dynamicHeaderPart = route.params?.selectedListName
+			.replace(/([A-Z])/g, ' $1')
+			.trim();
 
-export default function App() {
-	useEffect(() => {
-		fetchFonts();
-	}, []);
+		return {
+			title: `Esercizi ${dynamicHeaderPart}` || 'Lista Esercizi',
+		};
+	};
 
 	return (
-		<NavigationContainer>
-			<Stack.Navigator
-				initialRouteName="Home"
-				screenOptions={navScreensOptions}
-			>
-				<Stack.Screen
-					name="Home"
-					component={HomeScreen}
-					options={{ title: 'Vocal Trainer' }}
-				/>
-				<Stack.Screen
-					name="Lista Famiglie"
-					component={FamiglieList}
-					options={{ title: 'Famiglie' }}
-				/>
-				<Stack.Screen
-					name="Lista esercizi"
-					component={EserciziList}
-					options={({ route }) => ({ title: route.params.name })}
-				/>
-				<Stack.Screen
-					name="Training"
-					component={TrainingScreen}
-					options={({ route }) => ({ title: route.params.name })}
-				/>
-				<Stack.Screen name="VocalsChoose" component={VocalsChoose} />
-				<Stack.Screen name="Vocalizzi" component={VocalizziCategoryList} />
-				<Stack.Screen
-					name="VocalizziList"
-					component={VocalizziList}
-					options={({ route }) => ({ title: route.params.name })}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
+		<VocalizationsStack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerStyle: { backgroundColor: '#c6e9ff' },
+				title: 'Vocal Trainer',
+			}}
+		>
+			<VocalizationsStack.Screen name="Home" component={Vocalizations} />
+			<VocalizationsStack.Screen
+				name="Lista"
+				component={VocalizationsList}
+				options={getDynamicHeader}
+			/>
+		</VocalizationsStack.Navigator>
 	);
 }
 
-const navScreensOptions = {
-	headerTitleAlign: 'center',
-	headerStyle: {
-		backgroundColor: '#1CC625',
-	},
-	headerTitleStyle: {
-		fontWeight: 'bold',
-		fontSize: 30,
-		textAlign: 'center',
-	},
-};
+function BreathingStackScreen() {
+	const getDynamicHeader = ({ route }) => {
+		//Replace usato per il caso di route name lunghi passati in
+		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
+		const dynamicHeaderPart = route.params?.selectedListName
+			.replace(/([A-Z])/g, ' $1')
+			.trim();
+
+		return {
+			title: `Esercizi ${dynamicHeaderPart}` || 'Lista Esercizi',
+		};
+	};
+
+	return (
+		<BreathingStack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerStyle: { backgroundColor: '#c6e9ff' },
+				title: 'Vocal Trainer',
+			}}
+		>
+			<BreathingStack.Screen
+				name="BreathingFamilies"
+				component={CategoriesBreath}
+			/>
+			<BreathingStack.Screen
+				name="BreathingList"
+				component={BreathingList}
+			/>
+			<BreathingStack.Screen name="Training" component={TrainingScreen} />
+		</BreathingStack.Navigator>
+	);
+}
+
+export default function App() {
+	useFirebaseInit();
+	return (
+		<NavigationContainer>
+			<SafeAreaProvider>
+				<GluestackUIProvider config={config}>
+					<StatusBar />
+					<Tab.Navigator
+						screenOptions={({ route }) => ({
+							tabBarIcon: ({ focused }) => {
+								if (route.name === 'Vocalizzi') {
+									return (
+										<Icon
+											as={AudioLines}
+											color={'$primary500'}
+										/>
+									);
+								}
+								if (route.name === 'Respirazione') {
+									return (
+										<Icon as={Wind} color={'$primary500'} />
+									);
+								}
+							},
+							tabBarInactiveTintColor: 'gray',
+							headerShown: false,
+						})}
+					>
+						<Tab.Screen
+							name="Vocalizzi"
+							component={VocalizationsStackScreen}
+						/>
+						<Tab.Screen
+							name="Respirazione"
+							component={BreathingStackScreen}
+						/>
+					</Tab.Navigator>
+				</GluestackUIProvider>
+			</SafeAreaProvider>
+		</NavigationContainer>
+	);
+}
