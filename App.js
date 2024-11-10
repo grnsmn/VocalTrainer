@@ -107,8 +107,8 @@ export default function App() {
 				<GluestackUIProvider config={config}>
 					<StatusBar />
 					<Tab.Navigator
-					
 						screenOptions={({ route }) => ({
+							tabBarActiveBackgroundColor: '#c6e9ff',
 							tabBarIcon: ({ focused }) => {
 								if (route.name === 'Vocalizzi') {
 									return (
@@ -132,21 +132,29 @@ export default function App() {
 									);
 								}
 							},
-							tabBarInactiveTintColor: 'gray',
 							headerShown: false,
+							tabBarLabelStyle: {
+								fontSize: 14,
+								fontWeight: 'bold',
+							},
+							tabBarItemStyle: {
+								borderColor: '#CCE9FF',
+								padding: 10,
+							},
+							tabBarIconStyle: {
+								paddingBottom: 6, // Aumenta il valore negativo per più spazio
+							},
 						})}
+						initialRouteName="Auth"
 					>
-						<Tab.Screen
-							name="Vocalizzi"
-							component={VocalizationsStackScreen}
-						/>
+						<Tab.Screen name="Auth" component={AuthStackScreen} />
 						<Tab.Screen
 							name="Respirazione"
 							component={BreathingStackScreen}
 						/>
 						<Tab.Screen
-							name="Auth"
-							component={AuthStackScreen}
+							name="Vocalizzi"
+							component={VocalizationsStackScreen}
 						/>
 					</Tab.Navigator>
 				</GluestackUIProvider>
