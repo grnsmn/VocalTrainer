@@ -56,7 +56,7 @@ export default function AuthScreen() {
 	};
 
 	return (
-		<ScrollView>
+		<ScrollView p={'$4'} bg="$primary0">
 			<VStack space="sm" alignItems="center" justifyContent="center">
 				<Hero />
 				<Input borderWidth={1} borderRadius="lg">

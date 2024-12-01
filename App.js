@@ -20,6 +20,12 @@ const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator(); // Create a stack for authentication
 
+const screenOptions = {
+	headerTitleAlign: 'center',
+	headerStyle: { backgroundColor: '#c6e9ff' },
+	title: 'Vocal Trainer',
+};
+
 function VocalizationsStackScreen() {
 	const getDynamicHeader = ({ route }) => {
 		//Replace usato per il caso di route name lunghi passati in
@@ -35,11 +41,7 @@ function VocalizationsStackScreen() {
 
 	return (
 		<VocalizationsStack.Navigator
-			screenOptions={{
-				headerTitleAlign: 'center',
-				headerStyle: { backgroundColor: '#c6e9ff' },
-				title: 'Vocal Trainer',
-			}}
+			screenOptions={screenOptions}
 		>
 			<VocalizationsStack.Screen name="Home" component={Vocalizations} />
 			<VocalizationsStack.Screen
@@ -64,14 +66,10 @@ function BreathingStackScreen() {
 		};
 	};
 
+
+
 	return (
-		<BreathingStack.Navigator
-			screenOptions={{
-				headerTitleAlign: 'center',
-				headerStyle: { backgroundColor: '#c6e9ff' },
-				title: 'Vocal Trainer',
-			}}
-		>
+		<BreathingStack.Navigator screenOptions={screenOptions}>
 			<BreathingStack.Screen
 				name="BreathingFamilies"
 				component={CategoriesBreath}
@@ -88,12 +86,7 @@ function BreathingStackScreen() {
 function AuthStackScreen() {
 	return (
 		<AuthStack.Navigator
-			screenOptions={{
-				headerTitleAlign: 'center',
-				headerStyle: { backgroundColor: '#c6e9ff' },
-				title: 'Authentication',
-				headerShown: false
-			}}
+			screenOptions={screenOptions}
 		>
 			<AuthStack.Screen name="Auth" component={AuthScreen} />
 		</AuthStack.Navigator>
