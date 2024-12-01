@@ -32,24 +32,26 @@ export default function AuthScreen() {
 		signInWithRedirect(auth, provider);
 	};
 
-	const handleLogin = () => {
-		setAccessToken('ciao');
-		signInWithEmailAndPassword(auth, email, password)
-			.then(userCredential => {
-				alert('Logged in!', `Welcome ${userCredential.user.email}`);
-			})
-			.catch(error => {
-				Alert.alert('Login error', error.message);
-			});
-	};
-
-	const handleSignup = async () => {
+	const handleLogin = async () => {
 		try {
-			const signupResp = await createUserWithEmailAndPassword(
+			const loginResp = await signInWithEmailAndPassword(
 				auth,
 				email,
 				password,
 			);
+			console.log('🚀 ~ loginResp:', loginResp);
+		} catch (error) {
+			Alert.alert('Login error', error.message);
+		}
+	};
+
+	const handleSignup = async () => {
+		try {
+			const {
+				_tokenResponse: { idToken },
+			} = await createUserWithEmailAndPassword(auth, email, password);
+			console.log('🚀 ~ idToken:', idToken);
+			setAccessToken(idToken);
 		} catch (error) {
 			Alert.alert('Signup error', error.message);
 		}
@@ -71,6 +73,7 @@ export default function AuthScreen() {
 						placeholder="Password"
 						onChangeText={setPassword}
 						bgColor="$blueGray200"
+						secureTextEntry
 					/>
 				</Input>
 				<Button title="Login" onPress={handleLogin}>
