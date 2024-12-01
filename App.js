@@ -1,4 +1,7 @@
 // App.js
+if (__DEV__) {
+	require('./ReactotronConfig');
+}
 import React from 'react';
 import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
@@ -107,7 +110,6 @@ export default function App() {
 				<GluestackUIProvider config={config}>
 					<StatusBar />
 					<Tab.Navigator
-					
 						screenOptions={({ route }) => ({
 							tabBarActiveBackgroundColor: '#c6e9ff',
 							tabBarIcon: ({ focused }) => {
@@ -147,13 +149,10 @@ export default function App() {
 							},
 						})}
 					>
+						<Tab.Screen name="Auth" component={AuthStackScreen} />
 						<Tab.Screen
 							name="Respirazione"
 							component={BreathingStackScreen}
-						/>
-						<Tab.Screen
-							name="Auth"
-							component={AuthStackScreen}
 						/>
 						<Tab.Screen
 							name="Vocalizzi"
