@@ -14,7 +14,7 @@ import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
-
+import useStore from './src/store';
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
@@ -40,9 +40,7 @@ function VocalizationsStackScreen() {
 	};
 
 	return (
-		<VocalizationsStack.Navigator
-			screenOptions={screenOptions}
-		>
+		<VocalizationsStack.Navigator screenOptions={screenOptions}>
 			<VocalizationsStack.Screen name="Home" component={Vocalizations} />
 			<VocalizationsStack.Screen
 				name="Lista"
@@ -66,8 +64,6 @@ function BreathingStackScreen() {
 		};
 	};
 
-
-
 	return (
 		<BreathingStack.Navigator screenOptions={screenOptions}>
 			<BreathingStack.Screen
@@ -85,16 +81,16 @@ function BreathingStackScreen() {
 
 function AuthStackScreen() {
 	return (
-		<AuthStack.Navigator
-			screenOptions={screenOptions}
-		>
-			<AuthStack.Screen name="Auth" component={AuthScreen} />
+		<AuthStack.Navigator screenOptions={screenOptions}>
+			<AuthStack.Screen name="Main" component={AuthScreen} />
 		</AuthStack.Navigator>
 	);
 }
 
 export default function App() {
 	useFirebaseInit();
+	const { auth } = useStore();
+
 	return (
 		<NavigationContainer>
 			<SafeAreaProvider>
@@ -142,14 +138,18 @@ export default function App() {
 						initialRouteName="Auth"
 					>
 						<Tab.Screen name="Auth" component={AuthStackScreen} />
-						<Tab.Screen
-							name="Respirazione"
-							component={BreathingStackScreen}
-						/>
-						<Tab.Screen
-							name="Vocalizzi"
-							component={VocalizationsStackScreen}
-						/>
+						{!!auth && (
+							<>
+								<Tab.Screen
+									name="Respirazione"
+									component={BreathingStackScreen}
+								/>
+								<Tab.Screen
+									name="Vocalizzi"
+									component={VocalizationsStackScreen}
+								/>
+							</>
+						)}
 					</Tab.Navigator>
 				</GluestackUIProvider>
 			</SafeAreaProvider>

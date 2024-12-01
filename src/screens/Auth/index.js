@@ -8,6 +8,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithCredential,
 	GoogleAuthProvider,
+	signInWithPopup,
 } from 'firebase/auth';
 import {
 	Button,
@@ -23,13 +24,13 @@ import useStore from '../../store';
 export default function AuthScreen() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { auth: _auth, setAccessToken } = useStore();
+	const { auth: _auth, setAuth } = useStore();
 
 	const auth = getAuth();
 	const provider = new GoogleAuthProvider();
 
 	const onPressGoogle = () => {
-		signInWithRedirect(auth, provider);
+		signInWithPopup(auth, provider);
 	};
 
 	const handleLogin = async () => {
@@ -47,11 +48,12 @@ export default function AuthScreen() {
 
 	const handleSignup = async () => {
 		try {
-			const {
-				_tokenResponse: { idToken },
-			} = await createUserWithEmailAndPassword(auth, email, password);
-			console.log('🚀 ~ idToken:', idToken);
-			setAccessToken(idToken);
+			const { _tokenResponse } = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password,
+			);
+			setAuth(_tokenResponse);
 		} catch (error) {
 			Alert.alert('Signup error', error.message);
 		}
