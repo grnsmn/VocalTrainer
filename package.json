@@ -34,6 +34,7 @@
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
     "react-native-web-lottie": "^1.4.4",
+    "redux-devtools-extension": "^2.13.9",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
