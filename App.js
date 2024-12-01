@@ -92,6 +92,7 @@ function AuthStackScreen() {
 				headerTitleAlign: 'center',
 				headerStyle: { backgroundColor: '#c6e9ff' },
 				title: 'Authentication',
+				headerShown: false
 			}}
 		>
 			<AuthStack.Screen name="Auth" component={AuthScreen} />
