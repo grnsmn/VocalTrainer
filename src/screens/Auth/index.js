@@ -32,11 +32,11 @@ export default function AuthScreen() {
 	const [password, setPassword] = useState('');
 	const { auth: _auth, setAuth } = useStore();
 
-	const auth = getAuth();
-	const provider = new GoogleAuthProvider();
-
-	const onPressGoogle = () => {
-		signInWithPopup(auth, provider);
+	const onPressGoogle = async () => {
+		const auth = getAuth();
+		const provider = new GoogleAuthProvider();
+		const resp = await signInWithPopup(auth, provider);
+		setAuth(resp);
 	};
 
 	const handleLogin = async () => {
@@ -129,7 +129,7 @@ export default function AuthScreen() {
 						>
 							<ButtonText color="$white">Signup</ButtonText>
 						</Button>
-						{Platform.OS === 'web' && (
+						{Platform.OS === 'web' && ( // Only show on web temporarily
 							<Button
 								bgColor="$primary500"
 								borderRadius="$2xl"
