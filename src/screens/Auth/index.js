@@ -46,7 +46,7 @@ export default function AuthScreen() {
 				email,
 				password,
 			);
-			console.log('🚀 ~ loginResp:', loginResp);
+			setAuth(loginResp);
 		} catch (error) {
 			Alert.alert('Login error', error.message);
 		}
