@@ -5,7 +5,7 @@ import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
+import { AudioLines, Wind, KeyRoundIcon, LogOut } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -15,6 +15,7 @@ import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
 import useStore from './src/store';
+import { Pressable } from 'react-native';
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
@@ -27,6 +28,8 @@ const screenOptions = {
 };
 
 function VocalizationsStackScreen() {
+	const { clearAuth } = useStore();
+
 	const getDynamicHeader = ({ route }) => {
 		//Replace usato per il caso di route name lunghi passati in
 		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
@@ -40,7 +43,16 @@ function VocalizationsStackScreen() {
 	};
 
 	return (
-		<VocalizationsStack.Navigator screenOptions={screenOptions}>
+		<VocalizationsStack.Navigator
+			screenOptions={{
+				...screenOptions,
+				headerRight: () => (
+					<Pressable onPress={clearAuth}>
+						<Icon as={LogOut} color={'$primary500'} size={24} />
+					</Pressable>
+				),
+			}}
+		>
 			<VocalizationsStack.Screen name="Home" component={Vocalizations} />
 			<VocalizationsStack.Screen
 				name="Lista"
@@ -52,20 +64,19 @@ function VocalizationsStackScreen() {
 }
 
 function BreathingStackScreen() {
-	const getDynamicHeader = ({ route }) => {
-		//Replace usato per il caso di route name lunghi passati in
-		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
-		const dynamicHeaderPart = route.params?.selectedListName
-			.replace(/([A-Z])/g, ' $1')
-			.trim();
-
-		return {
-			title: `Esercizi ${dynamicHeaderPart}` || 'Lista Esercizi',
-		};
-	};
+	const { clearAuth } = useStore();
 
 	return (
-		<BreathingStack.Navigator screenOptions={screenOptions}>
+		<BreathingStack.Navigator
+			screenOptions={{
+				...screenOptions,
+				headerRight: () => (
+					<Pressable onPress={clearAuth}>
+						<Icon as={LogOut} color={'$primary500'} size={24} />
+					</Pressable>
+				),
+			}}
+		>
 			<BreathingStack.Screen
 				name="BreathingFamilies"
 				component={CategoriesBreath}

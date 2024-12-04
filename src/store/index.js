@@ -6,6 +6,7 @@ const useStore = create(
 		set => ({
 			auth: undefined,
 			setAuth: newAuth => set(() => ({ auth: newAuth })),
+			clearAuth: () => set(() => ({ auth: undefined })),
 		}),
 		{ name: 'AuthStore' },
 	),
