@@ -9,6 +9,6 @@ const useStore = create(
 		}),
 		{ name: 'AuthStore' },
 	),
-); // Nome per identificare lo store nei DevTools
+);
 
 export default useStore;
