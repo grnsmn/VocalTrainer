@@ -135,9 +135,14 @@ export default function App() {
 								paddingBottom: 6, // Aumenta il valore negativo per più spazio
 							},
 						})}
-						initialRouteName="Auth"
+						initialRouteName={!auth ? 'Auth' : 'Respirazione'}
 					>
-						<Tab.Screen name="Auth" component={AuthStackScreen} />
+						{!auth && (
+							<Tab.Screen
+								name="Auth"
+								component={AuthStackScreen}
+							/>
+						)}
 						{!!auth && (
 							<>
 								<Tab.Screen
