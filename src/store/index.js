@@ -6,13 +6,6 @@ const useStore = create(
 		set => ({
 			auth: undefined,
 			setAuth: newAuth => set(() => ({ auth: newAuth })),
-			setAccessToken: newAccessToken =>
-				set(state => ({
-					auth: {
-						...state.auth,
-						accessToken: newAccessToken,
-					},
-				})),
 		}),
 		{ name: 'AuthStore' },
 	),
