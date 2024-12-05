@@ -27,26 +27,27 @@ import useStore from '../../store';
 import { Eye, EyeOff } from 'lucide-react-native';
 
 export default function AuthScreen() {
+	const auth = getAuth();
+	const provider = new GoogleAuthProvider();
+
 	const [showPassword, setShowPassword] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { auth: _auth, setAuth } = useStore();
 
 	const onPressGoogle = async () => {
-		const auth = getAuth();
-		const provider = new GoogleAuthProvider();
 		const resp = await signInWithPopup(auth, provider);
 		setAuth(resp);
 	};
 
 	const handleLogin = async () => {
 		try {
-			const loginResp = await signInWithEmailAndPassword(
+			const { _tokenResponse } = await signInWithEmailAndPassword(
 				auth,
 				email,
 				password,
 			);
-			setAuth(loginResp);
+			setAuth(_tokenResponse);
 		} catch (error) {
 			Alert.alert('Login error', error.message);
 		}
