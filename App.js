@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,6 +17,7 @@ import AuthScreen from './src/screens/Auth';
 import { signOut, getAuth } from 'firebase/auth';
 import useStore from './src/store';
 import { Pressable } from 'react-native';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
@@ -29,7 +30,7 @@ const screenOptions = {
 
 function VocalizationsStackScreen() {
 	const { clearAuth } = useStore();
-
+	const { removeItem } = useAsyncStorage('authData');
 	const getDynamicHeader = ({ route }) => {
 		//Replace usato per il caso di route name lunghi passati in
 		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
@@ -45,7 +46,7 @@ function VocalizationsStackScreen() {
 	const handleLogout = () => {
 		const auth = getAuth();
 		signOut(auth).then(() => {
-			console.log('🚀 ~ testing');
+			removeItem();
 			clearAuth();
 		});
 	};
@@ -73,11 +74,12 @@ function VocalizationsStackScreen() {
 
 function BreathingStackScreen() {
 	const { clearAuth } = useStore();
+	const { removeItem } = useAsyncStorage('authData');
 
 	const handleLogout = () => {
 		const auth = getAuth();
 		signOut(auth).then(() => {
-			console.log('🚀 ~ testing');
+			removeItem();
 			clearAuth();
 		});
 	};
@@ -116,7 +118,23 @@ function AuthStackScreen() {
 
 export default function App() {
 	useFirebaseInit();
-	const { auth } = useStore();
+	const { auth, setAuth } = useStore();
+	const { getItem } = useAsyncStorage('authData');
+
+	useEffect(() => {
+		const restoreCacheAuthData = async () => {
+			try {
+				const data = await getItem();
+				if (data) {
+					setAuth(JSON.parse(data));
+				}
+			} catch (e) {
+				console.error('Failed to fetch data from storage', e);
+			}
+		};
+
+		restoreCacheAuthData();
+	}, []);
 
 	return (
 		<NavigationContainer>

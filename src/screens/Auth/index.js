@@ -6,7 +6,6 @@ import {
 	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
-	signInWithCredential,
 	GoogleAuthProvider,
 	signInWithPopup,
 } from 'firebase/auth';
@@ -25,10 +24,20 @@ import {
 import Hero from '../../components/Hero';
 import useStore from '../../store';
 import { Eye, EyeOff } from 'lucide-react-native';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function AuthScreen() {
 	const auth = getAuth();
 	const provider = new GoogleAuthProvider();
+	const { setItem } = useAsyncStorage('authData');
+
+	const saveAuthData = async authData => {
+		try {
+			await setItem(JSON.stringify(authData));
+		} catch (e) {
+			console.error('Failed to save data to storage', e);
+		}
+	};
 
 	const [showPassword, setShowPassword] = useState(false);
 	const [email, setEmail] = useState('');
@@ -38,6 +47,7 @@ export default function AuthScreen() {
 	const onPressGoogle = async () => {
 		const resp = await signInWithPopup(auth, provider);
 		setAuth(resp);
+		saveAuthData(resp);
 	};
 
 	const handleLogin = async () => {
@@ -48,6 +58,7 @@ export default function AuthScreen() {
 				password,
 			);
 			setAuth(_tokenResponse);
+			saveAuthData(_tokenResponse);
 		} catch (error) {
 			Alert.alert('Login error', error.message);
 		}
@@ -61,6 +72,7 @@ export default function AuthScreen() {
 				password,
 			);
 			setAuth(_tokenResponse);
+			saveAuthData(_tokenResponse);
 		} catch (error) {
 			Alert.alert('Signup error', error.message);
 		}
