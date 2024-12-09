@@ -84,7 +84,6 @@ const VocalizationsList = ({ route }) => {
 
 	const renderItem = ({ item }) => {
 		const pathVocalization = item?._location?.path;
-		console.log('🚀 ~ pathVocalization:', pathVocalization);
 		const title = getTitleExercise(pathVocalization);
 		const chosen = getTitleExercise(soundChoose) === title;
 
