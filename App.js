@@ -14,10 +14,9 @@ import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
-import { signOut, getAuth } from 'firebase/auth';
 import useStore from './src/store';
-import { Pressable } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import HeaderRight from './src/components/HeaderRight';
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
@@ -29,8 +28,6 @@ const screenOptions = {
 };
 
 function VocalizationsStackScreen() {
-	const { clearAuth } = useStore();
-	const { removeItem } = useAsyncStorage('authData');
 	const getDynamicHeader = ({ route }) => {
 		//Replace usato per il caso di route name lunghi passati in
 		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
@@ -43,23 +40,11 @@ function VocalizationsStackScreen() {
 		};
 	};
 
-	const handleLogout = () => {
-		const auth = getAuth();
-		signOut(auth).then(() => {
-			removeItem();
-			clearAuth();
-		});
-	};
-
 	return (
 		<VocalizationsStack.Navigator
 			screenOptions={{
 				...screenOptions,
-				headerRight: () => (
-					<Pressable onPress={handleLogout}>
-						<Icon as={LogOut} color={'$primary500'} size={24} />
-					</Pressable>
-				),
+				headerRight: () => <HeaderRight />,
 			}}
 		>
 			<VocalizationsStack.Screen name="Home" component={Vocalizations} />
@@ -73,26 +58,11 @@ function VocalizationsStackScreen() {
 }
 
 function BreathingStackScreen() {
-	const { clearAuth } = useStore();
-	const { removeItem } = useAsyncStorage('authData');
-
-	const handleLogout = () => {
-		const auth = getAuth();
-		signOut(auth).then(() => {
-			removeItem();
-			clearAuth();
-		});
-	};
-
 	return (
 		<BreathingStack.Navigator
 			screenOptions={{
 				...screenOptions,
-				headerRight: () => (
-					<Pressable onPress={handleLogout}>
-						<Icon as={LogOut} color={'$primary500'} size={24} />
-					</Pressable>
-				),
+				headerRight: () => <HeaderRight />,
 			}}
 		>
 			<BreathingStack.Screen
