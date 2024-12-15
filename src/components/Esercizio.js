@@ -8,7 +8,7 @@ import {
 	SliderTrack,
 	SliderThumb,
 } from '@gluestack-ui/themed';
-import { Volume, Volume2Icon, ArrowRightFromLine } from 'lucide-react-native';
+import { Volume, Volume2Icon } from 'lucide-react-native';
 
 import { View } from 'react-native';
 import { Audio } from 'expo-av';
