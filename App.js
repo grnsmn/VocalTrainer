@@ -5,7 +5,7 @@ import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind, KeyRoundIcon, LogOut } from 'lucide-react-native';
+import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -20,7 +20,7 @@ import HeaderRight from './src/components/HeaderRight';
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
-const AuthStack = createNativeStackNavigator(); // Create a stack for authentication
+const AuthStack = createNativeStackNavigator();
 const screenOptions = {
 	headerTitleAlign: 'center',
 	headerStyle: { backgroundColor: '#c6e9ff' },
