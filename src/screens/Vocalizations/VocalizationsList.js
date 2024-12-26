@@ -30,7 +30,7 @@ const VocalizationsList = ({ route }) => {
 				const soundRef = ref(storage, `${STORAGE_PATH}/${soundChoose}`);
 				if (soundRef) {
 					const uri = await getDownloadURL(soundRef);
-					console.log('Loading Sound');
+					// console.log('Loading Sound');
 					const { sound: soundFirebase } =
 						await Audio.Sound.createAsync({
 							uri,
@@ -49,7 +49,7 @@ const VocalizationsList = ({ route }) => {
 		play();
 		return sound
 			? () => {
-					console.log('Unloading Sound');
+					// console.log('Unloading Sound');
 					sound.unloadAsync();
 			  }
 			: undefined;
@@ -75,7 +75,10 @@ const VocalizationsList = ({ route }) => {
 	/* -------------------------------------------------------------------------- */
 
 	const getTitleExercise = useCallback(
-		urlPath => urlPath?.match(/\btraccia\s(?:\d{1,3})\b/i)?.[0],
+		urlPath =>
+			urlPath
+				?.replace('- uomini', '')
+				?.match(/\btraccia\s(?:\d{1,3}(?:\s\w+)*)\b/i)?.[0],
 		[],
 	);
 

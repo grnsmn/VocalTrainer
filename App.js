@@ -1,9 +1,11 @@
+// App.js
+import React, { useEffect } from 'react';
 import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind } from 'lucide-react-native';
+import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -11,10 +13,19 @@ import VocalizationsList from './src/screens/Vocalizations/VocalizationsList';
 import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
-
+import AuthScreen from './src/screens/Auth';
+import useStore from './src/store';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import HeaderRight from './src/components/HeaderRight';
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
+const screenOptions = {
+	headerTitleAlign: 'center',
+	headerStyle: { backgroundColor: '#c6e9ff' },
+	title: 'Vocal Trainer',
+};
 
 function VocalizationsStackScreen() {
 	const getDynamicHeader = ({ route }) => {
@@ -32,9 +43,8 @@ function VocalizationsStackScreen() {
 	return (
 		<VocalizationsStack.Navigator
 			screenOptions={{
-				headerTitleAlign: 'center',
-				headerStyle: { backgroundColor: '#c6e9ff' },
-				title: 'Vocal Trainer',
+				...screenOptions,
+				headerRight: () => <HeaderRight />,
 			}}
 		>
 			<VocalizationsStack.Screen name="Home" component={Vocalizations} />
@@ -48,24 +58,11 @@ function VocalizationsStackScreen() {
 }
 
 function BreathingStackScreen() {
-	const getDynamicHeader = ({ route }) => {
-		//Replace usato per il caso di route name lunghi passati in
-		//camel case che vengono divisi con spazio per una migliore leggibilità nell'header della UI
-		const dynamicHeaderPart = route.params?.selectedListName
-			.replace(/([A-Z])/g, ' $1')
-			.trim();
-
-		return {
-			title: `Esercizi ${dynamicHeaderPart}` || 'Lista Esercizi',
-		};
-	};
-
 	return (
 		<BreathingStack.Navigator
 			screenOptions={{
-				headerTitleAlign: 'center',
-				headerStyle: { backgroundColor: '#c6e9ff' },
-				title: 'Vocal Trainer',
+				...screenOptions,
+				headerRight: () => <HeaderRight />,
 			}}
 		>
 			<BreathingStack.Screen
@@ -81,8 +78,34 @@ function BreathingStackScreen() {
 	);
 }
 
+function AuthStackScreen() {
+	return (
+		<AuthStack.Navigator screenOptions={screenOptions}>
+			<AuthStack.Screen name="Main" component={AuthScreen} />
+		</AuthStack.Navigator>
+	);
+}
+
 export default function App() {
 	useFirebaseInit();
+	const { auth, setAuth } = useStore();
+	const { getItem } = useAsyncStorage('authData');
+
+	useEffect(() => {
+		const restoreCacheAuthData = async () => {
+			try {
+				const data = await getItem();
+				if (data) {
+					setAuth(JSON.parse(data));
+				}
+			} catch (e) {
+				console.error('Failed to fetch data from storage', e);
+			}
+		};
+
+		restoreCacheAuthData();
+	}, []);
+
 	return (
 		<NavigationContainer>
 			<SafeAreaProvider>
@@ -105,6 +128,14 @@ export default function App() {
 										<Icon as={Wind} color={'$primary500'} />
 									);
 								}
+								if (route.name === 'Auth') {
+									return (
+										<Icon
+											as={KeyRoundIcon}
+											color={'$primary500'}
+										/>
+									);
+								}
 							},
 							headerShown: false,
 							tabBarLabelStyle: {
@@ -119,15 +150,26 @@ export default function App() {
 								paddingBottom: 6, // Aumenta il valore negativo per più spazio
 							},
 						})}
+						initialRouteName={!auth ? 'Auth' : 'Respirazione'}
 					>
-						<Tab.Screen
-							name="Respirazione"
-							component={BreathingStackScreen}
-						/>
-						<Tab.Screen
-							name="Vocalizzi"
-							component={VocalizationsStackScreen}
-						/>
+						{!auth && (
+							<Tab.Screen
+								name="Auth"
+								component={AuthStackScreen}
+							/>
+						)}
+						{!!auth && (
+							<>
+								<Tab.Screen
+									name="Respirazione"
+									component={BreathingStackScreen}
+								/>
+								<Tab.Screen
+									name="Vocalizzi"
+									component={VocalizationsStackScreen}
+								/>
+							</>
+						)}
 					</Tab.Navigator>
 				</GluestackUIProvider>
 			</SafeAreaProvider>
