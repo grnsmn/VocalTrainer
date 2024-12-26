@@ -3,8 +3,9 @@ import { FlatList } from '@gluestack-ui/themed';
 import CardSelect from '../../components/CardSelect';
 import { useNavigation } from '@react-navigation/native';
 import Hero from '../../components/Hero';
+import { CATEGORY_LIST } from '@env';
 
-const CATEGORY_LIST = ['Trillo', 'Humming', 'Gne', 'Apertura Vocali', 'Solo'];
+const categoryListArray = CATEGORY_LIST?.split(',');
 
 export const Vocalizations = () => {
 	const navigation = useNavigation();
@@ -31,7 +32,7 @@ export const Vocalizations = () => {
 	return (
 		<FlatList
 			bg={'$primary0'}
-			data={CATEGORY_LIST}
+			data={categoryListArray}
 			renderItem={renderItem}
 			ListHeaderComponent={<Hero />}
 		/>
