@@ -6,11 +6,11 @@
                 "descrizione": "",
                 "lista_pallini": [
                     {
+                        "key": 1,
                         "definizione": "",
                         "durata": [
                             0
-                        ],
-                        "key": 1
+                        ]
                     }
                 ],
                 "titolo": "Esercizio 1"
