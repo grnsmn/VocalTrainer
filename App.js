@@ -1,5 +1,5 @@
 // App.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
@@ -90,6 +90,7 @@ export default function App() {
 	useFirebaseInit();
 	const { auth, setAuth } = useStore();
 	const { getItem } = useAsyncStorage('authData');
+	const [initialRouteName, setInitialRouteName] = useState('Auth');
 
 	useEffect(() => {
 		const restoreCacheAuthData = async () => {
@@ -97,6 +98,9 @@ export default function App() {
 				const data = await getItem();
 				if (data) {
 					setAuth(JSON.parse(data));
+					setInitialRouteName('Respirazione');
+				} else {
+					setInitialRouteName('Auth');
 				}
 			} catch (e) {
 				console.error('Failed to fetch data from storage', e);
@@ -150,7 +154,7 @@ export default function App() {
 								paddingBottom: 6, // Aumenta il valore negativo per più spazio
 							},
 						})}
-						initialRouteName={!auth ? 'Auth' : 'Respirazione'}
+						initialRouteName={initialRouteName}
 					>
 						{!auth && (
 							<Tab.Screen
