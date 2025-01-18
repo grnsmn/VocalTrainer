@@ -18,6 +18,7 @@ const BreathingSession = ({ pallini, cicli }) => {
 	const [bpm, setBpm] = useState(100);
 	const [playing, setPlaying] = useState(false);
 	const [count, setCount] = useState(1);
+	console.log('🚀 ~ count:', count);
 	const [counterTot, setCounterTot] = useState(1);
 	const [keyIndex, setKeyIndex] = useState(0);
 	const [currentCiclo, setCurrentCiclo] = useState(0);
@@ -84,7 +85,7 @@ const BreathingSession = ({ pallini, cicli }) => {
 	useEffect(() => {
 		fetchClick1();
 		fetchClick2();
-		durataEsercizioCompleta();
+		// durataEsercizioCompleta();
 
 		return () => {
 			// Cleanup on unmount
@@ -103,7 +104,6 @@ const BreathingSession = ({ pallini, cicli }) => {
 		} else {
 			timer.current = setInterval(() => playClick(), (60 / bpm) * 1000);
 			setPlaying(true);
-			resetCounters();
 			playClick(); // Play the first click immediately
 		}
 	};
@@ -119,29 +119,29 @@ const BreathingSession = ({ pallini, cicli }) => {
 
 	// Play click sound
 	const playClick = () => {
-		if (counterTot === durataEsercizio) {
-			startStop();
-			return;
-		}
+		// if (counterTot === durataEsercizio) {
+		// 	startStop();
+		// 	return;
+		// }
 
-		if (counterDurataCiclo === durataCiclo[currentCiclo]) {
-			setCurrentCiclo(prev => prev + 1);
-			setCounterDurataCiclo(0);
-			setKeyIndex(0);
-		}
+		// if (counterDurataCiclo === durataCiclo[currentCiclo]) {
+		// 	setCurrentCiclo(prev => prev + 1);
+		// 	setCounterDurataCiclo(0);
+		// 	setKeyIndex(0);
+		// }
 
-		if (count % cicliState[currentCiclo][keyIndex] === 1) {
-			click2.current?.replayAsync();
-			setKeyIndex(prev => (prev === pallini.length - 1 ? 0 : prev + 1));
-			setCount(1);
-		} else {
-			click1.current?.replayAsync();
-		}
+		// if (count % cicliState[currentCiclo][keyIndex] === 1) {
+		// 	click2.current?.replayAsync();
+		// 	setKeyIndex(prev => (prev === pallini.length - 1 ? 0 : prev + 1));
+		// 	setCount(1);
+		// } else {
+		click1.current?.replayAsync();
+		// }
 
 		// Update counters
 		setCount(prev => prev + 1);
-		setCounterTot(prev => prev + 1);
-		setCounterDurataCiclo(prev => prev + 1);
+		// setCounterTot(prev => prev + 1);
+		// setCounterDurataCiclo(prev => prev + 1);
 	};
 
 	// Countdown toggle
