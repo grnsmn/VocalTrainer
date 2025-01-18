@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
-import Esercizio from '../../components/Esercizio';
+import BreathingSession from '../../components/Breath';
 import { ScrollView } from '@gluestack-ui/themed';
-// import Metronome from '../components/MetronomeHook'
 
 const TrainingScreen = ({ route, navigation }) => {
 	const { esercizio } = route?.params;
@@ -16,22 +15,20 @@ const TrainingScreen = ({ route, navigation }) => {
 			},
 			headerTitleStyle: {
 				fontWeight: 'bold',
-				fontSize: 28,
+				fontSize: 24,
 				textAlign: 'center',
 			},
 		});
 	}, []);
+
 	return (
 		<View style={styles.container}>
 			<ScrollView flexGrow={1} h={'$full'}>
-				{/* <Text style={styles.Title}>{esercizio.titolo}</Text> */}
 				<Text style={styles.Descript}>{esercizio?.descrizione}</Text>
-				<Esercizio
+				<BreathingSession
 					pallini={esercizio?.lista_pallini}
 					cicli={[esercizio?.cicli]}
 				/>
-				{/* <Metronome pallini={esercizio.lista_pallini}  cicli= {[esercizio.cicli]}/> */}
-
 				{/* <Button title='Next' onPress={navigation.navigate('Training', {esercizio: next.contenuto})}></Button> */}
 			</ScrollView>
 		</View>
@@ -44,18 +41,18 @@ const styles = StyleSheet.create({
 		height: '100%',
 	},
 	Title: {
-		fontSize: 24,
+		fontSize: 16,
 		textAlign: 'center',
 		color: 'red',
 		fontWeight: 'bold',
 	},
 	Descript: {
 		fontSize: 20,
-		lineHeight: 27,
-		textAlign: 'center',
-		fontStyle: 'italic',
+		lineHeight: 30,
+		textAlign: 'justify',
+		fontStyle: 'bold',
 		marginVertical: 16,
-		paddingHorizontal: 4,
+		paddingHorizontal: 16,
 	},
 });
 export default TrainingScreen;
