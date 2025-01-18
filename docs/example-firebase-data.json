@@ -1,0 +1,20 @@
+{
+    "Respirazione": {
+        "Category": {
+            "Esercizio 1": {
+                "cicli": 1,
+                "descrizione": "",
+                "lista_pallini": [
+                    {
+                        "definizione": "",
+                        "durata": [
+                            0
+                        ],
+                        "key": 1
+                    }
+                ],
+                "titolo": "Esercizio 1"
+            }
+        }
+    }
+}
