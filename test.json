@@ -1,0 +1,137 @@
+{
+	"families": [
+		{
+			"id": "Addominale Diaframmatica",
+			"exercises": [
+				{
+					"id": "e08945cc-3d38-5121-bbc2-bcbdb9393f9e",
+					"name": "Esercizio 6",
+					"description": "Descrizione",
+					"total_duration": 86,
+					"cycles": [
+						{
+							"duration": 26,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4,
+									"key": 1
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 2
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 2,
+									"key": 3
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 4
+								},
+								{
+									"definition": "Espirare con 'S' fortemente",
+									"duration": 4,
+									"key": 5
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 6
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4,
+									"key": 7
+								}
+							]
+						},
+						{
+							"duration": 28,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4,
+									"key": 1
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 2
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 2,
+									"key": 3
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 4
+								},
+								{
+									"definition": "Espirare con 'S' fortemente",
+									"duration": 6,
+									"key": 5
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 6
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4,
+									"key": 7
+								}
+							]
+						},
+						{
+							"duration": 32,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4,
+									"key": 1
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 2
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 2,
+									"key": 3
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 4
+								},
+								{
+									"definition": "Espirare con 'S' fortemente",
+									"duration": 10,
+									"key": 5
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4,
+									"key": 6
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4,
+									"key": 7
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
