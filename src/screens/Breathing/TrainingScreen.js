@@ -4,11 +4,12 @@ import BreathingSession from '../../components/Breath';
 import { ScrollView } from '@gluestack-ui/themed';
 
 const TrainingScreen = ({ route, navigation }) => {
-	const { esercizio } = route?.params;
+	const { exercice } = route?.params;
+	console.log('🚀 ~ exercice:', exercice);
 
 	useEffect(() => {
 		navigation.setOptions({
-			title: esercizio?.titolo,
+			title: exercice?.name,
 			headerTitleAlign: 'center',
 			headerStyle: {
 				backgroundColor: '#c6e9ff',
@@ -24,12 +25,8 @@ const TrainingScreen = ({ route, navigation }) => {
 	return (
 		<View style={styles.container}>
 			<ScrollView flexGrow={1} h={'$full'}>
-				<Text style={styles.Descript}>{esercizio?.descrizione}</Text>
-				<BreathingSession
-					pallini={esercizio?.lista_pallini}
-					cicli={[esercizio?.cicli]}
-				/>
-				{/* <Button title='Next' onPress={navigation.navigate('Training', {esercizio: next.contenuto})}></Button> */}
+				{/* <Text style={styles.Descript}>{exercice?.description}</Text> */}
+				<BreathingSession exercise={exercice} />
 			</ScrollView>
 		</View>
 	);

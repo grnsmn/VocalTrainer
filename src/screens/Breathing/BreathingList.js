@@ -1,16 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { FlatList } from '@gluestack-ui/themed';
 import CardSelect from '../../components/CardSelect';
 import useStore from '../../store';
 import { Audio } from 'expo-av';
 
 const BreathingList = ({ route, navigation }) => {
-	const { Titoli, famiglia } = route.params;
-	const [listaTitoli, setListaTitoli] = useState(Object.values(Titoli));
-	const [scelta, setScelta] = useState('');
-	const { setSounds, sounds } = useStore();
-
-	//console.log(Object.values(Titoli));
+	const { exercices, famiglia } = route.params;
+	const { setSounds } = useStore();
 
 	useEffect(() => {
 		const loadSounds = async () => {
@@ -37,46 +33,24 @@ const BreathingList = ({ route, navigation }) => {
 		loadSounds();
 	}, []);
 
-	const loadEsercizio = item => {
-		setScelta(item);
+	const onPressExercice = item => {
+		navigation.navigate('Training', {
+			exercice: exercices.find(element => element.name === item),
+		});
 	};
 
-	useEffect(() => {
-		if (scelta.length != 0) {
-			let esercizioScelto = {};
-			let esercizioNext = {};
-			esercizioScelto = listaTitoli?.find(element => {
-				return element.titolo == scelta;
-			});
-
-			let nextIndex = listaTitoli.indexOf(esercizioScelto) + 1;
-			if (listaTitoli[nextIndex] != null) {
-				esercizioNext = listaTitoli[nextIndex];
-			}
-
-			navigation.navigate('Training', {
-				esercizio: esercizioScelto,
-				next: esercizioNext,
-			});
-
-			// listaTitoli.forEach(element => {
-			//   if (element.id===scelta){
-			//     navigation.navigate('Training', {esercizio: element.contenuto})
-			//   }
-			// }
-			// )
-		}
-		setScelta('');
-	}, [scelta]);
-
 	const renderItem = item => (
-		<CardSelect title={item.item.titolo} onPress={loadEsercizio} />
+		<CardSelect
+			key={item.id}
+			title={item.item.name}
+			onPress={onPressExercice}
+		/>
 	);
 
 	return (
 		<FlatList
 			bg="$primary0"
-			data={listaTitoli}
+			data={exercices}
 			keyExtractor={item => item.titolo}
 			renderItem={renderItem}
 		/>
