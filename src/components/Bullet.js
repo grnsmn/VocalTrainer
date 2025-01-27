@@ -1,4 +1,4 @@
-import { Text, Box } from '@gluestack-ui/themed';
+import { Text, Box, VStack } from '@gluestack-ui/themed';
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '../store';
 
@@ -55,11 +55,23 @@ const Bullet = ({ item, isActive, onComplete, bpm }) => {
 	};
 
 	return (
-		<Box flexDirection="row" alignItems="center" flexWrap="wrap" gap={'$2'}>
+		<Box
+			flexDirection="row"
+			alignItems="center"
+			justifyContent="space-between"
+			flexWrap="wrap"
+			gap={'$2'}
+		>
 			<Text bold={isActive} size="xl" maxWidth="70%">
 				{`\u29BF ${item.definition}`}
 			</Text>
-			<Box flexDirection="row" gap={'$1'} flexWrap="wrap">
+			<Box
+				flexDirection="row"
+				gap={'$1'}
+				flexWrap="wrap"
+				alignItems="center"
+				justifyContent="center"
+			>
 				{renderDots()}
 			</Box>
 		</Box>

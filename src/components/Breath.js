@@ -61,6 +61,7 @@ const BreathingSession = ({ exercise }) => {
 		const isActive = playing && index === currentBullet;
 		return (
 			<Bullet
+				key={index}
 				item={item}
 				isActive={isActive}
 				onComplete={() => setCurrentBullet(prev => prev + 1)}

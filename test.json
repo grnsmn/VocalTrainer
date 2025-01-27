@@ -14,38 +14,31 @@
 							"bullets": [
 								{
 									"definition": "Espirare",
-									"duration": 4,
-									"key": 1
+									"duration": 4
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 2
+									"duration": 4
 								},
 								{
 									"definition": "Inspirare",
-									"duration": 2,
-									"key": 3
+									"duration": 2
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 4
+									"duration": 4
 								},
 								{
-									"definition": "Espirare con 'S' fortemente",
-									"duration": 4,
-									"key": 5
+									"definition": "Espirare forte con 'S'",
+									"duration": 4
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 6
+									"duration": 4
 								},
 								{
 									"definition": "Inspirare",
-									"duration": 4,
-									"key": 7
+									"duration": 4
 								}
 							]
 						},
@@ -54,38 +47,31 @@
 							"bullets": [
 								{
 									"definition": "Espirare",
-									"duration": 4,
-									"key": 1
+									"duration": 4
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 2
+									"duration": 4
 								},
 								{
 									"definition": "Inspirare",
-									"duration": 2,
-									"key": 3
+									"duration": 2
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 4
+									"duration": 4
 								},
 								{
 									"definition": "Espirare con 'S' fortemente",
-									"duration": 6,
-									"key": 5
+									"duration": 6
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 6
+									"duration": 4
 								},
 								{
 									"definition": "Inspirare",
-									"duration": 4,
-									"key": 7
+									"duration": 4
 								}
 							]
 						},
@@ -94,38 +80,31 @@
 							"bullets": [
 								{
 									"definition": "Espirare",
-									"duration": 4,
-									"key": 1
+									"duration": 4
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 2
+									"duration": 4
 								},
 								{
 									"definition": "Inspirare",
-									"duration": 2,
-									"key": 3
+									"duration": 2
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 4
+									"duration": 4
 								},
 								{
 									"definition": "Espirare con 'S' fortemente",
-									"duration": 10,
-									"key": 5
+									"duration": 10
 								},
 								{
 									"definition": "Apnea",
-									"duration": 4,
-									"key": 6
+									"duration": 4
 								},
 								{
 									"definition": "Inspirare",
-									"duration": 4,
-									"key": 7
+									"duration": 4
 								}
 							]
 						}
