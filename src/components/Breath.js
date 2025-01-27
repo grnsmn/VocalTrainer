@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, use } from 'react';
+import React, { useEffect, useState, useRef, use, act } from 'react';
 import {
 	Text,
 	Slider,
@@ -13,64 +13,26 @@ import { Volume, Volume2Icon } from 'lucide-react-native';
 import { View } from 'react-native';
 import CardPlay from './CardPlay';
 import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove
-import useStore from '../store';
+import Bullet from './Bullet';
 
 const BreathingSession = ({ exercise }) => {
-	const { total_duration, cycles, description } = exercise;
+	const { cycles, description } = exercise;
 
 	const [bpm, setBpm] = useState(100);
 	const [playing, setPlaying] = useState(false);
-	const [count, setCount] = useState(0);
 	const [activeCycle, setActiveCycle] = useState(0);
 	const [currentBullet, setCurrentBullet] = useState(0);
 
-	const { bullets } = cycles[activeCycle];
-
-	useEffect(() => {}, [activeCycle]);
-
-	const {
-		sounds: { click1, click2 },
-	} = useStore();
-
-	// Timer reference
-	const timer = useRef(null);
-
-	// Effect for mounting/unmounting
-	useEffect(() => {
-		return () => {
-			// Cleanup on unmount
-			if (timer.current) clearInterval(timer.current);
-		};
-	}, []);
-
-	const playClick = () => {
-		setCount(prev => {
-			const newCount = prev + 1;
-			setCurrentBullet(currentBullet => {
-				const bullet = bullets[currentBullet];
-				console.log('🚀 ~ bullet:', bullet);
-				if (newCount % bullet.duration === 0) {
-					click1?.replayAsync();
-					return currentBullet + 1;
-				} else {
-					click2?.replayAsync();
-				}
-				return currentBullet;
-			});
-			return newCount;
-		});
-	};
-
+	const { bullets } = cycles[activeCycle] || {};
 	// Play/stop functionality
 	const startStop = () => {
 		if (playing) {
-			clearInterval(timer.current);
-			setPlaying(false);
-			setCount(0);
-			setActiveCycle(0);
+			// clearInterval(timer.current);
 			setCurrentBullet(0);
+			setPlaying(false);
+			setActiveCycle(0);
 		} else {
-			timer.current = setInterval(() => playClick(), (60 / bpm) * 1000);
+			// timer.current = setInterval(() => playClick(), (60 / bpm) * 1000);
 			setPlaying(true);
 		}
 	};
@@ -82,19 +44,11 @@ const BreathingSession = ({ exercise }) => {
 
 	// BPM change handler
 	const handleBpmChange = newBpm => {
-		if (playing) {
-			clearInterval(timer.current);
-			timer.current = setInterval(
-				() => playClick(),
-				(60 / newBpm) * 1000,
-			);
-			resetCounters();
-		}
 		setBpm(newBpm);
 	};
 
 	useEffect(() => {
-		if (currentBullet === bullets.length) {
+		if (currentBullet === bullets?.length) {
 			setCurrentBullet(0);
 			setActiveCycle(prev => prev + 1);
 		}
@@ -104,12 +58,14 @@ const BreathingSession = ({ exercise }) => {
 	}, [currentBullet, activeCycle]);
 
 	const renderItem = ({ item, index }) => {
-		const isCurrent = index === currentBullet;
+		const isActive = playing && index === currentBullet;
 		return (
-			<Text
-				bold={isCurrent}
-				size="xl"
-			>{`\u29BF ${item.definition}`}</Text>
+			<Bullet
+				item={item}
+				isActive={isActive}
+				onComplete={() => setCurrentBullet(prev => prev + 1)}
+				bpm={bpm}
+			/>
 		);
 	};
 
@@ -156,12 +112,6 @@ const BreathingSession = ({ exercise }) => {
 					/>
 
 					<Text color={'$primary600'}>{bpm} BPM</Text>
-					<Text
-						style={styles.countTitle}
-						color={playing ? '$orange400' : '$primary600'}
-					>
-						Count: {count}{' '}
-					</Text>
 
 					<Center flex={1} w={'$80%'} h={40}>
 						<Slider
@@ -191,11 +141,6 @@ const styles = {
 		fontSize: 16,
 		textAlign: 'center',
 		paddingVertical: 4,
-	},
-	countTitle: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		alignSelf: 'center',
 	},
 	container: {
 		flex: 1,
