@@ -11,7 +11,7 @@ const CategoriesBreath = ({ navigation }) => {
 
 	const onPressHandler = ({ item }) => {
 		navigation.navigate('BreathingList', {
-			Titoli: item?.contenuto,
+			exercices: item?.exercises,
 			famiglia: item?.id,
 		});
 	};
