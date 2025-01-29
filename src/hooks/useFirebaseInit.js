@@ -10,6 +10,9 @@ import {
 	MEASUREMENT_ID,
 } from '@env';
 import { useEffect } from 'react';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 const useFirebaseInit = () => {
 	const firebaseConfig = {
@@ -26,7 +29,14 @@ const useFirebaseInit = () => {
 	useEffect(() => {
 		// Inizializza Firebase solo se non è già stato inizializzato
 		if (!firebase.apps.length) {
-			firebase.initializeApp(firebaseConfig);
+			const app = firebase.initializeApp(firebaseConfig);
+			if (Platform.OS !== 'web') {
+				initializeAuth(app, {
+					persistence: getReactNativePersistence(
+						ReactNativeAsyncStorage,
+					),
+				});
+			}
 		} else {
 			firebase.app(); // if already initialized, use that one
 		}

@@ -85,7 +85,11 @@ export default function AuthScreen() {
 	};
 
 	return (
-		<ScrollView bg="$primary0" flexGrow={1}>
+		<ScrollView
+			bg="$primary0"
+			flexGrow={1}
+			keyboardShouldPersistTaps="handled"
+		>
 			<FormControl
 				p="$4"
 				alignSelf="center"
