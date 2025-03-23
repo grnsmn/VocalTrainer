@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, use, act } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Text,
 	Slider,
