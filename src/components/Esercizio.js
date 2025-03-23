@@ -309,7 +309,7 @@ const styles = {
 	},
 	Pallino: {
 		textAlign: 'left',
-		fontSize: 24,
+		fontSize: 22,
 		fontWeight: 'bold',
 		color: 'black',
 	},

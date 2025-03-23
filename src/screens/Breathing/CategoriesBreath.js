@@ -4,6 +4,7 @@ import useBreathingFamilies from '../../hooks/useBreathingFamilies';
 import CardSelect from '../../components/CardSelect';
 import Loader from '../../components/Loader';
 import Hero from '../../components/Hero';
+import PianoKeyboard from '../../../components/Piano/PianoKeyboard';
 
 const CategoriesBreath = ({ navigation }) => {
 	const { families, loading: isLoadingBreathCategories } =
@@ -36,6 +37,11 @@ const CategoriesBreath = ({ navigation }) => {
 			keyExtractor={item => item.id}
 			renderItem={renderItem}
 			ListHeaderComponent={<Hero />}
+			ListFooterComponent={
+				<PianoKeyboard
+					onPressKey={a => console.log('🚀 ~ testing', a)}
+				/>
+			}
 		/>
 	);
 };
