@@ -1,6 +1,7 @@
 import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import reactotronZustand from 'reactotron-plugin-zustand';
+import { Platform } from 'react-native';
 
 // Creiamo una funzione per configurare Reactotron con lo store
 // per evitare importazioni circolari
@@ -10,12 +11,13 @@ export const addZustandStore = (name, store) => {
 	zustandStores.push({ name, store });
 };
 
-// Verifichiamo se siamo in ambiente di sviluppo
 if (__DEV__) {
 	Reactotron.setAsyncStorageHandler(AsyncStorage) // Integrazione con AsyncStorage
 		.configure({
 			name: 'VocalTrainer',
-			host: 'localhost',
+			// Se stiamo usando un dispositivo fisico, utilizziamo l'indirizzo IP del computer
+			// Per Expo, è necessario impostare manualmente l'IP del tuo computer
+			host: Platform.OS === 'ios' ? 'localhost' : '192.168.1.25',
 			port: 9090,
 		})
 		.useReactNative({
