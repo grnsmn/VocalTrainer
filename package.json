@@ -43,6 +43,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "react-native-dotenv": "^3.4.9",
+    "reactotron-plugin-zustand": "^2.0.8",
     "reactotron-react-js": "^3.3.16",
     "reactotron-react-native": "^5.1.12"
   },
