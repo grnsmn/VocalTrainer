@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { addZustandStore } from '../ReactotronConfig';
 
+// Creazione dello store utilizzando devtools
 const useStore = create(
 	devtools(
 		set => ({
@@ -11,5 +13,10 @@ const useStore = create(
 		{ name: 'AuthStore' },
 	),
 );
+
+// Registra lo store in Reactotron se in development
+if (__DEV__) {
+	addZustandStore('auth', useStore);
+}
 
 export default useStore;
