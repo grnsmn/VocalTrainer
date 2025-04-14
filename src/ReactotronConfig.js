@@ -37,23 +37,23 @@ if (__DEV__) {
 	console.tron = Reactotron;
 
 	// Sovrascriviamo console.log, console.warn, console.error per reindirizzarli anche a Reactotron
-	const oldLog = console.log;
-	console.log = (...args) => {
-		oldLog(...args);
-		Reactotron.log(...args);
-	};
+	// const oldLog = console.log;
+	// console.log = (...args) => {
+	// 	oldLog(...args);
+	// 	Reactotron.log(...args);
+	// };
 
-	const oldWarn = console.warn;
-	console.warn = (...args) => {
-		oldWarn(...args);
-		Reactotron.warn(args);
-	};
+	// const oldWarn = console.warn;
+	// console.warn = (...args) => {
+	// 	oldWarn(...args);
+	// 	Reactotron.warn(args);
+	// };
 
-	const oldError = console.error;
-	console.error = (...args) => {
-		oldError(...args);
-		Reactotron.error(args);
-	};
+	// const oldError = console.error;
+	// console.error = (...args) => {
+	// 	oldError(...args);
+	// 	Reactotron.error(args);
+	// };
 
 	// Messaggio di benvenuto
 	Reactotron.log('Reactotron Configurato 🚀');
