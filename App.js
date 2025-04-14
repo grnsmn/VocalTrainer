@@ -1,4 +1,5 @@
 // App.js
+import Reactotron, { setupZustandPlugin } from './src/ReactotronConfig';
 import React, { useEffect } from 'react';
 import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
@@ -92,6 +93,11 @@ export default function App() {
 	const { getItem } = useAsyncStorage('authData');
 
 	useEffect(() => {
+		// Configura il plugin Zustand per Reactotron
+		if (__DEV__) {
+			setupZustandPlugin();
+		}
+
 		const restoreCacheAuthData = async () => {
 			try {
 				const data = await getItem();
