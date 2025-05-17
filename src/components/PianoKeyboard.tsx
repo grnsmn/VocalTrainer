@@ -50,8 +50,8 @@ function isBlackKey(note: string) {
 }
 
 const PianoKeyboard: React.FC<IPianoKeyboardProps> = ({
-  startKey = "C2",
-  endKey = "C4",
+  startKey = "C3",
+  endKey = "C6",
   keyDisabled,
   onPressKey,
 }) => {
