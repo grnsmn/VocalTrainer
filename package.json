@@ -22,7 +22,7 @@
     "expo": "^52.0.11",
     "expo-av": "~15.0.1",
     "expo-status-bar": "~2.0.0",
-    "expo-image": "~1.12.13",
+    "expo-image": "~2.0.0",
     "firebase": "^10.12.2",
     "lottie-react-native": "7.1.0",
     "lucide-react-native": "^0.376.0",
