@@ -22,6 +22,7 @@
     "expo": "^52.0.11",
     "expo-av": "~15.0.1",
     "expo-status-bar": "~2.0.0",
+    "expo-image": "~1.12.13",
     "firebase": "^10.12.2",
     "lottie-react-native": "7.1.0",
     "lucide-react-native": "^0.376.0",
@@ -35,14 +36,18 @@
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
     "react-native-web-lottie": "^1.4.4",
+    "react-native-webview": "13.8.6",
     "redux-devtools-extension": "^2.13.9",
-    "zustand": "5.0.1"
+    "zustand": "5.0.1",
+    "tonal": "^6.2.0",
+    "tone": "^15.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
-    "react-native-dotenv": "^3.4.9"
+    "react-native-dotenv": "^3.4.9",
+    "@types/react": "~18.3.12"
   },
   "private": true
 }
