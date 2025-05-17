@@ -14,6 +14,7 @@ import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
+import Keyboard from './src/screens/Keyboard/Keyboard';
 import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
@@ -167,6 +168,10 @@ export default function App() {
 								<Tab.Screen
 									name="Vocalizzi"
 									component={VocalizationsStackScreen}
+								/>
+								<Tab.Screen
+									name="Keyboard"
+									component={Keyboard}
 								/>
 							</>
 						)}
