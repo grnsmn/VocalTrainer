@@ -22,22 +22,19 @@ const Keyboard = () => {
   return (
     <MidiProvider>
       <View style={styles.container}>
-        {/* <Text style={styles.title}>React Native Piano KeyBoard</Text>
         <Text style={styles.piano}>🎹</Text>
         <Text style={styles.description}>
-          Get inspired from{" "}
-          <Text style={styles.link} onPress={onLink1}>
-            ONLINE PIANIST
-          </Text>
+          Play the piano using your keyboard to play free exerrcised that you
+          wanted to play.
         </Text>
         <Text style={styles.description}>
           Sounds by{" "}
           <Text style={styles.link} onPress={onLink2}>
             Tone.js
           </Text>
-        </Text> */}
+        </Text>
         <View style={{ flex: 1 }} />
-        <Text style={styles.keylog}>Key pressed: {keyPressed.join(", ")}</Text>
+        {/* <Text style={styles.keylog}>Key pressed: {keyPressed.join(", ")}</Text> */}
         <PianoKeyboard onPressKey={onPressKey} />
         <StatusBar style="auto" />
       </View>
