@@ -5,7 +5,7 @@ import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
+import { AudioLines, Wind, KeyRoundIcon, KeyboardMusic } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -116,26 +116,39 @@ export default function App() {
 						screenOptions={({ route }) => ({
 							tabBarActiveBackgroundColor: '#c6e9ff',
 							tabBarIcon: ({ focused }) => {
-								if (route.name === 'Vocalizzi') {
-									return (
-										<Icon
-											as={AudioLines}
-											color={'$primary500'}
-										/>
-									);
-								}
-								if (route.name === 'Respirazione') {
-									return (
-										<Icon as={Wind} color={'$primary500'} />
-									);
-								}
-								if (route.name === 'Auth') {
-									return (
-										<Icon
-											as={KeyRoundIcon}
-											color={'$primary500'}
-										/>
-									);
+								const { name: tabName } = route;
+								// Use switch case for tab icons
+								switch (tabName) {
+									case 'Vocalizzi':
+										return (
+											<Icon
+												as={AudioLines}
+												color={'$primary500'}
+											/>
+										);
+									case 'Respirazione':
+										return (
+											<Icon 
+												as={Wind} 
+												color={'$primary500'} 
+											/>
+										);
+									case 'Auth':
+										return (
+											<Icon
+												as={KeyRoundIcon}
+												color={'$primary500'}
+											/>
+										);
+									case 'Keyboard':
+										return (
+											<Icon
+												as={KeyboardMusic}
+												color={'$primary500'}
+											/>
+										);
+									default:
+										return null;
 								}
 							},
 							headerShown: false,
