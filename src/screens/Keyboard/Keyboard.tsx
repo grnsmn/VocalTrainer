@@ -6,9 +6,17 @@ import { useState } from "react";
 
 const Keyboard = () => {
   const [keyPressed, setKeyPressed] = useState<string[]>([]);
-  const onPressKey = (note: string) => {
-    console.log("Key pressed:", note);
-    setKeyPressed((prev) => [...prev, note]);
+  
+  const onPressKey = (note: string, isKeyDown: boolean) => {
+    if (isKeyDown) {
+      // Aggiungi la nota all'array se non è già presente
+      setKeyPressed(prev => prev.includes(note) ? prev : [...prev, note]);
+      console.log("Key pressed:", note);
+    } else {
+      // Rimuovi la nota dall'array quando il tasto viene rilasciato
+      setKeyPressed(prev => prev.filter(item => item !== note));
+      console.log("Key released:", note);
+    }
   };
 
   const onLink1 = () => {
@@ -71,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Keyboard;    
+export default Keyboard;

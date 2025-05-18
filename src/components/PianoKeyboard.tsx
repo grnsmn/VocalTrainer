@@ -42,7 +42,7 @@ interface IPianoKeyboardProps {
   startKey?: string;
   endKey?: string;
   keyDisabled?: boolean;
-  onPressKey: (key: string) => void;
+  onPressKey: (key: string, isKeyDown: boolean) => void;
 }
 
 function isBlackKey(note: string) {
@@ -56,6 +56,7 @@ const PianoKeyboard: React.FC<IPianoKeyboardProps> = ({
   onPressKey,
 }) => {
   const [pianoKeys, setPianoKeys] = useState<TPianoKey[]>([]);
+  const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
   const [keyboardMetric, setKeyboardMetric] = useState({ width: 0, height: 0 });
   const { width: windowWidth } = useWindowDimensions();
   const { triggerAttackRelease, triggerRelease } = useMidi();
@@ -157,11 +158,28 @@ const PianoKeyboard: React.FC<IPianoKeyboardProps> = ({
     if (keyDisabled) {
       return;
     }
-    onPressKey(key.note);
+    
+    // Aggiungi il tasto premuto al set
+    setPressedKeys(prevSet => {
+      const newSet = new Set(prevSet);
+      newSet.add(key.note);
+      return newSet;
+    });
+    
+    onPressKey(key.note, true);
     triggerAttackRelease(key.note, "1");
   };
 
   const onPressKeyOut = (key: TPianoKey) => async () => {
+    // Rimuovi il tasto rilasciato dal set
+    setPressedKeys(prevSet => {
+      const newSet = new Set(prevSet);
+      newSet.delete(key.note);
+      return newSet;
+    });
+    
+    onPressKey(key.note, false);
+    
     if (!ENABLE_SUSTAIN) {
       triggerRelease(key.note, "+0.3");
     }
@@ -170,6 +188,7 @@ const PianoKeyboard: React.FC<IPianoKeyboardProps> = ({
   const renderPianoKey = (key: TPianoKey, index: number): JSX.Element => {
     const width = key.isWhite ? NOTE_WHITE_WIDTH : NOTE_BLACK_WIDTH;
     const height = key.isWhite ? NOTE_WHITE_HEIGHT : NOTE_BLACK_HEIGHT;
+    const isKeyPressed = pressedKeys.has(key.note);
 
     const keyStyle: StyleProp<ViewStyle> = {
       left: key.left,
@@ -187,16 +206,14 @@ const PianoKeyboard: React.FC<IPianoKeyboardProps> = ({
         onPressOut={onPressKeyOut(key)}
         android_disableSound
       >
-        {({ pressed }) => (
-          <View style={styles.keyContent}>
-            <Image
-              style={styles.keyImage}
-              source={getKeyImage(key, pressed)}
-              {...(Platform.OS === "web" && { draggable: false })}
-            />
-            <Text style={styles.keyNote}>{key.isWhite ? key.note : ""}</Text>
-          </View>
-        )}
+        <View style={styles.keyContent}>
+          <Image
+            style={styles.keyImage}
+            source={getKeyImage(key, isKeyPressed)}
+            {...(Platform.OS === "web" && { draggable: false })}
+          />
+          <Text style={styles.keyNote}>{key.isWhite ? key.note : ""}</Text>
+        </View>
       </Pressable>
     );
   };
