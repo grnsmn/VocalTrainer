@@ -1,8 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Linking } from "react-native";
-import PianoKeyboard from "../../components/PianoKeyboard";
-import { MidiProvider } from "../../components/MidiProvider";
 import { useState } from "react";
+import { MidiProvider, PianoKeyboard } from "react-native-piano-keyboard";
 
 const Keyboard = () => {
   const [keyPressed, setKeyPressed] = useState<string[]>([]);
@@ -27,8 +26,22 @@ const Keyboard = () => {
     Linking.openURL("https://tonejs.github.io/");
   };
 
+    const handleKeyPress = (note: string) => {
+    console.log('Pressed note:', note);
+  };
+
   return (
     <MidiProvider>
+      <PianoKeyboard
+        startKey="C2"
+        endKey="C4"
+        onPressKey={handleKeyPress}
+      />
+    </MidiProvider>
+  );
+
+  return (
+
       <View style={styles.container}>
         <Text style={styles.piano}>🎹</Text>
         <Text style={styles.description}>
@@ -43,10 +56,10 @@ const Keyboard = () => {
         </Text>
         <View style={{ flex: 1 }} />
         {/* <Text style={styles.keylog}>Key pressed: {keyPressed.join(", ")}</Text> */}
-        <PianoKeyboard onPressKey={onPressKey} />
+
         <StatusBar style="auto" />
       </View>
-    </MidiProvider>
+
   );
 }
 
