@@ -18,6 +18,8 @@ import KeyboardStackScreen from './src/screens/Keyboard/KeyboardStack';
 import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
@@ -87,6 +89,12 @@ function AuthStackScreen() {
 	);
 }
 
+function getActiveTabName(state) {
+	if (!state) return null;
+	const route = state.routes[state.index];
+	return route.name;
+}
+
 export default function App() {
 	useFirebaseInit();
 	const { auth, setAuth } = useStore();
@@ -107,8 +115,21 @@ export default function App() {
 		restoreCacheAuthData();
 	}, []);
 
+	const handleNavStateChange = state => {
+		const tabName = getActiveTabName(state);
+		if (tabName === 'Piano') {
+			ScreenOrientation.lockAsync(
+				ScreenOrientation.OrientationLock.LANDSCAPE,
+			);
+		} else {
+			ScreenOrientation.lockAsync(
+				ScreenOrientation.OrientationLock.PORTRAIT,
+			);
+		}
+	};
+
 	return (
-		<NavigationContainer>
+		<NavigationContainer onStateChange={handleNavStateChange}>
 			<SafeAreaProvider>
 				<GluestackUIProvider config={config}>
 					<StatusBar />
@@ -156,7 +177,7 @@ export default function App() {
 								padding: 10,
 							},
 							tabBarIconStyle: {
-								paddingBottom: 6, // Aumenta il valore negativo per più spazio
+								paddingBottom: 6,
 							},
 						})}
 						initialRouteName={!auth ? 'Auth' : 'Respirazione'}

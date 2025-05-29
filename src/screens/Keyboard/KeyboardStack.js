@@ -15,11 +15,16 @@ function KeyboardStackScreen() {
 	return (
 		<KeyboardStack.Navigator
 			screenOptions={{
-				...screenOptions,
-				headerRight: () => <HeaderRight />,
+				headerShown: false,
 			}}
 		>
-			<KeyboardStack.Screen name="Keyboard" component={KeyboardScreen} />
+			<KeyboardStack.Screen
+				name="Keyboard"
+				component={KeyboardScreen}
+				options={{
+					tabBarStyle: { display: 'none' }, // Hide tab bar for keyboard screen
+				}}
+			/>
 		</KeyboardStack.Navigator>
 	);
 }
