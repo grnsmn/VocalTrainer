@@ -5,7 +5,7 @@ import { config } from '@gluestack-ui/config';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
+import { AudioLines, Wind, KeyRoundIcon, Keyboard } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -14,6 +14,7 @@ import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
+import KeyboardStackScreen from './src/screens/Keyboard/KeyboardStack';
 import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
@@ -136,6 +137,14 @@ export default function App() {
 										/>
 									);
 								}
+								if (route.name === 'Piano') {
+									return (
+										<Icon
+											as={Keyboard}
+											color={'$primary500'}
+										/>
+									);
+								}
 							},
 							headerShown: false,
 							tabBarLabelStyle: {
@@ -167,6 +176,10 @@ export default function App() {
 								<Tab.Screen
 									name="Vocalizzi"
 									component={VocalizationsStackScreen}
+								/>
+								<Tab.Screen
+									name="Piano"
+									component={KeyboardStackScreen}
 								/>
 							</>
 						)}
