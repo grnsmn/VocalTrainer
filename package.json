@@ -21,6 +21,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "expo": "^52.0.11",
     "expo-av": "~15.0.1",
+    "expo-screen-orientation": "^8.1.6",
     "expo-status-bar": "~2.0.0",
     "firebase": "^10.12.2",
     "lottie-react-native": "7.1.0",
