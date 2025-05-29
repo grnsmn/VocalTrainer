@@ -19,6 +19,7 @@ import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
@@ -117,14 +118,16 @@ export default function App() {
 
 	const handleNavStateChange = state => {
 		const tabName = getActiveTabName(state);
-		if (tabName === 'Piano') {
-			ScreenOrientation.lockAsync(
-				ScreenOrientation.OrientationLock.LANDSCAPE,
-			);
-		} else {
-			ScreenOrientation.lockAsync(
-				ScreenOrientation.OrientationLock.PORTRAIT,
-			);
+		if (Platform.OS === 'android' || Platform.OS === 'ios') {
+			if (tabName === 'Piano') {
+				ScreenOrientation.lockAsync(
+					ScreenOrientation.OrientationLock.LANDSCAPE,
+				);
+			} else {
+				ScreenOrientation.lockAsync(
+					ScreenOrientation.OrientationLock.PORTRAIT,
+				);
+			}
 		}
 	};
 
