@@ -9,7 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/metro-runtime": "~4.0.0",
+    "@expo/metro-runtime": "4.0.0",
     "@gluestack-style/react": "^1.0.45",
     "@gluestack-ui/config": "^1.1.2",
     "@gluestack-ui/themed": "^1.1.2",
@@ -19,10 +19,10 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.26",
-    "expo": "~52.0.11",
-    "expo-av": "~15.0.1",
-    "expo-screen-orientation": "~8.1.6",
-    "expo-status-bar": "~2.0.0",
+    "expo": "52.0.11",
+    "expo-av": "15.0.1",
+    "expo-screen-orientation": "8.1.6",
+    "expo-status-bar": "2.0.0",
     "firebase": "^10.12.2",
     "lottie-react-native": "7.1.0",
     "lucide-react-native": "^0.376.0",
