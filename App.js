@@ -7,7 +7,12 @@ import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind, KeyRoundIcon, Keyboard } from 'lucide-react-native';
+import {
+	AudioLines,
+	Wind,
+	KeyRoundIcon,
+	KeyboardMusicIcon,
+} from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -143,7 +148,7 @@ export default function App() {
 	const handleNavStateChange = state => {
 		const tabName = getActiveTabName(state);
 		if (Platform.OS === 'android' || Platform.OS === 'ios') {
-			if (tabName === 'Piano') {
+			if (tabName === 'Keyboard') {
 				ScreenOrientation.lockAsync(
 					ScreenOrientation.OrientationLock.LANDSCAPE,
 				);
@@ -192,11 +197,11 @@ export default function App() {
 										/>
 									);
 								}
-								if (route.name === 'Piano') {
+								if (route.name === 'Keyboard') {
 									return (
 										<Icon
-											as={Keyboard}
-											color={'$primary500'}
+											as={KeyboardMusicIcon}
+											className="text-primary-500"
 										/>
 									);
 								}
@@ -234,7 +239,7 @@ export default function App() {
 									component={VocalizationsStackScreen}
 								/>
 								<Tab.Screen
-									name="Piano"
+									name="Keyboard"
 									component={KeyboardStackScreen}
 								/>
 							</>
