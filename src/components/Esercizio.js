@@ -207,7 +207,7 @@ export default class Esercizio extends Component {
 				<FlatList
 					data={this.props.pallini}
 					scrollEnabled={false}
-					contentContainerStyle={{ padding: 16 }}
+					contentContainerStyle={{ padding: 16, width: '100%' }}
 					ListFooterComponent={() => (
 						<CardPlay
 							flex={1}
@@ -269,7 +269,14 @@ export default class Esercizio extends Component {
 							Count: {count - 1}{' '}
 						</Text>
 
-						<Center className="flex-1 w-80% h-[40px]">
+						<Center
+							style={{
+								width: '100%',
+								maxWidth: 320,
+								alignSelf: 'center',
+								height: 40,
+							}}
+						>
 							<Slider
 								defaultValue={80}
 								size="sm"
@@ -279,6 +286,11 @@ export default class Esercizio extends Component {
 								isDisabled={false}
 								isReversed={false}
 								onChange={this.handleBpmChange}
+								style={{
+									width: '100%',
+									maxWidth: 320,
+									alignSelf: 'center',
+								}}
 							>
 								<SliderTrack>
 									<SliderFilledTrack />

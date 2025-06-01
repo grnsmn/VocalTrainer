@@ -1,4 +1,4 @@
-import { ScrollView } from "@/components/ui/scroll-view";
+import { ScrollView } from '@/components/ui/scroll-view';
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import Esercizio from '../../components/Esercizio';
@@ -22,20 +22,17 @@ const TrainingScreen = ({ route, navigation }) => {
 		});
 	}, []);
 	return (
-        <View style={styles.container}>
-            <ScrollView className="grow-[1px] h-full">
+		<View style={styles.container}>
+			<ScrollView className="grow-[1px] h-full">
 				{/* <Text style={styles.Title}>{esercizio.titolo}</Text> */}
 				<Text style={styles.Descript}>{esercizio?.descrizione}</Text>
 				<Esercizio
 					pallini={esercizio?.lista_pallini}
 					cicli={[esercizio?.cicli]}
 				/>
-				{/* <Metronome pallini={esercizio.lista_pallini}  cicli= {[esercizio.cicli]}/> */}
-
-				{/* <Button title='Next' onPress={navigation.navigate('Training', {esercizio: next.contenuto})}></Button> */}
 			</ScrollView>
-        </View>
-    );
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
