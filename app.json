@@ -38,11 +38,14 @@
     "owner": "gscripts",
     "newArchEnabled": true,
     "plugins": [
-      "expo-build-properties",{
+      [
+        "expo-build-properties",
+        {
           "android": {
             "kotlinVersion": "1.9.25"
+          }
         }
-      }
+      ]
     ]
   }
 }
