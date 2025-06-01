@@ -24,8 +24,9 @@ const TrainingScreen = ({ route, navigation }) => {
 	return (
 		<View style={styles.container}>
 			<ScrollView className="grow-[1px] h-full">
-				{/* <Text style={styles.Title}>{esercizio.titolo}</Text> */}
-				<Text style={styles.Descript}>{esercizio?.descrizione}</Text>
+				<Text className="text-xl leading-[24px] text-center italic my-4 px-1 ">
+					{esercizio?.descrizione}
+				</Text>
 				<Esercizio
 					pallini={esercizio?.lista_pallini}
 					cicli={[esercizio?.cicli]}
@@ -39,20 +40,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		height: '100%',
-	},
-	Title: {
-		fontSize: 24,
-		textAlign: 'center',
-		color: 'red',
-		fontWeight: 'bold',
-	},
-	Descript: {
-		fontSize: 20,
-		lineHeight: 27,
-		textAlign: 'center',
-		fontStyle: 'italic',
-		marginVertical: 16,
-		paddingHorizontal: 4,
 	},
 });
 export default TrainingScreen;
