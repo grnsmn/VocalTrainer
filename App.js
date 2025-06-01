@@ -1,7 +1,9 @@
+import { StatusBar } from '@/components/ui/status-bar';
+import { Icon } from '@/components/ui/icon';
 // App.js
 import React, { useEffect } from 'react';
-import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
-import { config } from '@gluestack-ui/config';
+import '@/global.css';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -109,7 +111,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<SafeAreaProvider>
-				<GluestackUIProvider config={config}>
+				<GluestackUIProvider mode="light">
 					<StatusBar />
 					<Tab.Navigator
 						screenOptions={({ route }) => ({
@@ -119,20 +121,23 @@ export default function App() {
 									return (
 										<Icon
 											as={AudioLines}
-											color={'$primary500'}
+											className="text-primary-500"
 										/>
 									);
 								}
 								if (route.name === 'Respirazione') {
 									return (
-										<Icon as={Wind} color={'$primary500'} />
+										<Icon
+											as={Wind}
+											className="text-primary-500"
+										/>
 									);
 								}
 								if (route.name === 'Auth') {
 									return (
 										<Icon
 											as={KeyRoundIcon}
-											color={'$primary500'}
+											className="text-primary-500"
 										/>
 									);
 								}

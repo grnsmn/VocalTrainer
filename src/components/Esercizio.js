@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import { Center } from '@/components/ui/center';
+import { FlatList } from '@/components/ui/flat-list';
 import {
-	Text,
 	Slider,
-	FlatList,
-	Center,
 	SliderFilledTrack,
 	SliderTrack,
 	SliderThumb,
-} from '@gluestack-ui/themed';
+} from '@/components/ui/slider';
+import { Text } from '@/components/ui/text';
+import React, { Component } from 'react';
 import { Volume, Volume2Icon } from 'lucide-react-native';
 
 import { View } from 'react-native';
@@ -35,7 +35,6 @@ export default class Esercizio extends Component {
 		currentCicle: 0,
 		startCountDown: true,
 	};
-
 	async fetchClick1() {
 		return (this.click1 = await Audio.Sound.createAsync(
 			require('../../assets/sounds/click1.mp3'),
@@ -219,19 +218,18 @@ export default class Esercizio extends Component {
 					)}
 					renderItem={({ item, index }) => (
 						<Text
-							py={'$0.5'}
 							style={
 								item.key == key && playing
 									? styles.PallinoPlay
 									: styles.Pallino
 							}
+							className="py-0.5"
 						>
 							{item.key == key && playing ? '' : `o  `}
 							{`${item.definizione}`}
 							<Text
-								textAlign={'right'}
 								style={styles.durataPallino}
-								color={'$primary600'}
+								className="text-right text-primary-600"
 							>
 								{`    [${item.durata} BPM]; `}
 							</Text>
@@ -261,15 +259,17 @@ export default class Esercizio extends Component {
 							showSeparator
 						/>
 
-						<Text color={'$primary600'}>{bpm} BPM</Text>
+						<Text className="text-primary-600">{bpm} BPM</Text>
 						<Text
 							style={styles.countTitle}
-							color={playing ? '$orange400' : '$primary600'}
+							className={` ${
+								playing ? 'text-orange-400' : 'text-primary-600'
+							} `}
 						>
 							Count: {count - 1}{' '}
 						</Text>
 
-						<Center flex={1} w={'$80%'} h={40}>
+						<Center className="flex-1 w-80% h-[40px]">
 							<Slider
 								defaultValue={80}
 								size="sm"

@@ -1,7 +1,7 @@
+import { ScrollView } from "@/components/ui/scroll-view";
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import Esercizio from '../../components/Esercizio';
-import { ScrollView } from '@gluestack-ui/themed';
 // import Metronome from '../components/MetronomeHook'
 
 const TrainingScreen = ({ route, navigation }) => {
@@ -22,8 +22,8 @@ const TrainingScreen = ({ route, navigation }) => {
 		});
 	}, []);
 	return (
-		<View style={styles.container}>
-			<ScrollView flexGrow={1} h={'$full'}>
+        <View style={styles.container}>
+            <ScrollView className="grow-[1px] h-full">
 				{/* <Text style={styles.Title}>{esercizio.titolo}</Text> */}
 				<Text style={styles.Descript}>{esercizio?.descrizione}</Text>
 				<Esercizio
@@ -34,8 +34,8 @@ const TrainingScreen = ({ route, navigation }) => {
 
 				{/* <Button title='Next' onPress={navigation.navigate('Training', {esercizio: next.contenuto})}></Button> */}
 			</ScrollView>
-		</View>
-	);
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({

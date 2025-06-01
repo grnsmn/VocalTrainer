@@ -1,3 +1,9 @@
+import { Text } from "@/components/ui/text";
+import { FormControl } from "@/components/ui/form-control";
+import { ScrollView } from "@/components/ui/scroll-view";
+import { VStack } from "@/components/ui/vstack";
+import { Input, InputField, InputSlot, InputIcon } from "@/components/ui/input";
+import { Button, ButtonText } from "@/components/ui/button";
 // src/screens/AuthScreen.js
 import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
@@ -9,18 +15,6 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 } from 'firebase/auth';
-import {
-	Button,
-	ButtonText,
-	Input,
-	InputField,
-	VStack,
-	ScrollView,
-	FormControl,
-	Text,
-	InputSlot,
-	InputIcon,
-} from '@gluestack-ui/themed';
 import Hero from '../../components/Hero';
 import useStore from '../../store';
 import { Eye, EyeOff } from 'lucide-react-native';
@@ -85,81 +79,53 @@ export default function AuthScreen() {
 	};
 
 	return (
-		<ScrollView
-			bg="$primary0"
-			flexGrow={1}
-			keyboardShouldPersistTaps="handled"
-		>
-			<FormControl
-				p="$4"
-				alignSelf="center"
-				borderRadius="$lg"
-				$dark-borderWidth="$1"
-				$dark-borderRadius="$lg"
-				$dark-borderColor="$borderDark800"
-				maxWidth={350}
-			>
+        <ScrollView keyboardShouldPersistTaps="handled" className="bg-primary-0 grow-[1px]">
+            <FormControl
+                className="p-4 self-center rounded-lg  dark:border-1  dark:rounded-lg  dark:border-borderDark-800 max-w-[350px]">
 				<Hero />
 				<VStack space="xl">
 					<VStack space="xs">
-						<Text color="$text500" lineHeight="$xs">
+						<Text className="text-text-500 leading-xs">
 							Email
 						</Text>
-						<Input bgColor="$blueGray200" borderRadius="$2xl">
+						<Input className="bg-blueGray-200 rounded-2xl">
 							<InputField type="text" onChangeText={setEmail} />
 						</Input>
 					</VStack>
 					<VStack space="xs">
-						<Text color="$text500" lineHeight="$xs">
+						<Text className="text-text-500 leading-xs">
 							Password
 						</Text>
-						<Input
-							textAlign="center"
-							borderWidth={1}
-							bgColor="$blueGray200"
-							borderRadius="$2xl"
-						>
+						<Input className="text-center border bg-blueGray-200 rounded-2xl">
 							<InputField
 								type={showPassword ? 'text' : 'password'}
 								onChangeText={setPassword}
 							/>
-							<InputSlot pr="$3" onPress={handleState}>
+							<InputSlot onPress={handleState} className="pr-3">
 								<InputIcon
 									as={showPassword ? Eye : EyeOff}
-									color="$darkBlue500"
+									className="text-darkBlue-500"
 								/>
 							</InputSlot>
 						</Input>
 					</VStack>
 					<VStack space="lg">
-						<Button
-							bgColor="$primary500"
-							borderRadius="$2xl"
-							onPress={handleLogin}
-						>
-							<ButtonText color="$white">Login</ButtonText>
+						<Button onPress={handleLogin} className="bg-primary-500 rounded-2xl">
+							<ButtonText className="text-white">Login</ButtonText>
 						</Button>
-						<Button
-							bgColor="$primary500"
-							borderRadius="$2xl"
-							onPress={handleSignup}
-						>
-							<ButtonText color="$white">Signup</ButtonText>
+						<Button onPress={handleSignup} className="bg-primary-500 rounded-2xl">
+							<ButtonText className="text-white">Signup</ButtonText>
 						</Button>
 						{Platform.OS === 'web' && ( // Only show on web temporarily
-							<Button
-								bgColor="$primary500"
-								borderRadius="$2xl"
-								onPress={onPressGoogle}
-							>
-								<ButtonText color="$white">
+							(<Button onPress={onPressGoogle} className="bg-primary-500 rounded-2xl">
+                                <ButtonText className="text-white">
 									Login with Google
 								</ButtonText>
-							</Button>
+                            </Button>)
 						)}
 					</VStack>
 				</VStack>
 			</FormControl>
-		</ScrollView>
-	);
+        </ScrollView>
+    );
 }

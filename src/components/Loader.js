@@ -1,14 +1,15 @@
+import { VStack } from "@/components/ui/vstack";
+import { Spinner } from "@/components/ui/spinner";
+import { Text } from "@/components/ui/text";
 import React from 'react';
-import { Text } from '@gluestack-ui/themed';
-import { Spinner, VStack } from '@gluestack-ui/themed';
 
 const Loader = () => {
 	return (
-		<VStack flex={1} space="sm" justifyContent="center" alignItems="center">
-			<Spinner size="small" />
-			<Text size="md">Please Wait</Text>
-		</VStack>
-	);
+        <VStack space="sm" className="flex-1 justify-center items-center">
+            <Spinner size="small" />
+            <Text size="md">Please Wait</Text>
+        </VStack>
+    );
 };
 
 export default Loader;
