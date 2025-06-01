@@ -269,14 +269,7 @@ export default class Esercizio extends Component {
 							Count: {count - 1}{' '}
 						</Text>
 
-						<Center
-							style={{
-								width: '100%',
-								maxWidth: 320,
-								alignSelf: 'center',
-								height: 40,
-							}}
-						>
+						<Center className="w-full max-w-[320px] mx-auto h-10">
 							<Slider
 								defaultValue={80}
 								size="sm"
@@ -286,11 +279,7 @@ export default class Esercizio extends Component {
 								isDisabled={false}
 								isReversed={false}
 								onChange={this.handleBpmChange}
-								style={{
-									width: '100%',
-									maxWidth: 320,
-									alignSelf: 'center',
-								}}
+								className="w-full max-w-[320px] mx-auto"
 							>
 								<SliderTrack>
 									<SliderFilledTrack />
