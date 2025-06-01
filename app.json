@@ -46,8 +46,8 @@
           }
         }
       ],
-      "expo-font",
       [
+        "expo-font",
         "expo-font",
         {
           "fonts": [
