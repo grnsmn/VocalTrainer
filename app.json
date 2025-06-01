@@ -48,7 +48,6 @@
       ],
       [
         "expo-font",
-        "expo-font",
         {
           "fonts": [
             "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
