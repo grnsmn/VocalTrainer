@@ -1,4 +1,4 @@
-import { FlatList } from "@/components/ui/flat-list";
+import { FlatList } from '@/components/ui/flat-list';
 import { useState, useEffect } from 'react';
 import CardSelect from '../../components/CardSelect';
 
@@ -11,9 +11,6 @@ const BreathingList = ({ route, navigation }) => {
 	useEffect(() => {
 		navigation.setOptions({
 			title: famiglia,
-			headerTitleStyle: {
-				fontSize: 24,
-			},
 		});
 	}, []);
 
@@ -54,13 +51,14 @@ const BreathingList = ({ route, navigation }) => {
 	);
 
 	return (
-        <FlatList
+		<FlatList
 			data={listaTitoli}
 			keyExtractor={item => item.titolo}
 			renderItem={renderItem}
 			className="bg-primary-0"
+			showsVerticalScrollIndicator={false}
 		/>
-    );
+	);
 };
 
 export default BreathingList;

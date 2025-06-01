@@ -105,7 +105,6 @@ export default function App() {
 	useEffect(() => {
 		async function prepare() {
 			try {
-				// Aspetta che il font sia caricato
 				if (fontsLoaded) {
 					await SplashScreen.hideAsync();
 				}

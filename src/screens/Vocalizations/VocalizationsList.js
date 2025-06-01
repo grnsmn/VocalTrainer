@@ -1,5 +1,5 @@
-import { FlatList } from "@/components/ui/flat-list";
-import { Fab, FabLabel } from "@/components/ui/fab";
+import { FlatList } from '@/components/ui/flat-list';
+import { Fab, FabLabel } from '@/components/ui/fab';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
@@ -89,14 +89,14 @@ const VocalizationsList = ({ route }) => {
 
 		if (title) {
 			return (
-                <CardPlay
+				<CardPlay
 					title={title}
 					onPress={() => setSoundChoose(pathVocalization)}
 					RightIcon={Play}
 					isPlaying={chosen}
 					isLoading={isLoadingSound && chosen}
 				/>
-            );
+			);
 		}
 	};
 
@@ -107,20 +107,26 @@ const VocalizationsList = ({ route }) => {
 	}
 
 	return (
-        <>
-            <FlatList data={data} renderItem={renderItem} className="bg-primary-0" />
-            {!!sound && (
+		<>
+			<FlatList
+				data={data}
+				renderItem={renderItem}
+				className="bg-primary-0"
+				showsVerticalScrollIndicator={false}
+			/>
+			{!!sound && (
 				<Fab
-                    placement={'bottom right'}
-                    showLabel={true}
-                    onPress={playSound}
-                    className="items-center bg-warning-600">
+					placement={'bottom right'}
+					showLabel={true}
+					onPress={playSound}
+					className="items-center bg-warning-600"
+				>
 					<FabLabel className="text-black">
 						{`STOP ${getTitleExercise(soundChoose)}`}
 					</FabLabel>
 				</Fab>
 			)}
-        </>
-    );
+		</>
+	);
 };
 export default VocalizationsList;
