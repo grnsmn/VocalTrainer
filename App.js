@@ -1,7 +1,9 @@
+import { StatusBar } from '@/components/ui/status-bar';
+import { Icon } from '@/components/ui/icon';
 // App.js
 import React, { useEffect } from 'react';
-import { GluestackUIProvider, Icon, StatusBar } from '@gluestack-ui/themed';
-import { config } from '@gluestack-ui/config';
+import '@/global.css';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -17,6 +19,11 @@ import AuthScreen from './src/screens/Auth';
 import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
+
 const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
@@ -91,6 +98,24 @@ export default function App() {
 	const { auth, setAuth } = useStore();
 	const { getItem } = useAsyncStorage('authData');
 
+	const [fontsLoaded] = useFonts({
+		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
+	});
+
+	useEffect(() => {
+		async function prepare() {
+			try {
+				if (fontsLoaded) {
+					await SplashScreen.hideAsync();
+				}
+			} catch (e) {
+				console.warn('Errore durante il caricamento del font:', e);
+			}
+		}
+
+		prepare();
+	}, [fontsLoaded]);
+
 	useEffect(() => {
 		const restoreCacheAuthData = async () => {
 			try {
@@ -106,10 +131,14 @@ export default function App() {
 		restoreCacheAuthData();
 	}, []);
 
+	if (!fontsLoaded) {
+		return null;
+	}
+
 	return (
 		<NavigationContainer>
 			<SafeAreaProvider>
-				<GluestackUIProvider config={config}>
+				<GluestackUIProvider mode="light">
 					<StatusBar />
 					<Tab.Navigator
 						screenOptions={({ route }) => ({
@@ -119,20 +148,23 @@ export default function App() {
 									return (
 										<Icon
 											as={AudioLines}
-											color={'$primary500'}
+											className="text-primary-500"
 										/>
 									);
 								}
 								if (route.name === 'Respirazione') {
 									return (
-										<Icon as={Wind} color={'$primary500'} />
+										<Icon
+											as={Wind}
+											className="text-primary-500"
+										/>
 									);
 								}
 								if (route.name === 'Auth') {
 									return (
 										<Icon
 											as={KeyRoundIcon}
-											color={'$primary500'}
+											className="text-primary-500"
 										/>
 									);
 								}
@@ -141,13 +173,14 @@ export default function App() {
 							tabBarLabelStyle: {
 								fontSize: 14,
 								fontWeight: 'bold',
+								fontFamily: 'Roboto',
 							},
 							tabBarItemStyle: {
 								borderColor: '#CCE9FF',
 								padding: 10,
 							},
 							tabBarIconStyle: {
-								paddingBottom: 6, // Aumenta il valore negativo per più spazio
+								paddingBottom: 6,
 							},
 						})}
 						initialRouteName={!auth ? 'Auth' : 'Respirazione'}

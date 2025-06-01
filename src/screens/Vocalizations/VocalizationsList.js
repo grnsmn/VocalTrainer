@@ -1,5 +1,6 @@
+import { FlatList } from '@/components/ui/flat-list';
+import { Fab, FabLabel } from '@/components/ui/fab';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Fab, FabLabel } from '@gluestack-ui/themed';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
@@ -7,7 +8,6 @@ import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
 import Loader from '../../components/Loader';
 import { Audio } from 'expo-av';
-import { FlatList } from '@gluestack-ui/themed';
 import { Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
@@ -108,16 +108,20 @@ const VocalizationsList = ({ route }) => {
 
 	return (
 		<>
-			<FlatList data={data} renderItem={renderItem} bg="$primary0" />
+			<FlatList
+				data={data}
+				renderItem={renderItem}
+				className="bg-primary-0"
+				showsVerticalScrollIndicator={false}
+			/>
 			{!!sound && (
 				<Fab
 					placement={'bottom right'}
 					showLabel={true}
 					onPress={playSound}
-					alignItems="center"
-					bgColor={'$warning600'}
+					className="items-center bg-warning-600"
 				>
-					<FabLabel color="$black">
+					<FabLabel className="text-black">
 						{`STOP ${getTitleExercise(soundChoose)}`}
 					</FabLabel>
 				</Fab>

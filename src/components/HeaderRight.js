@@ -1,7 +1,9 @@
+import { VStack } from "@/components/ui/vstack";
+import { Text } from "@/components/ui/text";
+import { Icon } from "@/components/ui/icon";
 // HeaderRight.js
 import React from 'react';
 import { Pressable } from 'react-native';
-import { Icon, Text, VStack } from '@gluestack-ui/themed';
 import { getAuth, signOut } from 'firebase/auth';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
@@ -21,13 +23,13 @@ const HeaderRight = () => {
 	};
 
 	return (
-		<Pressable onPress={handleLogout}>
-			<VStack alignItems={'center'} justifyContent={'center'} p={'$2'}>
-				<Icon as={LogOut} color={'$primary500'} size={24} />
+        <Pressable onPress={handleLogout}>
+            <VStack className="items-center justify-center p-2">
+				<Icon as={LogOut} size={24} className="text-primary-500" />
 				<Text>Logout</Text>
 			</VStack>
-		</Pressable>
-	);
+        </Pressable>
+    );
 };
 
 export default HeaderRight;
