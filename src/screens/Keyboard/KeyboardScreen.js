@@ -4,7 +4,7 @@ import { MidiProvider, PianoKeyboard } from 'react-native-piano-keyboard';
 
 const KeyboardScreen = () => {
 	const handleKeyPress = note => {
-		console.log('Pressed note:', note);
+		// console.log('Pressed note:', note);
 	};
 
 	return (
