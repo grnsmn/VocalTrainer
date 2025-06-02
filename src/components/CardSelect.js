@@ -1,12 +1,9 @@
+import { Pressable } from "@/components/ui/pressable";
+import { Heading } from "@/components/ui/heading";
+import { HStack } from "@/components/ui/hstack";
+import { ChevronsRightIcon, Icon } from "@/components/ui/icon";
+import { Card } from "@/components/ui/card";
 import React, { memo } from 'react';
-import {
-	Card,
-	ChevronsRightIcon,
-	HStack,
-	Heading,
-	Icon,
-	Pressable,
-} from '@gluestack-ui/themed';
 
 const CardSelect = ({ onPress, title }) => {
 	const handleOnPress = () => {
@@ -16,16 +13,16 @@ const CardSelect = ({ onPress, title }) => {
 	};
 
 	return (
-		<Pressable onPress={handleOnPress} m="$2">
-			<Card size="lg" variant="elevated">
-				<HStack justifyContent="space-between" alignItems="center">
+        <Pressable onPress={handleOnPress} className="m-2">
+            <Card size="lg" variant="elevated">
+				<HStack className="justify-between items-center">
 					<Heading size="md">{title}</Heading>
 
 					<Icon as={ChevronsRightIcon} />
 				</HStack>
 			</Card>
-		</Pressable>
-	);
+        </Pressable>
+    );
 };
 
 export default memo(CardSelect);

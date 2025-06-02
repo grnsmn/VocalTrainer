@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import { Center } from '@/components/ui/center';
+import { FlatList } from '@/components/ui/flat-list';
 import {
-	Text,
 	Slider,
-	FlatList,
-	Center,
 	SliderFilledTrack,
 	SliderTrack,
 	SliderThumb,
-} from '@gluestack-ui/themed';
+} from '@/components/ui/slider';
+import { Text } from '@/components/ui/text';
+import React, { Component } from 'react';
 import { Volume, Volume2Icon } from 'lucide-react-native';
 
 import { View } from 'react-native';
@@ -35,7 +35,6 @@ export default class Esercizio extends Component {
 		currentCicle: 0,
 		startCountDown: true,
 	};
-
 	async fetchClick1() {
 		return (this.click1 = await Audio.Sound.createAsync(
 			require('../../assets/sounds/click1.mp3'),
@@ -208,7 +207,8 @@ export default class Esercizio extends Component {
 				<FlatList
 					data={this.props.pallini}
 					scrollEnabled={false}
-					contentContainerStyle={{ padding: 16 }}
+					contentContainerStyle={{ padding: 16, width: '100%' }}
+					ItemSeparatorComponent={() => <View className="h-3" />}
 					ListFooterComponent={() => (
 						<CardPlay
 							flex={1}
@@ -219,20 +219,15 @@ export default class Esercizio extends Component {
 					)}
 					renderItem={({ item, index }) => (
 						<Text
-							py={'$0.5'}
-							style={
+							className={`py-0.5 font-bold ${
 								item.key == key && playing
-									? styles.PallinoPlay
-									: styles.Pallino
-							}
+									? 'text-orange-500 text-4xl leading-[34px] text-center py-5'
+									: 'text-black text-2xl leading-[25px] text-left'
+							}`}
 						>
 							{item.key == key && playing ? '' : `o  `}
 							{`${item.definizione}`}
-							<Text
-								textAlign={'right'}
-								style={styles.durataPallino}
-								color={'$primary600'}
-							>
+							<Text className="text-2xl text-right text-primary-600">
 								{`    [${item.durata} BPM]; `}
 							</Text>
 						</Text>
@@ -261,15 +256,16 @@ export default class Esercizio extends Component {
 							showSeparator
 						/>
 
-						<Text color={'$primary600'}>{bpm} BPM</Text>
+						<Text className="text-primary-600">{bpm} BPM</Text>
 						<Text
-							style={styles.countTitle}
-							color={playing ? '$orange400' : '$primary600'}
+							className={`font-bold self-center text-xl ${
+								playing ? 'text-orange-400' : 'text-primary-600'
+							}`}
 						>
 							Count: {count - 1}{' '}
 						</Text>
 
-						<Center flex={1} w={'$80%'} h={40}>
+						<Center className="w-full max-w-[320px] mx-auto h-10">
 							<Slider
 								defaultValue={80}
 								size="sm"
@@ -279,6 +275,7 @@ export default class Esercizio extends Component {
 								isDisabled={false}
 								isReversed={false}
 								onChange={this.handleBpmChange}
+								className="w-full max-w-[320px] mx-auto"
 							>
 								<SliderTrack>
 									<SliderFilledTrack />
@@ -293,35 +290,23 @@ export default class Esercizio extends Component {
 	}
 }
 const styles = {
-	bpmTitle: {
-		fontSize: 16,
-		textAlign: 'center',
-		paddingVertical: 4,
-	},
-	countTitle: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		alignSelf: 'center',
-	},
-	container: {
-		flex: 1,
-		justifyContent: 'space-between',
-	},
 	Pallino: {
 		textAlign: 'left',
-		fontSize: 24,
+		fontSize: 20,
+		lineHeight: 25,
 		fontWeight: 'bold',
 		color: 'black',
 	},
 	PallinoPlay: {
-		fontSize: 34,
+		fontSize: 28,
+		lineHeight: 34,
 		textAlign: 'center',
 		fontWeight: 'bold',
 		paddingVertical: 20,
 		color: 'orange',
 	},
 	durataPallino: {
-		fontSize: 26,
+		fontSize: 24,
 	},
 	infoTrainer: {
 		justifyContent: 'flex-end',
@@ -329,9 +314,6 @@ const styles = {
 		borderRadius: 16,
 		borderColor: '#c6e9ff',
 		padding: 16,
-	},
-	pallinoContainer: {
-		height: '60%',
 	},
 	controlContainer: {
 		alignItems: 'center',
