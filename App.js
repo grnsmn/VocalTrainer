@@ -148,7 +148,7 @@ export default function App() {
 	const handleNavStateChange = state => {
 		const tabName = getActiveTabName(state);
 		if (Platform.OS === 'android' || Platform.OS === 'ios') {
-			if (tabName === 'Keyboard') {
+			if (tabName === 'Piano') {
 				ScreenOrientation.lockAsync(
 					ScreenOrientation.OrientationLock.LANDSCAPE,
 				);
@@ -197,7 +197,7 @@ export default function App() {
 										/>
 									);
 								}
-								if (route.name === 'Keyboard') {
+								if (route.name === 'Piano') {
 									return (
 										<Icon
 											as={KeyboardMusicIcon}
@@ -239,7 +239,7 @@ export default function App() {
 									component={VocalizationsStackScreen}
 								/>
 								<Tab.Screen
-									name="Keyboard"
+									name="Piano"
 									component={KeyboardStackScreen}
 								/>
 							</>
