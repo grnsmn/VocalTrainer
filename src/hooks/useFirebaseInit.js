@@ -27,7 +27,6 @@ const useFirebaseInit = () => {
 	};
 
 	useEffect(() => {
-		// Inizializza Firebase solo se non è già stato inizializzato
 		if (!firebase.apps.length) {
 			const app = firebase.initializeApp(firebaseConfig);
 			if (Platform.OS !== 'web') {
