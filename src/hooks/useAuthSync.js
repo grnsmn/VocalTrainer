@@ -7,24 +7,23 @@ import useStore from '../store';
  */
 const useAuthSync = () => {
 	const setAuth = useStore(state => state.setAuth);
-	const clearAll = useStore(state => state.clearAll);
+	const clearAuth = useStore(state => state.clearAuth);
 
 	useEffect(() => {
 		const auth = getAuth();
 		const unsubscribe = onAuthStateChanged(auth, user => {
 			if (user) {
-				// Salva solo i dati necessari
 				setAuth({
 					uid: user.uid,
 					email: user.email,
 					displayName: user.displayName,
 				});
 			} else {
-				clearAll();
+				clearAuth();
 			}
 		});
 		return () => unsubscribe();
-	}, [setAuth, clearAll]);
+	}, [setAuth, clearAuth]);
 };
 
 export default useAuthSync;
