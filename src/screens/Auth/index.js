@@ -24,7 +24,7 @@ import {
 } from 'firebase/auth';
 import Hero from '../../components/Hero';
 import useStore from '../../store';
-import { Eye, EyeOff } from 'lucide-react-native';
+import { Eye, EyeOff, X } from 'lucide-react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function AuthScreen() {
@@ -72,6 +72,10 @@ export default function AuthScreen() {
 				...errors,
 			},
 		}));
+	};
+
+	const clearEmail = () => {
+		updateFormData('email', '');
 	};
 
 	const onPressGoogle = async () => {
@@ -168,6 +172,17 @@ export default function AuthScreen() {
 										updateFormData('email', value)
 									}
 								/>
+								{formData.email && (
+									<InputSlot
+										onPress={clearEmail}
+										className="pr-3"
+									>
+										<InputIcon
+											as={X}
+											className="text-darkBlue-500"
+										/>
+									</InputSlot>
+								)}
 							</Input>
 							<FormControlError>
 								<FormControlErrorIcon as={AlertCircleIcon} />
