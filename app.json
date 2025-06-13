@@ -27,7 +27,7 @@
       "package": "com.VocalTrainer.app",
       "versionCode": 2,
       "permissions": [],
-      "googleServicesFile": "./config/google-services.json"
+      "googleServicesFile": "./config/google-services-account.json"
     },
     "web": {
       "bundler": "metro",
