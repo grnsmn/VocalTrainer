@@ -147,17 +147,21 @@ export default function App() {
 		restoreCacheAuthData();
 	}, []);
 
-	const handleNavStateChange = state => {
+	const handleNavStateChange = async state => {
 		const tabName = getActiveTabName(state);
 		if (Platform.OS === 'android' || Platform.OS === 'ios') {
-			if (tabName === 'Piano') {
-				ScreenOrientation.lockAsync(
-					ScreenOrientation.OrientationLock.LANDSCAPE,
-				);
-			} else {
-				ScreenOrientation.lockAsync(
-					ScreenOrientation.OrientationLock.PORTRAIT,
-				);
+			try {
+				if (tabName === 'Piano') {
+					await ScreenOrientation.lockAsync(
+						ScreenOrientation.OrientationLock.LANDSCAPE,
+					);
+				} else {
+					await ScreenOrientation.lockAsync(
+						ScreenOrientation.OrientationLock.PORTRAIT,
+					);
+				}
+			} catch (error) {
+				console.warn("Impossibile bloccare l'orientamento:", error);
 			}
 		}
 	};
