@@ -11,7 +11,7 @@
 
 <p align="center">
   <img src="./assets/Demo_web.png" alt="web_demo" height="450" />
-  <img src="./assets/Demo_android.png" alt="ios_demo" height="450" />
+  <img src="./assets/Demo_android.png" alt="android_demo" height="450" />
 </p>
 
 ## Description
