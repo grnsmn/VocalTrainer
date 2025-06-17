@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	keyboard: {
-		width: Dimensions.get('window').height, // Use height since we're in landscape
+		width: Dimensions.get('window').width, // Use height since we're in landscape
 		height: '80%',
 	},
 });
