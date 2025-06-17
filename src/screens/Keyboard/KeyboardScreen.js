@@ -14,7 +14,6 @@ const KeyboardScreen = () => {
 					startKey="C2"
 					endKey="C5"
 					onPressKey={handleKeyPress}
-					style={styles.keyboard}
 				/>
 			</MidiProvider>
 		</View>
@@ -27,10 +26,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#FFFFFF',
 		justifyContent: 'flex-end',
 		alignItems: 'center',
-	},
-	keyboard: {
-		width: Dimensions.get('window').width, // Use height since we're in landscape
-		height: '80%',
 	},
 });
 
