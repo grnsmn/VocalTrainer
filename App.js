@@ -21,6 +21,7 @@ import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import useAuthSync from './src/hooks/useAuthSync';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -95,6 +96,7 @@ function AuthStackScreen() {
 
 export default function App() {
 	useFirebaseInit();
+	useAuthSync();
 	const { auth, setAuth } = useStore();
 	const { getItem } = useAsyncStorage('authData');
 
