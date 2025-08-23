@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { MidiProvider, PianoKeyboard } from 'react-native-piano-keyboard';
+import AnimatedJumpNotes from '../../../assets/lotties/jump_notes.json';
+import LottieView from 'lottie-react-native';
 
 const KeyboardScreen = () => {
 	const handleKeyPress = note => {
@@ -10,6 +12,13 @@ const KeyboardScreen = () => {
 	return (
 		<View style={styles.container}>
 			<MidiProvider>
+				<LottieView
+					webStyle={{ width: 250, height: 250 }}
+					source={AnimatedJumpNotes}
+					autoPlay
+					loop={true}
+					style={{ width: 50, height: 50 }}
+				/>
 				<PianoKeyboard
 					startKey="C2"
 					endKey="C5"
@@ -24,7 +33,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#FFFFFF',
-		justifyContent: 'flex-end',
+
+		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
 });
