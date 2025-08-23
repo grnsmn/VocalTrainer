@@ -244,12 +244,12 @@ export default function App() {
 									name="Vocalizzi"
 									component={VocalizationsStackScreen}
 								/>
-								{Platform.OS === 'android' && (
-									<Tab.Screen
-										name="Piano"
-										component={KeyboardStackScreen}
-									/>
-								)}
+								{/* {Platform.OS === 'android' && ( */}
+								<Tab.Screen
+									name="Piano"
+									component={KeyboardStackScreen}
+								/>
+								{/* )} */}
 							</>
 						)}
 					</Tab.Navigator>
