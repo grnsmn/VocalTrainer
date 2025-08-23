@@ -11,14 +11,15 @@ const KeyboardScreen = () => {
 
 	return (
 		<View style={styles.container}>
+			<LottieView
+				webStyle={{ width: 250, height: 250 }}
+				source={AnimatedJumpNotes}
+				autoPlay
+				loop={true}
+				style={{ width: 50, height: 50 }}
+			/>
+
 			<MidiProvider>
-				<LottieView
-					webStyle={{ width: 250, height: 250 }}
-					source={AnimatedJumpNotes}
-					autoPlay
-					loop={true}
-					style={{ width: 50, height: 50 }}
-				/>
 				<PianoKeyboard
 					startKey="C2"
 					endKey="C5"
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#FFFFFF',
-
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
