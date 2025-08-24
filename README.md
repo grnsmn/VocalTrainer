@@ -10,8 +10,8 @@
 ### If you are curious to try it out, you can check the [Web Demo](https://vocaltrainer.netlify.app/)
 
 <p align="center">
-  <img src="./assets/Demo_web.jpeg" alt="web_demo" height="450" />
-  <img src="./assets/Demo_ios.png" alt="ios_demo" height="450" />
+  <img src="./assets/Demo_web.png" alt="web_demo" height="450" />
+  <img src="./assets/Demo_android.png" alt="android_demo" height="450" />
 </p>
 
 ## Description

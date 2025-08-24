@@ -1,11 +1,11 @@
-import { Spinner } from "@/components/ui/spinner";
-import { Pressable } from "@/components/ui/pressable";
-import { Icon } from "@/components/ui/icon";
-import { Heading } from "@/components/ui/heading";
-import { HStack } from "@/components/ui/hstack";
-import { Card } from "@/components/ui/card";
+import { Spinner } from '@/components/ui/spinner';
+import { Pressable } from '@/components/ui/pressable';
+import { Icon } from '@/components/ui/icon';
+import { Heading } from '@/components/ui/heading';
+import { HStack } from '@/components/ui/hstack';
+import { Card } from '@/components/ui/card';
 import React, { memo } from 'react';
-//FIXME: Lottie on web
+
 import AnimatedPlayIcon from '../../assets/lotties/sing.json';
 import LottieView from 'lottie-react-native';
 
@@ -21,19 +21,23 @@ const CardPLay = ({
 		onPress(title);
 	};
 	return (
-        <Pressable onPress={handleOnPress} className="m-2">
-            <Card
+		<Pressable onPress={handleOnPress} className="m-2">
+			<Card
 				size="lg"
 				variant="elevated"
-				className={` ${isPlaying ? "bg-green-200" : "bg-white"} `}
+				className={` ${isPlaying ? 'bg-green-200' : 'bg-white'} `}
 			>
 				<HStack className="justify-between items-center">
 					<Heading size="md">{title}</Heading>
-					{isLoading && <Spinner size="small" className="text-green-700" />}
+					{isLoading && (
+						<Spinner size="small" className="text-green-700" />
+					)}
 					{showRightIcon && (
 						<Icon
 							as={RightIcon}
-							className={` ${isPlaying ? "text-green-700" : undefined} `}
+							className={` ${
+								isPlaying ? 'text-green-700' : undefined
+							} `}
 						/>
 					)}
 					{!showRightIcon && (
@@ -41,12 +45,13 @@ const CardPLay = ({
 							webStyle={{ width: 40, height: 40 }}
 							source={AnimatedPlayIcon}
 							autoPlay
+							loop={true}
 							style={{ width: 28, height: 28 }}
 						/>
 					)}
 				</HStack>
 			</Card>
-        </Pressable>
-    );
+		</Pressable>
+	);
 };
 export default memo(CardPLay);

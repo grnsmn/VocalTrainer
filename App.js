@@ -7,7 +7,12 @@ import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AudioLines, Wind, KeyRoundIcon } from 'lucide-react-native';
+import {
+	AudioLines,
+	Wind,
+	KeyRoundIcon,
+	KeyboardMusicIcon,
+} from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useFirebaseInit from './src/hooks/useFirebaseInit';
@@ -16,9 +21,12 @@ import CategoriesBreath from './src/screens/Breathing/CategoriesBreath';
 import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
+import KeyboardStackScreen from './src/screens/Keyboard/KeyboardStack';
 import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { Platform } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import useAuthSync from './src/hooks/useAuthSync';
@@ -94,6 +102,12 @@ function AuthStackScreen() {
 	);
 }
 
+function getActiveTabName(state) {
+	if (!state) return null;
+	const route = state.routes[state.index];
+	return route.name;
+}
+
 export default function App() {
 	useFirebaseInit();
 	useAuthSync();
@@ -133,12 +147,31 @@ export default function App() {
 		restoreCacheAuthData();
 	}, []);
 
+	const handleNavStateChange = async state => {
+		const tabName = getActiveTabName(state);
+		if (Platform.OS === 'android' || Platform.OS === 'ios') {
+			try {
+				if (tabName === 'Piano') {
+					await ScreenOrientation.lockAsync(
+						ScreenOrientation.OrientationLock.LANDSCAPE,
+					);
+				} else {
+					await ScreenOrientation.lockAsync(
+						ScreenOrientation.OrientationLock.PORTRAIT,
+					);
+				}
+			} catch (error) {
+				console.warn("Impossibile bloccare l'orientamento:", error);
+			}
+		}
+	};
+
 	if (!fontsLoaded) {
 		return null;
 	}
 
 	return (
-		<NavigationContainer>
+		<NavigationContainer onStateChange={handleNavStateChange}>
 			<SafeAreaProvider>
 				<GluestackUIProvider mode="light">
 					<StatusBar />
@@ -166,6 +199,14 @@ export default function App() {
 									return (
 										<Icon
 											as={KeyRoundIcon}
+											className="text-primary-500"
+										/>
+									);
+								}
+								if (route.name === 'Piano') {
+									return (
+										<Icon
+											as={KeyboardMusicIcon}
 											className="text-primary-500"
 										/>
 									);
@@ -202,6 +243,10 @@ export default function App() {
 								<Tab.Screen
 									name="Vocalizzi"
 									component={VocalizationsStackScreen}
+								/>
+								<Tab.Screen
+									name="Piano"
+									component={KeyboardStackScreen}
 								/>
 							</>
 						)}
