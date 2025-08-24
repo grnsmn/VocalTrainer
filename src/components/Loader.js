@@ -14,8 +14,8 @@ const Loader = () => {
 				autoPlay
 				loop={true}
 				style={{
-					width: 50,
-					height: 50,
+					width: 60,
+					height: 60,
 				}}
 			/>
 			<Text size="md">Please Wait</Text>
