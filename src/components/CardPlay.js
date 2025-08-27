@@ -1,13 +1,11 @@
+import { Spinner } from '@/components/ui/spinner';
+import { Pressable } from '@/components/ui/pressable';
+import { Icon } from '@/components/ui/icon';
+import { Heading } from '@/components/ui/heading';
+import { HStack } from '@/components/ui/hstack';
+import { Card } from '@/components/ui/card';
 import React, { memo } from 'react';
-import {
-	Card,
-	HStack,
-	Heading,
-	Icon,
-	Pressable,
-	Spinner,
-} from '@gluestack-ui/themed';
-//FIXME: Lottie on web
+
 import AnimatedPlayIcon from '../../assets/lotties/sing.json';
 import LottieView from 'lottie-react-native';
 
@@ -23,19 +21,23 @@ const CardPLay = ({
 		onPress(title);
 	};
 	return (
-		<Pressable onPress={handleOnPress} m="$2">
+		<Pressable onPress={handleOnPress} className="m-2">
 			<Card
 				size="lg"
 				variant="elevated"
-				backgroundColor={isPlaying ? '$green200' : '$white'}
+				className={` ${isPlaying ? 'bg-green-200' : 'bg-white'} `}
 			>
-				<HStack justifyContent="space-between" alignItems="center">
+				<HStack className="justify-between items-center">
 					<Heading size="md">{title}</Heading>
-					{isLoading && <Spinner size="small" color={'$green700'} />}
+					{isLoading && (
+						<Spinner size="small" className="text-green-700" />
+					)}
 					{showRightIcon && (
 						<Icon
 							as={RightIcon}
-							color={isPlaying ? '$green700' : undefined}
+							className={` ${
+								isPlaying ? 'text-green-700' : undefined
+							} `}
 						/>
 					)}
 					{!showRightIcon && (
@@ -43,6 +45,7 @@ const CardPLay = ({
 							webStyle={{ width: 40, height: 40 }}
 							source={AnimatedPlayIcon}
 							autoPlay
+							loop={true}
 							style={{ width: 28, height: 28 }}
 						/>
 					)}
