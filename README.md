@@ -51,6 +51,17 @@ Each section provides a series of exercises specifically created to develop and 
 - Firebase Realtime Database
 - Firebase Authentication
 
+## Debugging
+
+This project uses Reactotron for development and debugging. Follow these steps to set it up:
+
+1. Download and install [Reactotron](https://github.com/infinitered/reactotron/releases) for your operating system
+2. Launch Reactotron before starting the app
+3. The app will automatically connect to Reactotron when launched in development mode
+4. You can monitor Zustand state, logs, and network requests directly from Reactotron
+
+Debug utilities are available in `src/utils/debug.js`.
+
 Contributions are welcome! If you wish to contribute to this project, follow these steps:
 
 1. Fork the repository.

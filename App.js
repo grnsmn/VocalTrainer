@@ -1,6 +1,7 @@
 import { StatusBar } from '@/components/ui/status-bar';
 import { Icon } from '@/components/ui/icon';
 // App.js
+import Reactotron, { setupZustandPlugin } from './src/ReactotronConfig';
 import React, { useEffect } from 'react';
 import '@/global.css';
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
@@ -133,6 +134,11 @@ export default function App() {
 	}, [fontsLoaded]);
 
 	useEffect(() => {
+		// Configura il plugin Zustand per Reactotron
+		if (__DEV__) {
+			setupZustandPlugin();
+		}
+
 		const restoreCacheAuthData = async () => {
 			try {
 				const data = await getItem();
