@@ -1,11 +1,14 @@
 // HeaderRight.js
 import React from 'react';
-import { Icon, Text, VStack } from '@gluestack-ui/themed';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { VStack } from '@/components/ui/vstack';
+import { Text } from '@/components/ui/text';
+import { Icon } from '@/components/ui/icon';
+import { Pressable } from 'react-native';
+import { getAuth, signOut } from 'firebase/auth';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+
 import { LogOut } from 'lucide-react-native';
 import useStore from '../store';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import { getAuth, signOut } from 'firebase/auth';
 
 const HeaderRight = () => {
 	const { clearAuth } = useStore();
@@ -20,25 +23,13 @@ const HeaderRight = () => {
 	};
 
 	return (
-		<TouchableOpacity style={styles.button} onPress={handleLogout}>
-			<VStack alignItems={'center'} justifyContent={'center'} py={'$1'}>
-				<Icon as={LogOut} color={'$primary500'} size={20} />
-				<Text size="md">Logout</Text>
+		<Pressable onPress={handleLogout}>
+			<VStack className="items-center justify-center p-2">
+				<Icon as={LogOut} size={24} className="text-primary-500" />
+				<Text>Logout</Text>
 			</VStack>
-		</TouchableOpacity>
+		</Pressable>
 	);
 };
-
-const styles = StyleSheet.create({
-	button: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		padding: 10,
-	},
-	text: {
-		marginLeft: 5,
-		fontSize: 16,
-	},
-});
 
 export default HeaderRight;
