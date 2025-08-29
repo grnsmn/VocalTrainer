@@ -25,7 +25,7 @@ const HeaderRight = () => {
 	return (
 		<Pressable onPress={handleLogout}>
 			<VStack className="items-center justify-center p-2">
-				<Icon as={LogOut} size={24} className="text-primary-500" />
+				<Icon as={LogOut} size={24} className="text-primary-600" />
 				<Text>Logout</Text>
 			</VStack>
 		</Pressable>
