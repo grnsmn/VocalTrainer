@@ -32,7 +32,6 @@ const useBreathingFamilies = () => {
 			},
 			error => {
 				setAuth(undefined); // android: workaround to force logout when error occurs to fetch data
-				console.error(error);
 			},
 		);
 	}, []);
