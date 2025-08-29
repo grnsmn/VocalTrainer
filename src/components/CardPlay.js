@@ -29,26 +29,28 @@ const CardPLay = ({
 			>
 				<HStack className="justify-between items-center">
 					<Heading size="md">{title}</Heading>
-					{isLoading && (
-						<Spinner size="small" className="text-green-700" />
-					)}
-					{showRightIcon && (
-						<Icon
-							as={RightIcon}
-							className={` ${
-								isPlaying ? 'text-green-700' : undefined
-							} `}
-						/>
-					)}
-					{!showRightIcon && (
-						<LottieView
-							webStyle={{ width: 40, height: 40 }}
-							source={AnimatedPlayIcon}
-							autoPlay
-							loop={true}
-							style={{ width: 28, height: 28 }}
-						/>
-					)}
+					<HStack className="justify-center items-center space-x-3">
+						{isLoading && (
+							<Spinner size="small" className="text-green-700" />
+						)}
+						{showRightIcon && (
+							<Icon
+								as={RightIcon}
+								className={` ${
+									isPlaying ? 'text-green-700' : undefined
+								} `}
+							/>
+						)}
+						{!showRightIcon && (
+							<LottieView
+								webStyle={{ width: 36, height: 36 }}
+								source={AnimatedPlayIcon}
+								autoPlay
+								loop={true}
+								style={{ width: 32, height: 32 }}
+							/>
+						)}
+					</HStack>
 				</HStack>
 			</Card>
 		</Pressable>

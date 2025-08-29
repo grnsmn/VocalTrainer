@@ -32,10 +32,12 @@
     "@react-navigation/native-stack": "^6.9.26",
     "babel-plugin-module-resolver": "^5.0.2",
     "expo": "~52.0.46",
-    "expo-image": "~2.0.7",
     "expo-av": "~15.0.1",
     "expo-build-properties": "~0.13.3",
     "expo-font": "~13.0.4",
+    "expo-image": "~2.0.7",
+    "expo-linear-gradient": "~14.0.2",
+    "expo-screen-orientation": "~8.0.4",
     "expo-splash-screen": "~0.29.24",
     "expo-status-bar": "~2.0.0",
     "firebase": "^10.12.2",
@@ -60,8 +62,7 @@
     "tailwindcss": "^3.4.17",
     "tonal": "^6.4.1",
     "tone": "^15.1.22",
-    "zustand": "5.0.1",
-    "expo-screen-orientation": "~8.0.4"
+    "zustand": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
