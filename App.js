@@ -1,7 +1,7 @@
 import { StatusBar } from '@/components/ui/status-bar';
 import { Icon } from '@/components/ui/icon';
 // App.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '@/global.css';
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { NavigationContainer } from '@react-navigation/native';
@@ -113,6 +113,7 @@ export default function App() {
 	useAuthSync();
 	const { auth, setAuth } = useStore();
 	const { getItem } = useAsyncStorage('authData');
+	const [initialRouteName, setInitialRouteName] = useState('Auth');
 
 	const [fontsLoaded] = useFonts({
 		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
@@ -138,6 +139,9 @@ export default function App() {
 				const data = await getItem();
 				if (data) {
 					setAuth(JSON.parse(data));
+					setInitialRouteName('Respirazione');
+				} else {
+					setInitialRouteName('Auth');
 				}
 			} catch (e) {
 				console.error('Failed to fetch data from storage', e);
@@ -226,7 +230,7 @@ export default function App() {
 								paddingBottom: 6,
 							},
 						})}
-						initialRouteName={!auth ? 'Auth' : 'Respirazione'}
+						initialRouteName={initialRouteName}
 					>
 						{!auth && (
 							<Tab.Screen
