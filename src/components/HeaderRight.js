@@ -16,7 +16,6 @@ const HeaderRight = () => {
 		try {
 			const auth = getAuth();
 			await signOut(auth);
-
 			// Clean up local state
 			await removeItem();
 			clearAuth();
@@ -26,9 +25,8 @@ const HeaderRight = () => {
 	return (
 		<Pressable
 			onPressOut={handleLogout} // workaround for issue with pressable onPress with react navigation in new architecture https://github.com/react-navigation/react-navigation/issues/12039
-			android_ripple={{ color: 'rgba(0,0,0,0.1)' }}
-			hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-			className="items-center justify-center web:p-2"
+			android_ripple={{ color: 'rgba(0,0,0,0.1)', borderless: true }}
+			className="items-center justify-center web:p-2 rounded-lg"
 		>
 			<Icon as={DoorOpen} size={24} className="text-primary-500" />
 			<Text className="text-black font-medium">Logout</Text>
