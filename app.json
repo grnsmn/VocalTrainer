@@ -24,7 +24,10 @@
         "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.VocalTrainer.app"
+      "package": "com.VocalTrainer.app",
+      "versionCode": 2,
+      "permissions": [],
+      "googleServicesFile": "./config/google-services-account.json"
     },
     "web": {
       "bundler": "metro",
