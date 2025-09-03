@@ -11,7 +11,7 @@ import React, { Component } from 'react';
 import { Volume, Volume2Icon } from 'lucide-react-native';
 
 import { View } from 'react-native';
-import { Audio } from 'expo-audio';
+import { Audio } from 'expo-av';
 import CardPlay from './CardPlay';
 import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js
 
