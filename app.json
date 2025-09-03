@@ -13,6 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "newArchEnabled": false,
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -52,7 +53,8 @@
         {
           "initialOrientation": "DEFAULT"
         }
-      ]
+      ],
+      "expo-audio"
     ]
   }
 }

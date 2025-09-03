@@ -7,7 +7,7 @@ import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
 import Loader from '../../components/Loader';
-import { Audio } from 'expo-av';
+import { Audio } from 'expo-audio';
 import { Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {

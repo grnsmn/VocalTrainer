@@ -16,6 +16,11 @@ config.resolver = {
 			'node_modules/react-native-web-lottie',
 		),
 	},
+	unstable_conditionNames: [
+		  'browser',
+  			'require',
+ 		 'react-native',
+	]
 };
 
 module.exports = withNativeWind(config, {
