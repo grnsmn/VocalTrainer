@@ -47,7 +47,8 @@
             "compileSdkVersion": 34,
             "targetSdkVersion": 34,
             "buildToolsVersion": "34.0.0",
-            "minSdkVersion": 24
+            "minSdkVersion": 24,
+            "gradlePluginVersion": "8.3.2"
           }
         }
       ],
