@@ -37,7 +37,7 @@
       }
     },
     "owner": "gscripts",
-    "newArchEnabled": true,
+    "userInterfaceStyle": "automatic",
     "plugins": [
       [
         "expo-build-properties",
