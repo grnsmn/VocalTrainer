@@ -13,6 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "newArchEnabled": false,
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -36,15 +37,22 @@
       }
     },
     "owner": "gscripts",
-    "newArchEnabled": true,
+    "userInterfaceStyle": "automatic",
     "plugins": [
       [
         "expo-build-properties",
         {
           "android": {
-            "kotlinVersion": "1.9.25"
+            "kotlinVersion": "2.0.21",
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "buildToolsVersion": "35.0.0"
           }
         }
+      ],
+      [
+        "./plugins/minSdkProjectGradlePatch",
+        {}
       ],
       "expo-font",
       [
@@ -52,7 +60,8 @@
         {
           "initialOrientation": "DEFAULT"
         }
-      ]
+      ],
+      "expo-audio"
     ]
   }
 }
