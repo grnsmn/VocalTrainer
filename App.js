@@ -30,6 +30,7 @@ import { Platform } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import useAuthSync from './src/hooks/useAuthSync';
+import { Client, Account, ID, Models } from 'react-native-appwrite';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,6 +38,19 @@ const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
+
+let client;
+let account;
+
+client = new Client();
+client
+	.setEndpoint('https://fra.cloud.appwrite.io/v1') // Your API Endpoint
+	.setProject('68c521460031cc555128') // Your project ID
+	.setPlatform('com.VocalTrainer.app');
+
+account = new Account(client);
+console.log('🚀 ~ testing', client);
+console.log('🚀 ~ account', account);
 const screenOptions = {
 	headerTitleAlign: 'center',
 	headerStyle: { backgroundColor: '#c6e9ff' },
