@@ -29,9 +29,9 @@ module.exports = function withMinSdkProjectGradlePatch(config) {
 
 		config.modResults.contents = addCode.contents;
 
-		console.log(
-			'[minSdkProjectGradlePatch] Gradle patch applied successfully!',
-		);
+		// console.log(
+		// 	'[minSdkProjectGradlePatch] Gradle patch applied successfully!',
+		// );
 
 		return config;
 	});
