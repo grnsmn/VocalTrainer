@@ -41,6 +41,7 @@ const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
 const TheoryStack = createNativeStackNavigator();
+
 const screenOptions = {
 	headerTitleAlign: 'center',
 	headerStyle: { backgroundColor: '#c6e9ff' },
@@ -114,8 +115,16 @@ function TheoryStackScreen() {
 				headerRight: () => <HeaderRight />,
 			}}
 		>
-			<TheoryStack.Screen name="TheoryList" component={TheoryList} options={{ title: 'Teoria Musicale' }}/>
-			<TheoryStack.Screen name="PdfViewer" component={PdfViewer} options={({ route }) => ({ title: route.params.title })}/>
+			<TheoryStack.Screen
+				name="TheoryList"
+				component={TheoryList}
+				options={{ title: 'Teoria Musicale' }}
+			/>
+			<TheoryStack.Screen
+				name="PdfViewer"
+				component={PdfViewer}
+				options={({ route }) => ({ title: route.params.title })}
+			/>
 		</TheoryStack.Navigator>
 	);
 }
