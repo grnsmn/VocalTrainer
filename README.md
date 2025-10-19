@@ -4,62 +4,61 @@
   <img src="./assets/splash.png" alt="Logo" height="200" />
 </p>
 
-### Benvenuti nell'app Vocal Trainer, un'app cross-platform per esercitazioni vocali sviluppata utilizzando React Native con Expo.
+### Welcome to the Vocal Trainer app, a cross-platform vocal training app developed using React Native with Expo.
 
 ## Demo
-### Se sei incuriosito di provare di cosa si tratta puoi provare la [Demo web](https://vocaltrainer.netlify.app/)
+### If you are curious to try it out, you can check the [Web Demo](https://vocaltrainer.netlify.app/)
 
 <p align="center">
-  <img src="./assets/Demo_web.jpeg" alt="web_demo" height="450" />
-  <img src="./assets/Demo_ios.png" alt="ios_demo" height="450" />
+  <img src="./assets/Demo_web.png" alt="web_demo" height="450" />
+  <img src="./assets/Demo_android.png" alt="android_demo" height="450" />
 </p>
 
-## Descrizione
+## Description
 
-L'app Vocal Trainer è un'applicazione mobile progettata per aiutare i cantanti a migliorare le loro abilità vocali attraverso esercitazioni mirate. L'app offre diverse sezioni di esercizi:
+The Vocal Trainer app is a mobile application designed to help singers improve their vocal skills through targeted exercises. The app offers several exercise sections:
 
-- Esercizi di Respiro
-- Esercizi di Vocalizzi
+- Breathing Exercises
+- Vocal Exercises
 
-Ogni sezione fornisce una serie di esercizi appositamente creati per sviluppare e migliorare abilità specifiche nel canto.
+Each section provides a series of exercises specifically created to develop and improve specific singing skills.
 
-### **Allo stato attuale nella sezione dei vocalizzi sono disponibili solo audio per esercitazione adatta a voci tenorili.**
+### **Currently, only practice audio suitable for tenor voices is available in the vocal exercises section.**
 
-## Caratteristiche Principali
+## Main Features
 
-- Esercizi di Respiro: Questa sezione offre una serie di esercizi progettati per migliorare il controllo del respiro e la capacità polmonare dei cantanti.
+- Breathing Exercises: This section offers a series of exercises designed to improve breath control and lung capacity for singers.
 <!-- 
-- Esercizi Ritmici: Qui troverai esercizi per affinare il senso del ritmo e la precisione nell'interpretazione delle note musicali. (Ancora in fase progettuale) -->
+- Rhythmic Exercises: Here you will find exercises to refine your sense of rhythm and precision in interpreting musical notes. (Still in the planning stage) -->
 
-- Esercizi audio con Vocalizzi: La sezione dei vocalizzi ti permetterà di eseguire una varietà di vocalizzi per potenziare la flessibilità e la gamma della tua voce.
+- Audio Exercises with Vocalizations: The vocal exercises section will allow you to perform a variety of vocalizations to enhance the flexibility and range of your voice.
 
-## Contribuzione
+## Contribution
 
-### Installazione
+### Installation
 
-1. Assicurati di avere [Node.js](https://nodejs.org/) installato.
-2. Clone o scarica il repository.
-3. Apri il terminale nella directory del progetto e esegui `npm install` per installare le dipendenze.
-4. Esegui `npm start` per avviare l'app Expo.
+1. Make sure you have [Node.js](https://nodejs.org/) installed. We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions.
+2. Clone or download the repository.
+3. Open the terminal in the project directory and run `npm install` to install the dependencies.
+4. Run `npm start` to start the Expo app.
 
-
-### Requisiti di Sistema
+### System Requirements
 
 - Node.js
 - npm
 - Expo CLI
 - Firebase Storage
-- Firebase Reatime Database
+- Firebase Realtime Database
+- Firebase Authentication
 
+Contributions are welcome! If you wish to contribute to this project, follow these steps:
 
-Le contribuzioni sono ben accette! Se desideri contribuire a questo progetto, segui questi passaggi:
-
-1. Forka il repository.
-2. Crea un branch per le tue modifiche: `git checkout -b feature/nuova-funzionalita`.
-3. Fai i tuoi cambiamenti e commit: `git commit -m 'Aggiunta nuova funzionalità'`.
-4. Pusha il tuo branch: `git push origin feature/nuova-funzionalita`.
-5. Apri una Pull Request nella repository originale.
+1. Fork the repository.
+2. Create a branch for your changes: `git checkout -b feature/new-feature`.
+3. Make your changes and commit: `git commit -m 'Added new feature'`.
+4. Push your branch: `git push origin feature/new-feature`.
+5. Open a Pull Request in the original repository.
 
 ---
 
-Sviluppato da @grnsmn
+Developed by @grnsmn
