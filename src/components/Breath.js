@@ -115,13 +115,6 @@ const BreathingSession = ({ exercise }) => {
 					/>
 
 					<Text className="text-primary-600">{bpm} BPM</Text>
-					{/* <Text
-						className={`font-bold self-center text-xl ${
-							playing ? 'text-orange-400' : 'text-primary-600'
-						}`}
-					>
-						Count: {count - 1}{' '}
-					</Text> */}
 
 					<Center className="w-full max-w-[320px] mx-auto h-10">
 						<Slider
