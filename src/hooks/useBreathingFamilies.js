@@ -20,7 +20,6 @@ const useBreathingFamilies = () => {
 			snapshot => {
 				setLoading(true);
 				snapshot?.forEach(childSnap => {
-					console.log('🚀 ~ childSnap:', childSnap.val());
 					famiglia = childSnap.val();
 
 					tmp.push(famiglia);
