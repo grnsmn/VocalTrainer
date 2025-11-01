@@ -47,7 +47,7 @@ const BreathingList = ({ route, navigation }) => {
 	return (
 		<FlatList
 			data={exercices}
-			keyExtractor={item => item.titolo}
+			keyExtractor={item => item?.id}
 			renderItem={renderItem}
 			className="bg-primary-0"
 			showsVerticalScrollIndicator={false}
