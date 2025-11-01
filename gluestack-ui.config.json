@@ -1,0 +1,15 @@
+{
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "global.css"
+  },
+  "app": {
+    "entry": "App.js",
+    "components": "components/ui"
+  },
+  "fonts": {
+    "Roboto": {
+      "normal": "https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2"
+    }
+  }
+}

@@ -1,5 +1,5 @@
+import { FlatList } from "@/components/ui/flat-list";
 import React from 'react';
-import { FlatList } from '@gluestack-ui/themed';
 import CardSelect from '../../components/CardSelect';
 import { useNavigation } from '@react-navigation/native';
 import Hero from '../../components/Hero';
@@ -30,11 +30,11 @@ export const Vocalizations = () => {
 	};
 
 	return (
-		<FlatList
-			bg={'$primary0'}
+        <FlatList
 			data={categoryListArray}
 			renderItem={renderItem}
 			ListHeaderComponent={<Hero />}
+			className="bg-primary-0"
 		/>
-	);
+    );
 };

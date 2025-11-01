@@ -1,4 +1,5 @@
-import { Text, Box, VStack } from '@gluestack-ui/themed';
+import { Text } from '@/components/ui/text';
+import { Box } from '@/components/ui/box';
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '../store';
 
@@ -44,34 +45,25 @@ const Bullet = ({ item, isActive, onComplete, bpm }) => {
 		return Array.from({ length: item.duration }).map((_, index) => (
 			<Box
 				key={index}
-				width={10}
-				height={10}
-				borderRadius={5}
-				borderWidth={1}
-				borderColor="#000"
-				backgroundColor={index < playCount ? '#000' : 'transparent'}
+				className="w-4 h-4 rounded-full border-2 border-black mx-0.5"
+				style={{
+					backgroundColor: index < playCount ? '#000' : 'transparent',
+				}}
 			/>
 		));
 	};
 
 	return (
-		<Box
-			flexDirection="row"
-			alignItems="center"
-			justifyContent="space-between"
-			flexWrap="wrap"
-			gap={'$2'}
-		>
-			<Text bold={isActive} size="xl" maxWidth="70%">
+		<Box className="flex-row items-center flex-wrap gap-2">
+			<Text
+				className="text-2xl font-bold text-black"
+				style={{
+					fontWeight: isActive ? 'bold' : 'normal',
+				}}
+			>
 				{`\u29BF ${item.definition}`}
 			</Text>
-			<Box
-				flexDirection="row"
-				gap={'$1'}
-				flexWrap="wrap"
-				alignItems="center"
-				justifyContent="center"
-			>
+			<Box className="flex-row gap-1 flex-wrap items-center justify-center">
 				{renderDots()}
 			</Box>
 		</Box>

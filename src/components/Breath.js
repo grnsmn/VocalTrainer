@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { Center } from '@/components/ui/center';
+import { FlatList } from '@/components/ui/flat-list';
 import {
-	Text,
 	Slider,
-	FlatList,
-	Center,
 	SliderFilledTrack,
 	SliderTrack,
 	SliderThumb,
-	Heading,
-} from '@gluestack-ui/themed';
+} from '@/components/ui/slider';
+import { Text } from '@/components/ui/text';
+import React, { Component, useEffect, useState } from 'react';
 import { Volume, Volume2Icon } from 'lucide-react-native';
+
 import { View } from 'react-native';
 import CardPlay from './CardPlay';
-import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove
+import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js
+
 import Bullet from './Bullet';
+import { Heading } from '@/components/ui/heading';
 
 const BreathingSession = ({ exercise }) => {
 	const { cycles, description } = exercise;
@@ -112,9 +114,16 @@ const BreathingSession = ({ exercise }) => {
 						showSeparator
 					/>
 
-					<Text color={'$primary600'}>{bpm} BPM</Text>
+					<Text className="text-primary-600">{bpm} BPM</Text>
+					{/* <Text
+						className={`font-bold self-center text-xl ${
+							playing ? 'text-orange-400' : 'text-primary-600'
+						}`}
+					>
+						Count: {count - 1}{' '}
+					</Text> */}
 
-					<Center flex={1} w={'$80%'} h={40}>
+					<Center className="w-full max-w-[320px] mx-auto h-10">
 						<Slider
 							defaultValue={80}
 							size="sm"
@@ -124,6 +133,7 @@ const BreathingSession = ({ exercise }) => {
 							isDisabled={false}
 							isReversed={false}
 							onChange={handleBpmChange}
+							className="w-full max-w-[320px] mx-auto"
 						>
 							<SliderTrack>
 								<SliderFilledTrack />

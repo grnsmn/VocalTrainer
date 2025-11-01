@@ -1,5 +1,5 @@
+import { FlatList } from '@/components/ui/flat-list';
 import React from 'react';
-import { FlatList } from '@gluestack-ui/themed';
 import useBreathingFamilies from '../../hooks/useBreathingFamilies';
 import CardSelect from '../../components/CardSelect';
 import Loader from '../../components/Loader';
@@ -31,11 +31,11 @@ const CategoriesBreath = ({ navigation }) => {
 
 	return (
 		<FlatList
-			bg="$primary0"
 			data={families}
 			keyExtractor={item => item.id}
 			renderItem={renderItem}
 			ListHeaderComponent={<Hero />}
+			className="bg-primary-0"
 		/>
 	);
 };

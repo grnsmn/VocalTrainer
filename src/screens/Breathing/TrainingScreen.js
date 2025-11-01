@@ -1,11 +1,11 @@
+import { ScrollView } from '@/components/ui/scroll-view';
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import BreathingSession from '../../components/Breath';
-import { ScrollView } from '@gluestack-ui/themed';
+// import Metronome from '../components/MetronomeHook'
 
 const TrainingScreen = ({ route, navigation }) => {
 	const { exercice } = route?.params;
-	console.log('🚀 ~ exercice:', exercice);
 
 	useEffect(() => {
 		navigation.setOptions({
@@ -23,33 +23,15 @@ const TrainingScreen = ({ route, navigation }) => {
 	}, []);
 
 	return (
-		<View style={styles.container}>
-			<ScrollView flexGrow={1} h={'$full'}>
-				{/* <Text style={styles.Descript}>{exercice?.description}</Text> */}
+		<View className="flex-1 h-full">
+			<ScrollView className="grow-[1px] h-full">
+				<Text className="text-xl leading-[24px] text-center italic my-4 px-1 ">
+					{exercice?.dewcription}
+				</Text>
 				<BreathingSession exercise={exercice} />
 			</ScrollView>
 		</View>
 	);
 };
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		height: '100%',
-	},
-	Title: {
-		fontSize: 16,
-		textAlign: 'center',
-		color: 'red',
-		fontWeight: 'bold',
-	},
-	Descript: {
-		fontSize: 20,
-		lineHeight: 30,
-		textAlign: 'justify',
-		fontStyle: 'bold',
-		marginVertical: 16,
-		paddingHorizontal: 16,
-	},
-});
 export default TrainingScreen;

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { FlatList } from '@gluestack-ui/themed';
+import { FlatList } from '@/components/ui/flat-list';
+import { useState, useEffect } from 'react';
 import CardSelect from '../../components/CardSelect';
 import useStore from '../../store';
 import { Audio } from 'expo-av';
@@ -25,9 +25,6 @@ const BreathingList = ({ route, navigation }) => {
 
 		navigation.setOptions({
 			title: famiglia,
-			headerTitleStyle: {
-				fontSize: 24,
-			},
 		});
 
 		loadSounds();
@@ -49,10 +46,11 @@ const BreathingList = ({ route, navigation }) => {
 
 	return (
 		<FlatList
-			bg="$primary0"
 			data={exercices}
 			keyExtractor={item => item.titolo}
 			renderItem={renderItem}
+			className="bg-primary-0"
+			showsVerticalScrollIndicator={false}
 		/>
 	);
 };
