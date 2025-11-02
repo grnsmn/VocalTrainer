@@ -23,15 +23,15 @@ const BreathingSession = ({ exercise }) => {
 
 	const [bpm, setBpm] = useState(100);
 	const [playing, setPlaying] = useState(false);
-	const { 
+	const {
 		count: activeCycle,
 		increment: incrementCycle,
-		reset: resetCycle
+		reset: resetCycle,
 	} = useCounter(0);
 	const {
 		count: currentBullet,
 		increment: incrementBullet,
-		reset: resetBullet
+		reset: resetBullet,
 	} = useCounter(0);
 
 	const { bullets } = cycles[activeCycle] || {};
