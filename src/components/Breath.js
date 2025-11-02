@@ -72,21 +72,24 @@ const BreathingSession = ({ exercise }) => {
 		);
 	};
 
+	const ListHeaderComponent = () =>
+		description ? (
+			<Heading
+				size="xl"
+				className="p-4 text-primary-700 border-y-2 border-primary-200 mb-4"
+				alignSelf="center"
+			>
+				{description}
+			</Heading>
+		) : null;
+
 	return (
 		<>
 			<FlatList
 				className="bg-primary-0 flex-1 p-4"
 				data={bullets}
 				scrollEnabled={false}
-				ListHeaderComponent={
-					<Heading
-						size="xl"
-						className="p-4 text-primary-700 border-y-2 border-primary-200 mb-4"
-						alignSelf="center"
-					>
-						{description}
-					</Heading>
-				}
+				ListHeaderComponent={ListHeaderComponent}
 				ListFooterComponent={() => (
 					<CardPlay
 						onPress={startStop}
