@@ -32,8 +32,8 @@
     "@react-navigation/native-stack": "^6.9.26",
     "babel-plugin-module-resolver": "^5.0.2",
     "expo": "53.0.22",
-    "expo-av": "~15.1.7",
     "expo-audio": "~0.4.9",
+    "expo-av": "~15.1.7",
     "expo-build-properties": "~0.14.8",
     "expo-font": "~13.3.2",
     "expo-image": "~2.4.0",
@@ -63,6 +63,7 @@
     "tailwindcss": "^3.4.17",
     "tonal": "^6.4.1",
     "tone": "^15.1.22",
+    "usehooks-ts": "^3.1.1",
     "zustand": "5.0.1"
   },
   "devDependencies": {
