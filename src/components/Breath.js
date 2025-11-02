@@ -72,16 +72,31 @@ const BreathingSession = ({ exercise }) => {
 		);
 	};
 
-	const ListHeaderComponent = () =>
-		description ? (
-			<Heading
-				size="xl"
-				className="p-4 text-primary-700 border-y-2 border-primary-200 mb-4"
-				alignSelf="center"
-			>
-				{description}
-			</Heading>
-		) : null;
+	const ListHeaderComponent = () => {
+		return (
+			<View className="mb-4">
+				{description ? (
+					<Heading
+						size="xl"
+						className="p-4 text-primary-700 border-y-2 border-primary-200 mb-4"
+						alignSelf="center"
+					>
+						{description}
+					</Heading>
+				) : null}
+				<View className="flex-row justify-between items-center mb-2">
+					<Text className="text-primary-500">
+						Da ripetere per {cycles?.length} Cicli
+					</Text>
+					{playing && (
+						<Text className="text-primary-500 self-end" bold>
+							{activeCycle + 1}° Ciclo in corso
+						</Text>
+					)}
+				</View>
+			</View>
+		);
+	};
 
 	return (
 		<>
