@@ -22,7 +22,7 @@ const BreathingSession = ({ exercise }) => {
 	const { cycles, description, skip_metronome } = exercise || {};
 
 	const [bpm, setBpm] = useState(100);
-	const [playing, setPlaying] = useState(false);
+	const [playing, setPlaying] = useState(false); //TODO: replace with useBoolean
 	const {
 		count: activeCycle,
 		increment: incrementCycle,
