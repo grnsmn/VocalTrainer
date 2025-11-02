@@ -1,36 +1,28 @@
-import { getDatabase, onValue, ref } from 'firebase/database';
+import { getDatabase, onValue, ref, off } from 'firebase/database';
 import { useEffect, useState } from 'react';
-import useStore from '../store';
-import test from '../../test.json';
 
 const useBreathingFamilies = () => {
 	const [loading, setLoading] = useState(false);
 	const [families, setFamilies] = useState([]);
 
-	const db = getDatabase();
-	const refBreathingDB = ref(db, '/families/');
-
 	useEffect(() => {
-		let tmp = [];
-		let famiglia = {};
-		setFamilies([]);
+		const db = getDatabase();
+		const refBreathingDB = ref(db, '/families/');
 
-		onValue(
-			refBreathingDB,
-			snapshot => {
-				setLoading(true);
-				snapshot?.forEach(childSnap => {
-					famiglia = childSnap.val();
+		setLoading(true);
 
-					tmp.push(famiglia);
-				});
-				setFamilies(tmp);
-				setLoading(false);
-			},
-			error => {
-				setAuth(undefined); // android: workaround to force logout when error occurs to fetch data
-			},
-		);
+		const handleValue = snapshot => {
+			const data = snapshot.val();
+			const familiesArray = data ? Object.values(data) : [];
+			setFamilies(familiesArray);
+			setLoading(false);
+		};
+
+		onValue(refBreathingDB, handleValue);
+
+		return () => {
+			off(refBreathingDB, 'value', handleValue);
+		};
 	}, []);
 
 	return { families, loading };
