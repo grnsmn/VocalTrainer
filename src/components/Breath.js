@@ -9,6 +9,7 @@ import {
 import { Text } from '@/components/ui/text';
 import React, { Component, useEffect, useState } from 'react';
 import { Volume, Volume2Icon } from 'lucide-react-native';
+import { useCounter } from 'usehooks-ts';
 
 import { View } from 'react-native';
 import CardPlay from './CardPlay';
@@ -22,8 +23,16 @@ const BreathingSession = ({ exercise }) => {
 
 	const [bpm, setBpm] = useState(100);
 	const [playing, setPlaying] = useState(false);
-	const [activeCycle, setActiveCycle] = useState(0);
-	const [currentBullet, setCurrentBullet] = useState(0);
+	const { 
+		count: activeCycle,
+		increment: incrementCycle,
+		reset: resetCycle
+	} = useCounter(0);
+	const {
+		count: currentBullet,
+		increment: incrementBullet,
+		reset: resetBullet
+	} = useCounter(0);
 
 	const { bullets } = cycles[activeCycle] || {};
 	// Play/stop functionality
@@ -33,9 +42,9 @@ const BreathingSession = ({ exercise }) => {
 			return;
 		}
 		if (playing) {
-			setCurrentBullet(0);
+			resetBullet();
 			setPlaying(false);
-			setActiveCycle(0);
+			resetCycle();
 		} else {
 			setPlaying(true);
 		}
@@ -53,8 +62,8 @@ const BreathingSession = ({ exercise }) => {
 
 	useEffect(() => {
 		if (currentBullet === bullets?.length) {
-			setCurrentBullet(0);
-			setActiveCycle(prev => prev + 1);
+			resetBullet();
+			incrementCycle();
 		}
 		if (activeCycle === cycles.length) {
 			startStop();
@@ -69,7 +78,7 @@ const BreathingSession = ({ exercise }) => {
 				item={item}
 				isActive={isActive}
 				skipCounter={skip_metronome}
-				onComplete={() => setCurrentBullet(prev => prev + 1)}
+				onComplete={() => incrementBullet()}
 				bpm={bpm}
 			/>
 		);
