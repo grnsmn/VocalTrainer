@@ -20,7 +20,7 @@ import { Heading } from '@/components/ui/heading';
 
 const BreathingSession = ({ exercise }) => {
 	const { cycles, description, skip_metronome } = exercise || {};
-	const [playing, setPlaying] = useState(false); //TODO: replace with useBoolean
+	const [playing, setPlaying] = useState(false);
 	const [bpm, setBpm] = useState(100);
 
 	const {
