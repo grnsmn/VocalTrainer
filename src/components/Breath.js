@@ -20,9 +20,9 @@ import { Heading } from '@/components/ui/heading';
 
 const BreathingSession = ({ exercise }) => {
 	const { cycles, description, skip_metronome } = exercise || {};
-
-	const [bpm, setBpm] = useState(100);
 	const [playing, setPlaying] = useState(false); //TODO: replace with useBoolean
+	const [bpm, setBpm] = useState(100);
+
 	const {
 		count: activeCycle,
 		increment: incrementCycle,
@@ -48,11 +48,6 @@ const BreathingSession = ({ exercise }) => {
 		} else {
 			setPlaying(true);
 		}
-	};
-
-	// Countdown toggle
-	const handleCountDown = () => {
-		setStartCountDown(prev => !prev);
 	};
 
 	// BPM change handler
@@ -145,7 +140,6 @@ const BreathingSession = ({ exercise }) => {
 						}}
 						separatorStyle={{ color: '#c6e9ff' }}
 						timeToShow={['S']}
-						running={handleCountDown}
 						timeLabels={{ s: null }}
 						showSeparator
 					/>
