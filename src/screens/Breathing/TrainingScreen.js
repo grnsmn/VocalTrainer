@@ -1,6 +1,6 @@
 import { ScrollView } from '@/components/ui/scroll-view';
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import BreathingSession from '../../components/Breath';
 // import Metronome from '../components/MetronomeHook'
 
@@ -23,14 +23,9 @@ const TrainingScreen = ({ route, navigation }) => {
 	}, []);
 
 	return (
-		<View className="flex-1 h-full">
-			<ScrollView className="grow-[1px] h-full">
-				<Text className="text-xl leading-[24px] text-center italic my-4 px-1 ">
-					{exercice?.dewcription}
-				</Text>
-				<BreathingSession exercise={exercice} />
-			</ScrollView>
-		</View>
+		<ScrollView className="grow-[1px] h-full bg-primary-0">
+			<BreathingSession exercise={exercice} />
+		</ScrollView>
 	);
 };
 

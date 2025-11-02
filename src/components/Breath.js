@@ -75,28 +75,34 @@ const BreathingSession = ({ exercise }) => {
 	return (
 		<>
 			<FlatList
+				className="bg-primary-0 flex-1 p-4"
 				data={bullets}
 				scrollEnabled={false}
 				ListHeaderComponent={
-					<Heading alignSelf="center">{description}</Heading>
+					<Heading
+						size="xl"
+						className="p-4 self-center"
+						alignSelf="center"
+					>
+						{description}
+					</Heading>
 				}
-				contentContainerStyle={{ padding: 16 }}
 				ListFooterComponent={() => (
 					<CardPlay
-						flex={1}
 						onPress={startStop}
 						title={playing ? 'Stop  ' : 'Play '}
 						RightIcon={playing ? Volume : Volume2Icon}
 					/>
 				)}
+				ListFooterComponentStyle={{ marginTop: 24 }}
 				renderItem={renderItem}
 			/>
 			<View style={styles.infoTrainer}>
 				<View style={styles.controlContainer}>
 					<CountDown
 						size={30}
-						until={2}
-						// onFinish={playing ? null : startStop}
+						until={8}
+						onFinish={playing ? null : startStop}
 						digitStyle={{
 							backgroundColor: '#FFF',
 							borderWidth: 2,

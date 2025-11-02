@@ -54,9 +54,9 @@ const Bullet = ({ item, isActive, onComplete, bpm }) => {
 	};
 
 	return (
-		<Box className="flex-row items-center flex-wrap gap-2">
+		<Box className="flex-row items-center flex-wrap gap-4">
 			<Text
-				className="text-2xl font-bold text-black"
+				className="text-3xl font-bold text-black"
 				style={{
 					fontWeight: isActive ? 'bold' : 'normal',
 				}}
