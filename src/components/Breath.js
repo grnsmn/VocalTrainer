@@ -18,7 +18,7 @@ import Bullet from './Bullet';
 import { Heading } from '@/components/ui/heading';
 
 const BreathingSession = ({ exercise }) => {
-	const { cycles, description } = exercise;
+	const { cycles, description, skip_metronome } = exercise || {};
 
 	const [bpm, setBpm] = useState(100);
 	const [playing, setPlaying] = useState(false);
@@ -28,6 +28,10 @@ const BreathingSession = ({ exercise }) => {
 	const { bullets } = cycles[activeCycle] || {};
 	// Play/stop functionality
 	const startStop = () => {
+		if (skip_metronome) {
+			//TODO: integrate play audio guide for exercises without integrated metronome
+			return;
+		}
 		if (playing) {
 			setCurrentBullet(0);
 			setPlaying(false);
@@ -55,7 +59,7 @@ const BreathingSession = ({ exercise }) => {
 		if (activeCycle === cycles.length) {
 			startStop();
 		}
-	}, [currentBullet, activeCycle]);
+	}, [currentBullet, activeCycle, bullets, cycles.length]);
 
 	const renderItem = ({ item, index }) => {
 		const isActive = playing && index === currentBullet;
@@ -64,6 +68,7 @@ const BreathingSession = ({ exercise }) => {
 				key={index}
 				item={item}
 				isActive={isActive}
+				skipCounter={skip_metronome}
 				onComplete={() => setCurrentBullet(prev => prev + 1)}
 				bpm={bpm}
 			/>

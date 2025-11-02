@@ -4,14 +4,12 @@ import React, { useEffect } from 'react';
 import useStore from '../store';
 import { useInterval, useCounter } from 'usehooks-ts';
 
-const Bullet = ({ item, isActive, onComplete, bpm }) => {
+const Bullet = ({ item, isActive, onComplete, bpm, skipCounter }) => {
+	const { count: playCounter, increment, reset } = useCounter(0);
 	const {
 		sounds: { click1, click2 },
 	} = useStore();
 
-	const { count: playCounter, increment, reset } = useCounter(0);
-
-	// Funzione che gestisce la riproduzione dei click
 	const handleClick = () => {
 		if (playCounter + 1 === item.duration) {
 			click2?.replayAsync();
@@ -24,31 +22,32 @@ const Bullet = ({ item, isActive, onComplete, bpm }) => {
 	useInterval(handleClick, isActive ? (60 / bpm) * 1000 : null);
 
 	useEffect(() => {
-		if (playCounter === item.duration) {
+		if (playCounter === item.duration && !skipCounter) {
 			reset();
 			onComplete();
 		}
 	}, [playCounter, item.duration, reset, onComplete]);
 
 	const renderDots = () => {
-		if (!isActive)
+		if (!isActive) {
 			return (
-				<Text
-					bold
-					className="text-primary-700"
-					size={'xl'}
-				>{`[${item.duration}BPM]`}</Text>
+				<Text bold className="text-primary-700" size="xl">
+					{`[${item.duration}BPM]`}
+				</Text>
 			);
+		}
 
-		const dots = Array.from({ length: item.duration });
-
-		return dots?.map((_, index) =>
-			index < playCounter ? (
-				<Box
-					key={index}
-					className="w-4 h-4 rounded-full border-2 border-black mx-0.5 bg-primary-500"
-				/>
-			) : null,
+		return (
+			<>
+				{Array.from({ length: item.duration }).map((_, index) =>
+					index < playCounter ? (
+						<Box
+							key={index}
+							className="w-4 h-4 rounded-full border-2 border-black mx-0.5 bg-primary-500"
+						/>
+					) : null,
+				)}
+			</>
 		);
 	};
 
