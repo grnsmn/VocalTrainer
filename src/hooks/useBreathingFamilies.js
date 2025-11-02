@@ -33,7 +33,7 @@ const useBreathingFamilies = () => {
 		);
 	}, []);
 
-	return { families: test.families, loading };
+	return { families, loading };
 };
 
 export default useBreathingFamilies;
