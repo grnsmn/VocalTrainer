@@ -29,12 +29,10 @@ const BreathingSession = ({ exercise }) => {
 	// Play/stop functionality
 	const startStop = () => {
 		if (playing) {
-			// clearInterval(timer.current);
 			setCurrentBullet(0);
 			setPlaying(false);
 			setActiveCycle(0);
 		} else {
-			// timer.current = setInterval(() => playClick(), (60 / bpm) * 1000);
 			setPlaying(true);
 		}
 	};
