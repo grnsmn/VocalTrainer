@@ -42,23 +42,30 @@ const Bullet = ({ item, isActive, onComplete, bpm }) => {
 	}, [playCount]);
 
 	const renderDots = () => {
-		return Array.from({ length: item.duration }).map((_, index) => (
-			<Box
-				key={index}
-				className="w-4 h-4 rounded-full border-2 border-black mx-0.5"
-				style={{
-					backgroundColor: index < playCount ? '#000' : 'transparent',
-				}}
-			/>
-		));
+		return Array.from({ length: item.duration + 1 }).map((_, index) =>
+			isActive && index <= playCount ? (
+				<Box
+					key={index}
+					className="w-4 h-4 rounded-full border-2 border-black mx-0.5 bg-primary-500"
+				/>
+			) : null,
+		);
 	};
 
 	return (
-		<Box className="flex-row items-center flex-wrap gap-4">
+		<Box
+			className="flex-row items-center flex-wrap gap-2 rounded-2xl justify-between"
+			style={{
+				borderWidth: isActive ? 2 : 0,
+				padding: isActive ? 12 : 0,
+				backgroundColor: isActive ? '#d0f0ff' : 'transparent',
+			}}
+		>
 			<Text
-				className="text-3xl font-bold text-black"
+				className="text-2xl text-black"
 				style={{
 					fontWeight: isActive ? 'bold' : 'normal',
+					fontSize: isActive ? 26 : 22,
 				}}
 			>
 				{`\u29BF ${item.definition}`}
