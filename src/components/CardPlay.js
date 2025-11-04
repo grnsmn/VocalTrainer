@@ -21,7 +21,7 @@ const CardPLay = ({
 		onPress(title);
 	};
 	return (
-		<Pressable onPress={handleOnPress} className="m-2">
+		<Pressable onPress={handleOnPress} className="m-2 active:opacity-50">
 			<Card
 				size="lg"
 				variant="elevated"

@@ -7,14 +7,31 @@ import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
 import CardPlay from '../../components/CardPlay';
 import Loader from '../../components/Loader';
-import { Audio } from 'expo-av';
+import { useAudioPlayer } from 'expo-audio';
 import { Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
-	const [sound, setSound] = useState('');
 	const [soundChoose, setSoundChoose] = useState('');
-	const [isLoadingSound, setIsLoadingSound] = useState(false);
+	const [source, setSource] = useState(null);
+	const player = useAudioPlayer(source);
+
+	useEffect(() => {
+		if (!source) {
+			return;
+		}
+
+		player.play();
+		// Cleanup function to stop the player when component unmounts or source changes
+		return () => {
+			if (player.playing) {
+				player.pause();
+				setSource(null);
+				setSoundChoose('');
+			}
+		};
+	}, [source, player]);
+
 	const { storage, storageRef } = useStorage({
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
@@ -23,52 +40,34 @@ const VocalizationsList = ({ route }) => {
 	});
 
 	/* ---------------------- handle play vocalize sound --------------------- */
-	useEffect(() => {
-		const setAudio = async () => {
-			if (soundChoose !== '') {
-				setIsLoadingSound(true);
-				const soundRef = ref(storage, `${STORAGE_PATH}/${soundChoose}`);
-				if (soundRef) {
-					const uri = await getDownloadURL(soundRef);
-					// console.log('Loading Sound');
-					const { sound: soundFirebase } =
-						await Audio.Sound.createAsync({
-							uri,
-						});
-					setSound(soundFirebase);
-				}
-			}
-		};
-		setAudio();
-	}, [soundChoose]);
+	const handlePlayPause = async path => {
+		if (player.playing && soundChoose === path) {
+			player.pause();
+			setSource(null);
+			setSoundChoose('');
+			return;
+		}
 
-	useEffect(() => {
-		const play = async () => {
-			playSound();
-		};
-		play();
-		return sound
-			? () => {
-					// console.log('Unloading Sound');
-					sound.unloadAsync();
-			  }
-			: undefined;
-	}, [sound]);
+		if (player.playing) {
+			player.pause();
+		}
 
-	const playSound = async () => {
-		if (sound) {
-			const statusSound = await sound?.getStatusAsync();
-			setIsLoadingSound(false);
+		setSoundChoose(path);
 
-			if (!statusSound.isPlaying) {
-				// console.log('Playing Sound');
-				await sound.playAsync();
-			} else {
-				// console.log('Pause Sound');
-				await sound.stopAsync();
-				setSoundChoose('');
-				setSound('');
-			}
+		try {
+			const soundRef = ref(storage, `${STORAGE_PATH}/${path}`);
+			const uri = await getDownloadURL(soundRef);
+			setSource(uri);
+		} catch (error) {
+			console.error('Error getting download URL:', error);
+		}
+	};
+
+	const stopSound = () => {
+		if (player.isPlaying) {
+			player.pause();
+			setSource(null);
+			setSoundChoose('');
 		}
 	};
 
@@ -87,17 +86,18 @@ const VocalizationsList = ({ route }) => {
 		const title = getTitleExercise(pathVocalization);
 		const chosen = getTitleExercise(soundChoose) === title;
 
-		if (title) {
-			return (
-				<CardPlay
-					title={title}
-					onPress={() => setSoundChoose(pathVocalization)}
-					RightIcon={Play}
-					isPlaying={chosen}
-					isLoading={isLoadingSound && chosen}
-				/>
-			);
+		if (!title) {
+			return null;
 		}
+		return (
+			<CardPlay
+				title={title}
+				onPress={() => handlePlayPause(pathVocalization)}
+				RightIcon={Play}
+				isPlaying={chosen}
+				isLoading={player.loading}
+			/>
+		);
 	};
 
 	/* --------------------------------- render --------------------------------- */
@@ -107,26 +107,12 @@ const VocalizationsList = ({ route }) => {
 	}
 
 	return (
-		<>
-			<FlatList
-				data={data}
-				renderItem={renderItem}
-				className="bg-primary-0"
-				showsVerticalScrollIndicator={false}
-			/>
-			{!!sound && (
-				<Fab
-					placement={'bottom right'}
-					showLabel={true}
-					onPress={playSound}
-					className="items-center bg-warning-600"
-				>
-					<FabLabel className="text-black">
-						{`STOP ${getTitleExercise(soundChoose)}`}
-					</FabLabel>
-				</Fab>
-			)}
-		</>
+		<FlatList
+			data={data}
+			renderItem={renderItem}
+			className="bg-primary-0"
+			showsVerticalScrollIndicator={false}
+		/>
 	);
 };
 export default VocalizationsList;
