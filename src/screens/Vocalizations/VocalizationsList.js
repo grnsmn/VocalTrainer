@@ -1,77 +1,43 @@
 import { FlatList } from '@/components/ui/flat-list';
-import { Fab, FabLabel } from '@/components/ui/fab';
-import React, { useCallback, useEffect, useState } from 'react';
-import { ref, getDownloadURL } from 'firebase/storage';
-import { STORAGE_PATH } from '@env';
+import React, { useCallback, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
+import { useAudioControl } from '../../hooks/useAudioControl';
 import CardPlay from '../../components/CardPlay';
 import Loader from '../../components/Loader';
-import { useAudioPlayer } from 'expo-audio';
 import { Play } from 'lucide-react-native';
 
 const VocalizationsList = ({ route }) => {
 	const { typeVocal, selectedListName } = route.params;
-	const [soundChoose, setSoundChoose] = useState('');
-	const [source, setSource] = useState(null);
-	const player = useAudioPlayer(source);
-
-	useEffect(() => {
-		if (!source) {
-			return;
-		}
-
-		player.play();
-		// Cleanup function to stop the player when component unmounts or source changes
-		return () => {
-			if (player.playing) {
-				player.pause();
-				setSource(null);
-				setSoundChoose('');
-			}
-		};
-	}, [source, player]);
 
 	const { storage, storageRef } = useStorage({
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
+
+	const { player, soundChoose, handlePlayPause, stopSound, source } =
+		useAudioControl(storage);
+
 	const { data, loading: isLoadingVocalizations } = useVocalizationsList({
 		storageRef,
 	});
 
-	/* ---------------------- handle play vocalize sound --------------------- */
-	const handlePlayPause = async path => {
-		if (player.playing && soundChoose === path) {
-			player.pause();
-			setSource(null);
-			setSoundChoose('');
-			return;
-		}
+	useEffect(() => {
+		if (!source) return;
 
-		if (player.playing) {
-			player.pause();
-		}
+		player.play();
+		return () => {
+			if (player.playing) stopSound();
+		};
+	}, [source, player]);
 
-		setSoundChoose(path);
-
-		try {
-			const soundRef = ref(storage, `${STORAGE_PATH}/${path}`);
-			const uri = await getDownloadURL(soundRef);
-			setSource(uri);
-		} catch (error) {
-			console.error('Error getting download URL:', error);
-		}
-	};
-
-	const stopSound = () => {
-		if (player.isPlaying) {
-			player.pause();
-			setSource(null);
-			setSoundChoose('');
-		}
-	};
-
-	/* -------------------------------------------------------------------------- */
+	useFocusEffect(
+		useCallback(() => {
+			return () => {
+				if (player.playing) stopSound();
+			};
+		}, [player]),
+	);
 
 	const getTitleExercise = useCallback(
 		urlPath =>
@@ -86,9 +52,8 @@ const VocalizationsList = ({ route }) => {
 		const title = getTitleExercise(pathVocalization);
 		const chosen = getTitleExercise(soundChoose) === title;
 
-		if (!title) {
-			return null;
-		}
+		if (!title) return null;
+
 		return (
 			<CardPlay
 				title={title}
@@ -99,8 +64,6 @@ const VocalizationsList = ({ route }) => {
 			/>
 		);
 	};
-
-	/* --------------------------------- render --------------------------------- */
 
 	if (isLoadingVocalizations) {
 		return <Loader />;
@@ -115,4 +78,5 @@ const VocalizationsList = ({ route }) => {
 		/>
 	);
 };
+
 export default VocalizationsList;
