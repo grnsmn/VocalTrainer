@@ -7,8 +7,12 @@ import { useAudioPlayer } from 'expo-audio';
 const BreathingList = ({ route, navigation }) => {
 	const { exercices, famiglia } = route.params;
 	const { setSounds } = useStore();
-	const click1Player = useAudioPlayer(require('../../../assets/sounds/click1.mp3'));
-	const click2Player = useAudioPlayer(require('../../../assets/sounds/click2.mp3'));
+	const click1Player = useAudioPlayer(
+		require('../../../assets/sounds/click1-v2.mp3'),
+	);
+	const click2Player = useAudioPlayer(
+		require('../../../assets/sounds/click2-v2.mp3'),
+	);
 
 	useEffect(() => {
 		setSounds({
