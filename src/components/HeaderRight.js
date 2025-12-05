@@ -5,11 +5,11 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 import { DoorOpen } from 'lucide-react-native';
-import useStore from '../store';
+import { useAuthStore } from '../store/auth';
 import { Pressable } from '@/components/ui/pressable';
 
 const HeaderRight = () => {
-	const { clearAuth } = useStore();
+	const clearAuth = useAuthStore(state => state.clearAuth);
 	const { removeItem } = useAsyncStorage('authData');
 
 	const handleLogout = async () => {

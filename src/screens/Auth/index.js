@@ -23,7 +23,7 @@ import {
 	signInWithPopup,
 } from 'firebase/auth';
 import Hero from '../../components/Hero';
-import useStore from '../../store';
+import { useAuthStore } from '../../store/auth';
 import { Eye, EyeOff, X } from 'lucide-react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
@@ -31,7 +31,7 @@ export default function AuthScreen() {
 	const auth = getAuth();
 	const provider = new GoogleAuthProvider();
 	const { setItem } = useAsyncStorage('authData');
-	const { auth: _auth, setAuth } = useStore();
+	const setAuth = useAuthStore(state => state.setAuth);
 
 	const [formData, setFormData] = useState({
 		email: '',

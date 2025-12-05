@@ -22,7 +22,7 @@ import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
 import KeyboardStackScreen from './src/screens/Keyboard/KeyboardStack';
-import useStore from './src/store';
+
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
 import * as ScreenOrientation from 'expo-screen-orientation';
@@ -30,6 +30,7 @@ import { Platform } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import useAuthSync from './src/hooks/useAuthSync';
+import { useAuthStore } from './src/store/auth';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -111,9 +112,7 @@ function getActiveTabName(state) {
 export default function App() {
 	useFirebaseInit();
 	useAuthSync();
-	const { auth, setAuth } = useStore();
-	const { getItem } = useAsyncStorage('authData');
-	const [initialRouteName, setInitialRouteName] = useState('Auth');
+	const auth = useAuthStore(state => state.auth);
 
 	const [fontsLoaded] = useFonts({
 		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
@@ -133,49 +132,12 @@ export default function App() {
 		prepare();
 	}, [fontsLoaded]);
 
-	useEffect(() => {
-		const restoreCacheAuthData = async () => {
-			try {
-				const data = await getItem();
-				if (data) {
-					setAuth(JSON.parse(data));
-					setInitialRouteName('Respirazione');
-				} else {
-					setInitialRouteName('Auth');
-				}
-			} catch (e) {
-				console.error('Failed to fetch data from storage', e);
-			}
-		};
-
-		restoreCacheAuthData();
-	}, []);
-
-	const handleNavStateChange = async state => {
-		const tabName = getActiveTabName(state);
-		if (Platform.OS === 'android' || Platform.OS === 'ios') {
-			try {
-				if (tabName === 'Piano') {
-					await ScreenOrientation.lockAsync(
-						ScreenOrientation.OrientationLock.LANDSCAPE,
-					);
-				} else {
-					await ScreenOrientation.lockAsync(
-						ScreenOrientation.OrientationLock.PORTRAIT,
-					);
-				}
-			} catch (error) {
-				console.warn("Impossibile bloccare l'orientamento:", error);
-			}
-		}
-	};
-
-	if (!fontsLoaded) {
+	if (!fontsLoaded || auth === undefined) {
 		return null;
 	}
 
 	return (
-		<NavigationContainer onStateChange={handleNavStateChange}>
+		<NavigationContainer>
 			<SafeAreaProvider>
 				<GluestackUIProvider mode="light">
 					<StatusBar />
@@ -230,15 +192,16 @@ export default function App() {
 								paddingBottom: 6,
 							},
 						})}
-						initialRouteName={initialRouteName}
 					>
-						{!auth && (
+						{auth === null ? (
 							<Tab.Screen
 								name="Auth"
 								component={AuthStackScreen}
+								options={{
+									tabBarStyle: { display: 'none' },
+								}}
 							/>
-						)}
-						{!!auth && (
+						) : (
 							<>
 								<Tab.Screen
 									name="Respirazione"

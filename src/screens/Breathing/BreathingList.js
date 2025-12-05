@@ -1,12 +1,12 @@
 import { FlatList } from '@/components/ui/flat-list';
 import { useState, useEffect } from 'react';
 import CardSelect from '../../components/CardSelect';
-import useStore from '../../store';
+import { useSoundStore } from '../../store/sounds';
 import { Audio } from 'expo-av';
 
 const BreathingList = ({ route, navigation }) => {
 	const { exercices, famiglia } = route.params;
-	const { setSounds } = useStore();
+	const setSounds = useSoundStore(state => state.setSounds);
 
 	useEffect(() => {
 		const loadSounds = async () => {

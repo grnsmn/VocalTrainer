@@ -1,14 +1,12 @@
 import { Text } from '@/components/ui/text';
 import { Box } from '@/components/ui/box';
 import React, { useEffect } from 'react';
-import useStore from '../store';
+import { useSoundStore } from '../store/sounds';
 import { useInterval, useCounter } from 'usehooks-ts';
 
 const Bullet = ({ item, isActive, onComplete, bpm, skipCounter }) => {
 	const { count: playCounter, increment, reset } = useCounter(0);
-	const {
-		sounds: { click1, click2 },
-	} = useStore();
+	const { click1, click2 } = useSoundStore();
 
 	const handleClick = () => {
 		if (playCounter + 1 === item.duration) {

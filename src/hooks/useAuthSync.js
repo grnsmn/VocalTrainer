@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import useStore from '../store';
+import { useAuthStore } from '../store/auth';
 
 /**
  * Hook per sincronizzare lo stato di autenticazione Firebase con Zustand.
  */
 const useAuthSync = () => {
-	const setAuth = useStore(state => state.setAuth);
-	const clearAuth = useStore(state => state.clearAuth);
+	const setAuth = useAuthStore(state => state.setAuth);
+	const clearAuth = useAuthStore(state => state.clearAuth);
 
 	useEffect(() => {
 		const auth = getAuth();
