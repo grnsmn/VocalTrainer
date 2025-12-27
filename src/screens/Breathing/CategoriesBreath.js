@@ -1,4 +1,4 @@
-import { FlatList } from "@/components/ui/flat-list";
+import { FlatList } from '@/components/ui/flat-list';
 import React from 'react';
 import useBreathingFamilies from '../../hooks/useBreathingFamilies';
 import CardSelect from '../../components/CardSelect';
@@ -11,18 +11,18 @@ const CategoriesBreath = ({ navigation }) => {
 
 	const onPressHandler = ({ item }) => {
 		navigation.navigate('BreathingList', {
-			Titoli: item?.contenuto,
+			exercices: item?.exercises,
 			famiglia: item?.id,
 		});
 	};
 
 	const renderItem = item => {
 		return (
-            <CardSelect
+			<CardSelect
 				title={item.item.id}
 				onPress={() => onPressHandler(item)}
 			/>
-        );
+		);
 	};
 
 	if (isLoadingBreathCategories) {
@@ -30,14 +30,14 @@ const CategoriesBreath = ({ navigation }) => {
 	}
 
 	return (
-        <FlatList
+		<FlatList
 			data={families}
 			keyExtractor={item => item.id}
 			renderItem={renderItem}
 			ListHeaderComponent={<Hero />}
 			className="bg-primary-0"
 		/>
-    );
+	);
 };
 
 export default CategoriesBreath;
