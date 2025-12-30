@@ -2,8 +2,10 @@ name: EAS Build & Submit
 on:
   push:
     branches:
-      - main
+      - master
+      - dev
       - features/eas-workflow
+
 
 jobs:
   build:
@@ -30,7 +32,7 @@ jobs:
       - name: Create Service Account JSON
         env:
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
-        run: node -e "require('fs').writeFileSync('google-services-key.json', process.env.GOOGLE_SERVICE_ACCOUNT)"
+        run: echo "$GOOGLE_SERVICE_ACCOUNT" > google-services-key.json
 
       - name: Build Android App Bundle
         run: eas build --platform android --profile production --non-interactive --local
