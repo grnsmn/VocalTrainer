@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { useAudioPlayer } from 'expo-audio';
+import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
 
@@ -7,7 +7,11 @@ export const useAudioControl = storage => {
 	const [soundChoose, setSoundChoose] = useState('');
 	const [source, setSource] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(false);
+	const [isLoadingUrl, setIsLoadingUrl] = useState(false);
 	const player = useAudioPlayer(source);
+
+	// Ottieni lo status del player per avere isLoaded e isBuffering
+	const status = useAudioPlayerStatus(player);
 
 	// Refs per avere sempre i valori aggiornati nelle callbacks
 	const playerRef = useRef(player);
@@ -65,19 +69,25 @@ export const useAudioControl = storage => {
 		// Imposta immediatamente il nuovo audio selezionato
 		setSoundChoose(path);
 		setIsPlaying(true);
+		setIsLoadingUrl(true);
 		shouldPlayRef.current = true;
 
 		try {
 			const soundRef = ref(storage, `${STORAGE_PATH}/${path}`);
 			const uri = await getDownloadURL(soundRef);
 			setSource(uri);
+			setIsLoadingUrl(false);
 		} catch (error) {
 			console.error('Error getting download URL:', error);
 			setIsPlaying(false);
 			setSoundChoose('');
 			shouldPlayRef.current = false;
+			setIsLoadingUrl(false);
 		}
 	}, [storage, stopSound]);
+
+	// isLoading è true se stiamo caricando l'URL o se il player sta bufferando
+	const isLoading = isLoadingUrl || (status?.isBuffering && !status?.isLoaded);
 
 	return {
 		player,
@@ -86,5 +96,8 @@ export const useAudioControl = storage => {
 		stopSound,
 		source,
 		isPlaying,
+		isLoading,
+		status,
 	};
 };
+

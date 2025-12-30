@@ -15,7 +15,7 @@ const VocalizationsList = ({ route }) => {
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
 
-	const { player, soundChoose, handlePlayPause, stopSound, source, isPlaying } =
+	const { player, soundChoose, handlePlayPause, stopSound, source, isPlaying, isLoading } =
 		useAudioControl(storage);
 
 	const { data, loading: isLoadingVocalizations } = useVocalizationsList({
@@ -42,7 +42,7 @@ const VocalizationsList = ({ route }) => {
 		const pathVocalization = item?._location?.path;
 		const title = getTitleExercise(pathVocalization);
 		const chosen = getTitleExercise(soundChoose) === title;
-		console.log('🚀 ~ testing', player.loading)
+
 		if (!title) return null;
 
 		return (
@@ -51,7 +51,7 @@ const VocalizationsList = ({ route }) => {
 				onPress={() => handlePlayPause(pathVocalization)}
 				RightIcon={Play}
 				isPlaying={chosen}
-				isLoading={player.loading}
+				isLoading={chosen && isLoading}
 			/>
 		);
 	};
