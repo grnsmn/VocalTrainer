@@ -61,4 +61,21 @@ Contributions are welcome! If you wish to contribute to this project, follow the
 
 ---
 
+## Releasing a New Version
+
+Versioning is **fully automated** via CI:
+- **`dev` branch**: Creates prerelease versions (e.g., `2.1.0-dev.1`)
+- **`master` branch**: Creates stable versions (e.g., `2.1.0`)
+
+Just push your commits using [Conventional Commits](https://www.conventionalcommits.org/) format (`feat:`, `fix:`, etc.) and the CI will handle the rest!
+
+## CI/CD
+
+Pushing to `master` or `dev` triggers the GitHub Actions workflow that:
+1. Automatically bumps the version based on Conventional Commits.
+2. Builds the Android App Bundle locally.
+3. Submits it to Google Play Internal Testing.
+
+---
+
 Developed by @grnsmn

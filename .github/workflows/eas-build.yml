@@ -6,6 +6,8 @@ on:
       - dev
       - features/eas-workflow
 
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -13,12 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24.x
           cache: npm
+
+      - name: Setup Git User
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Setup Expo
         uses: expo/expo-github-action@v8
@@ -28,6 +38,16 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Release Version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ "${{ github.ref_name }}" == "master" ]]; then
+            npm run release -- --ci
+          else
+            npm run release -- --ci --prerelease=dev
+          fi
 
       - name: Create Service Account JSON
         env:
