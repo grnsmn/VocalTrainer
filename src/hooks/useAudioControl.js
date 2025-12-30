@@ -4,89 +4,101 @@ import { ref, getDownloadURL } from 'firebase/storage';
 import { STORAGE_PATH } from '@env';
 
 export const useAudioControl = storage => {
-	const [soundChoose, setSoundChoose] = useState('');
+	// State
+	const [selectedSound, setSelectedSound] = useState('');
 	const [source, setSource] = useState(null);
-	const [isPlaying, setIsPlaying] = useState(false);
 	const [isLoadingUrl, setIsLoadingUrl] = useState(false);
+
+	// Audio player
 	const player = useAudioPlayer(source);
 	const status = useAudioPlayerStatus(player);
 
-	// Refs to always have updated values in callbacks (avoid stale closures)
+	// Refs to avoid stale closures in callbacks
 	const playerRef = useRef(player);
-	const soundChooseRef = useRef(soundChoose);
-	const shouldPlayRef = useRef(false);
+	const selectedSoundRef = useRef(selectedSound);
+	const shouldAutoPlay = useRef(false);
 
-	// Auto-play when player is ready and shouldPlayRef is true
+	// Sync refs with state
 	useEffect(() => {
 		playerRef.current = player;
-
-		if (player && shouldPlayRef.current && source) {
-			try {
-				player.play();
-				shouldPlayRef.current = false;
-			} catch (e) { }
-		}
-	}, [player, source]);
+	}, [player]);
 
 	useEffect(() => {
-		soundChooseRef.current = soundChoose;
-	}, [soundChoose]);
+		selectedSoundRef.current = selectedSound;
+	}, [selectedSound]);
 
-	const stopSound = useCallback(() => {
+	// Auto-play when player is ready
+	useEffect(() => {
+		if (!player || !source || !shouldAutoPlay.current) return;
+
+		try {
+			player.play();
+			shouldAutoPlay.current = false;
+		} catch { }
+	}, [player, source]);
+
+	// Helper: safely pause current player
+	const pausePlayer = useCallback(() => {
 		try {
 			if (playerRef.current?.playing) {
 				playerRef.current.pause();
 			}
-		} catch (e) { }
-		shouldPlayRef.current = false;
-		setIsPlaying(false);
-		setSoundChoose('');
-		setSource(null);
+		} catch { }
 	}, []);
+
+	// Helper: reset all state
+	const resetState = useCallback(() => {
+		shouldAutoPlay.current = false;
+		setSelectedSound('');
+		setSource(null);
+		setIsLoadingUrl(false);
+	}, []);
+
+	// Helper: fetch audio URL from Firebase
+	const fetchAudioUrl = useCallback(async path => {
+		const soundRef = ref(storage, `${STORAGE_PATH}/${path}`);
+		return getDownloadURL(soundRef);
+	}, [storage]);
+
+	const stopSound = useCallback(() => {
+		pausePlayer();
+		resetState();
+	}, [pausePlayer, resetState]);
 
 	const handlePlayPause = useCallback(async path => {
 		// Toggle off if tapping the same audio
-		if (soundChooseRef.current === path) {
+		if (selectedSoundRef.current === path) {
 			stopSound();
 			return;
 		}
 
 		// Pause current audio before switching
-		try {
-			if (playerRef.current?.playing) {
-				playerRef.current.pause();
-			}
-		} catch (e) { }
+		pausePlayer();
 
-		setSoundChoose(path);
-		setIsPlaying(true);
+		// Set new audio state
+		setSelectedSound(path);
 		setIsLoadingUrl(true);
-		shouldPlayRef.current = true;
+		shouldAutoPlay.current = true;
 
 		try {
-			const soundRef = ref(storage, `${STORAGE_PATH}/${path}`);
-			const uri = await getDownloadURL(soundRef);
+			const uri = await fetchAudioUrl(path);
 			setSource(uri);
-			setIsLoadingUrl(false);
-		} catch (error) {
-			setIsPlaying(false);
-			setSoundChoose('');
-			shouldPlayRef.current = false;
+		} catch {
+			resetState();
+		} finally {
 			setIsLoadingUrl(false);
 		}
-	}, [storage, stopSound]);
+	}, [pausePlayer, fetchAudioUrl, stopSound, resetState]);
 
+	// Computed values
 	const isLoading = isLoadingUrl || (status?.isBuffering && !status?.isLoaded);
+	const isPlaying = Boolean(selectedSound && status?.playing);
 
 	return {
-		player,
-		soundChoose,
-		handlePlayPause,
-		stopSound,
-		source,
+		selectedSound,
 		isPlaying,
 		isLoading,
-		status,
+		handlePlayPause,
+		stopSound,
 	};
 };
-

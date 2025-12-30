@@ -15,7 +15,7 @@ const VocalizationsList = ({ route }) => {
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
 
-	const { player, soundChoose, handlePlayPause, stopSound, source, isPlaying, isLoading } =
+	const { selectedSound, isPlaying, isLoading, handlePlayPause, stopSound } =
 		useAudioControl(storage);
 
 	const { data, loading: isLoadingVocalizations } = useVocalizationsList({
@@ -24,34 +24,32 @@ const VocalizationsList = ({ route }) => {
 
 	useFocusEffect(
 		useCallback(() => {
-			return () => {
-				stopSound();
-			};
+			return () => stopSound();
 		}, [stopSound]),
 	);
 
-	const getTitleExercise = useCallback(
-		urlPath =>
-			urlPath
+	const extractTitle = useCallback(
+		path =>
+			path
 				?.replace('- uomini', '')
 				?.match(/\btraccia\s(?:\d{1,3}(?:\s\w+)*)\b/i)?.[0],
 		[],
 	);
 
 	const renderItem = ({ item }) => {
-		const pathVocalization = item?._location?.path;
-		const title = getTitleExercise(pathVocalization);
-		const chosen = getTitleExercise(soundChoose) === title;
+		const path = item?._location?.path;
+		const title = extractTitle(path);
+		const isSelected = extractTitle(selectedSound) === title;
 
 		if (!title) return null;
 
 		return (
 			<CardPlay
 				title={title}
-				onPress={() => handlePlayPause(pathVocalization)}
+				onPress={() => handlePlayPause(path)}
 				RightIcon={Play}
-				isPlaying={chosen}
-				isLoading={chosen && isLoading}
+				isPlaying={isSelected && isPlaying}
+				isLoading={isSelected && isLoading}
 			/>
 		);
 	};
@@ -71,3 +69,4 @@ const VocalizationsList = ({ route }) => {
 };
 
 export default VocalizationsList;
+
