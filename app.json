@@ -1,67 +1,63 @@
 {
-  "expo": {
-    "name": "Vocal Trainer",
-    "slug": "VocalTrainer",
-    "version": "2.2.1",
-    "orientation": "portrait",
-    "icon": "./assets/splash.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#c6e9ff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "newArchEnabled": false,
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/splash.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.VocalTrainer.app"
-    },
-    "web": {
-      "bundler": "metro",
-      "favicon": "./assets/splash.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "25baeacb-0df5-4607-b105-0e6242835ec3"
-      }
-    },
-    "owner": "gscripts",
-    "userInterfaceStyle": "automatic",
-    "plugins": [
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "kotlinVersion": "2.0.21",
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0"
-          }
-        }
-      ],
-      [
-        "./plugins/minSdkProjectGradlePatch",
-        {}
-      ],
-      "expo-font",
-      [
-        "expo-screen-orientation",
-        {
-          "initialOrientation": "DEFAULT"
-        }
-      ],
-      "expo-audio"
-    ]
-  }
+	"expo": {
+		"name": "Vocal Trainer",
+		"slug": "VocalTrainer",
+		"version": "2.2.1",
+		"orientation": "portrait",
+		"icon": "./assets/splash.png",
+		"splash": {
+			"image": "./assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#c6e9ff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"newArchEnabled": false,
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/splash.png",
+				"backgroundColor": "#ffffff"
+			},
+			"package": "com.VocalTrainer.app",
+			"versionCode": 1
+		},
+		"web": {
+			"bundler": "metro",
+			"favicon": "./assets/splash.png"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "25baeacb-0df5-4607-b105-0e6242835ec3"
+			}
+		},
+		"owner": "gscripts",
+		"userInterfaceStyle": "automatic",
+		"plugins": [
+			[
+				"expo-build-properties",
+				{
+					"android": {
+						"kotlinVersion": "2.0.21",
+						"compileSdkVersion": 35,
+						"targetSdkVersion": 35,
+						"buildToolsVersion": "35.0.0"
+					}
+				}
+			],
+			["./plugins/minSdkProjectGradlePatch", {}],
+			"expo-font",
+			[
+				"expo-screen-orientation",
+				{
+					"initialOrientation": "DEFAULT"
+				}
+			],
+			"expo-audio"
+		]
+	}
 }

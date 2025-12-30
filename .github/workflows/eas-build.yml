@@ -1,78 +1,78 @@
 name: EAS Build & Submit
 on:
-  push:
-    branches:
-      - master
-      - dev
-      - features/eas-workflow
+    push:
+        branches:
+            - master
+            - dev
+            - features/eas-workflow
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  build:
-    name: Install and Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+    build:
+        name: Install and Build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24.x
-          cache: npm
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24.x
+                  cache: npm
 
-      - name: Setup Git User
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+            - name: Setup Git User
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
-        with:
-          token: ${{ secrets.EXPO_TOKEN }}
-          eas-version: latest
+            - name: Setup Expo
+              uses: expo/expo-github-action@v8
+              with:
+                  token: ${{ secrets.EXPO_TOKEN }}
+                  eas-version: latest
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Release Version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [[ "${{ github.ref_name }}" == "master" ]]; then
-            npm run release -- --ci
-          else
-            npm run release -- --ci --prerelease=dev
-          fi
+            - name: Release Version
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  if [[ "${{ github.ref_name }}" == "master" ]]; then
+                    npm run release -- --ci
+                  else
+                    npm run release -- --ci --prerelease=dev
+                  fi
 
-      - name: Set Android Version Code
-        run: |
-          # Use total git commit count as versionCode
-          # Add offset of 100 to ensure we stay above historical values (~166)
-          COMMIT_COUNT=$(git rev-list --count HEAD)
-          NEW_CODE=$((COMMIT_COUNT + 100))
-          echo "Commit count: $COMMIT_COUNT, setting versionCode to $NEW_CODE"
-          node -e "
-            const fs = require('fs');
-            const app = JSON.parse(fs.readFileSync('app.json'));
-            if (!app.expo.android) app.expo.android = {};
-            app.expo.android.versionCode = $NEW_CODE;
-            fs.writeFileSync('app.json', JSON.stringify(app, null, 2));
-          "
-          # Debug: Print app.json to verify change
-          cat app.json
+            - name: Calculate and Apply Version Code
+              run: |
+                  # Use total git commit count + offset (5000) for safety
+                  COMMIT_COUNT=$(git rev-list --count HEAD)
+                  NEW_CODE=$((COMMIT_COUNT + 5000))
+                  echo "Calculated versionCode: $NEW_CODE"
 
-      - name: Create Service Account JSON
-        env:
-          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
-        run: echo "$GOOGLE_SERVICE_ACCOUNT" > google-services-key.json
+                  # Update versionCode in app.json using Node.js
+                  node -e "
+                    const fs = require('fs');
+                    const app = JSON.parse(fs.readFileSync('app.json', 'utf8'));
+                    app.expo.android.versionCode = $NEW_CODE;
+                    fs.writeFileSync('app.json', JSON.stringify(app, null, 2));
+                  "
 
-      - name: Build Android App Bundle
-        run: eas build --platform android --profile production --non-interactive --local
+                  echo "Updated app.json with versionCode: $NEW_CODE"
 
-      - name: Submit to Google Play
-        run: eas submit --platform android --profile production --latest --non-interactive
+            - name: Create Service Account JSON
+              env:
+                  GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+              run: echo "$GOOGLE_SERVICE_ACCOUNT" > google-services-key.json
+
+            - name: Build Android App Bundle
+              run: eas build --platform android --profile production --non-interactive --local
+
+            - name: Submit to Google Play
+              run: eas submit --platform android --profile production --latest --non-interactive
