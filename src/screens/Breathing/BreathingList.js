@@ -22,6 +22,20 @@ const BreathingList = ({ route, navigation }) => {
 	}, [click1Player, click2Player]);
 
 	useEffect(() => {
+		const loadSounds = async () => {
+			const click1 = await Audio.Sound.createAsync(
+				require('../../../assets/sounds/click1.mp3'),
+			);
+			const click2 = await Audio.Sound.createAsync(
+				require('../../../assets/sounds/click2.mp3'),
+			);
+
+			setSounds({
+				click1: click1.sound,
+				click2: click2.sound,
+			});
+		};
+
 		navigation.setOptions({
 			title: famiglia,
 		});
