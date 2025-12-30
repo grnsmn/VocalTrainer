@@ -16,23 +16,25 @@ const CardPLay = ({
 	isPlaying = false,
 	isLoading = false,
 }) => {
-	const showRightIcon = RightIcon && !isPlaying && !isLoading;
+	const showRightIcon = RightIcon && !isPlaying;
 	const handleOnPress = () => {
 		onPress(title);
 	};
 	return (
-		<PressableScale onPress={handleOnPress} activateOnHover animationType='spring'>
+		<PressableScale onPress={handleOnPress} android_ripple={null} animationType='spring' style={{ borderRadius: 12 }}>
 			<Card
 				size="lg"
 				variant="elevated"
-				className={`m-2 active:opacity-50 ${isPlaying ? 'bg-green-200' : 'bg-white'} `}
+				className={`m-2 ${isPlaying ? 'bg-green-200' : 'bg-white'}`}
 			>
 				<HStack className="justify-between items-center">
-					<Heading size="md">{title}</Heading>
-					<HStack className="justify-center items-center space-x-3">
+					<HStack className="items-center space-x-4">
+						<Heading size="md">{title}</Heading>
 						{isLoading && (
 							<Spinner size="small" className="text-green-700" />
 						)}
+					</HStack>
+					<HStack className="justify-center items-center space-x-3">
 						{showRightIcon && (
 							<Icon
 								as={RightIcon}
