@@ -72,7 +72,7 @@ jobs:
               run: echo "$GOOGLE_SERVICE_ACCOUNT" > google-services-key.json
 
             - name: Build Android App Bundle
-              run: eas build --platform android --profile production --non-interactive --local
+              run: eas build --platform android --profile production --non-interactive --local --output=./app-prod.aab
 
             - name: Submit to Google Play
-              run: eas submit --platform android --profile production --latest --non-interactive
+              run: eas submit --platform android --profile production --path ./app-prod.aab --non-interactive
