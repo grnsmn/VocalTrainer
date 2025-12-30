@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/grnsmn/VocalTrainer/compare/v2.2.1...v2.2.2) (2025-12-30)
+
+
+### Bug Fixes
+
+* use git commit count for versionCode (deterministic) ([bb84b19](https://github.com/grnsmn/VocalTrainer/commit/bb84b19acc5d456b465e8135eb8b0c721808ee28))
+
 ## [2.2.1](https://github.com/grnsmn/VocalTrainer/compare/v2.2.0...v2.2.1) (2025-12-30)
 
 # 2.2.0 (2025-12-30)
