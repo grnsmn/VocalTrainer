@@ -9,26 +9,22 @@ export const useAudioControl = storage => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isLoadingUrl, setIsLoadingUrl] = useState(false);
 	const player = useAudioPlayer(source);
-
-	// Ottieni lo status del player per avere isLoaded e isBuffering
 	const status = useAudioPlayerStatus(player);
 
-	// Refs per avere sempre i valori aggiornati nelle callbacks
+	// Refs to always have updated values in callbacks (avoid stale closures)
 	const playerRef = useRef(player);
 	const soundChooseRef = useRef(soundChoose);
 	const shouldPlayRef = useRef(false);
 
+	// Auto-play when player is ready and shouldPlayRef is true
 	useEffect(() => {
 		playerRef.current = player;
 
-		// Quando il player cambia e deve riprodurre, fai play
 		if (player && shouldPlayRef.current && source) {
 			try {
 				player.play();
 				shouldPlayRef.current = false;
-			} catch (e) {
-				console.log('Error auto-playing:', e);
-			}
+			} catch (e) { }
 		}
 	}, [player, source]);
 
@@ -41,9 +37,7 @@ export const useAudioControl = storage => {
 			if (playerRef.current?.playing) {
 				playerRef.current.pause();
 			}
-		} catch (e) {
-			console.log('Player already released');
-		}
+		} catch (e) { }
 		shouldPlayRef.current = false;
 		setIsPlaying(false);
 		setSoundChoose('');
@@ -51,22 +45,19 @@ export const useAudioControl = storage => {
 	}, []);
 
 	const handlePlayPause = useCallback(async path => {
-		// Se tap sullo stesso audio che sta suonando, ferma
+		// Toggle off if tapping the same audio
 		if (soundChooseRef.current === path) {
 			stopSound();
 			return;
 		}
 
-		// Pausa il player corrente (se sta suonando)
+		// Pause current audio before switching
 		try {
 			if (playerRef.current?.playing) {
 				playerRef.current.pause();
 			}
-		} catch (e) {
-			// Player già rilasciato, ignora
-		}
+		} catch (e) { }
 
-		// Imposta immediatamente il nuovo audio selezionato
 		setSoundChoose(path);
 		setIsPlaying(true);
 		setIsLoadingUrl(true);
@@ -78,7 +69,6 @@ export const useAudioControl = storage => {
 			setSource(uri);
 			setIsLoadingUrl(false);
 		} catch (error) {
-			console.error('Error getting download URL:', error);
 			setIsPlaying(false);
 			setSoundChoose('');
 			shouldPlayRef.current = false;
@@ -86,7 +76,6 @@ export const useAudioControl = storage => {
 		}
 	}, [storage, stopSound]);
 
-	// isLoading è true se stiamo caricando l'URL o se il player sta bufferando
 	const isLoading = isLoadingUrl || (status?.isBuffering && !status?.isLoaded);
 
 	return {
