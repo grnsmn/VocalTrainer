@@ -1,0 +1,33 @@
+name: EAS Build & Submit
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Install and Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          token: ${{ secrets.EXPO_TOKEN }}
+          eas-version: latest
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create Service Account JSON
+        run: echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT }}' > google-services-key.json
+
+      - name: Build and Submit to Google Play
+        run: eas build --platform android --profile production --non-interactive --auto-submit
