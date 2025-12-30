@@ -71,6 +71,8 @@
     "@babel/core": "^7.20.0",
     "@release-it/conventional-changelog": "^10.0.4",
     "@types/react": "~19.0.10",
+    "conventional-changelog-angular": "^8.1.0",
+    "conventional-commits-parser": "^6.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "jscodeshift": "^0.15.2",
