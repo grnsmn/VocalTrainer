@@ -30,7 +30,7 @@ jobs:
       - name: Create Service Account JSON
         env:
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
-        run: echo "$GOOGLE_SERVICE_ACCOUNT" > google-services-key.json
+        run: node -e "require('fs').writeFileSync('google-services-key.json', process.env.GOOGLE_SERVICE_ACCOUNT)"
 
       - name: Build and Submit to Google Play
         run: eas build --platform android --profile production --non-interactive --auto-submit
