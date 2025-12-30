@@ -28,7 +28,9 @@ jobs:
         run: npm ci
 
       - name: Create Service Account JSON
-        run: echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT }}' > google-services-key.json
+        env:
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+        run: echo "$GOOGLE_SERVICE_ACCOUNT" > google-services-key.json
 
       - name: Build and Submit to Google Play
         run: eas build --platform android --profile production --non-interactive --auto-submit
