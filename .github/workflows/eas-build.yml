@@ -49,6 +49,21 @@ jobs:
             npm run release -- --ci --prerelease=dev
           fi
 
+      - name: Set Android Version Code
+        run: |
+          # Read current app.json
+          # Use an offset + run_number to ensure uniqueness and increment
+          # Offset 10000 ensures we are above current ~166 and leave room
+          NEW_CODE=$((10000 + ${{ github.run_number }}))
+          echo "Setting versionCode to $NEW_CODE"
+          node -e "
+            const fs = require('fs');
+            const app = JSON.parse(fs.readFileSync('app.json'));
+            if (!app.expo.android) app.expo.android = {};
+            app.expo.android.versionCode = $NEW_CODE;
+            fs.writeFileSync('app.json', JSON.stringify(app, null, 2));
+          "
+
       - name: Create Service Account JSON
         env:
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
