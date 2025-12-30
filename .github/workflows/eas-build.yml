@@ -51,11 +51,11 @@ jobs:
 
       - name: Set Android Version Code
         run: |
-          # Read current app.json
-          # Use an offset + run_number to ensure uniqueness and increment
-          # Offset 10000 ensures we are above current ~166 and leave room
-          NEW_CODE=$((10000 + ${{ github.run_number }}))
-          echo "Setting versionCode to $NEW_CODE"
+          # Use total git commit count as versionCode
+          # Add offset of 100 to ensure we stay above historical values (~166)
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          NEW_CODE=$((COMMIT_COUNT + 100))
+          echo "Commit count: $COMMIT_COUNT, setting versionCode to $NEW_CODE"
           node -e "
             const fs = require('fs');
             const app = JSON.parse(fs.readFileSync('app.json'));
@@ -63,6 +63,8 @@ jobs:
             app.expo.android.versionCode = $NEW_CODE;
             fs.writeFileSync('app.json', JSON.stringify(app, null, 2));
           "
+          # Debug: Print app.json to verify change
+          cat app.json
 
       - name: Create Service Account JSON
         env:
