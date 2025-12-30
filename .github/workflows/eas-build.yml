@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - features/eas-workflow
 
 jobs:
   build:
