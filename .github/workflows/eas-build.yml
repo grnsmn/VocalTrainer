@@ -32,5 +32,8 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
         run: node -e "require('fs').writeFileSync('google-services-key.json', process.env.GOOGLE_SERVICE_ACCOUNT)"
 
-      - name: Build and Submit to Google Play
-        run: eas build --platform android --profile production --non-interactive --auto-submit --local
+      - name: Build Android App Bundle
+        run: eas build --platform android --profile production --non-interactive --local
+
+      - name: Submit to Google Play
+        run: eas submit --platform android --profile production --latest --non-interactive
