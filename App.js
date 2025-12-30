@@ -7,6 +7,7 @@ import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { Vocalizations } from './src/screens/Vocalizations';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
 	AudioLines,
 	Wind,
@@ -175,88 +176,90 @@ export default function App() {
 	}
 
 	return (
-		<NavigationContainer onStateChange={handleNavStateChange}>
-			<SafeAreaProvider>
-				<GluestackUIProvider mode="light">
-					<StatusBar />
-					<Tab.Navigator
-						screenOptions={({ route }) => ({
-							tabBarActiveBackgroundColor: '#c6e9ff',
-							tabBarIcon: ({ focused }) => {
-								if (route.name === 'Vocalizzi') {
-									return (
-										<Icon
-											as={AudioLines}
-											className="text-primary-500"
-										/>
-									);
-								}
-								if (route.name === 'Respirazione') {
-									return (
-										<Icon
-											as={Wind}
-											className="text-primary-500"
-										/>
-									);
-								}
-								if (route.name === 'Auth') {
-									return (
-										<Icon
-											as={KeyRoundIcon}
-											className="text-primary-500"
-										/>
-									);
-								}
-								if (route.name === 'Piano') {
-									return (
-										<Icon
-											as={KeyboardMusicIcon}
-											className="text-primary-500"
-										/>
-									);
-								}
-							},
-							headerShown: false,
-							tabBarLabelStyle: {
-								fontSize: 14,
-								fontWeight: 'bold',
-								fontFamily: 'Roboto',
-							},
-							tabBarItemStyle: {
-								borderColor: '#CCE9FF',
-								padding: 10,
-							},
-							tabBarIconStyle: {
-								paddingBottom: 6,
-							},
-						})}
-						initialRouteName={initialRouteName}
-					>
-						{!auth && (
-							<Tab.Screen
-								name="Auth"
-								component={AuthStackScreen}
-							/>
-						)}
-						{!!auth && (
-							<>
+		<GestureHandlerRootView style={{ flex: 1 }}>
+			<NavigationContainer onStateChange={handleNavStateChange}>
+				<SafeAreaProvider>
+					<GluestackUIProvider mode="light">
+						<StatusBar />
+						<Tab.Navigator
+							screenOptions={({ route }) => ({
+								tabBarActiveBackgroundColor: '#c6e9ff',
+								tabBarIcon: ({ focused }) => {
+									if (route.name === 'Vocalizzi') {
+										return (
+											<Icon
+												as={AudioLines}
+												className="text-primary-500"
+											/>
+										);
+									}
+									if (route.name === 'Respirazione') {
+										return (
+											<Icon
+												as={Wind}
+												className="text-primary-500"
+											/>
+										);
+									}
+									if (route.name === 'Auth') {
+										return (
+											<Icon
+												as={KeyRoundIcon}
+												className="text-primary-500"
+											/>
+										);
+									}
+									if (route.name === 'Piano') {
+										return (
+											<Icon
+												as={KeyboardMusicIcon}
+												className="text-primary-500"
+											/>
+										);
+									}
+								},
+								headerShown: false,
+								tabBarLabelStyle: {
+									fontSize: 14,
+									fontWeight: 'bold',
+									fontFamily: 'Roboto',
+								},
+								tabBarItemStyle: {
+									borderColor: '#CCE9FF',
+									padding: 10,
+								},
+								tabBarIconStyle: {
+									paddingBottom: 6,
+								},
+							})}
+							initialRouteName={initialRouteName}
+						>
+							{!auth && (
 								<Tab.Screen
-									name="Respirazione"
-									component={BreathingStackScreen}
+									name="Auth"
+									component={AuthStackScreen}
 								/>
-								<Tab.Screen
-									name="Vocalizzi"
-									component={VocalizationsStackScreen}
-								/>
-								<Tab.Screen
-									name="Piano"
-									component={KeyboardStackScreen}
-								/>
-							</>
-						)}
-					</Tab.Navigator>
-				</GluestackUIProvider>
-			</SafeAreaProvider>
-		</NavigationContainer>
+							)}
+							{!!auth && (
+								<>
+									<Tab.Screen
+										name="Respirazione"
+										component={BreathingStackScreen}
+									/>
+									<Tab.Screen
+										name="Vocalizzi"
+										component={VocalizationsStackScreen}
+									/>
+									<Tab.Screen
+										name="Piano"
+										component={KeyboardStackScreen}
+									/>
+								</>
+							)}
+						</Tab.Navigator>
+					</GluestackUIProvider>
+				</SafeAreaProvider>
+			</NavigationContainer>
+		</GestureHandlerRootView>
 	);
 }

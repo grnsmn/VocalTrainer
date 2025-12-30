@@ -1,5 +1,5 @@
 import { FlatList } from '@/components/ui/flat-list';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import useVocalizationsList from '../../hooks/useVocalizationsList';
 import useStorage from '../../hooks/useStorage';
@@ -15,28 +15,19 @@ const VocalizationsList = ({ route }) => {
 		customPath: `${typeVocal}/${selectedListName}`,
 	});
 
-	const { player, soundChoose, handlePlayPause, stopSound, source } =
+	const { player, soundChoose, handlePlayPause, stopSound, source, isPlaying } =
 		useAudioControl(storage);
 
 	const { data, loading: isLoadingVocalizations } = useVocalizationsList({
 		storageRef,
 	});
 
-	useEffect(() => {
-		if (!source) return;
-
-		player.play();
-		return () => {
-			if (player.playing) stopSound();
-		};
-	}, [source, player]);
-
 	useFocusEffect(
 		useCallback(() => {
 			return () => {
-				if (player.playing) stopSound();
+				stopSound();
 			};
-		}, [player]),
+		}, [stopSound]),
 	);
 
 	const getTitleExercise = useCallback(
@@ -51,7 +42,7 @@ const VocalizationsList = ({ route }) => {
 		const pathVocalization = item?._location?.path;
 		const title = getTitleExercise(pathVocalization);
 		const chosen = getTitleExercise(soundChoose) === title;
-
+		console.log('🚀 ~ testing', player.loading)
 		if (!title) return null;
 
 		return (

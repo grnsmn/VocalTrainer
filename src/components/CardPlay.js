@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/ui/spinner';
-import { Pressable } from '@/components/ui/pressable';
+import { PressableScale } from 'pressto';
 import { Icon } from '@/components/ui/icon';
 import { Heading } from '@/components/ui/heading';
 import { HStack } from '@/components/ui/hstack';
@@ -21,11 +21,11 @@ const CardPLay = ({
 		onPress(title);
 	};
 	return (
-		<Pressable onPress={handleOnPress} className="m-2 active:opacity-50">
+		<PressableScale onPress={handleOnPress} activateOnHover animationType='spring'>
 			<Card
 				size="lg"
 				variant="elevated"
-				className={` ${isPlaying ? 'bg-green-200' : 'bg-white'} `}
+				className={`m-2 active:opacity-50 ${isPlaying ? 'bg-green-200' : 'bg-white'} `}
 			>
 				<HStack className="justify-between items-center">
 					<Heading size="md">{title}</Heading>
@@ -36,9 +36,8 @@ const CardPLay = ({
 						{showRightIcon && (
 							<Icon
 								as={RightIcon}
-								className={` ${
-									isPlaying ? 'text-green-700' : undefined
-								} `}
+								className={` ${isPlaying ? 'text-green-700' : undefined
+									} `}
 							/>
 						)}
 						{!showRightIcon && (
@@ -53,7 +52,7 @@ const CardPLay = ({
 					</HStack>
 				</HStack>
 			</Card>
-		</Pressable>
+		</PressableScale>
 	);
 };
 export default memo(CardPLay);
