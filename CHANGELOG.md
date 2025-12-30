@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.3.0](https://github.com/grnsmn/VocalTrainer/compare/v2.2.2...v2.3.0) (2025-12-30)
+
+
+### Features
+
+* Update Android versionCode calculation in EAS workflow and initialize it in app.json. ([43871be](https://github.com/grnsmn/VocalTrainer/commit/43871be33a21bbdf4e5897e5233d9415f89f6789))
+
 ## [2.2.2](https://github.com/grnsmn/VocalTrainer/compare/v2.2.1...v2.2.2) (2025-12-30)
 
 
