@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/grnsmn/VocalTrainer/compare/v2.3.0...v2.3.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* explicit local artifact path for eas submit ([cafdb01](https://github.com/grnsmn/VocalTrainer/commit/cafdb01dff23c9594ca7619fae8f63c60b889c29))
+
 # [2.3.0](https://github.com/grnsmn/VocalTrainer/compare/v2.2.2...v2.3.0) (2025-12-30)
 
 
