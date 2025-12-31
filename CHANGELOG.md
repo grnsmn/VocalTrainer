@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/grnsmn/VocalTrainer/compare/v2.4.0...v2.4.1) (2025-12-31)
+
+
+### Bug Fixes
+
+* add error boundary to catch silent crashes ([5b249d1](https://github.com/grnsmn/VocalTrainer/commit/5b249d18086c8cdd58a70de7d91af2a7d38d9cec))
+
 # [2.4.0](https://github.com/grnsmn/VocalTrainer/compare/v2.3.4...v2.4.0) (2025-12-31)
 
 
