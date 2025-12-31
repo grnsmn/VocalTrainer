@@ -2,7 +2,7 @@
   "expo": {
     "name": "Vocal Trainer",
     "slug": "VocalTrainer",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "orientation": "portrait",
     "icon": "./assets/splash.png",
     "splash": {

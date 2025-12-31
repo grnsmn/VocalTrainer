@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.2](https://github.com/grnsmn/VocalTrainer/compare/v2.3.1...v2.3.2) (2025-12-31)
+
+
+### Bug Fixes
+
+* re-add env file creation step with prefixed secrets ([3441850](https://github.com/grnsmn/VocalTrainer/commit/3441850d077e8968745d27b924d9fd591fa0dd93))
+
 ## [2.3.1](https://github.com/grnsmn/VocalTrainer/compare/v2.3.0...v2.3.1) (2025-12-30)
 
 
