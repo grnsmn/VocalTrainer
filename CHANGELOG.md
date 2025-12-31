@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.3](https://github.com/grnsmn/VocalTrainer/compare/v2.3.2...v2.3.3) (2025-12-31)
+
+
+### Bug Fixes
+
+* harden versionCode and artifact discovery to prevent Play Store collisions ([7d4f806](https://github.com/grnsmn/VocalTrainer/commit/7d4f806e589c9ecd15c4e56e690be0abe47fc1bf))
+
 ## [2.3.2](https://github.com/grnsmn/VocalTrainer/compare/v2.3.1...v2.3.2) (2025-12-31)
 
 
