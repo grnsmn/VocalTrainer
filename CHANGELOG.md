@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.4](https://github.com/grnsmn/VocalTrainer/compare/v2.3.3...v2.3.4) (2025-12-31)
+
+
+### Bug Fixes
+
+* set appVersionSource to local to respect CI versioning ([c6b9552](https://github.com/grnsmn/VocalTrainer/commit/c6b9552d7f1a3f63f230d367ba5964ea79d45891))
+
 ## [2.3.3](https://github.com/grnsmn/VocalTrainer/compare/v2.3.2...v2.3.3) (2025-12-31)
 
 
