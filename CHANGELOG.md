@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.4.0](https://github.com/grnsmn/VocalTrainer/compare/v2.3.4...v2.4.0) (2025-12-31)
+
+
+### Features
+
+* Add error handling, API key validation, and platform-specific alerts for Firebase initialization. ([5ffbffc](https://github.com/grnsmn/VocalTrainer/commit/5ffbffc420c0a88b5f859989dbecd6c8ab5e9b22))
+
 ## [2.3.4](https://github.com/grnsmn/VocalTrainer/compare/v2.3.3...v2.3.4) (2025-12-31)
 
 
