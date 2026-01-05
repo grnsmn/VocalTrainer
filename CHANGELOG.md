@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.2](https://github.com/grnsmn/VocalTrainer/compare/v2.4.1...v2.4.2) (2026-01-05)
+
+
+### Bug Fixes
+
+* Move .env file creation in EAS build workflow to occur before npm/build steps. ([d81a8eb](https://github.com/grnsmn/VocalTrainer/commit/d81a8eb692b3cab438a3f5b5509b0b5a649d09b9))
+
 ## [2.4.1](https://github.com/grnsmn/VocalTrainer/compare/v2.4.0...v2.4.1) (2025-12-31)
 
 
