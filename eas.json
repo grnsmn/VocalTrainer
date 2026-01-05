@@ -8,6 +8,7 @@
       "developmentClient": true,
       "distribution": "internal",
       "autoIncrement": true,
+      "channel": "development",
       "ios": {
         "simulator": true
       },
@@ -18,12 +19,14 @@
     "preview": {
       "distribution": "internal",
       "autoIncrement": true,
+      "channel": "preview",
       "android": {
         "image": "latest",
         "buildType": "apk"
       }
     },
     "production": {
+      "channel": "production",
       "android": {
         "image": "latest",
         "buildType": "app-bundle"

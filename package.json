@@ -42,6 +42,7 @@
     "expo-screen-orientation": "~8.1.7",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "~2.2.3",
+    "expo-updates": "~0.28.17",
     "firebase": "^10.12.2",
     "lottie-react-native": "7.2.2",
     "lucide-react-native": "^0.376.0",

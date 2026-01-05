@@ -1,0 +1,60 @@
+# EAS Workflow: Preview per Pull Request
+# 
+# COSA FA QUESTO WORKFLOW?
+# Quando viene aperta/aggiornata una PR su GitHub, questo workflow:
+# 1. Crea un update OTA (Over-The-Air) con le modifiche
+# 2. Posta un commento sulla PR con un QR code
+# 3. Il team può testare le modifiche scansionando il QR code!
+#
+# PERCHÉ EAS WORKFLOWS invece di GitHub Actions?
+# - È il sistema CI/CD nativo di Expo, ottimizzato per React Native
+# - Usa hardware M4 Pro ad alte prestazioni
+# - Ha job pre-configurati (build, update, submit, ecc.)
+# - Tutti gli artefatti appaiono su expo.dev
+# - Meno YAML da scrivere e mantenere
+
+name: PR Preview
+
+# TRIGGER: Quando viene eseguito questo workflow?
+# NOTA: Per ora limitato al branch di test. Rimuovi 'branches' per attivarlo su tutte le PR
+on:
+  pull_request:
+    # Attiva solo per PR che hanno come BASE (target) questo branch
+    branches:
+      - 'features/eas-pr-preview'
+
+jobs:
+  # JOB 1: Pubblica un update OTA
+  # PERCHÉ? Gli update OTA sono veloci (pochi secondi) rispetto a una build completa (20+ minuti)
+  # Perfetti per modifiche JavaScript/asset che non toccano codice nativo
+  publish_preview_update:
+    name: Publish Preview Update
+    type: update
+    # ENVIRONMENT: usa l'ambiente "preview" per le variabili d'ambiente
+    # Questo permette di avere configurazioni diverse per preview/production
+    environment: preview
+    params:
+      # Il branch sarà automaticamente il nome della PR
+      branch: ${{ github.ref_name }}
+      # Il messaggio dell'update includerà info sulla PR
+      message: "PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
+
+  # JOB 2: Posta un commento sulla PR con il QR code
+  # PERCHÉ? Rende super facile per il team testare le modifiche:
+  # - Scansioni il QR code
+  # - L'app si aggiorna con le modifiche della PR
+  # - Testi direttamente sul telefono!
+  comment_on_pr:
+    name: Comment on PR
+    # AFTER: questo job viene eseguito DOPO che l'update è stato pubblicato
+    # Così possiamo includere il link all'update nel commento
+    after:
+      - publish_preview_update
+    type: github-comment
+    params:
+      message: |
+        🚀 **Preview disponibile!**
+        
+        Scansiona il QR code per testare le modifiche di questa PR direttamente sull'app.
+        
+        ⚠️ **Nota**: Assicurati di avere installato un development build con il canale `preview`.
