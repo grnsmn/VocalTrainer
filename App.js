@@ -108,169 +108,157 @@ function getActiveTabName(state) {
 	return route.name;
 }
 
-import ErrorBoundary from './src/components/ErrorBoundary';
 
 export default function App() {
-	// ... hooks ...
+	useFirebaseInit();
+	useAuthSync();
+	const { auth, setAuth } = useStore();
+	const { getItem } = useAsyncStorage('authData');
+	const [initialRouteName, setInitialRouteName] = useState('Auth');
 
-	try {
-		// Existing hooks
-		useFirebaseInit();
-		useAuthSync();
-		const { auth, setAuth } = useStore();
-		const { getItem } = useAsyncStorage('authData');
-		const [initialRouteName, setInitialRouteName] = useState('Auth');
+	const [fontsLoaded] = useFonts({
+		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
+	});
 
-		const [fontsLoaded] = useFonts({
-			Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
-		});
 
-		// ... useEffects and handlers ...
-
-		useEffect(() => {
-			async function prepare() {
-				try {
-					if (fontsLoaded) {
-						await SplashScreen.hideAsync();
-					}
-				} catch (e) {
-					console.warn('Errore durante il caricamento del font:', e);
+	useEffect(() => {
+		async function prepare() {
+			try {
+				if (fontsLoaded) {
+					await SplashScreen.hideAsync();
 				}
+			} catch (e) {
+				console.warn('Errore durante il caricamento del font:', e);
 			}
+		}
 
-			prepare();
-		}, [fontsLoaded]);
+		prepare();
+	}, [fontsLoaded]);
 
-		useEffect(() => {
-			const restoreCacheAuthData = async () => {
-				try {
-					const data = await getItem();
-					if (data) {
-						setAuth(JSON.parse(data));
-						setInitialRouteName('Respirazione');
-					} else {
-						setInitialRouteName('Auth');
-					}
-				} catch (e) {
-					console.error('Failed to fetch data from storage', e);
+	useEffect(() => {
+		const restoreCacheAuthData = async () => {
+			try {
+				const data = await getItem();
+				if (data) {
+					setAuth(JSON.parse(data));
+					setInitialRouteName('Respirazione');
+				} else {
+					setInitialRouteName('Auth');
 				}
-			};
-
-			restoreCacheAuthData();
-		}, []);
-
-		const handleNavStateChange = async state => {
-			const tabName = getActiveTabName(state);
-			if (Platform.OS === 'android' || Platform.OS === 'ios') {
-				try {
-					if (tabName === 'Piano') {
-						await ScreenOrientation.lockAsync(
-							ScreenOrientation.OrientationLock.LANDSCAPE,
-						);
-					} else {
-						await ScreenOrientation.lockAsync(
-							ScreenOrientation.OrientationLock.PORTRAIT,
-						);
-					}
-				} catch (error) {
-					console.warn("Impossibile bloccare l'orientamento:", error);
-				}
+			} catch (e) {
+				console.error('Failed to fetch data from storage', e);
 			}
 		};
 
-		if (!fontsLoaded) {
-			return null;
-		}
+		restoreCacheAuthData();
+	}, []);
 
-		return (
-			<ErrorBoundary>
-				<NavigationContainer onStateChange={handleNavStateChange}>
-					<SafeAreaProvider>
-						<GluestackUIProvider mode="light">
-							<StatusBar />
-							<Tab.Navigator
-								screenOptions={({ route }) => ({
-									tabBarActiveBackgroundColor: '#c6e9ff',
-									tabBarIcon: ({ focused }) => {
-										if (route.name === 'Vocalizzi') {
-											return (
-												<Icon
-													as={AudioLines}
-													className="text-primary-500"
-												/>
-											);
-										}
-										if (route.name === 'Respirazione') {
-											return (
-												<Icon
-													as={Wind}
-													className="text-primary-500"
-												/>
-											);
-										}
-										if (route.name === 'Auth') {
-											return (
-												<Icon
-													as={KeyRoundIcon}
-													className="text-primary-500"
-												/>
-											);
-										}
-										if (route.name === 'Piano') {
-											return (
-												<Icon
-													as={KeyboardMusicIcon}
-													className="text-primary-500"
-												/>
-											);
-										}
-									},
-									headerShown: false,
-									tabBarLabelStyle: {
-										fontSize: 14,
-										fontWeight: 'bold',
-										fontFamily: 'Roboto',
-									},
-									tabBarItemStyle: {
-										borderColor: '#CCE9FF',
-										padding: 10,
-									},
-									tabBarIconStyle: {
-										paddingBottom: 6,
-									},
-								})}
-								initialRouteName={initialRouteName}
-							>
-								{!auth && (
-									<Tab.Screen
-										name="Auth"
-										component={AuthStackScreen}
-									/>
-								)}
-								{!!auth && (
-									<>
-										<Tab.Screen
-											name="Respirazione"
-											component={BreathingStackScreen}
-										/>
-										<Tab.Screen
-											name="Vocalizzi"
-											component={VocalizationsStackScreen}
-										/>
-										<Tab.Screen
-											name="Piano"
-											component={KeyboardStackScreen}
-										/>
-									</>
-								)}
-							</Tab.Navigator>
-						</GluestackUIProvider>
-					</SafeAreaProvider>
-				</NavigationContainer>
-			</ErrorBoundary>
-		);
-	} catch (e) {
-		console.error("Top level Error: ", e);
+	const handleNavStateChange = async state => {
+		const tabName = getActiveTabName(state);
+		if (Platform.OS === 'android' || Platform.OS === 'ios') {
+			try {
+				if (tabName === 'Piano') {
+					await ScreenOrientation.lockAsync(
+						ScreenOrientation.OrientationLock.LANDSCAPE,
+					);
+				} else {
+					await ScreenOrientation.lockAsync(
+						ScreenOrientation.OrientationLock.PORTRAIT,
+					);
+				}
+			} catch (error) {
+				console.warn("Impossibile bloccare l'orientamento:", error);
+			}
+		}
+	};
+
+	if (!fontsLoaded) {
 		return null;
 	}
+
+	return (
+		<NavigationContainer onStateChange={handleNavStateChange}>
+			<SafeAreaProvider>
+				<GluestackUIProvider mode="light">
+					<StatusBar />
+					<Tab.Navigator
+						screenOptions={({ route }) => ({
+							tabBarActiveBackgroundColor: '#c6e9ff',
+							tabBarIcon: ({ focused }) => {
+								if (route.name === 'Vocalizzi') {
+									return (
+										<Icon
+											as={AudioLines}
+											className="text-primary-500"
+										/>
+									);
+								}
+								if (route.name === 'Respirazione') {
+									return (
+										<Icon
+											as={Wind}
+											className="text-primary-500"
+										/>
+									);
+								}
+								if (route.name === 'Auth') {
+									return (
+										<Icon
+											as={KeyRoundIcon}
+											className="text-primary-500"
+										/>
+									);
+								}
+								if (route.name === 'Piano') {
+									return (
+										<Icon
+											as={KeyboardMusicIcon}
+											className="text-primary-500"
+										/>
+									);
+								}
+							},
+							headerShown: false,
+							tabBarLabelStyle: {
+								fontSize: 14,
+								fontWeight: 'bold',
+								fontFamily: 'Roboto',
+							},
+							tabBarItemStyle: {
+								borderColor: '#CCE9FF',
+								padding: 10,
+							},
+							tabBarIconStyle: {
+								paddingBottom: 6,
+							},
+						})}
+						initialRouteName={initialRouteName}
+					>
+						{!auth && (
+							<Tab.Screen
+								name="Auth"
+								component={AuthStackScreen}
+							/>
+						)}
+						{!!auth && (
+							<>
+								<Tab.Screen
+									name="Respirazione"
+									component={BreathingStackScreen}
+								/>
+								<Tab.Screen
+									name="Vocalizzi"
+									component={VocalizationsStackScreen}
+								/>
+								<Tab.Screen
+									name="Piano"
+									component={KeyboardStackScreen}
+								/>
+							</>
+						)}
+					</Tab.Navigator>
+				</GluestackUIProvider>
+			</SafeAreaProvider>
+		</NavigationContainer>
+	);
 }
