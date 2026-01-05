@@ -27,34 +27,16 @@ const useFirebaseInit = () => {
 	};
 
 	useEffect(() => {
-		try {
-			if (!firebase.apps.length) {
-				if (!API_KEY) {
-					throw new Error('API_KEY is missing from env vars!');
-				}
-				const app = firebase.initializeApp(firebaseConfig);
-				if (Platform.OS !== 'web') {
-					initializeAuth(app, {
-						persistence: getReactNativePersistence(
-							ReactNativeAsyncStorage,
-						),
-					});
-				}
-			} else {
-				firebase.app(); // if already initialized, use that one
-			}
-		} catch (error) {
-			console.error('Firebase Init Error:', error);
-			if (Platform.OS !== 'web') {
-				// Use standard Alert since we might be outside UI context
-				const { Alert } = require('react-native');
-				Alert.alert(
-					'Initialization Error',
-					`Failed to start app service.\n${error.message}\nKey Status: ${API_KEY ? 'Loaded' : 'Missing'}`
-				);
-			}
+		if (firebase.apps.length > 0) return;
+
+		const app = firebase.initializeApp(firebaseConfig);
+
+		if (Platform.OS !== 'web') {
+			initializeAuth(app, {
+				persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+			});
 		}
-	}, [firebase]);
+	}, []);
 };
 
 export default useFirebaseInit;
