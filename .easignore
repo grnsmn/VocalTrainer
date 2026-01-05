@@ -1,0 +1,25 @@
+# This file controls what EAS includes/excludes during build
+# It's similar to .gitignore but specifically for EAS builds
+# 
+# IMPORTANT: We do NOT exclude .env here because react-native-dotenv
+# needs it at build time to bake the env vars into the bundle
+
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+# Build artifacts that shouldn't be included
+build-*.apk
+build-*.aab
+google-services-key.json
