@@ -27,19 +27,16 @@ const useFirebaseInit = () => {
 	};
 
 	useEffect(() => {
-		if (!firebase.apps.length) {
-			const app = firebase.initializeApp(firebaseConfig);
-			if (Platform.OS !== 'web') {
-				initializeAuth(app, {
-					persistence: getReactNativePersistence(
-						ReactNativeAsyncStorage,
-					),
-				});
-			}
-		} else {
-			firebase.app(); // if already initialized, use that one
+		if (firebase.apps.length > 0) return;
+
+		const app = firebase.initializeApp(firebaseConfig);
+
+		if (Platform.OS !== 'web') {
+			initializeAuth(app, {
+				persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+			});
 		}
-	}, [firebase]);
+	}, []);
 };
 
 export default useFirebaseInit;

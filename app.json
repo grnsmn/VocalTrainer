@@ -2,7 +2,7 @@
   "expo": {
     "name": "Vocal Trainer",
     "slug": "VocalTrainer",
-    "version": "2.0.0",
+    "version": "2.4.7",
     "orientation": "portrait",
     "icon": "./assets/splash.png",
     "splash": {
@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.VocalTrainer.app"
+      "package": "com.VocalTrainer.app",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",

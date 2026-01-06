@@ -108,6 +108,7 @@ function getActiveTabName(state) {
 	return route.name;
 }
 
+
 export default function App() {
 	useFirebaseInit();
 	useAuthSync();
@@ -118,6 +119,7 @@ export default function App() {
 	const [fontsLoaded] = useFonts({
 		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
 	});
+
 
 	useEffect(() => {
 		async function prepare() {

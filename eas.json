@@ -1,7 +1,7 @@
 {
   "cli": {
     "version": ">= 3.15.0",
-    "appVersionSource": "remote"
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
@@ -25,7 +25,8 @@
     },
     "production": {
       "android": {
-        "image": "latest"
+        "image": "latest",
+        "buildType": "app-bundle"
       },
       "ios": {
         "image": "latest"
@@ -33,6 +34,19 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./google-services-key.json",
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    },
+    "internal": {
+      "android": {
+        "serviceAccountKeyPath": "./google-services-key.json",
+        "track": "internal",
+        "releaseStatus": "completed"
+      }
+    }
   }
 }

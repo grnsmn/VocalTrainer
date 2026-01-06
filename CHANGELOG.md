@@ -1,0 +1,332 @@
+# Changelog
+
+## [2.4.7](https://github.com/grnsmn/VocalTrainer/compare/v2.4.6...v2.4.7) (2026-01-06)
+
+## [2.4.6](https://github.com/grnsmn/VocalTrainer/compare/v2.4.5...v2.4.6) (2026-01-06)
+
+## [2.4.5](https://github.com/grnsmn/VocalTrainer/compare/v2.4.4...v2.4.5) (2026-01-05)
+
+## [2.4.4](https://github.com/grnsmn/VocalTrainer/compare/v2.4.3...v2.4.4) (2026-01-05)
+
+## [2.4.3](https://github.com/grnsmn/VocalTrainer/compare/v2.4.2...v2.4.3) (2026-01-05)
+
+## [2.4.2](https://github.com/grnsmn/VocalTrainer/compare/v2.4.1...v2.4.2) (2026-01-05)
+
+
+### Bug Fixes
+
+* Move .env file creation in EAS build workflow to occur before npm/build steps. ([d81a8eb](https://github.com/grnsmn/VocalTrainer/commit/d81a8eb692b3cab438a3f5b5509b0b5a649d09b9))
+
+## [2.4.1](https://github.com/grnsmn/VocalTrainer/compare/v2.4.0...v2.4.1) (2025-12-31)
+
+
+### Bug Fixes
+
+* add error boundary to catch silent crashes ([5b249d1](https://github.com/grnsmn/VocalTrainer/commit/5b249d18086c8cdd58a70de7d91af2a7d38d9cec))
+
+# [2.4.0](https://github.com/grnsmn/VocalTrainer/compare/v2.3.4...v2.4.0) (2025-12-31)
+
+
+### Features
+
+* Add error handling, API key validation, and platform-specific alerts for Firebase initialization. ([5ffbffc](https://github.com/grnsmn/VocalTrainer/commit/5ffbffc420c0a88b5f859989dbecd6c8ab5e9b22))
+
+## [2.3.4](https://github.com/grnsmn/VocalTrainer/compare/v2.3.3...v2.3.4) (2025-12-31)
+
+
+### Bug Fixes
+
+* set appVersionSource to local to respect CI versioning ([c6b9552](https://github.com/grnsmn/VocalTrainer/commit/c6b9552d7f1a3f63f230d367ba5964ea79d45891))
+
+## [2.3.3](https://github.com/grnsmn/VocalTrainer/compare/v2.3.2...v2.3.3) (2025-12-31)
+
+
+### Bug Fixes
+
+* harden versionCode and artifact discovery to prevent Play Store collisions ([7d4f806](https://github.com/grnsmn/VocalTrainer/commit/7d4f806e589c9ecd15c4e56e690be0abe47fc1bf))
+
+## [2.3.2](https://github.com/grnsmn/VocalTrainer/compare/v2.3.1...v2.3.2) (2025-12-31)
+
+
+### Bug Fixes
+
+* re-add env file creation step with prefixed secrets ([3441850](https://github.com/grnsmn/VocalTrainer/commit/3441850d077e8968745d27b924d9fd591fa0dd93))
+
+## [2.3.1](https://github.com/grnsmn/VocalTrainer/compare/v2.3.0...v2.3.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* explicit local artifact path for eas submit ([cafdb01](https://github.com/grnsmn/VocalTrainer/commit/cafdb01dff23c9594ca7619fae8f63c60b889c29))
+
+# [2.3.0](https://github.com/grnsmn/VocalTrainer/compare/v2.2.2...v2.3.0) (2025-12-30)
+
+
+### Features
+
+* Update Android versionCode calculation in EAS workflow and initialize it in app.json. ([43871be](https://github.com/grnsmn/VocalTrainer/commit/43871be33a21bbdf4e5897e5233d9415f89f6789))
+
+## [2.2.2](https://github.com/grnsmn/VocalTrainer/compare/v2.2.1...v2.2.2) (2025-12-30)
+
+
+### Bug Fixes
+
+* use git commit count for versionCode (deterministic) ([bb84b19](https://github.com/grnsmn/VocalTrainer/commit/bb84b19acc5d456b465e8135eb8b0c721808ee28))
+
+## [2.2.1](https://github.com/grnsmn/VocalTrainer/compare/v2.2.0...v2.2.1) (2025-12-30)
+
+# 2.2.0 (2025-12-30)
+
+
+### Bug Fixes
+
+* add componentwillunmount and add some restyling ([a05bb8a](https://github.com/grnsmn/VocalTrainer/commit/a05bb8a8b3a648ea1cb630ef4e5fd7ea1362ccea))
+* add optional chaining to CATEGORY_LIST split in Vocalizations screen ([63e6e1d](https://github.com/grnsmn/VocalTrainer/commit/63e6e1dea9505b036085bf9a3cc1a7e7febe2355))
+* add some restyling on trainingScreen ([b1701ef](https://github.com/grnsmn/VocalTrainer/commit/b1701efddfaddd6bcf8d4c49404994c9b295d2b3))
+* aggiunto controlli stretti sulla funzione playclick ([26f4640](https://github.com/grnsmn/VocalTrainer/commit/26f46400099c5a95f127cc5d8d11cbf941390345))
+* app version 1.0,.1 ([f8b5d1d](https://github.com/grnsmn/VocalTrainer/commit/f8b5d1da39268f3f2de6f8d2a51a2557efd501d7))
+* **app.json:** correct structure of plugins array ([7d9462f](https://github.com/grnsmn/VocalTrainer/commit/7d9462f3b5c54f3fa27fd17070a3803200f5bc2f))
+* **app.json:** remove duplicate entry for expo-font ([e19f2dc](https://github.com/grnsmn/VocalTrainer/commit/e19f2dc3eaed6e5625c709375c5a2367ddc1e43a))
+* **app.json:** simplify expo-font configuration ([ddc76bc](https://github.com/grnsmn/VocalTrainer/commit/ddc76bc6fb97e2156bd6fac42096502cc05c07c3))
+* **app:** adjust screen orientation handling for mobile platforms ([a530ab3](https://github.com/grnsmn/VocalTrainer/commit/a530ab348bd51212ea2be0024eb9d83ca73ad75a))
+* **App:** comment out conditional rendering for Piano tab ([f5bd638](https://github.com/grnsmn/VocalTrainer/commit/f5bd63826a2c8397c185b25847b2853c80fd0eb1))
+* **App:** comment out conditional rendering for Piano tab on Android ([480db19](https://github.com/grnsmn/VocalTrainer/commit/480db192e57127a76cf186b67946a6436e5d21f8))
+* **App:** conditionally render Piano tab for Android ([ebe70ea](https://github.com/grnsmn/VocalTrainer/commit/ebe70eaac976546ec73f2b1f5c1d84e9b38ea304))
+* **App:** handleNavStateChange to use async/await for orientation locking ([be57d2f](https://github.com/grnsmn/VocalTrainer/commit/be57d2feb89e737de8f4f5ebc8c8b323d1b575dd))
+* apply some custom style on trainingScreen and Esercizio ([202d5ef](https://github.com/grnsmn/VocalTrainer/commit/202d5ef729462168edf324f7750f6a6cf7a1d524))
+* **App:** remove commented code and improve FlatList properties ([32f9473](https://github.com/grnsmn/VocalTrainer/commit/32f9473ead999de9059cbea04d4b8753c292b5d9))
+* **App:** update Keyboard component and import changes ([52cafc3](https://github.com/grnsmn/VocalTrainer/commit/52cafc3ae2cb48eeea80e54244553f1448c7f6e2))
+* **App:** update tab names from Keyboard to Piano ([e97b9c5](https://github.com/grnsmn/VocalTrainer/commit/e97b9c53f7b40ddb4ae6817759e023a60f6044f7))
+* **assets:** update Demo_web.png image ([41d7bbd](https://github.com/grnsmn/VocalTrainer/commit/41d7bbdf78b0554d4df43aa751a1928ba3f3216f))
+* **assets:** update Demo_web.png image file ([df645ae](https://github.com/grnsmn/VocalTrainer/commit/df645ae8706d1c75f114e8c2a4ded0aa392e7122))
+* **CardPlay:** standardize import quotes and improve code formatting ([9053df3](https://github.com/grnsmn/VocalTrainer/commit/9053df377ba5f0bcc997c41b6d0e0a9ff3e773b6))
+* **CardSelect:** add check for onPress handler ([9085124](https://github.com/grnsmn/VocalTrainer/commit/90851244899106e54c93010004df7446c0ef8d85))
+* **dependencies:** downgrade expo-linear-gradient to version 14.0.2 ([24100c1](https://github.com/grnsmn/VocalTrainer/commit/24100c118b2e3a49326def49ef2f6631eaf21f11))
+* **Esercizio:** adjust layout properties for FlatList and Slider components ([0e874c4](https://github.com/grnsmn/VocalTrainer/commit/0e874c4a3d9c1a71db660ed1838afdd9729efae4))
+* **Esercizio:** enhance item rendering and styling in FlatList ([50caf8b](https://github.com/grnsmn/VocalTrainer/commit/50caf8b8e1d82f677dda47659018ec18fcb1902d))
+* **Esercizio:** simplify styles for Center and Slider components ([4e5231b](https://github.com/grnsmn/VocalTrainer/commit/4e5231be3c8ab1b3a7aaa9e4694697242a5baf29))
+* fixed countdon component error ([bf77892](https://github.com/grnsmn/VocalTrainer/commit/bf77892ffe4b8ac1e5e0f6d3f252fa6a3d6195a4))
+* fixed icon in tabbar ([7a72932](https://github.com/grnsmn/VocalTrainer/commit/7a72932e75f7e0ade47edbbff2995d10faced68c))
+* fixed naming project ([c0cc090](https://github.com/grnsmn/VocalTrainer/commit/c0cc090dbac1c60d4f19473618d7bc8e18fbf8ac))
+* fixed slug on app.json to build android apk ([a5099c4](https://github.com/grnsmn/VocalTrainer/commit/a5099c4d820c171ff6b8b3f8b86821192f5fbfb6))
+* fixed some deps in package with expo downgrade ([8a29708](https://github.com/grnsmn/VocalTrainer/commit/8a297081830b88fb6e50053dee3a8f1aa83258f7))
+* handle better loading breath families ([4b5ad0e](https://github.com/grnsmn/VocalTrainer/commit/4b5ad0eaec5499659a21edbe54a21309666915a4))
+* **HeaderRight:** enhance logout button styling and functionality ([b6a6e04](https://github.com/grnsmn/VocalTrainer/commit/b6a6e0458bc805095135bb9c9e8b4e288f1a95a6))
+* **HeaderRight:** refactor logout functionality for improved error handling ([3c961f1](https://github.com/grnsmn/VocalTrainer/commit/3c961f16b7ab51cd32ab39255ad2ce28536139f1))
+* **HeaderRight:** update logout functionality and icon ([de85540](https://github.com/grnsmn/VocalTrainer/commit/de85540e942a93073096a256dc02c8feca403e37))
+* **HeaderRight:** update logout icon color for better visibility ([2113db9](https://github.com/grnsmn/VocalTrainer/commit/2113db9e22ff7b4f8ba500c7b1cd6e8297f7ec56))
+* isolate warning removelister on countdown component ([fbd209f](https://github.com/grnsmn/VocalTrainer/commit/fbd209fb1b131981c059f483ac1e2e6132c27220))
+* **keyboard:** adjust KeyboardScreen layout for better user experience ([fcd5a33](https://github.com/grnsmn/VocalTrainer/commit/fcd5a33ba08819fe1bbd13890a620df01ee44fe8))
+* **KeyboardScreen:** comment out console log for key press ([095b3cf](https://github.com/grnsmn/VocalTrainer/commit/095b3cf73995524a2e4c1ea91454223a816bf42e))
+* **KeyboardScreen:** correct keyboard width calculation for landscape orientation ([363c137](https://github.com/grnsmn/VocalTrainer/commit/363c1378324adc9571d981738def16e29c406137))
+* **KeyboardScreen:** remove unused keyboard style ([bfca328](https://github.com/grnsmn/VocalTrainer/commit/bfca328ca2886fae21e69c9340fc799e9215a5fb))
+* **Loader:** update loader dimensions for improved visibility ([a92c4f7](https://github.com/grnsmn/VocalTrainer/commit/a92c4f7b719192ec4fc269f402eb8cfa88dc9da8))
+* lock zustand version to 5.0.1 in package.json ([6f1e30f](https://github.com/grnsmn/VocalTrainer/commit/6f1e30f277aa5ac8dfeb4e5c2c53bd603be59a39))
+* **package-lock:** update react-native-piano-keyboard version to 1.0.3 ([c844e18](https://github.com/grnsmn/VocalTrainer/commit/c844e18adda011402d73de992e6baa13513cbbb2))
+* **package:** update expo and expo-screen-orientation versions to use tilde ([15d337a](https://github.com/grnsmn/VocalTrainer/commit/15d337a9189a59f9e9ec243c529c44fe25b73f7a))
+* **package:** update expo and expo-screen-orientation versions to use tilde ([321614d](https://github.com/grnsmn/VocalTrainer/commit/321614d7ec1cd97d569bcdf8a6782aad1a9e0f27))
+* **package:** update expo version and maintain dependencies ([20c0d1d](https://github.com/grnsmn/VocalTrainer/commit/20c0d1db1c3ffdecade03a5efd4d5b46022e37e3))
+* **package:** update package versions for consistency ([98b69b1](https://github.com/grnsmn/VocalTrainer/commit/98b69b1bb993f3b73e9f23f77e5e9dd4c587a6bd))
+* **package:** update package versions for consistency ([627f5f2](https://github.com/grnsmn/VocalTrainer/commit/627f5f25d014cf676262bf9ac04191218900075b))
+* pass Google Service Account secret via environment variable instead of direct interpolation ([609460b](https://github.com/grnsmn/VocalTrainer/commit/609460bcd8ca9051bbd46b535cae114c41e10732))
+* **README:** correct alt text for android demo image ([66ae6a0](https://github.com/grnsmn/VocalTrainer/commit/66ae6a0879dfb50084885d2cca7bfecb8bf63338))
+* remove log ([1d1ebe2](https://github.com/grnsmn/VocalTrainer/commit/1d1ebe2d8baafeb367ef886b35de4257eae7a7f3))
+* removed size in icon Cards components ([e607490](https://github.com/grnsmn/VocalTrainer/commit/e6074907dc6f1dff65fcea1902eb40fe03de29aa))
+* removed uncorrect background colo in card select ([f61e1cf](https://github.com/grnsmn/VocalTrainer/commit/f61e1cf29228d54ebf6f8a88feccf5abcf817b44))
+* removed unnecessary AppLoading expo component for waiting font loading ([7e730c2](https://github.com/grnsmn/VocalTrainer/commit/7e730c23018d6dcf26c4625dfbc179a87806e84c))
+* split build and submit steps for local build support ([3495aa1](https://github.com/grnsmn/VocalTrainer/commit/3495aa10116a02f1aa7e5fde27ffbd2d8e478ed5))
+* **tailwind.config.js:** update Tailwind CSS configuration for improved color management ([2509e28](https://github.com/grnsmn/VocalTrainer/commit/2509e28cba8feb2bbea7d5a46d1fbf5d3a6a1076))
+* **TrainingScreen:** update text styling and remove unused styles ([c6bf09d](https://github.com/grnsmn/VocalTrainer/commit/c6bf09d837946d18f54e57777a831adf3c34baa7))
+* update @react-native-async-storage/async-storage to use caret versioning in package.json and package-lock.json ([8263d47](https://github.com/grnsmn/VocalTrainer/commit/8263d47cc2e6021659f0b652ed9d5e5788470b40))
+* Update app.json remove duplication expo font plugin ([a519aa7](https://github.com/grnsmn/VocalTrainer/commit/a519aa7c9bf251e155a981a24fe33ea9b4180c32))
+* Update babel.config.js ([e2c1a48](https://github.com/grnsmn/VocalTrainer/commit/e2c1a4843f35cf0a31e09f582c55d2d7de335fa1))
+* Update components/ui/card/styles.tsx ([675cae1](https://github.com/grnsmn/VocalTrainer/commit/675cae10f3545e499b68a4f7d53e909354691a28))
+* update expo sdk and rn version with minor updates ([819cb84](https://github.com/grnsmn/VocalTrainer/commit/819cb843d0031e92f0942d68f543dcc1a3094d85))
+* use node 24 and local build to bypass quota ([14ca13a](https://github.com/grnsmn/VocalTrainer/commit/14ca13ae0a28f79c1b5400f48d4e638813c05745))
+* **useAuthSync:** rename clearAll to clearAuth for clarity ([7599a96](https://github.com/grnsmn/VocalTrainer/commit/7599a9642e8597886e86776a1ef3d41c563a6d87))
+* **useBreathingFamilies:** remove console error logging ([d8f857b](https://github.com/grnsmn/VocalTrainer/commit/d8f857b4278b6370f0cfd7359c7ab55e15dc9aab))
+* **Web:** install miss deps for work lotties on web ([851a554](https://github.com/grnsmn/VocalTrainer/commit/851a5548494b15db005f4589bc393990a30e14a3))
+* Write Google Service Account JSON using node for improved robustness. ([7b29121](https://github.com/grnsmn/VocalTrainer/commit/7b291218f498726f51d8ee52f12064b9f50a14a5))
+
+
+### Features
+
+* add @react-native-async-storage/async-storage dependency to package.json and package-lock.json ([d94428c](https://github.com/grnsmn/VocalTrainer/commit/d94428c512cc007b36a06e414f83469c642f1c75))
+* add aios in production ([04ced17](https://github.com/grnsmn/VocalTrainer/commit/04ced176ba27e2ecea1fe858b4fa7f0a840d9714))
+* add countdown legacy component ([c91580c](https://github.com/grnsmn/VocalTrainer/commit/c91580c279c74cd0ae39dc90ba0e9d511f0bf641))
+* add eslint ([da7447e](https://github.com/grnsmn/VocalTrainer/commit/da7447e1b83affacdf8f92650a1ad79a3f39d769))
+* Add GitHub Actions workflow for automated EAS Android builds and submissions, and update EAS configuration for app bundle, auto-increment, and submission details. ([9611020](https://github.com/grnsmn/VocalTrainer/commit/96110203bbcd6a59c6bb67a09ad8da720d6073ec))
+* add google only for web ([7a5e8f4](https://github.com/grnsmn/VocalTrainer/commit/7a5e8f4c8ae0ae21532004319ef287d380fec92b))
+* add handler to format for request an case of camel case list name ([8a2d480](https://github.com/grnsmn/VocalTrainer/commit/8a2d480c0c26f5bc36e5f013a7cef3d3b8b31c85))
+* add hero component ([d6279a1](https://github.com/grnsmn/VocalTrainer/commit/d6279a12caab06c4ab33d126e356251be39ffa9e))
+* add hero on categories breath screen ([8643397](https://github.com/grnsmn/VocalTrainer/commit/8643397afb7f6522159607d8bfcfed204eac7197))
+* add hero on main vocalization screen ([5d60f6c](https://github.com/grnsmn/VocalTrainer/commit/5d60f6ca5f44cf31060e139fe04f6aa899ff19a1))
+* add loader when load breath exercice ([6906aff](https://github.com/grnsmn/VocalTrainer/commit/6906affde624e0177203503a5f1e7dc0448e73e4))
+* add logout functionality to clear authentication state ([93b20db](https://github.com/grnsmn/VocalTrainer/commit/93b20db52cf995022e9e41f2d38cb567e4965682))
+* add lottie for animated sing reproduction ([1fb2f6f](https://github.com/grnsmn/VocalTrainer/commit/1fb2f6ff842b9a56ce92a8b711d500266fb15724))
+* add on script option to clear cache ([b157da8](https://github.com/grnsmn/VocalTrainer/commit/b157da89cd5fb71b5a9d9780d0e52e3b34e2adc2))
+* add options on route Training to permit dynamic title in that screen ([beccfeb](https://github.com/grnsmn/VocalTrainer/commit/beccfeb1d2ceb6685e99922a8c12ae3e7b53b349))
+* add owner to eas config ([758ade4](https://github.com/grnsmn/VocalTrainer/commit/758ade4d8cc6d907597f8dd72937475e2b67e01f))
+* add package name ([8dd7fb5](https://github.com/grnsmn/VocalTrainer/commit/8dd7fb5a7ecde8b5606903e476745bdb0f693d0a))
+* add react-native-worklets dependency ([30bd23c](https://github.com/grnsmn/VocalTrainer/commit/30bd23ca2c80954e06d4964c2c7b733fd2a68cbd))
+* add redux-devtools-extension for enhanced state management and debugging in zustand store ([7b2c1ac](https://github.com/grnsmn/VocalTrainer/commit/7b2c1acf216782606325e41d5b1b18c8b34bbf52))
+* add sound assets ([9abb419](https://github.com/grnsmn/VocalTrainer/commit/9abb4199e4c37b944fe8a6a9fc8defbffe42820b))
+* add state to handle loading vocalization ([397bcba](https://github.com/grnsmn/VocalTrainer/commit/397bcbade923e33ef8be8822e4ef5beb0ad116c4))
+* add text on spinner loader ([b94f955](https://github.com/grnsmn/VocalTrainer/commit/b94f955185e38d0883d21e4bcffe44eff7828585))
+* add web favicon ([9fc1c77](https://github.com/grnsmn/VocalTrainer/commit/9fc1c77bcaa194013e1eb97a5a271bb7875a343f))
+* added branch fixed countdown component ([#11](https://github.com/grnsmn/VocalTrainer/issues/11)) ([092ed5a](https://github.com/grnsmn/VocalTrainer/commit/092ed5a55db9c165186f9aea50430b7a8e1dad0c))
+* added dotEnv ([7c7e6c0](https://github.com/grnsmn/VocalTrainer/commit/7c7e6c0ec3cffe7e73e426c3e890d1b60482e138))
+* added eas json ([22c87fd](https://github.com/grnsmn/VocalTrainer/commit/22c87fd2d01423064e9576fcd0c07fe619c262e8))
+* added gluestack themed config. ([8ac3f63](https://github.com/grnsmn/VocalTrainer/commit/8ac3f63aa4242ffd2956cc77f19e2211965bdcee))
+* added handler to select category breath ([70b7c5e](https://github.com/grnsmn/VocalTrainer/commit/70b7c5e6b70ceb3c6823908dd041587369e0febc))
+* added iamge for trigger build in expo for android apk preview ([45ad6aa](https://github.com/grnsmn/VocalTrainer/commit/45ad6aaea6783fda64b091c1be40768b6ced54d0))
+* added navigation stack deps ([23080e4](https://github.com/grnsmn/VocalTrainer/commit/23080e4d6ccdd9e85f2d5379061faf38651cd24e))
+* added new creativity for favicon and icon app ([#17](https://github.com/grnsmn/VocalTrainer/issues/17)) ([1a2820f](https://github.com/grnsmn/VocalTrainer/commit/1a2820f72f520a4863ade47e7ab1536d5cb38199))
+* added nvmrc file for set node version ([7ea741b](https://github.com/grnsmn/VocalTrainer/commit/7ea741bce14e5739138405b9f1af193c7759f7c3))
+* added requiredd expo webpack for new SDK version ([c602af0](https://github.com/grnsmn/VocalTrainer/commit/c602af0a8e072600596e9e2b6851ae81b24ff607))
+* adjust ScrollView to use flexGrow for improved layout in AuthScreen ([055891e](https://github.com/grnsmn/VocalTrainer/commit/055891e589461044382b8f09183d37f2e999ff13))
+* allineate app json and metro config ([f54ede5](https://github.com/grnsmn/VocalTrainer/commit/f54ede51ea74d2e52bceef640758f3d1cce0bc5c))
+* **app.json:** add expo-screen-orientation configuration ([7b69fd2](https://github.com/grnsmn/VocalTrainer/commit/7b69fd2b9a207b7cf3bd96af9c0904ae59f652ef))
+* **app.json:** add Kotlin version for Android build properties ([61d4620](https://github.com/grnsmn/VocalTrainer/commit/61d46206cafb3d1eaf5d2212db06430f2ca6dbd4))
+* **App:** Add Breathing tab section ([0da1dc7](https://github.com/grnsmn/VocalTrainer/commit/0da1dc779a56d04daae95e5267e5758818b3292f))
+* **app:** add Piano screen and integrate KeyboardStack for enhanced music interaction ([73dd38e](https://github.com/grnsmn/VocalTrainer/commit/73dd38e347de601a94e161f8b177aa7f02faf8f8))
+* **App:** integrate custom fonts and splash screen handling ([1786b65](https://github.com/grnsmn/VocalTrainer/commit/1786b6514541480f49aeb173b939f92909421476))
+* **App:** integrate useAuthSync hook for Firebase authentication synchronization ([d5eec5c](https://github.com/grnsmn/VocalTrainer/commit/d5eec5c55223e475a39cf228f077b5738f800cfb))
+* apply some update to legacy code and make it works ([acdcdfb](https://github.com/grnsmn/VocalTrainer/commit/acdcdfba24f4f40f9fd39cc8b8ecd9dbab6672aa))
+* **assets:** add speaker playing animation JSON file ([7b96886](https://github.com/grnsmn/VocalTrainer/commit/7b968869a594554de86c39bf0ab4f31d5971d1bc))
+* **assets:** add voice lines animation JSON file ([5a2a2df](https://github.com/grnsmn/VocalTrainer/commit/5a2a2df2055829303dd2af38207a9538b35de4a7))
+* **Auth:** add clear email functionality to authentication form ([b4a253d](https://github.com/grnsmn/VocalTrainer/commit/b4a253d056a5f5de95b70cc399d09f028f091941))
+* **Auth:** enhance authentication form with error handling and password visibility toggle ([5b8d0b5](https://github.com/grnsmn/VocalTrainer/commit/5b8d0b57b440c7335e46173469bd95e1c8a5320c))
+* automate CI versioning with prerelease on dev ([ba25e40](https://github.com/grnsmn/VocalTrainer/commit/ba25e405b2bf6abeb90785c421105664e8281df9))
+* call in app new firebase init hook ([66bd592](https://github.com/grnsmn/VocalTrainer/commit/66bd592f0c4de9d6ddd25d80bfa5ff0b0fe6d7c6))
+* **CardPlay:** add style for web lottie ([8f54835](https://github.com/grnsmn/VocalTrainer/commit/8f548356e689a2fd81ccbc89e27c1f096dd20302))
+* **CardPlay:** removed progressbar and added spinner for loading ([34c72ef](https://github.com/grnsmn/VocalTrainer/commit/34c72ef39ac337e9af856ea0e67f4b0201cbcee6))
+* **CardPlay:** Update with animated icon ([f4d8a6d](https://github.com/grnsmn/VocalTrainer/commit/f4d8a6d4cfcd05037824fd8ecb8335d38d5b3fcb))
+* centralize header options for Vocalizations and Breathing stacks; update AuthScreen layout ([92a8841](https://github.com/grnsmn/VocalTrainer/commit/92a8841428ca9419d44408749a5c160f2e74f1fb))
+* change bg in major screens ([950d074](https://github.com/grnsmn/VocalTrainer/commit/950d07451be3746a9c9f5f60bc60b3f9dc087e67))
+* change image on hero ([ee1e3ae](https://github.com/grnsmn/VocalTrainer/commit/ee1e3ae5cc20f124c027b5b68b22ea281c66aee5))
+* conditionally render Auth screen based on authentication state ([4389675](https://github.com/grnsmn/VocalTrainer/commit/4389675c3efc64453546e0e817415225fe481b14))
+* continuo to create Home ([d187699](https://github.com/grnsmn/VocalTrainer/commit/d18769947cdaefbbb90c51652084b6db589de2d0))
+* creat hook to request data from storage ([27f5c9e](https://github.com/grnsmn/VocalTrainer/commit/27f5c9e2c46dd6d4bfac6241594ba28970b4ce49))
+* create hook for init firebase accesss ([82dd7a2](https://github.com/grnsmn/VocalTrainer/commit/82dd7a26bfabea46790a42660f2aed6a76c97018))
+* create hook to creatate storage ref ([8db9e4d](https://github.com/grnsmn/VocalTrainer/commit/8db9e4dfc217fa35e02cd9c1b6529502b5005049))
+* create hook to take breathing exercice from firebase ([5612a2c](https://github.com/grnsmn/VocalTrainer/commit/5612a2c427236051681c0846b416761e49d818e9))
+* created cardPlay component ([ab1b5a9](https://github.com/grnsmn/VocalTrainer/commit/ab1b5a94702469578c6d1e3afb1025d49ebbc8eb))
+* created screen to show categories of brething exercice ([aef1b28](https://github.com/grnsmn/VocalTrainer/commit/aef1b28974caeb50a6711e10e7a7ce2e9e92dd4e))
+* created vocalizations list screen ([e6f6f09](https://github.com/grnsmn/VocalTrainer/commit/e6f6f0942255480d32ee4c8573b07f854eeda0fd))
+* customize piano screen with a gradient ([c8b6e22](https://github.com/grnsmn/VocalTrainer/commit/c8b6e22f4133c17d70fccde5976a340fab045805))
+* downgrade expo on 49 ([1d46add](https://github.com/grnsmn/VocalTrainer/commit/1d46add1b2229d79c43aad08eb400f86dc71826e))
+* enable and works auth with email and password ([3c73407](https://github.com/grnsmn/VocalTrainer/commit/3c73407cd77d37715dca25b719f47a30357bd56b))
+* enhance AuthScreen layout with password visibility toggle and improved input fields ([cad761d](https://github.com/grnsmn/VocalTrainer/commit/cad761d9c0c00139dcf1f100a5a0b0544afd2f7f))
+* enhance HeaderRight component with logout label and improved layout ([e6d2bf7](https://github.com/grnsmn/VocalTrainer/commit/e6d2bf70623cebde7aa90244fadf20450b2823df))
+* enhance useStorage hook to handle firebase initialization ([18eae97](https://github.com/grnsmn/VocalTrainer/commit/18eae973c5ada569f8938c7f939ef35912f01e29))
+* header in navigation top ([#2](https://github.com/grnsmn/VocalTrainer/issues/2)) ([07418b5](https://github.com/grnsmn/VocalTrainer/commit/07418b5ed294745b6ba6bf21b7559609bfa4fe3a))
+* hide header in AuthStackScreen for improved UI ([da7b0b1](https://github.com/grnsmn/VocalTrainer/commit/da7b0b1202f95c9faed953a7effc9cd40ff4c029))
+* implement async storage for authentication cache data management in Auth and App components ([d2974a9](https://github.com/grnsmn/VocalTrainer/commit/d2974a9854e91c718628a3fe9004ffb011dd8955))
+* implement logout functionality and update authentication handling in AuthScreen ([2361b6d](https://github.com/grnsmn/VocalTrainer/commit/2361b6d050445a30a575b1ee3fd8714d5ed098d7))
+* initialize Firebase authentication with React Native Async Storage persistence for mobile version ([801116e](https://github.com/grnsmn/VocalTrainer/commit/801116e77d3d544ff92e3a006b2daab27eb6c60c))
+* install rn slider ([87b5b65](https://github.com/grnsmn/VocalTrainer/commit/87b5b650d5a4e8e0e064113c3c7caa27d1622b84))
+* installed firebase ([38e3463](https://github.com/grnsmn/VocalTrainer/commit/38e3463e8c576ff673d3f3fae89cb2f239de279f))
+* installed Lucid icons for RN ([b99c22f](https://github.com/grnsmn/VocalTrainer/commit/b99c22fea986259e34547fff8c60b07e1a4a836e))
+* installed native stack ([bb395b4](https://github.com/grnsmn/VocalTrainer/commit/bb395b4c95932c8bd9a6f7c95b50b8085b1f1e6e))
+* installed tabs navigation ([2a62b75](https://github.com/grnsmn/VocalTrainer/commit/2a62b755f539538e8c44446c3543dec2f88595c9))
+* integrate audio player with vocalizzi streamed from google firebase storage ([#5](https://github.com/grnsmn/VocalTrainer/issues/5)) ([ed34efb](https://github.com/grnsmn/VocalTrainer/commit/ed34efbdb7d5231ed53d31a91d24ca951ef04b66))
+* integrate authentication check in useBreathingFamilies hook to manage data loading based on user state ([2d4b21e](https://github.com/grnsmn/VocalTrainer/commit/2d4b21ed5406d648cf57c73aced2c2f47f8cf97a))
+* Integrate Breath component to replace Legacy Class EsercizioComponent ([#30](https://github.com/grnsmn/VocalTrainer/issues/30)) ([ea74258](https://github.com/grnsmn/VocalTrainer/commit/ea7425846e60f25693d3917623f0d9688e633102))
+* Integrate env to isolate environment firebase storage and realtime database info ([#7](https://github.com/grnsmn/VocalTrainer/issues/7)) ([bc454a2](https://github.com/grnsmn/VocalTrainer/commit/bc454a2c1a53e12a90cb654795c34b0e0ec9e915))
+* integrate eslint and prittier ([#6](https://github.com/grnsmn/VocalTrainer/issues/6)) ([303c5d0](https://github.com/grnsmn/VocalTrainer/commit/303c5d04da908562890bb51215884460b369d16e))
+* integrate expo av ([c1c7493](https://github.com/grnsmn/VocalTrainer/commit/c1c749395d47994154356bc4985af5947d6a6bb5))
+* integrate hook in screen list ([b7ee679](https://github.com/grnsmn/VocalTrainer/commit/b7ee6799b469b317de40136d7735359cb20d27eb))
+* Integrate legacy breath code ([9f9636f](https://github.com/grnsmn/VocalTrainer/commit/9f9636f5eea3d563096f5963743886d702d549b3))
+* integrate lottie react native deps ([9c200dc](https://github.com/grnsmn/VocalTrainer/commit/9c200dc5ac3d921d8a85808a4d6f4480c9cb4dbe))
+* integrate useStore for authentication state and update Google sign-in method in AuthScreen ([60a9e90](https://github.com/grnsmn/VocalTrainer/commit/60a9e90cd8753261cec1c0db0fb12e29360ce202))
+* integrated gluestack-ui ([441fb3d](https://github.com/grnsmn/VocalTrainer/commit/441fb3dba83eede02862becfc4864d4d9769f723))
+* isolate Loader component ([b5e7ba4](https://github.com/grnsmn/VocalTrainer/commit/b5e7ba44fd0285399105d2c59946d57c72486605))
+* isoleted a component czard ([798e6e2](https://github.com/grnsmn/VocalTrainer/commit/798e6e2ac3fdc118a907bdf173c24f7f753d9c04))
+* **keyboard:** add KeyboardScreen and KeyboardStack for piano functionality ([a10de50](https://github.com/grnsmn/VocalTrainer/commit/a10de50e4f047000124eee130dce87896387cf84))
+* **keyboard:** enhance KeyboardScreen layout and update KeyboardStack options ([c44fdc7](https://github.com/grnsmn/VocalTrainer/commit/c44fdc70dc46dd45005ad01d32022a6f002866a7))
+* **KeyboardScreen:** add animated jump notes to keyboard screen ([72e7b85](https://github.com/grnsmn/VocalTrainer/commit/72e7b85109bc469c8d7bb1e14da5d6cad59efc36))
+* **KeyboardScreen:** enhance animations with voice lines and speaker effects ([36494a4](https://github.com/grnsmn/VocalTrainer/commit/36494a409b431693d1cef580f7e8d7de04795504))
+* **Loader:** integrate Lottie animation for loading state ([d603957](https://github.com/grnsmn/VocalTrainer/commit/d603957043b543b796a15188b18ee5b8afd84fb2))
+* make better dynamic header ([c038e79](https://github.com/grnsmn/VocalTrainer/commit/c038e793e8ea7bd5fd84b845be5c54ab864b49ca))
+* make dynamic title screen of vocalizations list ([283fa3b](https://github.com/grnsmn/VocalTrainer/commit/283fa3ba83c7f91ded3007d1958b355b114e3262))
+* manage initial route based on authentication state and improve logout handling ([9095f99](https://github.com/grnsmn/VocalTrainer/commit/9095f995e55dcaec37596fd8ed9eaa9755160690))
+* **package:** add @gluestack-ui/alert dependency ([126421b](https://github.com/grnsmn/VocalTrainer/commit/126421b2db72b28cecf771491788cf2f7bc1cf32))
+* **package:** add expo-screen-orientation dependency ([c04a4bc](https://github.com/grnsmn/VocalTrainer/commit/c04a4bc3259139aa410a6746e62c2f2d88596901))
+* **package:** add react-native-piano-keyboard and update dependencies ([f162b13](https://github.com/grnsmn/VocalTrainer/commit/f162b1325abfa6e7326d2128ec692d154034139b))
+* **package:** update dependencies and remove unused packages ([d056ebb](https://github.com/grnsmn/VocalTrainer/commit/d056ebb46578c1b0753c5e39797da89e8e2fec01))
+* **README:** update demo images for web and android ([dd7e223](https://github.com/grnsmn/VocalTrainer/commit/dd7e223486dc86270624aa248c7738af64734ece))
+* refactor AuthScreen to use new UI component ([3e3e11e](https://github.com/grnsmn/VocalTrainer/commit/3e3e11e709a1f82ebf025eeb9778b21c0183d9ee))
+* refactor CardPlay ([c1fe4cb](https://github.com/grnsmn/VocalTrainer/commit/c1fe4cb0e3f1df6879428730de13700d8a607690))
+* refactor login and signup handling in AuthScreen for improved error management and token handling ([1306065](https://github.com/grnsmn/VocalTrainer/commit/13060656d05d7039167536dec1b1c4ecf5d0fcf9))
+* remove expo auth ([5c5a28d](https://github.com/grnsmn/VocalTrainer/commit/5c5a28d11b19a2f17ebc9e291df57b2b656a3705))
+* removed auth comment code ([a14f89a](https://github.com/grnsmn/VocalTrainer/commit/a14f89ac6d242746bece816e1b5247f8b7d0c84a))
+* removed image on developement ([6950e94](https://github.com/grnsmn/VocalTrainer/commit/6950e9475603caad4cd86f63319761956484d361))
+* removed slider community ([9351227](https://github.com/grnsmn/VocalTrainer/commit/93512275f91dd0e9cbca0164d9d4f3e5490821bd))
+* rename esercizi list in breathingList ([ba1fb0f](https://github.com/grnsmn/VocalTrainer/commit/ba1fb0fe58d3ed647f363ecac67b33227010b528))
+* renamed home index screen and start to integrate navigation to list ([7537df6](https://github.com/grnsmn/VocalTrainer/commit/7537df652cbe3bfa01a1a55ca34aa0fac7529c20))
+* renamed module in app js ([0768042](https://github.com/grnsmn/VocalTrainer/commit/0768042ac77e2375047400c90d8e5d81e34cb754))
+* renamed status loading vocalizations ([b222fde](https://github.com/grnsmn/VocalTrainer/commit/b222fde69424081c49a2fd39399126f2bd6fd0bb))
+* renewed icon ([c95851c](https://github.com/grnsmn/VocalTrainer/commit/c95851c2c9fcbad266d95ebe5aee9712b5d24a94))
+* replaced npm with yarn package manager and install react navigation ([dcf95b6](https://github.com/grnsmn/VocalTrainer/commit/dcf95b6fb5d97fbc80d4932eb24e6c8fa5abcf93))
+* setup eas workflow and gh actions ([58cdbca](https://github.com/grnsmn/VocalTrainer/commit/58cdbca74479b5a7e5abf1f959c8b4ff7868059d))
+* start to add autoincrement eas building number ([7a8a39c](https://github.com/grnsmn/VocalTrainer/commit/7a8a39cd163d35a1dbd040188910ad0b42e61b20))
+* start to base use gluestack on app ([096015f](https://github.com/grnsmn/VocalTrainer/commit/096015fcdc6a913587d6c9c394ffacb93dc1df68))
+* start to create Home ([9e03753](https://github.com/grnsmn/VocalTrainer/commit/9e03753364c7ed94d6fcad14d59ca0777e5cbb4e))
+* start to improve UI playing info ([61ad852](https://github.com/grnsmn/VocalTrainer/commit/61ad8529676f943afc4bb3864f33d6fa35c9ec61))
+* start to integrate auth ([9444333](https://github.com/grnsmn/VocalTrainer/commit/94443339b01042ba5858e67c05f0f4ea344d9daa))
+* start to integrate play track ([244def8](https://github.com/grnsmn/VocalTrainer/commit/244def8d79bf251067871c69bf60907a004e6802))
+* start to prepare 2.0 renewed version ([c662d6f](https://github.com/grnsmn/VocalTrainer/commit/c662d6fe38dfe0d622f98d86d8159bb29eb461bc))
+* start to request storage from firebase in vocalizationsList ([7e4d420](https://github.com/grnsmn/VocalTrainer/commit/7e4d420fa45ca67dbf82e8e2ffd908bc982bc91c))
+* start to require exercices from firebase storage ([a4b4632](https://github.com/grnsmn/VocalTrainer/commit/a4b463223e22e32732f3e863efc20ca955796d0f))
+* start to try to integrate vocalizzi audio [local stable - in comment storageBucket firebase] ([e5b626a](https://github.com/grnsmn/VocalTrainer/commit/e5b626a4fe9b1651f23b1093e7611d6c119a9f0f))
+* test to integrate rn support for web lottie ([9c9297a](https://github.com/grnsmn/VocalTrainer/commit/9c9297a6c552016a675acf67f83e77094198f173))
+* try new test asset ([45cdd92](https://github.com/grnsmn/VocalTrainer/commit/45cdd9252cd6404e3c4fb1c6fd6d3eeee332b262))
+* updat app ([31d810a](https://github.com/grnsmn/VocalTrainer/commit/31d810ad8e7995fddf349976b49e95c37420804e))
+* updat package ([7301ce8](https://github.com/grnsmn/VocalTrainer/commit/7301ce8b3d6349e30bb71cc997c7d75dea046ba4))
+* update app ([bcb9567](https://github.com/grnsmn/VocalTrainer/commit/bcb9567c647819fe87dfeb48684b1a1503ead1f6))
+* update app and package configurations for new architecture and dependency upgrades ([73c3d2c](https://github.com/grnsmn/VocalTrainer/commit/73c3d2cc96f8d7cba23091b77cecee23099f6e86))
+* update assets ([95d0fc5](https://github.com/grnsmn/VocalTrainer/commit/95d0fc5aa7fb5715f15d4bee9a3270dc4276bb1c))
+* update assets ([039e721](https://github.com/grnsmn/VocalTrainer/commit/039e7218e8c262486c198bc962ccf378672e8a5e))
+* update AuthScreen to set authentication state on successful login ([da0bbb0](https://github.com/grnsmn/VocalTrainer/commit/da0bbb01ac4bf50aa4f1c58378fdc91c36d3df4a))
+* update card select ([becd466](https://github.com/grnsmn/VocalTrainer/commit/becd4663231de013511e34e0c575b2f118a217f0))
+* update CardPlay comonent ([c18053f](https://github.com/grnsmn/VocalTrainer/commit/c18053f9e7d278ea816b9f13e2f1a2312d4a046b))
+* update CATEGORY_LIST to use environment variable and adjust data handling in Vocalizations screen ([f4776d8](https://github.com/grnsmn/VocalTrainer/commit/f4776d82fbfa6f451a357417a40e8595df8de034))
+* update dependencies after advice of expo doctor ([6efd4bc](https://github.com/grnsmn/VocalTrainer/commit/6efd4bc8df9b81126338b15f5132dd0738b73b22))
+* update eas.json config for dev end production build and remove image in preview ([5ba100d](https://github.com/grnsmn/VocalTrainer/commit/5ba100d398b9c7a14077a347b49530642c7f50bb))
+* update expo sdk 49 ([#12](https://github.com/grnsmn/VocalTrainer/issues/12)) ([0020542](https://github.com/grnsmn/VocalTrainer/commit/0020542b605ec1ad8c576a0339a615d71fa5a2be))
+* update expo sdk 53 ([#48](https://github.com/grnsmn/VocalTrainer/issues/48)) ([5275a95](https://github.com/grnsmn/VocalTrainer/commit/5275a95b8409cdc21b828f49c5f29e3871c45748))
+* update expo sdk to 45 and adapted firebase old version with new metro.config file ([9b5fbd6](https://github.com/grnsmn/VocalTrainer/commit/9b5fbd6b02ad1713caf667b94fc479327a73021b))
+* update expo sdk to 45 and adapted firebase old version with new metro.config file ([98bb806](https://github.com/grnsmn/VocalTrainer/commit/98bb806fd3bf264d4cfcd2b1f63b86f857305505))
+* update expo SDK to 47 ([b2f6be5](https://github.com/grnsmn/VocalTrainer/commit/b2f6be5da77e5a263a801a506b89f605d295b235))
+* update firebase version and add zustand for state management ([191f69f](https://github.com/grnsmn/VocalTrainer/commit/191f69f4094286913668b2f3db729a517345f3ec))
+* update Google sign-in method to handle authentication response ([55f1b63](https://github.com/grnsmn/VocalTrainer/commit/55f1b63938bbb0497ad8064e92c7969a98b65a9e))
+* update Home ([8ba9206](https://github.com/grnsmn/VocalTrainer/commit/8ba9206e68c2b8d938fa4118270b754c4ac934b6))
+* update icon ([9e8d7d9](https://github.com/grnsmn/VocalTrainer/commit/9e8d7d9411ea565b371fae1b4779abb30739ed27))
+* update lock ([d178720](https://github.com/grnsmn/VocalTrainer/commit/d178720c9eec70046caefdc1f344e88d3134814c))
+* update lock ([4068cf4](https://github.com/grnsmn/VocalTrainer/commit/4068cf4b7e270adcd45d2c01e7f332dec4a324a3))
+* update metro config ([a40d985](https://github.com/grnsmn/VocalTrainer/commit/a40d98579239b5d5943e7a8350942491237ca379))
+* update metro config file ([3b0c8e8](https://github.com/grnsmn/VocalTrainer/commit/3b0c8e83617d9868de67f80f438d0cdfd9b8de8c))
+* update navigation ([6f44635](https://github.com/grnsmn/VocalTrainer/commit/6f446357179b78b9f2239db0705cea5a07d06b84))
+* update package and integrate countdown legacy ([5e35eda](https://github.com/grnsmn/VocalTrainer/commit/5e35eda581f42a0a9e94073a9f02534d98a9bda5))
+* update package lock ([81638f1](https://github.com/grnsmn/VocalTrainer/commit/81638f124050e5ca0d0d30df2a3e0666b6470602))
+* update tab navigator styles and re-order screens ([6a3c0fa](https://github.com/grnsmn/VocalTrainer/commit/6a3c0faf5910d80d1ec89accc707d0e4c7df5968))
+* update to Expo SDK 51 ([e1b43a3](https://github.com/grnsmn/VocalTrainer/commit/e1b43a3bc911fcd7f6059e216bd9f2ac1e38e025))
+* update to sdk 50 ([a04d14e](https://github.com/grnsmn/VocalTrainer/commit/a04d14e14e82d391969402b58edc490df5e9c406))
+* update vocalizationlist with new UI handled playing ([42b35e9](https://github.com/grnsmn/VocalTrainer/commit/42b35e9deec5f68a2abb24a2cba4c7a25a4b97be))
+* update vocalizations list with new card and logic with loader while download data ([84710cc](https://github.com/grnsmn/VocalTrainer/commit/84710cc8d0a6ccb3959d7db276e09f254a243eb6))
+* update vocalizationsList hook ([0986b06](https://github.com/grnsmn/VocalTrainer/commit/0986b0682bee2b6f69fcec8863c63b0b270bffcd))
+* upgrade expo to sdk 46 ([#3](https://github.com/grnsmn/VocalTrainer/issues/3)) ([21e6647](https://github.com/grnsmn/VocalTrainer/commit/21e66476e3589170d75bcd907abb7bd541871640))
+* Upgrade to gluestack v2 ([ca08043](https://github.com/grnsmn/VocalTrainer/commit/ca080439d1e749a3649be7409fd387a25c8e553f))
+* use a callback to pass label of card select onPressed ([2e629bd](https://github.com/grnsmn/VocalTrainer/commit/2e629bd049f23654cfd1860530706f6a5e7efb96))
+* use new loader component in breathing list ([9360e62](https://github.com/grnsmn/VocalTrainer/commit/9360e62d8ea548070f6766b44c215a699eaa6fad))
+* use new loader component in localizations list ([521da04](https://github.com/grnsmn/VocalTrainer/commit/521da046f6fbffc170fa7890f49769621d75ffc2))
+* **VocalizationLIst:** update right icon handler in card play render item ([adc4947](https://github.com/grnsmn/VocalTrainer/commit/adc4947065a07c7db08c6d90edaa8048d1c52ec6))
+* wrap app with nav container ([3216974](https://github.com/grnsmn/VocalTrainer/commit/32169745c45844583e5776322800937adb7f6a5b))
+* wrap app with navigator ([62b0b65](https://github.com/grnsmn/VocalTrainer/commit/62b0b65c36699c9eefaffecf115639bf982ba920))
+* wrap AuthScreen content in ScrollView for better layout management ([b7da712](https://github.com/grnsmn/VocalTrainer/commit/b7da712c9468da746d1505689817e35a8191deb5))
+
+
+### Performance Improvements
+
+* memoized getTitle function ([3a1b28d](https://github.com/grnsmn/VocalTrainer/commit/3a1b28de9964e4e61b08f64c81c6d022f739e9ea))
