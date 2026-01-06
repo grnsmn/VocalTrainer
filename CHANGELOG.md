@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.4.8](https://github.com/grnsmn/VocalTrainer/compare/v2.4.7...v2.4.8) (2026-01-06)
+
 ## [2.4.7](https://github.com/grnsmn/VocalTrainer/compare/v2.4.6...v2.4.7) (2026-01-06)
 
 ## [2.4.6](https://github.com/grnsmn/VocalTrainer/compare/v2.4.5...v2.4.6) (2026-01-06)
