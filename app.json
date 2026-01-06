@@ -51,10 +51,6 @@
           }
         }
       ],
-      [
-        "./plugins/minSdkProjectGradlePatch",
-        {}
-      ],
       "expo-font",
       [
         "expo-screen-orientation",
