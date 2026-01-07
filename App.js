@@ -12,6 +12,7 @@ import {
 	Wind,
 	KeyRoundIcon,
 	KeyboardMusicIcon,
+	BookOpen,
 } from 'lucide-react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -22,6 +23,8 @@ import BreathingList from './src/screens/Breathing/BreathingList';
 import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
 import KeyboardStackScreen from './src/screens/Keyboard/KeyboardStack';
+import TheoryList from './src/screens/Theory/TheoryList';
+import PdfViewer from './src/screens/Theory/PdfViewer';
 import useStore from './src/store';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
@@ -37,6 +40,8 @@ const Tab = createBottomTabNavigator();
 const VocalizationsStack = createNativeStackNavigator();
 const BreathingStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
+const TheoryStack = createNativeStackNavigator();
+
 const screenOptions = {
 	headerTitleAlign: 'center',
 	headerStyle: { backgroundColor: '#c6e9ff' },
@@ -99,6 +104,28 @@ function AuthStackScreen() {
 		<AuthStack.Navigator screenOptions={screenOptions}>
 			<AuthStack.Screen name="Main" component={AuthScreen} />
 		</AuthStack.Navigator>
+	);
+}
+
+function TheoryStackScreen() {
+	return (
+		<TheoryStack.Navigator
+			screenOptions={{
+				...screenOptions,
+				headerRight: () => <HeaderRight />,
+			}}
+		>
+			<TheoryStack.Screen
+				name="TheoryList"
+				component={TheoryList}
+				options={{ title: 'Teoria Musicale' }}
+			/>
+			<TheoryStack.Screen
+				name="PdfViewer"
+				component={PdfViewer}
+				options={({ route }) => ({ title: route.params.title })}
+			/>
+		</TheoryStack.Navigator>
 	);
 }
 
@@ -217,6 +244,14 @@ export default function App() {
 										/>
 									);
 								}
+								if (route.name === 'Teoria') {
+									return (
+										<Icon
+											as={BookOpen}
+											className="text-primary-500"
+										/>
+									);
+								}
 							},
 							headerShown: false,
 							tabBarLabelStyle: {
@@ -253,6 +288,10 @@ export default function App() {
 								<Tab.Screen
 									name="Piano"
 									component={KeyboardStackScreen}
+								/>
+								<Tab.Screen
+									name="Teoria"
+									component={TheoryStackScreen}
 								/>
 							</>
 						)}
