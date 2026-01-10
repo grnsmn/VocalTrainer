@@ -1,6 +1,6 @@
 name: Release Update
 
-# Si attiva quando viene pushato un tag versione (creato da npm run release)
+# Triggers when a version tag is pushed (created by npm run release)
 on:
     push:
         tags:

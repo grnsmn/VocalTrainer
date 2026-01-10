@@ -1,6 +1,6 @@
 name: Preview Update on Feature Branch
 
-# Si attiva su ogni push ai branch features/* o feature/*
+# Triggers on every push to features/* or feature/* branches
 on:
     push:
         branches:

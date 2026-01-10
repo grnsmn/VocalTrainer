@@ -1,6 +1,6 @@
 name: PR Preview
 
-# Si attiva quando una PR viene aperta/aggiornata verso dev
+# Triggers when a PR is opened/updated targeting dev
 on:
     pull_request:
         branches:

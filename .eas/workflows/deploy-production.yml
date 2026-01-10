@@ -1,19 +1,19 @@
 name: Deploy to Production
 
-# Si attiva su push al branch master
+# Triggers on push to master branch
 on:
     push:
         branches:
             - 'master'
 
 jobs:
-    # Step 1: Calcola fingerprint delle parti native
+    # Step 1: Calculate fingerprint of native parts
     fingerprint:
         name: Calculate Fingerprint
         type: fingerprint
         environment: production
 
-    # Step 2: Verifica se esiste già una build Android con questo fingerprint
+    # Step 2: Check if Android build with this fingerprint exists
     get_android_build:
         name: Check Android Build
         needs: [fingerprint]
@@ -22,7 +22,7 @@ jobs:
             fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
             profile: production
 
-    # Step 3: Verifica se esiste già una build iOS con questo fingerprint
+    # Step 3: Check if iOS build with this fingerprint exists
     get_ios_build:
         name: Check iOS Build
         needs: [fingerprint]
@@ -31,7 +31,7 @@ jobs:
             fingerprint_hash: ${{ needs.fingerprint.outputs.ios_fingerprint_hash }}
             profile: production
 
-    # Step 4a: Se NON esiste build Android, creala
+    # Step 4a: If Android build does NOT exist, create it
     build_android:
         name: Build Android
         needs: [get_android_build]
@@ -41,7 +41,7 @@ jobs:
             platform: android
             profile: production
 
-    # Step 4b: Se NON esiste build iOS, creala
+    # Step 4b: If iOS build does NOT exist, create it
     build_ios:
         name: Build iOS
         needs: [get_ios_build]
@@ -51,7 +51,7 @@ jobs:
             platform: ios
             profile: production
 
-    # Step 5a: Submit nuova build Android allo store
+    # Step 5a: Submit new Android build to store
     submit_android:
         name: Submit Android to Store
         needs: [build_android]
@@ -59,7 +59,7 @@ jobs:
         params:
             build_id: ${{ needs.build_android.outputs.build_id }}
 
-    # Step 5b: Submit nuova build iOS allo store
+    # Step 5b: Submit new iOS build to store
     submit_ios:
         name: Submit iOS to Store
         needs: [build_ios]
@@ -67,7 +67,7 @@ jobs:
         params:
             build_id: ${{ needs.build_ios.outputs.build_id }}
 
-    # Step 4c: Se ESISTE già build Android, fai solo OTA update
+    # Step 4c: If Android build EXISTS, do OTA update only
     update_android:
         name: OTA Update Android
         needs: [get_android_build]
@@ -77,7 +77,7 @@ jobs:
             platform: android
             channel: production
 
-    # Step 4d: Se ESISTE già build iOS, fai solo OTA update
+    # Step 4d: If iOS build EXISTS, do OTA update only
     update_ios:
         name: OTA Update iOS
         needs: [get_ios_build]
