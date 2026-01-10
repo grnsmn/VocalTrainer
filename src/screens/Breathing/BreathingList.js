@@ -2,33 +2,30 @@ import { FlatList } from '@/components/ui/flat-list';
 import { useState, useEffect } from 'react';
 import CardSelect from '../../components/CardSelect';
 import useStore from '../../store';
-import { Audio } from 'expo-av';
+import { useAudioPlayer } from 'expo-audio';
 
 const BreathingList = ({ route, navigation }) => {
 	const { exercices, famiglia } = route.params;
 	const { setSounds } = useStore();
+	const click1Player = useAudioPlayer(
+		require('../../../assets/sounds/click1-v2.mp3'),
+	);
+	const click2Player = useAudioPlayer(
+		require('../../../assets/sounds/click2-v2.mp3'),
+	);
 
 	useEffect(() => {
-		const loadSounds = async () => {
-			const click1 = await Audio.Sound.createAsync(
-				require('../../../assets/sounds/click1.mp3'),
-			);
-			const click2 = await Audio.Sound.createAsync(
-				require('../../../assets/sounds/click2.mp3'),
-			);
+		setSounds({
+			click1: click1Player,
+			click2: click2Player,
+		});
+	}, [click1Player, click2Player]);
 
-			setSounds({
-				click1: click1.sound,
-				click2: click2.sound,
-			});
-		};
-
+	useEffect(() => {
 		navigation.setOptions({
 			title: famiglia,
 		});
-
-		loadSounds();
-	}, []);
+	}, [famiglia, navigation]);
 
 	const onPressExercice = item => {
 		navigation.navigate('Training', {

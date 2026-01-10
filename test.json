@@ -1,0 +1,1114 @@
+{
+	"Respirazione": {
+		"Addominale Diaframmatica": {
+			"Esercizio 2": {
+				"cicli": 1,
+				"descrizione": "E' possibile eseguirlo in piedi o supino",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare Contraendo Addome",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Inspirare Rilassando Addome",
+						"durata": [
+							4
+						],
+						"key": 4
+					}
+				],
+				"titolo": "Esercizio 2"
+			},
+			"Esercizio 3": {
+				"cicli": 1,
+				"descrizione": "In piedi, Seduto, Supino. Mantenere mani poggiate su torace e addome",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Inspirare prima addome(2) poi torace(2)",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Espirare svuotando prima addom (2) poi torace(2)",
+						"durata": [
+							4
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							4
+						],
+						"key": 7
+					}
+				],
+				"titolo": "Esercizio 3"
+			},
+			"Esercizio 4": {
+				"cicli": 1,
+				"descrizione": "Identico a Esercizio 3 ma respirando dal naso. Mantenere una mano poggiata su addome e con l'altra tappare una narice alternando la narice ad ogni apnea",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Inspirare prima addome(2) poi torace(2)",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Espirare svuotando prima addome(2) poi torace(2)",
+						"durata": [
+							4
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							4
+						],
+						"key": 7
+					}
+				],
+				"titolo": "Esercizio 4"
+			},
+			"Esercizio 5": {
+				"cicli": 3,
+				"descrizione": "",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4,
+							4,
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4,
+							4,
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							2,
+							2,
+							2
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4,
+							4,
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Espirare con 'S' forte",
+						"durata": [
+							4,
+							6,
+							10
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4,
+							4,
+							4
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							4,
+							4,
+							4
+						],
+						"key": 7
+					}
+				],
+				"titolo": "Esercizio 5"
+			},
+			"Esercizio 7": {
+				"cicli": 1,
+				"descrizione": "SEDUTO, IN PIEDI",
+				"lista_pallini": [
+					{
+						"definizione": "Inspira alzando le braccia",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espira abbassando le braccia",
+						"durata": [
+							4
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 7"
+			},
+			"Esercizio 8": {
+				"cicli": 1,
+				"descrizione": "IN PIEDI, SEDUTO",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Inspirare alzando le braccia",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Espirare a braccia in alto",
+						"durata": [
+							4
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Inspirare a braccia in alto",
+						"durata": [
+							4
+						],
+						"key": 7
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 8
+					},
+					{
+						"definizione": "Espirare abbassando braccia",
+						"durata": [
+							4
+						],
+						"key": 9
+					}
+				],
+				"titolo": "Esercizio 8"
+			}
+		},
+		"Dorsale": {
+			"Esercizio 1": {
+				"cicli": 1,
+				"descrizione": "Per la percezione del diaframma: \n Inserire i pollici di ambedue le mani aperte negli intercostali sia frontali che dietro",
+				"lista_pallini": [
+					{
+						"definizione": "",
+						"durata": [
+							0
+						],
+						"key": 1
+					}
+				],
+				"titolo": "Esercizio 1"
+			},
+			"Esercizio 2": {
+				"cicli": 1,
+				"descrizione": "In piedi, Seduto ben poggiato su schienale, In piedi con schiena a parete; Mani su INTERCOSTALI. Ripetere fino a sentire l'apertura della schiena",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Inspira e convoglia l'aria verso le spalle e con le mani seguire l'apertura degli intercostali",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Espirare con S forte a intercostali aperti",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Inspira sempre aria verso le spalle",
+						"durata": [
+							4
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 6
+					}
+				],
+				"titolo": "Esercizio 2"
+			},
+			"Esercizio 3": {
+				"cicli": 1,
+				"descrizione": "Sdraiato a pancia in giù",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Inspirare prima cercando di sollevare la schiena",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 4
+					}
+				],
+				"titolo": "Esercizio 3"
+			}
+		},
+		"Ginnastica Vocale": {
+			"Esercizio 1A": {
+				"cicli": 1,
+				"descrizione": "Sono 3 cicli, riposo a ogni fine ciclo",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							8
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Inspirare dal naso con sbadiglio",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare con \"I\" (da gatto) in avanti con addome che rientra",
+						"durata": [
+							8
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 1A"
+			},
+			"Esercizio 1B": {
+				"cicli": 1,
+				"descrizione": "Sono 3 cicli, riposo a ogni fine ciclo",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							10
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Inspirare dal naso con sbadiglio",
+						"durata": [
+							5
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare con \"I\" (da gatto) in avanti con addome che rientra",
+						"durata": [
+							10
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 1B"
+			},
+			"Esercizio 1C": {
+				"cicli": 1,
+				"descrizione": "Sono 3 cicli, riposo a ogni fine ciclo",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							12
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Inspirare dal naso con sbadiglio",
+						"durata": [
+							6
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare con \"I\" (da gatto) in avanti con addome che rientra",
+						"durata": [
+							12
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 1C"
+			},
+			"Esercizio 2": {
+				"cicli": 1,
+				"descrizione": "In piedi, chinato in avanti",
+				"lista_pallini": [
+					{
+						"definizione": "Inspira lentamente",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea: spalanca la bocca, alza zigomi e lingua mornida piatta in arcata denti inferiori",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare spingendo lingua contro incisivi inferiori come a pronunciare una \"I\" e addome rientra",
+						"durata": [
+							4
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 2"
+			},
+			"Esercizio 3": {
+				"cicli": 1,
+				"descrizione": "In piedi, chinato in avanti, senza un tempo scandito",
+				"lista_pallini": [
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							0
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Eseguire il vocalizzo dell'audio \n1. LU",
+						"durata": [
+							0
+						],
+						"key": 2
+					},
+					{
+						"definizione": "2. LI-LO-LU-LA",
+						"durata": [
+							0
+						],
+						"key": 3
+					},
+					{
+						"definizione": "2. LI-IO",
+						"durata": [
+							0
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Apnea con acceeno sbadiglio",
+						"durata": [
+							0
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Espirare",
+						"durata": [
+							0
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							0
+						],
+						"key": 7
+					},
+					{
+						"definizione": "Inspirare e Rilassarsi",
+						"durata": [
+							0
+						],
+						"key": 8
+					}
+				],
+				"titolo": "Esercizio 3"
+			},
+			"Esercizio 4": {
+				"cicli": 1,
+				"descrizione": "Uguale al tre ma in piedi poggiando schiena a parete",
+				"lista_pallini": [
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							0
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Eseguire il vocalizzo dell'audio \n1. LU",
+						"durata": [
+							0
+						],
+						"key": 2
+					},
+					{
+						"definizione": "2. LI-LO-LU-LA",
+						"durata": [
+							0
+						],
+						"key": 3
+					},
+					{
+						"definizione": "2. LI-IO",
+						"durata": [
+							0
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Apnea con acceeno sbadiglio",
+						"durata": [
+							0
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Espirare",
+						"durata": [
+							0
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							0
+						],
+						"key": 7
+					},
+					{
+						"definizione": "Inspirare e Rilassarsi",
+						"durata": [
+							0
+						],
+						"key": 8
+					}
+				],
+				"titolo": "Esercizio 4"
+			},
+			"Esercizio 5": {
+				"cicli": 1,
+				"descrizione": "In piedi",
+				"lista_pallini": [
+					{
+						"definizione": "Inspira",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea: spalanca la bocca e muovere in AVANTI, IN BASSO, INDIETRO E AI LATI la Mandibola ",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 5"
+			},
+			"Esercizio 6": {
+				"cicli": 1,
+				"descrizione": "In piedi",
+				"lista_pallini": [
+					{
+						"definizione": "Inspira",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea: cercare sbadiglio muovendo tutte le parti del viso",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espira",
+						"durata": [
+							4
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 6"
+			}
+		},
+		"Intercostale": {
+			"Esercizio 1": {
+				"cicli": 1,
+				"descrizione": "Posizionare entrambe le mani sugli intercostali e mantenerle per tutta la durata dell'esercizio",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Inspirare prima addome (2) poi torace (2)",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Espirare con S forte mantenendo intercostali aperti",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Svuota Torace",
+						"durata": [
+							2
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 6
+					}
+				],
+				"titolo": "Esercizio 1"
+			},
+			"Esercizio 2": {
+				"cicli": 1,
+				"descrizione": "Posizionare entrambe le mani sugli intercostali e mantenerle per tutta la durata dell'esercizio",
+				"lista_pallini": [
+					{
+						"definizione": "Espirare",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Inspirare prima addome (2) poi torace (2)",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "Espirare con S forte mantenendo intercostali aperti",
+						"durata": [
+							4
+						],
+						"key": 5
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 6
+					},
+					{
+						"definizione": "Inspirare",
+						"durata": [
+							4
+						],
+						"key": 7
+					}
+				],
+				"titolo": "Esercizio 2"
+			}
+		},
+		"Sostegno del fiato": {
+			"Esercizio 1": {
+				"cicli": 1,
+				"descrizione": "Mantenere posizione sbadiglo, dovrai sentire il petto sollevarsi quando inspiri",
+				"lista_pallini": [
+					{
+						"definizione": "Inspirare dal naso",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare dal naso arrendendo mandibola",
+						"durata": [
+							4
+						],
+						"key": 3
+					}
+				],
+				"titolo": "Esercizio 1"
+			},
+			"Esercizio 2": {
+				"cicli": 1,
+				"descrizione": "Mantenere posizione sbadiglo, dovrai sentire il petto sollevarsi quando inspiri",
+				"lista_pallini": [
+					{
+						"definizione": "Inspirare dal naso",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare dalla bocca accennando una O espirata",
+						"durata": [
+							2
+						],
+						"key": 3
+					},
+					{
+						"definizione": "Espirare dalla bocca accennando una O silenziosa",
+						"durata": [
+							2
+						],
+						"key": 4
+					}
+				],
+				"titolo": "Esercizio 2"
+			},
+			"Esercizio 3": {
+				"cicli": 1,
+				"descrizione": "",
+				"lista_pallini": [
+					{
+						"definizione": "Inspirare dal naso",
+						"durata": [
+							4
+						],
+						"key": 1
+					},
+					{
+						"definizione": "Apnea",
+						"durata": [
+							4
+						],
+						"key": 2
+					},
+					{
+						"definizione": "Espirare con S forte\n1. In più parti",
+						"durata": [
+							4
+						],
+						"key": 3
+					},
+					{
+						"definizione": "2. Soffio continuo",
+						"durata": [
+							4
+						],
+						"key": 4
+					},
+					{
+						"definizione": "3. SC, SCI, SCIAEIOU",
+						"durata": [
+							4
+						],
+						"key": 5
+					}
+				],
+				"titolo": "Esercizio 3"
+			}
+		}
+	},
+	"families": [
+		{
+			"id": "Addominale Diaframmatica",
+			"exercises": [
+				{
+					"id": "e08945cc-3d38-5121-bbc2-bcbdb9393f9e",
+					"name": "Esercizio 5",
+					"total_duration": 86,
+					"cycles": [
+						{
+							"duration": 26,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 2
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Espirare forte con 'S'",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4
+								}
+							]
+						},
+						{
+							"duration": 28,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 2
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Espirare con 'S' fortemente",
+									"duration": 6
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4
+								}
+							]
+						},
+						{
+							"duration": 32,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 2
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Espirare con 'S' fortemente",
+									"duration": 10
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "e08945cc-3d38-5121-bbc2-bcbdb9393f9f",
+					"name": "Esercizio 2",
+					"description": "E' possibile eseguirlo in piedi o supino",
+					"total_duration": 16,
+					"cycles": [
+						{
+							"duration": 16,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Espirare Contraendo Addome",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare Rilassando Addome",
+									"duration": 4
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "e08945cc-3d38-5121-bbc2-bcbdb9393f9d",
+					"name": "Esercizio 3",
+					"description": "In piedi, Seduto, Supino. Mantenere mani poggiate su torace e addome",
+					"total_duration": 28,
+					"cycles": [
+						{
+							"duration": 28,
+							"bullets": [
+								{
+									"definition": "Espirare",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare prima addome(2) poi torace(2)",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Espirare svuotando prima addom (2) poi torace(2)",
+									"duration": 4
+								},
+								{
+									"definition": "Apnea",
+									"duration": 4
+								},
+								{
+									"definition": "Inspirare",
+									"duration": 4
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
