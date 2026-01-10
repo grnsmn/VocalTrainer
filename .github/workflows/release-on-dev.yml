@@ -1,0 +1,48 @@
+name: Auto Release on Dev Merge
+
+# Si attiva quando viene pushato su dev (dopo merge di una PR)
+on:
+    push:
+        branches:
+            - dev
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+
+        # Permesso per pushare commit e tag
+        permissions:
+            contents: write
+
+        steps:
+            # Checkout con history completa per analizzare i commit
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            # Setup Node.js
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+
+            # Installa dipendenze
+            - name: Install dependencies
+              run: npm ci
+
+            # Configura Git per i commit automatici
+            - name: Configure Git
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            # Esegue standard-version per bump versione
+            - name: Bump version
+              run: npm run release
+
+            # Pusha commit e tag
+            - name: Push changes
+              run: git push --follow-tags origin dev
