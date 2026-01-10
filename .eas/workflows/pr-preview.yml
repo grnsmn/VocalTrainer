@@ -1,0 +1,30 @@
+name: PR Preview
+
+# Si attiva quando una PR viene aperta/aggiornata verso dev
+on:
+    pull_request:
+        branches:
+            - 'dev'
+        types:
+            - opened
+            - synchronize
+            - reopened
+
+jobs:
+    publish_preview:
+        name: Publish PR Preview
+        type: update
+        params:
+            # Crea un branch update univoco per questa PR
+            branch: pr-${{ github.event.pull_request.number }}
+            message: 'PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}'
+
+    comment_on_pr:
+        name: Comment QR Code on PR
+        needs: [publish_preview]
+        type: github-comment
+        params:
+            message: |
+                📱 **Preview pronta per testing!**
+
+                Scansiona il QR code con la development build per testare le modifiche.

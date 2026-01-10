@@ -5,6 +5,7 @@
   },
   "build": {
     "development": {
+      "channel": "development",
       "developmentClient": true,
       "distribution": "internal",
       "autoIncrement": true,
@@ -16,6 +17,7 @@
       }
     },
     "preview": {
+      "channel": "preview",
       "distribution": "internal",
       "autoIncrement": true,
       "android": {
@@ -24,6 +26,7 @@
       }
     },
     "production": {
+      "channel": "production",
       "android": {
         "image": "latest"
       },

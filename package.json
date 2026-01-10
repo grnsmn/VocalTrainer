@@ -3,6 +3,10 @@
   "version": "2.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "release": "standard-version",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
     "start": "expo start -c",
     "android": "DARK_MODE=media expo start --android",
     "ios": "DARK_MODE=media expo start --ios",
@@ -41,6 +45,7 @@
     "expo-screen-orientation": "~8.1.7",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "~2.2.3",
+    "expo-updates": "~0.28.17",
     "firebase": "^10.12.2",
     "lottie-react-native": "7.2.2",
     "lucide-react-native": "^0.376.0",
@@ -72,7 +77,9 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "jscodeshift": "^0.15.2",
-    "react-native-dotenv": "^3.4.9"
+    "react-native-dotenv": "^3.4.9",
+    "standard-version": "^9.5.0",
+    "standard-version-expo": "^1.0.3"
   },
   "private": true,
   "overrides": {

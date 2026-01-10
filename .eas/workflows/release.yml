@@ -1,0 +1,15 @@
+name: Release Update
+
+# Si attiva quando viene pushato un tag versione (creato da npm run release)
+on:
+    push:
+        tags:
+            - 'v*'
+
+jobs:
+    publish_release:
+        name: Publish Release to Preview Channel
+        type: update
+        params:
+            channel: preview
+            message: 'Release ${{ github.ref_name }}'
