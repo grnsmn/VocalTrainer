@@ -1,25 +1,10 @@
 import { FlatList } from '@/components/ui/flat-list';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import CardSelect from '../../components/CardSelect';
-import useStore from '../../store';
-import { useAudioPlayer } from 'expo-audio';
 
 const BreathingList = ({ route, navigation }) => {
 	const { exercices, famiglia } = route.params;
-	const { setSounds } = useStore();
-	const click1Player = useAudioPlayer(
-		require('../../../assets/sounds/click1-v2.mp3'),
-	);
-	const click2Player = useAudioPlayer(
-		require('../../../assets/sounds/click2-v2.mp3'),
-	);
-
-	useEffect(() => {
-		setSounds({
-			click1: click1Player,
-			click2: click2Player,
-		});
-	}, [click1Player, click2Player]);
+	// Audio players rimossi: ora gestiti dal hook useMetronome in Bullet.js
 
 	useEffect(() => {
 		navigation.setOptions({

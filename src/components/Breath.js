@@ -17,11 +17,14 @@ import CountDown from 'react-native-countdown-component'; // Fixed version for l
 
 import Bullet from './Bullet';
 import { Heading } from '@/components/ui/heading';
+import { MetronomeProvider } from '../context/MetronomeContext';
 
 const BreathingSession = ({ exercise }) => {
 	const { cycles, description, skip_metronome } = exercise || {};
 	const [playing, setPlaying] = useState(false);
 	const [bpm, setBpm] = useState(100);
+	// Il MetronomeProvider crea i player audio UNA SOLA VOLTA
+	// e li rende disponibili a tutti i componenti figli tramite Context
 
 	const {
 		count: activeCycle,
@@ -75,6 +78,7 @@ const BreathingSession = ({ exercise }) => {
 				skipCounter={skip_metronome}
 				onComplete={() => incrementBullet()}
 				bpm={bpm}
+				// playClick1/playClick2 rimossi: ora Bullet li prende dal Context!
 			/>
 		);
 	};
@@ -106,7 +110,7 @@ const BreathingSession = ({ exercise }) => {
 	};
 
 	return (
-		<>
+		<MetronomeProvider>
 			<FlatList
 				className="bg-primary-0 flex-1 p-4"
 				data={bullets}
@@ -166,7 +170,7 @@ const BreathingSession = ({ exercise }) => {
 					</Center>
 				</View>
 			</View>
-		</>
+		</MetronomeProvider>
 	);
 };
 
