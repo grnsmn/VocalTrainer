@@ -12,7 +12,4 @@ jobs:
         name: Publish Preview Update
         type: update
         params:
-            # Usa il nome del branch come branch dell'update
-            # Es: features/new-exercise → update branch "features/new-exercise"
             branch: ${{ github.ref_name }}
-            message: '${{ github.ref_name }}: ${{ github.event.head_commit.message }}'
