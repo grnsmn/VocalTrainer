@@ -126,7 +126,8 @@ export default function App() {
 					await SplashScreen.hideAsync();
 				}
 			} catch (e) {
-				console.warn('Errore durante il caricamento del font:', e);
+				if (__DEV__)
+					console.warn('Errore durante il caricamento del font:', e);
 			}
 		}
 
@@ -147,7 +148,8 @@ export default function App() {
 					);
 				}
 			} catch (error) {
-				console.warn("Impossibile bloccare l'orientamento:", error);
+				if (__DEV__)
+					console.warn("Impossibile bloccare l'orientamento:", error);
 			}
 		}
 	};
