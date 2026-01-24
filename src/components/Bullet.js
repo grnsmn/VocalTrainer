@@ -12,9 +12,11 @@ const Bullet = ({ item, isActive, onComplete, bpm, skipCounter }) => {
 
 	const handleClick = () => {
 		if (playCounter + 1 === item.duration) {
-			click2?.replayAsync();
+			click2?.seekTo(0);
+			click2?.play();
 		} else {
-			click1?.replayAsync();
+			click1?.seekTo(0);
+			click1?.play();
 		}
 		increment();
 	};

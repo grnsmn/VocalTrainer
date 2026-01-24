@@ -15,12 +15,12 @@ import { Alert, AlertText, AlertIcon } from '@/components/ui/alert';
 import React, { useState } from 'react';
 import { Platform } from 'react-native';
 
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 import {
-	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
-	GoogleAuthProvider,
-	signInWithPopup,
+	getAuth,
 } from 'firebase/auth';
 import Hero from '../../components/Hero';
 import useStore from '../../store';
@@ -29,7 +29,6 @@ import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function AuthScreen() {
 	const auth = getAuth();
-	const provider = new GoogleAuthProvider();
 	const { setItem } = useAsyncStorage('authData');
 	const { auth: _auth, setAuth } = useStore();
 
@@ -79,9 +78,14 @@ export default function AuthScreen() {
 	};
 
 	const onPressGoogle = async () => {
-		const resp = await signInWithPopup(auth, provider);
-		setAuth(resp);
-		saveAuthData(resp);
+		try {
+			const googleProvider = new firebase.auth.GoogleAuthProvider();
+			const resp = await firebase.auth().signInWithPopup(googleProvider);
+			setAuth(resp);
+			saveAuthData(resp);
+		} catch (error) {
+			updateErrors({ general: error.message });
+		}
 	};
 
 	const handleLogin = async () => {
