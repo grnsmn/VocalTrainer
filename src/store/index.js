@@ -1,18 +1,26 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist, createJSONStorage } from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useStore = create(
 	devtools(
-		set => ({
-			auth: undefined,
-			sounds: {
-				click1: undefined,
-				click2: undefined,
+		persist(
+			set => ({
+				auth: undefined,
+				sounds: {
+					click1: undefined,
+					click2: undefined,
+				},
+				setSounds: newSounds => set(() => ({ sounds: newSounds })),
+				setAuth: newAuth => set(() => ({ auth: newAuth })),
+				clearAuth: () => set(() => ({ auth: undefined })),
+			}),
+			{
+				name: 'vocaltrainer-storage',
+				storage: createJSONStorage(() => AsyncStorage),
+				partialize: state => ({ auth: state.auth }), // Only persist auth, not sounds
 			},
-			setSounds: newSounds => set(() => ({ sounds: newSounds })),
-			setAuth: newAuth => set(() => ({ auth: newAuth })),
-			clearAuth: () => set(() => ({ auth: undefined })),
-		}),
+		),
 		{ name: 'AuthStore' },
 	),
 );

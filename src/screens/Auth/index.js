@@ -25,12 +25,10 @@ import {
 import Hero from '../../components/Hero';
 import useStore from '../../store';
 import { Eye, EyeOff, X } from 'lucide-react-native';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function AuthScreen() {
 	const auth = getAuth();
-	const { setItem } = useAsyncStorage('authData');
-	const { auth: _auth, setAuth } = useStore();
+	const { setAuth } = useStore();
 
 	const [formData, setFormData] = useState({
 		email: '',
@@ -42,14 +40,6 @@ export default function AuthScreen() {
 			general: '',
 		},
 	});
-
-	const saveAuthData = async authData => {
-		try {
-			await setItem(JSON.stringify(authData));
-		} catch (e) {
-			console.error('Failed to save data to storage', e);
-		}
-	};
 
 	const updateFormData = (field, value) => {
 		setFormData(prev => ({
@@ -82,7 +72,6 @@ export default function AuthScreen() {
 			const googleProvider = new firebase.auth.GoogleAuthProvider();
 			const resp = await firebase.auth().signInWithPopup(googleProvider);
 			setAuth(resp);
-			saveAuthData(resp);
 		} catch (error) {
 			updateErrors({ general: error.message });
 		}
@@ -107,7 +96,6 @@ export default function AuthScreen() {
 				password,
 			);
 			setAuth(_tokenResponse);
-			saveAuthData(_tokenResponse);
 		} catch (error) {
 			updateErrors({ general: error.message });
 		}
@@ -138,7 +126,6 @@ export default function AuthScreen() {
 				password,
 			);
 			setAuth(_tokenResponse);
-			saveAuthData(_tokenResponse);
 		} catch (error) {
 			updateErrors({ general: error.message });
 		}
