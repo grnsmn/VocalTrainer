@@ -111,10 +111,9 @@ function getActiveTabName(state) {
 export default function App() {
 	useFirebaseInit();
 	useAuthSync();
-	const { auth, setAuth } = useStore();
 	// Zustand persist automatically handles restoring auth state
 	// React Navigation will automatically show the correct stack based on `auth` presence
-
+	const { auth, setAuth } = useStore();
 	const [fontsLoaded] = useFonts({
 		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
 	});
