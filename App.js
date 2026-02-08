@@ -24,7 +24,6 @@ import TrainingScreen from './src/screens/Breathing/TrainingScreen';
 import AuthScreen from './src/screens/Auth';
 import KeyboardStackScreen from './src/screens/Keyboard/KeyboardStack';
 import useStore from './src/store';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import HeaderRight from './src/components/HeaderRight';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { Platform } from 'react-native';
@@ -112,10 +111,9 @@ function getActiveTabName(state) {
 export default function App() {
 	useFirebaseInit();
 	useAuthSync();
+	// Zustand persist automatically handles restoring auth state
+	// React Navigation will automatically show the correct stack based on `auth` presence
 	const { auth, setAuth } = useStore();
-	const { getItem } = useAsyncStorage('authData');
-	const [initialRouteName, setInitialRouteName] = useState('Auth');
-
 	const [fontsLoaded] = useFonts({
 		Roboto: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
 	});
@@ -127,30 +125,13 @@ export default function App() {
 					await SplashScreen.hideAsync();
 				}
 			} catch (e) {
-				console.warn('Errore durante il caricamento del font:', e);
+				if (__DEV__)
+					console.warn('Errore durante il caricamento del font:', e);
 			}
 		}
 
 		prepare();
 	}, [fontsLoaded]);
-
-	useEffect(() => {
-		const restoreCacheAuthData = async () => {
-			try {
-				const data = await getItem();
-				if (data) {
-					setAuth(JSON.parse(data));
-					setInitialRouteName('Respirazione');
-				} else {
-					setInitialRouteName('Auth');
-				}
-			} catch (e) {
-				console.error('Failed to fetch data from storage', e);
-			}
-		};
-
-		restoreCacheAuthData();
-	}, []);
 
 	const handleNavStateChange = async state => {
 		const tabName = getActiveTabName(state);
@@ -166,7 +147,8 @@ export default function App() {
 					);
 				}
 			} catch (error) {
-				console.warn("Impossibile bloccare l'orientamento:", error);
+				if (__DEV__)
+					console.warn("Impossibile bloccare l'orientamento:", error);
 			}
 		}
 	};
@@ -232,7 +214,6 @@ export default function App() {
 									paddingBottom: 6,
 								},
 							})}
-							initialRouteName={initialRouteName}
 						>
 							{!auth && (
 								<Tab.Screen
