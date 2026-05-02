@@ -7,6 +7,16 @@ export const DEFAULT_START_OCTAVE = 2;
 
 export const SCALE_TYPES = [
 	{
+		id: 'naturalMajor',
+		label: 'Natural Major',
+		tonalName: 'major',
+	},
+	{
+		id: 'naturalMinor',
+		label: 'Natural Minor',
+		tonalName: 'minor',
+	},
+	{
 		id: 'majorPentatonic',
 		label: 'Major Pentatonic',
 		tonalName: 'pentatonic',
