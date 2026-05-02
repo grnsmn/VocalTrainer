@@ -9,19 +9,25 @@ import {
 } from '@/components/ui/slider';
 import AnimatedVoiceLines from '../../../../assets/lotties/voice_lines.json';
 import AnimatedSpeaker from '../../../../assets/lotties/speaker_playing.json';
-import { KEY_OPTIONS, SCALE_TYPES } from '../keyboard.constants';
+import {
+	KEY_OPTIONS,
+	SCALE_TYPES,
+	START_OCTAVE_OPTIONS,
+} from '../keyboard.constants';
 import SelectionRow from './SelectionRow';
 
 // Render the whole control surface above the keyboard.
 const KeyboardControlsPanel = ({
 	selectedKey,
 	selectedScaleType,
+	startOctave,
 	bpm,
 	isPlaying,
 	playedSteps,
 	sequenceLength,
 	onSelectKey,
 	onSelectScaleType,
+	onSelectStartOctave,
 	onPlay,
 	onStop,
 	onChangeBpm,
@@ -45,6 +51,12 @@ const KeyboardControlsPanel = ({
 					items={SCALE_TYPES}
 					selectedItem={selectedScaleType}
 					onSelect={onSelectScaleType}
+					style={styles.scaleRow}
+				/>
+				<SelectionRow
+					items={START_OCTAVE_OPTIONS}
+					selectedItem={startOctave}
+					onSelect={onSelectStartOctave}
 					style={styles.scaleRow}
 				/>
 				<View style={styles.actionsRow}>

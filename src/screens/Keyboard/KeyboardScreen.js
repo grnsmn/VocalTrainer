@@ -12,6 +12,7 @@ const KeyboardContent = () => {
 	const {
 		selectedKey,
 		selectedScaleType,
+		startOctave,
 		bpm,
 		isPlaying,
 		playedSteps,
@@ -19,6 +20,7 @@ const KeyboardContent = () => {
 		currentSequence,
 		setSelectedKey,
 		setSelectedScaleType,
+		setStartOctave,
 		setBpm,
 		startPlayback,
 		stopPlayback,
@@ -35,12 +37,14 @@ const KeyboardContent = () => {
 				<KeyboardControlsPanel
 					selectedKey={selectedKey}
 					selectedScaleType={selectedScaleType}
+					startOctave={startOctave}
 					bpm={bpm}
 					isPlaying={isPlaying}
 					playedSteps={playedSteps}
 					sequenceLength={currentSequence.length}
 					onSelectKey={setSelectedKey}
 					onSelectScaleType={setSelectedScaleType}
+					onSelectStartOctave={setStartOctave}
 					onPlay={startPlayback}
 					onStop={stopPlayback}
 					onChangeBpm={setBpm}

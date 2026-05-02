@@ -3,6 +3,7 @@ import { Note, Scale } from 'tonal';
 import {
 	DEFAULT_BPM,
 	DEFAULT_SCALE_TYPE,
+	DEFAULT_START_OCTAVE,
 	DEFAULT_SELECTED_KEY,
 	SCALE_TYPES,
 } from '../keyboard.constants';
@@ -20,7 +21,7 @@ const normalizeNote = note =>
 		.replace('Bb', 'A#');
 
 // Build an ascending+descending pentatonic sequence with octave rollover.
-const buildScaleSequence = (selectedKey, selectedScaleType) => {
+const buildScaleSequence = (selectedKey, selectedScaleType, startOctave) => {
 	const scaleType = SCALE_TYPES.find(type => type.id === selectedScaleType);
 
 	if (!scaleType) {
@@ -37,7 +38,7 @@ const buildScaleSequence = (selectedKey, selectedScaleType) => {
 	let previousMidi = null;
 
 	notes.forEach(noteName => {
-		let octave = 2;
+		let octave = startOctave;
 		let candidateNote = normalizeNote(`${noteName}${octave}`);
 		let candidateMidi = Note.midi(candidateNote);
 
@@ -51,7 +52,7 @@ const buildScaleSequence = (selectedKey, selectedScaleType) => {
 		previousMidi = candidateMidi;
 	});
 
-	let topOctave = 3;
+	let topOctave = startOctave + 1;
 	let topNote = normalizeNote(`${selectedKey}${topOctave}`);
 	let topNoteMidi = Note.midi(topNote);
 
@@ -72,6 +73,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 	const [selectedKey, setSelectedKey] = useState(DEFAULT_SELECTED_KEY);
 	const [selectedScaleType, setSelectedScaleType] =
 		useState(DEFAULT_SCALE_TYPE);
+	const [startOctave, setStartOctave] = useState(DEFAULT_START_OCTAVE);
 	const [bpm, setBpm] = useState(DEFAULT_BPM);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [playedSteps, setPlayedSteps] = useState(0);
@@ -83,12 +85,13 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 	const previousSelectionRef = useRef({
 		selectedKey: DEFAULT_SELECTED_KEY,
 		selectedScaleType: DEFAULT_SCALE_TYPE,
+		startOctave: DEFAULT_START_OCTAVE,
 		isInitialized: false,
 	});
 
 	const currentSequence = useMemo(
-		() => buildScaleSequence(selectedKey, selectedScaleType),
-		[selectedKey, selectedScaleType],
+		() => buildScaleSequence(selectedKey, selectedScaleType, startOctave),
+		[selectedKey, selectedScaleType, startOctave],
 	);
 
 	// Keep the latest bpm value available inside timer callbacks.
@@ -186,6 +189,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 			previousSelectionRef.current = {
 				selectedKey,
 				selectedScaleType,
+				startOctave,
 				isInitialized: true,
 			};
 			return;
@@ -193,11 +197,13 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 
 		const hasSelectionChanged =
 			previousSelectionRef.current.selectedKey !== selectedKey ||
-			previousSelectionRef.current.selectedScaleType !== selectedScaleType;
+			previousSelectionRef.current.selectedScaleType !== selectedScaleType ||
+			previousSelectionRef.current.startOctave !== startOctave;
 
 		previousSelectionRef.current = {
 			selectedKey,
 			selectedScaleType,
+			startOctave,
 			isInitialized: true,
 		};
 
@@ -206,7 +212,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 		}
 
 		startPlayback();
-	}, [selectedKey, selectedScaleType, startPlayback]);
+	}, [selectedKey, selectedScaleType, startOctave, startPlayback]);
 
 	// Cleanup timers when unmounting.
 	useEffect(() => () => stopPlayback(), [stopPlayback]);
@@ -214,6 +220,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 	return {
 		selectedKey,
 		selectedScaleType,
+		startOctave,
 		bpm,
 		isPlaying,
 		playedSteps,
@@ -221,6 +228,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 		currentSequence,
 		setSelectedKey,
 		setSelectedScaleType,
+		setStartOctave,
 		setBpm,
 		startPlayback,
 		stopPlayback,

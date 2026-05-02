@@ -3,6 +3,7 @@ export const END_KEY = 'C5';
 export const DEFAULT_BPM = 100;
 export const DEFAULT_SELECTED_KEY = 'C';
 export const DEFAULT_SCALE_TYPE = 'majorPentatonic';
+export const DEFAULT_START_OCTAVE = 2;
 
 export const SCALE_TYPES = [
 	{
@@ -30,4 +31,10 @@ export const KEY_OPTIONS = [
 	'A',
 	'A#',
 	'B',
+];
+
+export const START_OCTAVE_OPTIONS = [
+	{ id: 2, label: 'Start Octave 2' },
+	{ id: 3, label: 'Start Octave 3' },
+	{ id: 4, label: 'Start Octave 4' },
 ];
