@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 import { Note, Scale } from 'tonal';
 import {
 	DEFAULT_BPM,
@@ -68,20 +68,73 @@ const buildScaleSequence = (selectedKey, selectedScaleType, startOctave) => {
 	return [...fullAscending, ...descending];
 };
 
+// --- Reducer ---
+
+const initialState = {
+	selectedKey: DEFAULT_SELECTED_KEY,
+	selectedScaleType: DEFAULT_SCALE_TYPE,
+	startOctave: DEFAULT_START_OCTAVE,
+	bpm: DEFAULT_BPM,
+	isPlaying: false,
+	playedSteps: 0,
+	activePlaybackNote: null,
+};
+
+const ACTION = {
+	SET_KEY: 'SET_KEY',
+	SET_SCALE_TYPE: 'SET_SCALE_TYPE',
+	SET_START_OCTAVE: 'SET_START_OCTAVE',
+	SET_BPM: 'SET_BPM',
+	PLAY_STARTED: 'PLAY_STARTED',
+	PLAY_STOPPED: 'PLAY_STOPPED',
+	STEP_PLAYED: 'STEP_PLAYED',
+	SET_ACTIVE_NOTE: 'SET_ACTIVE_NOTE',
+	CLEAR_ACTIVE_NOTE: 'CLEAR_ACTIVE_NOTE',
+};
+
+const keyboardPlaybackReducer = (state, action) => {
+	switch (action.type) {
+		case ACTION.SET_KEY:
+			return { ...state, selectedKey: action.payload };
+		case ACTION.SET_SCALE_TYPE:
+			return { ...state, selectedScaleType: action.payload };
+		case ACTION.SET_START_OCTAVE:
+			return { ...state, startOctave: action.payload };
+		case ACTION.SET_BPM:
+			return { ...state, bpm: action.payload };
+		case ACTION.PLAY_STARTED:
+			return { ...state, isPlaying: true, playedSteps: 0 };
+		case ACTION.PLAY_STOPPED:
+			return {
+				...state,
+				isPlaying: false,
+				playedSteps: 0,
+				...(action.payload?.clearActiveNote
+					? { activePlaybackNote: null }
+					: {}),
+			};
+		case ACTION.STEP_PLAYED:
+			return { ...state, playedSteps: action.payload };
+		case ACTION.SET_ACTIVE_NOTE:
+			return { ...state, activePlaybackNote: action.payload };
+		case ACTION.CLEAR_ACTIVE_NOTE:
+			return { ...state, activePlaybackNote: null };
+		default:
+			return state;
+	}
+};
+
 // Manage scale playback and expose UI-ready state/actions.
 export const useKeyboardScalePlayback = triggerAttackRelease => {
-	const [selectedKey, setSelectedKey] = useState(DEFAULT_SELECTED_KEY);
-	const [selectedScaleType, setSelectedScaleType] =
-		useState(DEFAULT_SCALE_TYPE);
-	const [startOctave, setStartOctave] = useState(DEFAULT_START_OCTAVE);
-	const [bpm, setBpm] = useState(DEFAULT_BPM);
-	const [isPlaying, setIsPlaying] = useState(false);
-	const [playedSteps, setPlayedSteps] = useState(0);
-	const [activePlaybackNote, setActivePlaybackNote] = useState(null);
+	const [state, dispatch] = useReducer(keyboardPlaybackReducer, initialState);
+	const { selectedKey, selectedScaleType, startOctave, bpm, isPlaying, playedSteps, activePlaybackNote } = state;
+
 	const timeoutRef = useRef(null);
 	const clearActiveNoteTimeoutRef = useRef(null);
 	const isPlayingRef = useRef(false);
 	const bpmRef = useRef(bpm);
+
+	// Track previous selection to trigger autoplay only on real changes.
 	const previousSelectionRef = useRef({
 		selectedKey: DEFAULT_SELECTED_KEY,
 		selectedScaleType: DEFAULT_SCALE_TYPE,
@@ -112,12 +165,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 		}
 
 		isPlayingRef.current = false;
-		setIsPlaying(false);
-		setPlayedSteps(0);
-
-		if (clearActiveNote) {
-			setActivePlaybackNote(null);
-		}
+		dispatch({ type: ACTION.PLAY_STOPPED, payload: { clearActiveNote } });
 	}, []);
 
 	// Start playback for the current sequence and handle retries while buffers load.
@@ -130,7 +178,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 
 			stopPlayback();
 			isPlayingRef.current = true;
-			setIsPlaying(true);
+			dispatch({ type: ACTION.PLAY_STARTED });
 
 			let stepIndex = 0;
 			let retryCount = 0;
@@ -145,7 +193,7 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 
 				try {
 					triggerAttackRelease(note, `${durationSeconds}`);
-					setActivePlaybackNote(note);
+					dispatch({ type: ACTION.SET_ACTIVE_NOTE, payload: note });
 					retryCount = 0;
 				} catch (error) {
 					const errorMessage = String(error?.message || error);
@@ -163,12 +211,12 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 					return;
 				}
 
-				setPlayedSteps(stepIndex + 1);
+				dispatch({ type: ACTION.STEP_PLAYED, payload: stepIndex + 1 });
 				stepIndex += 1;
 
 				if (stepIndex >= sequence.length) {
 					clearActiveNoteTimeoutRef.current = setTimeout(() => {
-						setActivePlaybackNote(null);
+						dispatch({ type: ACTION.CLEAR_ACTIVE_NOTE });
 						clearActiveNoteTimeoutRef.current = null;
 					}, Math.max(stepMs * 0.55, 120));
 					stopPlayback(false);
@@ -226,10 +274,10 @@ export const useKeyboardScalePlayback = triggerAttackRelease => {
 		playedSteps,
 		activePlaybackNote,
 		currentSequence,
-		setSelectedKey,
-		setSelectedScaleType,
-		setStartOctave,
-		setBpm,
+		setSelectedKey: payload => dispatch({ type: ACTION.SET_KEY, payload }),
+		setSelectedScaleType: payload => dispatch({ type: ACTION.SET_SCALE_TYPE, payload }),
+		setStartOctave: payload => dispatch({ type: ACTION.SET_START_OCTAVE, payload }),
+		setBpm: payload => dispatch({ type: ACTION.SET_BPM, payload }),
 		startPlayback,
 		stopPlayback,
 	};
