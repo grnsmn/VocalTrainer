@@ -27,18 +27,19 @@ const Esercizio = ({ pallini, cicli: numCicli }) => {
 	const click1 = useRef(null);
 	const click2 = useRef(null);
 	const timer = useRef(null);
+	const playClickRef = useRef(null);
 
 	// Precompute durations
 	const exerciseData = useMemo(() => {
 		const cyclesMatrix = [];
-		const totalCycles = pallini?.[0]?.durata?.length || 0;
+		const totalCycles = numCicli || pallini?.[0]?.durata?.length || 0;
 		for (let i = 0; i < totalCycles; i++) {
 			cyclesMatrix.push(pallini.map(p => p.durata[i]));
 		}
 		const cycleDurations = cyclesMatrix.map(c => c.reduce((a, b) => a + b, 0));
 		const totalDuration = cycleDurations.reduce((a, b) => a + b, 0);
 		return { totalDuration, cyclesMatrix, cycleDurations };
-	}, [pallini]);
+	}, [pallini, numCicli]);
 
 	useEffect(() => {
 		const loadSounds = async () => {
@@ -55,14 +56,27 @@ const Esercizio = ({ pallini, cicli: numCicli }) => {
 		};
 	}, []);
 
+	const stopExercise = useCallback(() => {
+		if (timer.current) clearInterval(timer.current);
+		setPlaying(false);
+		setCount(1);
+		setCounterTot(1);
+		setActiveKey(0);
+		setCurrentCycle(0);
+		setCounterDurataCiclo(0);
+	}, []);
+
+	useEffect(() => {
+		playClickRef.current = playClick;
+	}, [playClick]);
+
 	const playClick = useCallback(() => {
-		setCounterTot(prevTot => {
-			if (prevTot >= exerciseData.totalDuration) {
-				stopExercise();
-				return prevTot;
-			}
-			return prevTot + 1;
-		});
+		if (counterTot >= exerciseData.totalDuration) {
+			stopExercise();
+			return;
+		}
+
+		setCounterTot(prev => prev + 1);
 
 		setCounterDurataCiclo(prevCycleCounter => {
 			const isCycleEnd = prevCycleCounter + 1 === exerciseData.cycleDurations[currentCycle];
@@ -75,7 +89,7 @@ const Esercizio = ({ pallini, cicli: numCicli }) => {
 		});
 
 		setCount(prevCount => {
-			const currentBeatLimit = exerciseData.cyclesMatrix[currentCycle][activeKey] || 4;
+			const currentBeatLimit = Math.max(1, exerciseData.cyclesMatrix[currentCycle][activeKey] || 4);
 			if (prevCount % currentBeatLimit === 1) {
 				click2.current?.replayAsync();
 				setActiveKey(k => (k + 1) % pallini.length);
@@ -85,17 +99,14 @@ const Esercizio = ({ pallini, cicli: numCicli }) => {
 				return prevCount + 1;
 			}
 		});
-	}, [currentCycle, activeKey, exerciseData, pallini.length]);
-
-	const stopExercise = () => {
-		if (timer.current) clearInterval(timer.current);
-		setPlaying(false);
-		setCount(1);
-		setCounterTot(1);
-		setActiveKey(0);
-		setCurrentCycle(0);
-		setCounterDurataCiclo(0);
-	};
+	}, [
+		currentCycle,
+		activeKey,
+		exerciseData,
+		pallini.length,
+		counterTot,
+		stopExercise,
+	]);
 
 	const startStop = () => {
 		if (playing) {
@@ -103,7 +114,8 @@ const Esercizio = ({ pallini, cicli: numCicli }) => {
 		} else {
 			setPlaying(true);
 			setStartCountDown(true);
-			timer.current = setInterval(playClick, (60 / bpm) * 1000);
+			timer.current = setInterval(() => playClickRef.current?.(), (60 / bpm) * 1000);
+			playClick();
 		}
 	};
 
@@ -111,7 +123,8 @@ const Esercizio = ({ pallini, cicli: numCicli }) => {
 		setBpm(newBpm);
 		if (playing) {
 			clearInterval(timer.current);
-			timer.current = setInterval(playClick, (60 / newBpm) * 1000);
+			timer.current = setInterval(() => playClickRef.current?.(), (60 / newBpm) * 1000);
+			playClick();
 		}
 	};
 
