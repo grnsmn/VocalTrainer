@@ -85,8 +85,7 @@ const BreathingSession = ({ exercise }) => {
 				{description ? (
 					<Heading
 						size="xl"
-						className="p-4 text-primary-700 border-y-2 border-primary-200 mb-4"
-						alignSelf="center"
+						className="p-4 text-primary-700 border-y-2 border-primary-200 mb-4 self-center"
 					>
 						{description}
 					</Heading>

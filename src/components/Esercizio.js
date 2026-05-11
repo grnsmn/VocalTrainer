@@ -1,4 +1,4 @@
-import { Center } from '@/components/ui/center';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { FlatList } from '@/components/ui/flat-list';
 import {
 	Slider,
@@ -7,316 +7,190 @@ import {
 	SliderThumb,
 } from '@/components/ui/slider';
 import { Text } from '@/components/ui/text';
-import React, { Component } from 'react';
+import { Center } from '@/components/ui/center';
 import { Volume, Volume2Icon } from 'lucide-react-native';
-
 import { View } from 'react-native';
 import { Audio } from 'expo-av';
 import CardPlay from './CardPlay';
 import CountDown from 'react-native-countdown-component'; // Fixed version for listener remove: https://github.com/binotby/react-native-countdown-component/blob/patch-1/index.js
 
-export default class Esercizio extends Component {
-	constructor(props) {
-		super(props);
-		this.click1 = this.fetchClick1();
-		this.click2 = this.fetchClick2();
-	}
-	state = {
-		bpm: 100,
-		playing: false,
-		count: 1,
-		counterDurataCiclo: 0,
-		beatPerMeasure: 4,
-		key: 0,
-		counterTot: 1,
-		durataEsercizio: 0,
-		cicli: [],
-		durataCiclo: [],
-		currentCicle: 0,
-		startCountDown: true,
-	};
-	async fetchClick1() {
-		return (this.click1 = await Audio.Sound.createAsync(
-			require('../../assets/sounds/click1.mp3'),
-		));
-	}
-	async fetchClick2() {
-		return (this.click2 = await Audio.Sound.createAsync(
-			require('../../assets/sounds/click2.mp3'),
-		));
-	}
-	durataEsercizioCompleta() {
-		var x = 0;
-		var index = 0;
-		var c = new Array();
-		var num_pallini = this.props?.pallini?.length;
-		//console.log(this.props.cicli + '\n')
-		while (index < this.props.cicli) {
-			//console.log('ciclo ' + index)
-			var tmp = [];
-			this.props?.pallini?.forEach(element => {
-				tmp.push(element.durata[index]);
-				if (element.key == num_pallini) index++;
-			});
-			c.push(tmp);
-		}
-		this.props?.pallini?.forEach(element => {
-			element.durata.forEach(item => {
-				x += parseInt(item);
-			});
-		});
-		//console.log(x)
-		this.setState({
-			durataEsercizio: x,
-			cicli: c,
-		});
-		var durCicl = [];
-		const reducer = (previousValue, currentValue) =>
-			previousValue + currentValue;
-		c.forEach(el => {
-			durCicl.push(el.reduce(reducer));
-		});
-		this.setState({
-			durataCiclo: durCicl,
-		});
-	}
-	componentDidMount() {
-		this.durataEsercizioCompleta();
-	}
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
-	startStop = () => {
-		if (this.state.playing) {
-			// Stop the timer
-			clearInterval(this.timer);
-			this.setState({
-				playing: false,
-				count: 1,
-				counterTot: 0,
-				key: 0,
-				currentCicle: 0,
-				counterDurataCiclo: 0,
-			});
-		} else {
-			// Start a timer with the current BPM
-			this.timer = setInterval(
-				this.playClick,
-				(60 / this.state.bpm) * 1000,
-			);
-			// console.log('inziio ciclo')
-			this.setState(
-				{
-					playing: true,
-					counterTot: 0,
-					count: 1,
-					currentCicle: 0,
-					counterDurataCiclo: 0,
-					key: 0,
-					startCountDown: true,
-					// Play a click "immediately" (after setState finishes)
-				},
-				this.playClick,
-			);
-		}
-	};
-	playClick = () => {
-		const {
-			count,
-			counterTot,
-			beatPerMeasure,
-			key,
-			durataEsercizio,
-			durataCiclo,
-			counterDurataCiclo,
-			currentCicle,
-			cicli,
-		} = this.state;
+const Esercizio = ({ pallini, cicli: numCicli }) => {
+	const [bpm, setBpm] = useState(100);
+	const [playing, setPlaying] = useState(false);
+	const [count, setCount] = useState(1);
+	const [counterTot, setCounterTot] = useState(1);
+	const [currentCycle, setCurrentCycle] = useState(0);
+	const [counterDurataCiclo, setCounterDurataCiclo] = useState(0);
+	const [activeKey, setActiveKey] = useState(0);
+	const [startCountDown, setStartCountDown] = useState(true);
 
-		// The first beat will have a different sound than the others
-		if (counterTot === durataEsercizio) {
-			this.startStop();
-		}
-		if (counterDurataCiclo === durataCiclo[currentCicle]) {
-			// console.log(durataCiclo[currentCicle], counterDurataCiclo)
-			//console.log('cambio ciclo')
-			this.setState(state => ({
-				currentCicle: state.currentCicle + 1,
-				counterDurataCiclo: 0,
-				key: 0,
-			}));
-		}
-		if (count % beatPerMeasure === 1) {
-			//console.log('resto ' + count % beatPerMeasure)
-			this.click2?.sound?.replayAsync();
-			this.setState(state => ({
-				beatPerMeasure: cicli[currentCicle][key - 1],
-				count: 1,
-				key:
-					count == 1 ||
-					count == cicli[currentCicle][key - 1] ||
-					key === this.props.pallini.length
-						? 1
-						: state.key + 1,
-			}));
-		} else {
-			this.click1.sound?.replayAsync();
-			//console.log(currentCicle, key)
-			//console.log(currentCicle, cicli[currentCicle][key-1], key)
-		}
-		// Keep track of which beat we're on
-		this.setState(state => ({
-			beatPerMeasure: cicli[currentCicle][key - 1],
-			count: state.count + 1,
-			counterTot: state.counterTot + 1,
-			counterDurataCiclo: state.counterDurataCiclo + 1,
-		}));
-	};
-	handleCountDown() {
-		var x = this.startCountDown;
-		this.setState({
-			startCountDown: !x,
-		});
-	}
-	handleBpmChange = bpm => {
-		if (this.state.playing) {
-			// Stop the old timer and start a new one
-			clearInterval(this.timer);
-			this.timer = setInterval(this.playClick, (60 / bpm) * 1000);
+	const click1 = useRef(null);
+	const click2 = useRef(null);
+	const timer = useRef(null);
+	const playClickRef = useRef(null);
 
-			// Set the new BPM, and reset the beat counter
-			this.setState({
-				count: 1,
-				counterTot: 0,
-				currentCicle: 0,
-				counterDurataCiclo: 0,
-				key: 0,
-				bpm,
-			});
+	// Precompute durations
+	const exerciseData = useMemo(() => {
+		const cyclesMatrix = [];
+		const totalCycles = numCicli || pallini?.[0]?.durata?.length || 0;
+		for (let i = 0; i < totalCycles; i++) {
+			cyclesMatrix.push(pallini.map(p => p.durata[i]));
+		}
+		const cycleDurations = cyclesMatrix.map(c => c.reduce((a, b) => a + b, 0));
+		const totalDuration = cycleDurations.reduce((a, b) => a + b, 0);
+		return { totalDuration, cyclesMatrix, cycleDurations };
+	}, [pallini, numCicli]);
+
+	useEffect(() => {
+		const loadSounds = async () => {
+			const { sound: s1 } = await Audio.Sound.createAsync(require('../../assets/sounds/click1.mp3'));
+			const { sound: s2 } = await Audio.Sound.createAsync(require('../../assets/sounds/click2.mp3'));
+			click1.current = s1;
+			click2.current = s2;
+		};
+		loadSounds();
+		return () => {
+			click1.current?.unloadAsync();
+			click2.current?.unloadAsync();
+			if (timer.current) clearInterval(timer.current);
+		};
+	}, []);
+
+	const stopExercise = useCallback(() => {
+		if (timer.current) clearInterval(timer.current);
+		setPlaying(false);
+		setCount(1);
+		setCounterTot(1);
+		setActiveKey(0);
+		setCurrentCycle(0);
+		setCounterDurataCiclo(0);
+	}, []);
+
+	useEffect(() => {
+		playClickRef.current = playClick;
+	}, [playClick]);
+
+	const playClick = useCallback(() => {
+		if (counterTot >= exerciseData.totalDuration) {
+			stopExercise();
+			return;
+		}
+
+		setCounterTot(prev => prev + 1);
+
+		setCounterDurataCiclo(prevCycleCounter => {
+			const isCycleEnd = prevCycleCounter + 1 === exerciseData.cycleDurations[currentCycle];
+			if (isCycleEnd) {
+				setCurrentCycle(c => c + 1);
+				setActiveKey(0);
+				return 0;
+			}
+			return prevCycleCounter + 1;
+		});
+
+		setCount(prevCount => {
+			const currentBeatLimit = Math.max(1, exerciseData.cyclesMatrix[currentCycle][activeKey] || 4);
+			if (prevCount % currentBeatLimit === 1) {
+				click2.current?.replayAsync();
+				setActiveKey(k => (k + 1) % pallini.length);
+				return 1;
+			} else {
+				click1.current?.replayAsync();
+				return prevCount + 1;
+			}
+		});
+	}, [
+		currentCycle,
+		activeKey,
+		exerciseData,
+		pallini.length,
+		counterTot,
+		stopExercise,
+	]);
+
+	const startStop = () => {
+		if (playing) {
+			stopExercise();
 		} else {
-			// Otherwise just update the BPM
-			this.setState({
-				bpm,
-			});
+			setPlaying(true);
+			setStartCountDown(true);
+			timer.current = setInterval(() => playClickRef.current?.(), (60 / bpm) * 1000);
+			playClick();
 		}
 	};
-	render() {
-		const { bpm, playing, count, key, startCountDown } = this.state;
-		return (
-			<>
-				<FlatList
-					data={this.props.pallini}
-					scrollEnabled={false}
-					contentContainerStyle={{ padding: 16, width: '100%' }}
-					ItemSeparatorComponent={() => <View className="h-3" />}
-					ListFooterComponent={() => (
-						<CardPlay
-							flex={1}
-							onPress={this.startStop}
-							title={playing ? 'Stop  ' : 'Play '}
-							RightIcon={playing ? Volume : Volume2Icon}
-						/>
-					)}
-					renderItem={({ item, index }) => (
-						<Text
-							className={`py-0.5 font-bold ${
-								item.key == key && playing
-									? 'text-orange-500 text-4xl leading-[34px] text-center py-5'
-									: 'text-black text-2xl leading-[25px] text-left'
-							}`}
-						>
-							{item.key == key && playing ? '' : `o  `}
-							{`${item.definizione}`}
-							<Text className="text-2xl text-right text-primary-600">
-								{`    [${item.durata} BPM]; `}
-							</Text>
+
+	const handleBpmChange = (newBpm) => {
+		setBpm(newBpm);
+		if (playing) {
+			clearInterval(timer.current);
+			timer.current = setInterval(() => playClickRef.current?.(), (60 / newBpm) * 1000);
+			playClick();
+		}
+	};
+
+	return (
+		<>
+			<FlatList
+				data={pallini}
+				scrollEnabled={false}
+				contentContainerStyle={{ padding: 16, width: '100%' }}
+				ItemSeparatorComponent={() => <View className="h-3" />}
+				ListFooterComponent={() => (
+					<CardPlay
+						onPress={startStop}
+						title={playing ? 'Stop' : 'Play'}
+						RightIcon={playing ? Volume : Volume2Icon}
+					/>
+				)}
+				renderItem={({ item }) => (
+					<Text
+						className={`py-0.5 font-bold ${
+							item.key === activeKey + 1 && playing
+								? 'text-orange-500 text-4xl leading-[34px] text-center py-5'
+								: 'text-black text-2xl leading-[25px] text-left'
+						}`}
+					>
+						{item.key === activeKey + 1 && playing ? '' : `o  `}
+						{`${item.definizione}`}
+						<Text className="text-2xl text-right text-primary-600">
+							{`    [${item.durata} BPM]; `}
 						</Text>
-					)}
-				/>
-				<View style={styles.infoTrainer}>
-					<View style={styles.controlContainer}>
-						<CountDown
-							size={30}
-							until={10}
-							onFinish={playing === true ? null : this.startStop}
-							digitStyle={{
-								backgroundColor: '#FFF',
-								borderWidth: 2,
-								borderColor: '#c6e9ff',
-							}}
-							digitTxtStyle={{ color: '#005DB4' }}
-							timeLabelStyle={{
-								color: 'red',
-								fontWeight: 'bold',
-							}}
-							separatorStyle={{ color: '#c6e9ff' }}
-							timeToShow={['S']}
-							running={startCountDown}
-							timeLabels={{ s: null }}
-							showSeparator
-						/>
-
-						<Text className="text-primary-600">{bpm} BPM</Text>
-						<Text
-							className={`font-bold self-center text-xl ${
-								playing ? 'text-orange-400' : 'text-primary-600'
-							}`}
+					</Text>
+				)}
+			/>
+			<View className="justify-end border-2 rounded-2xl border-primary-200 p-4">
+				<View className="items-center gap-3">
+					<CountDown
+						size={30}
+						until={10}
+						onFinish={playing ? null : startStop}
+						digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#c6e9ff' }}
+						digitTxtStyle={{ color: '#005DB4' }}
+						timeToShow={['S']}
+						running={startCountDown}
+						timeLabels={{ s: null }}
+						showSeparator
+					/>
+					<Text className="text-primary-600 font-bold">{bpm} BPM</Text>
+					<Text className={`font-bold self-center text-xl ${playing ? 'text-orange-400' : 'text-primary-600'}`}>
+						Count: {count - 1}
+					</Text>
+					<Center className="w-full max-w-[320px] mx-auto h-10">
+						<Slider
+							defaultValue={bpm}
+							minValue={40}
+							maxValue={180}
+							onChange={handleBpmChange}
+							className="w-full"
 						>
-							Count: {count - 1}{' '}
-						</Text>
-
-						<Center className="w-full max-w-[320px] mx-auto h-10">
-							<Slider
-								defaultValue={80}
-								size="sm"
-								minValue={40}
-								maxValue={180}
-								orientation="horizontal"
-								isDisabled={false}
-								isReversed={false}
-								onChange={this.handleBpmChange}
-								className="w-full max-w-[320px] mx-auto"
-							>
-								<SliderTrack>
-									<SliderFilledTrack />
-								</SliderTrack>
-								<SliderThumb />
-							</Slider>
-						</Center>
-					</View>
+							<SliderTrack><SliderFilledTrack /></SliderTrack>
+							<SliderThumb />
+						</Slider>
+					</Center>
 				</View>
-			</>
-		);
-	}
-}
-const styles = {
-	Pallino: {
-		textAlign: 'left',
-		fontSize: 20,
-		lineHeight: 25,
-		fontWeight: 'bold',
-		color: 'black',
-	},
-	PallinoPlay: {
-		fontSize: 28,
-		lineHeight: 34,
-		textAlign: 'center',
-		fontWeight: 'bold',
-		paddingVertical: 20,
-		color: 'orange',
-	},
-	durataPallino: {
-		fontSize: 24,
-	},
-	infoTrainer: {
-		justifyContent: 'flex-end',
-		borderWidth: 2,
-		borderRadius: 16,
-		borderColor: '#c6e9ff',
-		padding: 16,
-	},
-	controlContainer: {
-		alignItems: 'center',
-		gap: 12,
-	},
+			</View>
+		</>
+	);
 };
+
+export default Esercizio;
