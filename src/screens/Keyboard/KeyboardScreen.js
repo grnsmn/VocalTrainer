@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MidiProvider, PianoKeyboard, useMidi } from 'react-native-piano-keyboard';
 import KeyboardControlsPanel from './components/KeyboardControlsPanel';
@@ -8,6 +8,7 @@ import { useKeyboardScalePlayback } from './hooks/useKeyboardScalePlayback';
 
 // Render keyboard screen content inside MidiProvider context.
 const KeyboardContent = () => {
+	const { height } = useWindowDimensions();
 	const { triggerAttackRelease } = useMidi();
 	const {
 		selectedKey,
@@ -52,7 +53,7 @@ const KeyboardContent = () => {
 			</LinearGradient>
 			<LinearGradient
 				colors={['transparent', '#080808']}
-				style={styles.keyboard}
+				style={[styles.keyboard, Platform.OS !== 'web' && { height: Math.min(height * 0.45, 260) }]}
 			>
 				<PianoKeyboard
 					startKey={START_KEY}

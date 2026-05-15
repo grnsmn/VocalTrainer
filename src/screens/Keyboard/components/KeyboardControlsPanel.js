@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import {
 	Slider,
@@ -32,16 +32,24 @@ const KeyboardControlsPanel = ({
 	onStop,
 	onChangeBpm,
 }) => {
+	const isMobile = Platform.OS !== 'web';
+
 	return (
 		<View style={styles.container}>
-			<LottieView
-				webStyle={{ width: 200, height: 200 }}
-				source={AnimatedSpeaker}
-				autoPlay
-				loop
-				style={styles.smallSpeaker}
-			/>
-			<View style={styles.controlsContainer}>
+			{!isMobile && (
+				<LottieView
+					webStyle={{ width: 200, height: 200 }}
+					source={AnimatedSpeaker}
+					autoPlay
+					loop
+					style={styles.smallSpeaker}
+				/>
+			)}
+			<ScrollView
+				style={styles.scrollArea}
+				contentContainerStyle={styles.controlsContainer}
+				showsVerticalScrollIndicator={false}
+			>
 				<SelectionRow
 					items={KEY_OPTIONS}
 					selectedItem={selectedKey}
@@ -92,14 +100,16 @@ const KeyboardControlsPanel = ({
 						<SliderThumb />
 					</Slider>
 				</View>
-			</View>
-			<LottieView
-				webStyle={{ width: 200, height: 200 }}
-				source={AnimatedSpeaker}
-				autoPlay
-				loop
-				style={styles.smallSpeaker}
-			/>
+			</ScrollView>
+			{!isMobile && (
+				<LottieView
+					webStyle={{ width: 200, height: 200 }}
+					source={AnimatedSpeaker}
+					autoPlay
+					loop
+					style={styles.smallSpeaker}
+				/>
+			)}
 		</View>
 	);
 };
@@ -111,18 +121,21 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-	controlsContainer: {
+	scrollArea: {
 		flex: 1,
+	},
+	controlsContainer: {
 		alignItems: 'center',
 		paddingHorizontal: 10,
+		paddingVertical: 8,
 	},
 	scaleRow: {
-		marginTop: 8,
+		marginTop: 6,
 	},
 	actionsRow: {
 		flexDirection: 'row',
 		gap: 10,
-		marginTop: 10,
+		marginTop: 8,
 	},
 	actionButton: {
 		borderRadius: 10,
@@ -140,7 +153,7 @@ const styles = StyleSheet.create({
 		fontWeight: '700',
 	},
 	statusText: {
-		marginTop: 10,
+		marginTop: 6,
 		color: '#005DB4',
 		fontWeight: '700',
 	},
