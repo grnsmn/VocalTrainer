@@ -1,75 +1,82 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { MidiProvider, PianoKeyboard } from 'react-native-piano-keyboard';
-import AnimatedVoiceLines from '../../../assets/lotties/voice_lines.json';
-import AnimatedSpeaker from '../../../assets/lotties/speaker_playing.json';
-import LottieView from 'lottie-react-native';
+import React, { useCallback } from 'react';
+import { Platform, StyleSheet, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { MidiProvider, PianoKeyboard, useMidi } from 'react-native-piano-keyboard';
+import KeyboardControlsPanel from './components/KeyboardControlsPanel';
+import { END_KEY, START_KEY } from './keyboard.constants';
+import { useKeyboardScalePlayback } from './hooks/useKeyboardScalePlayback';
 
-const KeyboardScreen = () => {
-	const handleKeyPress = note => {
-		// console.log('Pressed note:', note);
-	};
+// Render keyboard screen content inside MidiProvider context.
+const KeyboardContent = () => {
+	const { height } = useWindowDimensions();
+	const { triggerAttackRelease } = useMidi();
+	const {
+		selectedKey,
+		selectedScaleType,
+		startOctave,
+		bpm,
+		isPlaying,
+		playedSteps,
+		activePlaybackNote,
+		currentSequence,
+		setSelectedKey,
+		setSelectedScaleType,
+		setStartOctave,
+		setBpm,
+		startPlayback,
+		stopPlayback,
+	} = useKeyboardScalePlayback(triggerAttackRelease);
+
+	// Keep callback explicit for future note-tracking features.
+	const handleKeyPress = useCallback(note => {
+		void note;
+	}, []);
 
 	return (
 		<>
-			<LinearGradient
-				colors={['#CCE9FF', 'transparent']}
-				style={styles.container}
-			>
-				<LottieView
-					webStyle={{ width: 200, height: 200 }}
-					source={AnimatedSpeaker}
-					autoPlay
-					loop={true}
-					style={{
-						width: 50,
-						height: 50,
-					}}
-				/>
-				<LottieView
-					webStyle={{ width: 400, height: 300 }}
-					source={AnimatedVoiceLines}
-					autoPlay
-					loop={true}
-					style={{
-						width: 200,
-						height: 120,
-					}}
-				/>
-				<LottieView
-					webStyle={{ width: 200, height: 200 }}
-					source={AnimatedSpeaker}
-					autoPlay
-					loop={true}
-					style={{
-						width: 50,
-						height: 50,
-					}}
+			<LinearGradient colors={['#CCE9FF', 'transparent']} style={styles.controlsArea}>
+				<KeyboardControlsPanel
+					selectedKey={selectedKey}
+					selectedScaleType={selectedScaleType}
+					startOctave={startOctave}
+					bpm={bpm}
+					isPlaying={isPlaying}
+					playedSteps={playedSteps}
+					sequenceLength={currentSequence.length}
+					onSelectKey={setSelectedKey}
+					onSelectScaleType={setSelectedScaleType}
+					onSelectStartOctave={setStartOctave}
+					onPlay={startPlayback}
+					onStop={stopPlayback}
+					onChangeBpm={setBpm}
 				/>
 			</LinearGradient>
 			<LinearGradient
 				colors={['transparent', '#080808']}
-				style={styles.keyboard}
+				style={[styles.keyboard, Platform.OS !== 'web' && { height: Math.min(height * 0.45, 260) }]}
 			>
-				<MidiProvider>
-					<PianoKeyboard
-						startKey="C2"
-						endKey="C5"
-						onPressKey={handleKeyPress}
-					/>
-				</MidiProvider>
+				<PianoKeyboard
+					startKey={START_KEY}
+					endKey={END_KEY}
+					onPressKey={handleKeyPress}
+					activeKeys={activePlaybackNote ? [activePlaybackNote] : []}
+				/>
 			</LinearGradient>
 		</>
 	);
 };
 
+const KeyboardScreen = () => {
+	return (
+		<MidiProvider>
+			<KeyboardContent />
+		</MidiProvider>
+	);
+};
+
 const styles = StyleSheet.create({
-	container: {
+	controlsArea: {
 		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
 	},
 	keyboard: {
 		borderTopLeftRadius: 30,
