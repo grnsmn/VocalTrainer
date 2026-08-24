@@ -1,9 +1,8 @@
 name: Release Android
 
-# Avvio solo manuale, di proposito: in questa fase si verifica che la CI
-# riproduca esattamente il risultato di una release fatta a mano, senza che
-# un merge possa far partire una pubblicazione a sorpresa.
-# Il trigger su tag `v*` arriva in un secondo momento.
+# Un tag `v*` e' la fonte di verita' di un rilascio: master resta libero di
+# ricevere merge senza pubblicare nulla. L'avvio manuale resta disponibile
+# per provare la pipeline, ed e' l'unico modo per costruire senza inviare.
 on:
     workflow_dispatch:
         inputs:
@@ -11,6 +10,9 @@ on:
                 description: 'Invia a Google Play dopo la build (track alpha / closed testing)'
                 type: boolean
                 default: true
+    push:
+        tags:
+            - 'v*'
 
 # Due release in parallelo si contenderebbero lo stesso versionCode.
 # Non si cancella la run in corso: potrebbe essere gia' in submit.
@@ -61,9 +63,12 @@ jobs:
             # contatore remoto, e il keystore gia' registrato come upload key
             # su Play App Signing.
             - name: Build su EAS
-              if: ${{ !inputs.submit }}
-              run: eas build --platform android --profile production --non-interactive
-
-            - name: Build e submit su EAS
-              if: ${{ inputs.submit }}
-              run: eas build --platform android --profile production --non-interactive --auto-submit
+              env:
+                  # Un tag pubblica sempre; l'avvio manuale lo decide chi lo lancia.
+                  SUBMIT: ${{ github.event_name == 'push' || inputs.submit }}
+              run: |
+                  if [ "$SUBMIT" = "true" ]; then
+                    eas build --platform android --profile production --non-interactive --auto-submit
+                  else
+                    eas build --platform android --profile production --non-interactive
+                  fi
