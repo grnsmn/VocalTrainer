@@ -11,5 +11,14 @@ npm-debug.*
 web-build/
 .env
 
+# Credenziali: mai committare. Le chiavi dei service account Google
+# permettono di pubblicare sul Play Store.
+*service-account*.json
+google-services-key.json
+
+# Artefatti di build
+*.aab
+*.apk
+
 # macOS
 .DS_Store
