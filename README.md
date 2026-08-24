@@ -59,6 +59,61 @@ Contributions are welcome! If you wish to contribute to this project, follow the
 4. Push your branch: `git push origin feature/new-feature`.
 5. Open a Pull Request in the original repository.
 
+## Releasing to Google Play
+
+Android releases are built by [EAS Build](https://docs.expo.dev/build/introduction/)
+and uploaded by [EAS Submit](https://docs.expo.dev/submit/android/) through the
+`Release Android` GitHub Actions workflow.
+
+### Cutting a release
+
+```sh
+# 1. Bump the version in app.json and package.json (keep them in sync)
+# 2. Commit, then tag and push
+git tag v3.0.0
+git push origin v3.0.0
+```
+
+Pushing a `v*` tag builds the `production` profile and submits it. Merging to
+`master` does **not** publish anything — the tag is the source of truth.
+
+To build without submitting, run the workflow manually from the Actions tab and
+untick **submit**. This is the way to verify a build without touching the store.
+
+### What is managed where
+
+| Concern | Where it lives |
+| --- | --- |
+| `versionCode` | EAS servers (`appVersionSource: remote` + `autoIncrement`) — never edit by hand |
+| Signing key | EAS, registered as the Play App Signing upload key |
+| Firebase config | EAS environment `production` — **not** GitHub secrets |
+| Google Play credentials | Service account key uploaded to EAS |
+| Release track | `submit.production.android.track` in `eas.json` (currently `alpha`) |
+
+The only GitHub secret this workflow needs is `EXPO_TOKEN`.
+
+### Release status
+
+Submissions land on the **closed testing** track with `releaseStatus: draft`:
+nothing reaches users until you press **Rollout** in the Play Console. This is a
+deliberate checkpoint — change `releaseStatus` in `eas.json` to remove it.
+
+Production access requires Google's closed-testing rule to be satisfied first:
+12 testers opted in for 14 consecutive days. Internal testing does not count
+toward it.
+
+### If a submission fails
+
+The build does not need to be repeated. `eas submit` is free and unlimited, so
+configuration mistakes can be fixed and retried against the same artifact:
+
+```sh
+eas submit --platform android --profile production --id <build-id>
+```
+
+A `versionCode` is burned once uploaded and can never be reused — on failure,
+increment rather than overwrite.
+
 ---
 
 Developed by @grnsmn
