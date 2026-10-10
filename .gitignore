@@ -22,3 +22,7 @@ google-services-key.json
 
 # macOS
 .DS_Store
+
+# Native generati da expo prebuild (CNG)
+/android
+/ios
