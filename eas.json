@@ -24,8 +24,11 @@
       }
     },
     "production": {
+      "autoIncrement": true,
+      "environment": "production",
       "android": {
-        "image": "latest"
+        "image": "latest",
+        "buildType": "app-bundle"
       },
       "ios": {
         "image": "latest"
@@ -33,6 +36,11 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "track": "alpha",
+        "releaseStatus": "draft"
+      }
+    }
   }
 }

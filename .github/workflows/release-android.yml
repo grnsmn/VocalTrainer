@@ -1,0 +1,74 @@
+name: Release Android
+
+# Un tag `v*` e' la fonte di verita' di un rilascio: master resta libero di
+# ricevere merge senza pubblicare nulla. L'avvio manuale resta disponibile
+# per provare la pipeline, ed e' l'unico modo per costruire senza inviare.
+on:
+    workflow_dispatch:
+        inputs:
+            submit:
+                description: 'Invia a Google Play dopo la build (track alpha / closed testing)'
+                type: boolean
+                default: true
+    push:
+        tags:
+            - 'v*'
+
+# Due release in parallelo si contenderebbero lo stesso versionCode.
+# Non si cancella la run in corso: potrebbe essere gia' in submit.
+concurrency:
+    group: release-android
+    cancel-in-progress: false
+
+jobs:
+    release:
+        name: Build e submit Android
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            # Fallire subito con un messaggio chiaro, invece che a metà
+            # build con un errore di autenticazione EAS.
+            - name: Verifica i secret richiesti
+              env:
+                  EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+              run: |
+                  if [ -z "$EXPO_TOKEN" ]; then
+                    echo "::error::Secret EXPO_TOKEN mancante. Crearlo su expo.dev (Account settings > Access tokens) e aggiungerlo ai secret del repository."
+                    exit 1
+                  fi
+                  echo "EXPO_TOKEN presente."
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+                  cache: npm
+
+            - name: Setup EAS
+              uses: expo/expo-github-action@v8
+              with:
+                  eas-version: latest
+                  token: ${{ secrets.EXPO_TOKEN }}
+
+            # npm ci rispetta .npmrc (legacy-peer-deps=true).
+            - name: Installa le dipendenze
+              run: npm ci
+
+            # Le variabili Firebase NON servono qui: le legge EAS Build dal
+            # proprio environment `production` (vedi `environment` in eas.json).
+            # L'unico secret necessario a questo workflow e' EXPO_TOKEN.
+            #
+            # versionCode e firma sono gestiti da EAS: autoIncrement sul
+            # contatore remoto, e il keystore gia' registrato come upload key
+            # su Play App Signing.
+            - name: Build su EAS
+              env:
+                  # Un tag pubblica sempre; l'avvio manuale lo decide chi lo lancia.
+                  SUBMIT: ${{ github.event_name == 'push' || inputs.submit }}
+              run: |
+                  if [ "$SUBMIT" = "true" ]; then
+                    eas build --platform android --profile production --non-interactive --auto-submit
+                  else
+                    eas build --platform android --profile production --non-interactive
+                  fi
