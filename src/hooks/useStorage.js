@@ -1,15 +1,13 @@
 import { STORAGE_PATH } from '@env';
-import firebase from 'firebase/compat/app';
-
+import { getApps } from 'firebase/app';
 import { getStorage, ref } from 'firebase/storage';
 
 const useStorage = ({ customPath } = {}) => {
-	/* ----------------------------- STORAGE REQUIRE ---------------------------- */
-	if (!firebase.apps.length) {
-		return;
+	if (!getApps().length) {
+		return {}; // Return empty object to prevent destructuring errors (const { storage } = ...)
 	}
 	const storage = getStorage();
-	const endpoint = `${STORAGE_PATH}/${customPath}`;
+	const endpoint = `${STORAGE_PATH}/${customPath || ''}`;
 	const storageRef = ref(storage, endpoint);
 
 	return { storage, storageRef };

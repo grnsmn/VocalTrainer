@@ -2,7 +2,7 @@ import gluestackPlugin from '@gluestack-ui/nativewind-utils/tailwind-plugin';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	darkMode: 'media',
+	darkMode: 'class', //from media to class to allow user toggle
 	content: [
 		'App.{tsx,jsx,ts,js}',
 		'src/**/*.{tsx,jsx,ts,js}',
@@ -564,7 +564,7 @@ module.exports = {
 					900: 'rgb(var(--color-backgroundDark-900)/<alpha-value>)',
 					950: 'rgb(var(--color-backgroundDark-950)/<alpha-value>)',
 				},
-
+				
 				backgroundLight: {
 					0: 'rgb(var(--color-backgroundLight-0)/<alpha-value>)',
 					50: 'rgb(var(--color-backgroundLight-50)/<alpha-value>)',
@@ -605,9 +605,9 @@ module.exports = {
 			},
 
 			fontFamily: {
-				heading: undefined,
-				body: undefined,
-				mono: undefined,
+				heading: ['Roboto', 'sans-serif'],
+				body: ['Roboto', 'sans-serif'],
+				mono: ['monospace'],
 				roboto: ['Roboto', 'sans-serif'],
 			},
 

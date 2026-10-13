@@ -1,4 +1,4 @@
-import firebase from 'firebase/compat/app';
+import { initializeApp, getApps } from 'firebase/app';
 import {
 	API_KEY,
 	AUTH_DOMAIN,
@@ -10,7 +10,8 @@ import {
 	MEASUREMENT_ID,
 } from '@env';
 import { useEffect } from 'react';
-import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import { initializeAuth } from 'firebase/auth';
+import { getReactNativePersistence } from 'firebase/auth/react-native';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
@@ -27,8 +28,8 @@ const useFirebaseInit = () => {
 	};
 
 	useEffect(() => {
-		if (!firebase.apps.length) {
-			const app = firebase.initializeApp(firebaseConfig);
+		if (!getApps().length) {
+			const app = initializeApp(firebaseConfig);
 			if (Platform.OS !== 'web') {
 				initializeAuth(app, {
 					persistence: getReactNativePersistence(
@@ -36,10 +37,8 @@ const useFirebaseInit = () => {
 					),
 				});
 			}
-		} else {
-			firebase.app(); // if already initialized, use that one
 		}
-	}, [firebase]);
+	}, []);
 };
 
 export default useFirebaseInit;
